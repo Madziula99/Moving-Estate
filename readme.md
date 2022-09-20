@@ -1,4 +1,4 @@
-# Getting Started with Create React App [Figma](https://www.figma.com/file/etjqKd2owOjZVh6O5ZGmha/Moving-Estate)
+# Getting Started with Create React App [[Figma](https://www.figma.com/file/etjqKd2owOjZVh6O5ZGmha/Moving-Estate)]
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
