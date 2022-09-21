@@ -5,7 +5,7 @@ class ComponentGallery extends React.Component {
   render() {
     return (
       <>
-        <Header />
+        <Header>FIRS PAGE</Header>
       </>
     );
   }

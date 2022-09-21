@@ -1,16 +1,8 @@
-import React from "react";
+import React, { Children } from "react";
 import classes from "./Header.module.css";
 import logo from "../pictures/logo.png";
 
-const propsFake = {
-  title: "First page",
-};
-
 class Header extends React.Component {
-  constructor(props) {
-    super(props);
-    this.data = propsFake;
-  }
   render() {
     return (
       <header>
@@ -18,9 +10,7 @@ class Header extends React.Component {
         <div className={classes.header_wrapper}>
           <div className={classes.header}>
             <img className={classes.header_logo} src={logo} alt="logo" />
-            <h2 className={classes.header_text}>
-              {propsFake.title.toUpperCase()}
-            </h2>
+            <h2 className={classes.header_text}>{this.props.children}</h2>
           </div>
         </div>
       </header>
