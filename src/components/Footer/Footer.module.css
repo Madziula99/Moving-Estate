@@ -3,20 +3,35 @@ footer {
 }
 
 .wrapper {
+    font-family: 'Inter';
     width: 80%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
+    margin: auto;
 }
 
 .footer_logo {
-    margin: 2rem;
+    margin: 3rem;
 }
 
 .footer_logo path {
     fill: #DF434A;
 }
 
+.footer_contact {
+    width: 80%;
+    padding-top: 3rem;
+}
+
 .contact_title {
     font-size: 1.25rem;
+    line-height: 1.5rem;
+    color: #4D4F52;
+}
+
+.contact_info {
+    width: 100%;
+    margin-top: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
 }
