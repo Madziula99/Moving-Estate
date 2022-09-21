@@ -1,0 +1,26 @@
+:root {
+  --backgroundHeader: #df434a;
+  --backgroundHeaderLine: #e29999;
+}
+
+.header_wrapper {
+  background-image: url("../pictures/Header.png");
+  background-color: var(--backgroundHeader);
+  height: 231px;
+}
+
+.header_line {
+  background-color: var(--backgroundHeaderLine);
+  height: 10px;
+}
+
+.header {
+  width: 1096px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.header_logo {
+  padding-top: 56px;
+  padding-right: 30px;
+}
