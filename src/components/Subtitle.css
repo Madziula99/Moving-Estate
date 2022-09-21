@@ -1,0 +1,25 @@
+.subtitle-component {
+    width: 1097px;
+    height: 51px;
+}
+
+.subtitle-section__name {
+    height: 39px;
+    font-family: 'Noto Sans', sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 39px;
+    color: #DF434A;
+    margin-bottom: 8px;
+
+}
+
+.subtitle-section__underline {
+    width: 100px;
+    height: 2px;
+    border-top: 1px solid #DF434A;
+    border-bottom: 1px solid #DF434A;
+    margin: 0 auto;
+}
