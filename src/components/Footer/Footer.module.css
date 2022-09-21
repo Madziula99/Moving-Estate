@@ -1,0 +1,22 @@
+footer {
+    background-color: #F1F3F6;
+}
+
+.wrapper {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer_logo {
+    margin: 2rem;
+}
+
+.footer_logo path {
+    fill: #DF434A;
+}
+
+.contact_title {
+    font-size: 1.25rem;
+}
