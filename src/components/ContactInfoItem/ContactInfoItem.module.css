@@ -1,0 +1,22 @@
+.icon {
+  border: 1px solid #74777C;
+  border-radius: 0.3rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.3rem 0.3rem 0.3rem 0;
+}
+
+.contact_info_item {
+  color: #74777C;
+  display: flex;
+  align-items: center;
+}
+
+.contact_link {
+  text-decoration: none;
+  color: #74777C;
+  font-size: 1rem;
+}
