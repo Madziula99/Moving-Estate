@@ -1,12 +1,12 @@
 import React from "react";
-import "./Subtitle.css";
+import styles from "./Subtitle.module.css";
 
 class Subtitle extends React.Component {
     render() {
         return (
-            <div className="subtitle-component">
-                <div className="subtitle-section__name">{this.props.children}</div>
-                <div className="subtitle-section__underline"></div>
+            <div className={styles.subtitle_component}>
+                <div className={styles.subtitle_section_name}>{this.props.children}</div>
+                <div className={styles.subtitle_section_underline}></div>
             </div>
         )
     }
