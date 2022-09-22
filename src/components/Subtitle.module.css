@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Inter';
-  src: url(/src/fonts/NotoSans.ttf);
+  src: url(/public/fonts/NotoSans.ttf);
 }
 
 .subtitle_section_name {
