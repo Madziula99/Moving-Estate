@@ -1,25 +1,24 @@
-.subtitle_component {
-    width: 1097px;
-    height: 51px;
-}
-
 .subtitle_section_name {
-    height: 39px;
-    font-family: 'Noto Sans', sans-serif;
-    text-transform: uppercase;
-    text-align: center;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 39px;
-    color: #DF434A;
-    margin-bottom: 8px;
-
+  position: relative;
+  width: 1097px;
+  font-family: 'Noto Sans', sans-serif;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 39px;
+  font-weight: 400;
+  font-size: 32px;
+  color: #DF434A;
 }
 
-.subtitle_section_underline {
-    width: 100px;
-    height: 2px;
-    border-top: 1px solid #DF434A;
-    border-bottom: 1px solid #DF434A;
-    margin: 0 auto;
+.subtitle_section_name::after {
+  position: absolute;
+  content: '';
+  height: 2px;
+  bottom: -10px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  width: 100px;
+  border-top: 1px solid #DF434A;
+  border-bottom: 1px solid #DF434A;
 }
