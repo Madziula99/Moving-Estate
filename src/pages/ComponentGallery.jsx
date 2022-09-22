@@ -104,6 +104,11 @@ class ComponentGallery extends React.Component {
           id="A003N"
           />
 
+
+                <h2>&lt;Pagination&gt;</h2>
+                <Pagination pages={7} page={2} onChange={page => console.log(`Page changed to ${page}`)} />
+
+
       </>
     )
   }
