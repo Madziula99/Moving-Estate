@@ -1,4 +1,5 @@
 import React from "react";
+import ContactInfoItem from "../components/ContactInfoItem/ContactInfoItem.jsx";
 import Header from "../components/Header/Header.jsx";
 import Subtitle from "../components/Subtitle/Subtitle.jsx";
 import Footer from "../components/Footer/Footer.jsx";

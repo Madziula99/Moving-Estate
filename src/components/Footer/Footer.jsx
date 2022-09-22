@@ -1,18 +1,15 @@
 import React from "react";
-
 import styles from './Footer.module.css';
-
 import ContactInfoItem from "../ContactInfoItem/ContactInfoItem.jsx";
-
 import {ReactComponent as Logo} from './logo.svg';
 
 class Footer extends React.Component {
   render() {
     return <footer>
       <div className={styles.wrapper}>
-        <Logo stroke="#DF434A" className={styles.footer_logo}/>
+        <Logo className={styles.footer_logo}/>
         <div className={styles.footer_contact}>
-          <span className={styles.contact_title}>Contact Info</span>
+          Contact Info
           <div className={styles.contact_info}>
             <ContactInfoItem type="address" isFooter={true}>24th Street, New York, USA</ContactInfoItem>
             <ContactInfoItem type="phone" isFooter={true}>+0 123-456-7890</ContactInfoItem>
@@ -20,7 +17,6 @@ class Footer extends React.Component {
           </div>
         </div>
       </div>
-
     </footer>
   }
 }
