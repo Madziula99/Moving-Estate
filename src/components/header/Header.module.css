@@ -1,17 +1,11 @@
-:root {
-  --background-header: #df434a;
-  --background-header-line: #e29999;
-  --text-header: #ffffff;
-}
-
 .header_wrapper {
   background-image: url("./background.svg");
-  background-color: var(--background-header);
+  background-color: #df434a;
   height: 231px;
 }
 
 .header_line {
-  background-color: var(--background-header-line);
+  background-color: #e29999;
   height: 10px;
 }
 
@@ -23,12 +17,7 @@
   padding-top: 56px;
 }
 
-.header_logo {
-  padding-right: 30px;
-  padding-bottom: 5px;
-}
-
 .header_text {
-  color: var(--text-header);
+  color: #ffffff;
   font-size: 3.2em;
 }
