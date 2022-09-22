@@ -1,7 +1,13 @@
+@font-face {
+  font-family: 'Inter';
+  src: url(/src/fonts/NotoSans.ttf);
+}
+
 .subtitle_section_name {
+  font-family: "Inter", sans-serif;
   position: relative;
   width: 1097px;
-  font-family: 'Noto Sans', sans-serif;
+  margin: 0;
   text-transform: uppercase;
   text-align: center;
   line-height: 39px;
