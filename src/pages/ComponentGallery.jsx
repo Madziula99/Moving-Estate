@@ -1,18 +1,13 @@
 import React from "react";
-import Header from "../components/header/Header.jsx";
-
+import Subtitle from "../components/Subtitle";
 class ComponentGallery extends React.Component {
-  render() {
-    return (
-      <>
-        {/* prettier-ignore */}
-
-        <Header>PROPERTIES</Header>
-
-        {/* prettier-ignore */}
-      </>
-    );
-  }
+    render() {
+        return (
+            <>
+                <Subtitle>test</Subtitle>
+            </>
+        )
+    }
 }
 
 export default ComponentGallery;
