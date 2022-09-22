@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../components/Button/Button.jsx";
 import {ReactComponent as ListModeIcon} from './listMode.svg';
 import {ReactComponent as GridModeIcon} from './gridMode.svg';
+import Pagination from "../components/Pagination/Pagination.jsx";
 
 class ComponentGallery extends React.Component {
     render() {
@@ -21,15 +22,18 @@ class ComponentGallery extends React.Component {
                     </div>
                     <Button type="page" position="standalone" onChange={() => console.log(`Page changed to 3`)}>&gt;</Button>
                 </div>
-
                 <hr />
-
                 <Button type="view_mode" position="left" onChange={() => console.log(`Toggle view`)}>
                     <GridModeIcon />
                 </Button>
                 <Button type="view_mode" position="right" onChange={() => console.log(`Toggle view`)}>
                     <ListModeIcon />
                 </Button>
+
+
+                <h2>&lt;Pagination&gt;</h2>
+                <Pagination pages={7} page={2} onChange={page => console.log(`Page changed to ${page}`)} />
+
 
             </>
         )
