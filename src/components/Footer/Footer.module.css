@@ -10,7 +10,11 @@ footer {
     color: #4D4F52;
 }
 
+<<<<<<< HEAD
 .wrapper svg {
+=======
+.footer_logo {
+>>>>>>> 96469be (Change css styles for Footer and ContactInfoItem)
     flex: 1;
     margin: 3rem 3rem 3rem 0;
 }
@@ -25,4 +29,8 @@ footer {
     display: grid;
     gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
+}
+
+.contact_info > * {
+    padding-right: 0.4rem;
 }
