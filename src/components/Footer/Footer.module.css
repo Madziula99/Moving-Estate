@@ -23,9 +23,6 @@ footer {
 .contact_info {
     margin-top: 1.5rem;
     display: grid;
+    gap: 1rem;
     grid-template-columns: 1fr 1fr 1fr;
-}
-
-.contact_info > * {
-    padding-right: 0.4rem;
 }
