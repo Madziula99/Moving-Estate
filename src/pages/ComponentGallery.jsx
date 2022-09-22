@@ -5,6 +5,9 @@ import Description from "../components/Description/Description";
 import Footer from "../components/Footer/Footer.jsx";
 import ContactInfoItem from "../components/ContactInfoItem/ContactInfoItem.jsx";
 import PropertyInfo from "../components/PropertyInfo/PropertyInfo.jsx";
+import Button from "../components/Button/Button.jsx";
+import {ReactComponent as ListModeIcon} from './listMode.svg';
+import {ReactComponent as GridModeIcon} from './gridMode.svg';
 
 class ComponentGallery extends React.Component {
   render() {
