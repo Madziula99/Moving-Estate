@@ -4,6 +4,7 @@ import Subtitle from "../components/Subtitle/Subtitle.jsx";
 import Button from "../components/Button/Button.jsx";
 import {ReactComponent as ListModeIcon} from './listMode.svg';
 import {ReactComponent as GridModeIcon} from './gridMode.svg';
+import Pagination from "../components/Pagination/Pagination.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
