@@ -5,13 +5,10 @@ import Logo from "../logo/Logo.jsx";
 class Header extends React.Component {
   render() {
     return (
-      <header>
-        <div className={classes.header_line}></div>
-        <div className={classes.header_wrapper}>
-          <div className={classes.header}>
-            <Logo isFooter={false} />
-            <span className={classes.header_text}>{this.props.children}</span>
-          </div>
+      <header className={classes.header}>
+        <div className={classes.header_center}>
+          <Logo isFooter={false} />
+          {this.props.children}
         </div>
       </header>
     );

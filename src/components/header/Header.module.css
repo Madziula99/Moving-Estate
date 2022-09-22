@@ -1,23 +1,15 @@
-.header_wrapper {
+.header {
   background-image: url("./background.svg");
   background-color: #df434a;
-  height: 231px;
-}
-
-.header_line {
-  background-color: #e29999;
-  height: 10px;
-}
-
-.header {
-  width: 1096px;
-  margin: 0 auto;
-  display: flex;
-  align-items: flex-end;
-  padding-top: 56px;
-}
-
-.header_text {
+  height: 240px;
+  border-top: 10px solid #e29999;
   color: #ffffff;
   font-size: 3.2em;
+  line-height: 3.9em;
+}
+
+.header_center {
+  width: 1096px;
+  margin: 0 auto;
+  padding-top: 40px;
 }

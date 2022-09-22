@@ -5,7 +5,11 @@ class ComponentGallery extends React.Component {
   render() {
     return (
       <>
+        {/* prettier-ignore */}
+
         <Header>PROPERTIES</Header>
+
+        {/* prettier-ignore */}
       </>
     );
   }
