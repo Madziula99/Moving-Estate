@@ -81,14 +81,15 @@ class ComponentGallery extends React.Component {
 
         <Description>Description demo component. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque delectus expedita iusto molestias provident repudiandae tempore? Commodi corporis delectus dicta dolorem eius enim iure maiores molestias, rem sed voluptates!</Description>
 
+        <Subtitle>Subtitle Component</Subtitle>
 
                 <h2>&lt;Pagination&gt;</h2>
-                <Pagination pages={7} page={2} onChange={page => console.log(`Page changed to ${page}`)} />
-
-
-      </>
-    )
-  }
+                <Pagination pages={7} page={1} onChange={page => console.log(`Page changed to ${page}`)} />
+                <Pagination pages={7} page={3} onChange={page => console.log(`Page changed to ${page}`)} />
+                <Pagination pages={7} page={7} onChange={page => console.log(`Page changed to ${page}`)} />
+            </>
+        )
+    }
 }
 
 export default ComponentGallery;
