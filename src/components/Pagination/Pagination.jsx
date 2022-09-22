@@ -7,6 +7,7 @@ class Pagination extends React.Component {
     const pages = this.props.pages;
     const start = Math.max(1, Math.min(active - 1, active - 2));
     const end = Math.min(pages, Math.max(active + 1, active + 2));
+
     const buttons = [];
     for (let i = start; i <= end; i++) {
       const position =
@@ -18,11 +19,11 @@ class Pagination extends React.Component {
 
     return (
       <div style={{display: "flex"}}>
-        <Button type="page" position="standalone" onChange={() => this.props.onChange(this.props.page-1)}>&lt;</Button>
+        { active !== 1 && <Button type="page" position="standalone" onChange={() => this.props.onChange(this.props.page-1)}>&lt;</Button> }
         <div style={{margin: "0 1rem"}}>
-            {buttons}
+          {buttons}
         </div>
-        <Button type="page" position="standalone" onChange={() => this.props.onChange(this.props.page+1)}>&gt;</Button>
+        { active !== pages && <Button type="page" position="standalone" onChange={() => this.props.onChange(this.props.page+1)}>&gt;</Button> }
       </div>
     )
   }
