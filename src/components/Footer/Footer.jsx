@@ -14,9 +14,9 @@ class Footer extends React.Component {
         <div className={styles.footer_contact}>
           <span className={styles.contact_title}>Contact Info</span>
           <div className={styles.contact_info}>
-            <ContactInfoItem className={styles.contact_info_item} type="address">24th Street, New York, USA</ContactInfoItem>
-            <ContactInfoItem className={styles.contact_info_item} type="phone">+0 123-456-7890</ContactInfoItem>
-            <ContactInfoItem className={styles.contact_info_item} type="email">info@example.com</ContactInfoItem>
+            <ContactInfoItem type="address" isFooter={true}>24th Street, New York, USA</ContactInfoItem>
+            <ContactInfoItem type="phone" isFooter={true}>+0 123-456-7890</ContactInfoItem>
+            <ContactInfoItem type="email" isFooter={true}>info@example.com</ContactInfoItem>
           </div>
         </div>
       </div>
