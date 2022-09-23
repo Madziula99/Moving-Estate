@@ -15,7 +15,13 @@ class Pagination extends React.Component {
       i === start && (props.roundedLeft = true)
       i === end && (props.roundedRight = true)
       i === active && (props.isFocused = true)
-      buttons.push(<Button {...props} key={i}>{i}</Button>);
+      buttons.push(
+        <Button
+          {...props}
+          onClick={() => this.props.onChange(i)}
+          key={i}
+        >{i}
+        </Button>);
     }
 
     return (
