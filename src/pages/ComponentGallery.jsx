@@ -1,7 +1,7 @@
 import React from "react";
-import Header from "../components/Header/Header.jsx";
-import Subtitle from "../components/Subtitle/Subtitle.jsx";
-import Description from "../components/Description/Description";
+import Header from "../Components/Header/Header.jsx";
+import Subtitle from "../Components/Subtitle/Subtitle.jsx";
+import Description from "../Components/Description/Description";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -23,4 +23,3 @@ class ComponentGallery extends React.Component {
 }
 
 export default ComponentGallery;
-a
