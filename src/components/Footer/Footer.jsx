@@ -1,13 +1,13 @@
 import React from "react";
 import styles from './Footer.module.css';
 import ContactInfoItem from "../ContactInfoItem/ContactInfoItem.jsx";
-import {ReactComponent as Logo} from './logo.svg';
+import Logo from "../Logo/Logo.jsx";
 
 class Footer extends React.Component {
   render() {
     return <footer>
       <div className={styles.wrapper}>
-        <Logo className={styles.footer_logo}/>
+        <Logo isFooter={true} />
         <div className={styles.footer_contact}>
           Contact Info
           <div className={styles.contact_info}>
