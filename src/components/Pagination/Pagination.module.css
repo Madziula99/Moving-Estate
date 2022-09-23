@@ -1,0 +1,10 @@
+.wrapper {
+  display: block;
+  text-align: center;
+  margin: 4rem 0;
+}
+
+.pages {
+  display: inline-block;
+  margin: 0 0.6rem
+}
