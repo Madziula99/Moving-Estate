@@ -3,26 +3,22 @@
   border-style: solid;
   border-right: none;
   background: transparent;
-  outline: none;
   color: #74777C;
   padding: 0;
 }
 
-.selected {
+.focused {
   background: #F1F3F6;
 }
 
-.left {
-  border-radius: 0.1rem 0 0 0.1rem;
+.roundedLeft {
+  border-top-left-radius: 0.1rem;
+  border-bottom-left-radius: 0.1rem;
 }
 
-.right {
-  border-radius: 0 0.1rem 0.1rem 0;
-  border-right: 1px solid #74777C;
-}
-
-.standalone {
-  border-radius: 0.1rem;
+.roundedRight {
+  border-top-right-radius: 0.1rem;
+  border-bottom-right-radius: 0.1rem;
   border-right: 1px solid #74777C;
 }
 

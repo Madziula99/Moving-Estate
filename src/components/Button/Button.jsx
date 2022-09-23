@@ -3,15 +3,13 @@ import styles from './Button.module.css';
 
 class Button extends React.Component {
   render() {
-    const type = this.props.type;
-    const position = this.props.position;
-    const selected = this.props.selected;
+    const classes = [styles.button, styles[this.props.type]]
+    this.props.roundedLeft && classes.push(styles.roundedLeft);
+    this.props.roundedRight && classes.push(styles.roundedRight);
+    this.props.isFocused && classes.push(styles.focused);
 
     return (
-      <button
-        className={`${styles.button} ${styles[position]} ${styles[type]} ${styles[selected]}`}
-        onClick={this.props.onChange}
-      >
+      <button className={classes.join(" ")} onClick={this.props.onClick}>
         {this.props.children}
       </button>
     )
