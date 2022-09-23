@@ -104,6 +104,37 @@ class ComponentGallery extends React.Component {
           id="A003N"
           />
 
+<<<<<<< HEAD
+        <Header>PROPERTIES</Header>
+
+        {/* prettier-ignore */}
+
+        <Subtitle>Subtitle Component</Subtitle>
+
+        <Description>Description demo component. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque delectus expedita iusto molestias provident repudiandae tempore? Commodi corporis delectus dicta dolorem eius enim iure maiores molestias, rem sed voluptates!</Description>
+
+        <h2>&lt;ContactInfoItem&gt;</h2>
+        <ContactInfoItem type="phone" isFooter={false}>+0 123-456-7890</ContactInfoItem>
+        <ContactInfoItem type="email" isFooter={false}>info@example.com</ContactInfoItem>
+        <ContactInfoItem type="address" isFooter={true}>24th Street, New York, USA</ContactInfoItem>
+        <ContactInfoItem type="phone" isFooter={true}>+0 123-456-7890</ContactInfoItem>
+        <ContactInfoItem type="email" isFooter={true}>info@example.com</ContactInfoItem>
+
+        <h2>&lt;Footer&gt;</h2>
+        <Footer />
+
+        <h2>&lt;Property Info&gt;</h2>
+        <PropertyInfo
+          type="townhouse"
+          area={1932}
+          beds={4}
+          baths={3}
+          isCentered={false}
+          id="A003N"
+          />
+
+=======
+>>>>>>> 14e34c5 (Fix Button rendering in Pagination)
 
         <h2>&lt;Pagination&gt;</h2>
         <Pagination pages={7} page={1} onChange={page => console.log(`Page changed to ${page}`)} />
