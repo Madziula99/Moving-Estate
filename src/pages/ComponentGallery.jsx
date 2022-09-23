@@ -2,17 +2,17 @@ import React from "react";
 import Subtitle from "../components/Subtitle";
 
 class ComponentGallery extends React.Component {
-  render() {
-    return (
-      <>
+    render() {
+        return (
+            <>
 
 
-        <Subtitle>Subtitle component</Subtitle>
+                <Subtitle>Subtitle component</Subtitle>
 
 
-      </>
-    )
-  }
+            </>
+        )
+    }
 }
 
 export default ComponentGallery;
