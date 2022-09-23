@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Inter';
+    /*
+    src: url(/public/fonts/NotoSans.ttf);
+    I will delete this comment after the subtitle commit is approved.
+    It contains a font file.
+     */
+}
+
+.description_component {
+    font-family: "Inter", sans-serif;
+    width: 1092px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    color: #4D4F52;
+}
