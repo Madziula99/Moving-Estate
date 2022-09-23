@@ -11,21 +11,67 @@ class ComponentGallery extends React.Component {
   render() {
     return (
       <>
-                <h2>&lt;Button&gt;</h2>
-                <div style={{display: "flex"}}>
-                    <Button type="page" position="standalone" onChange={() => console.log(`Page changed to 3`)}>&lt;</Button>
-                    <div style={{margin: "0 1rem"}}>
-                        {pages}
-                    </div>
-                    <Button type="page" position="standalone" onChange={() => console.log(`Page changed to 3`)}>&gt;</Button>
-                </div>
-                <hr />
-                <Button type="view_mode" position="left" onChange={() => console.log(`Toggle view`)}>
-                    <GridModeIcon />
-                </Button>
-                <Button type="view_mode" position="right" onChange={() => console.log(`Toggle view`)}>
-                    <ListModeIcon />
-                </Button>
+        <h2>&lt;Button&gt;</h2>
+        <div style={{margin: "1rem"}}>
+          <Button
+            type="page"
+            roundedLeft
+            roundedRight
+            onClick={() => console.log(`Page change: Previous page`)}
+          >
+            &lt;
+          </Button>
+          <br />
+          <Button
+            type="page"
+            roundedLeft
+            roundedRight
+            onClick={() => console.log(`Page change: Next page`)}
+          >
+            &gt;
+          </Button>
+          <br />
+          <Button
+            type="page"
+            roundedLeft
+            isFocused
+            onClick={() => console.log(`Page change: Page 1`)}
+          >
+            1
+          </Button>
+          <br />
+          <Button
+            type="page"
+            onClick={() => console.log(`Page change: Page 2`)}
+          >
+            2
+          </Button>
+          <br />
+          <Button
+            type="page"
+            roundedRight
+            onClick={() => console.log(`Page change: Page 3`)}
+          >
+            3
+          </Button>
+          <br />
+          <Button
+            type="view_mode"
+            roundedLeft
+            isFocused
+            onClick={() => console.log(`Toggle view: Grid Mode`)}
+          >
+            <GridModeIcon />
+          </Button>
+          <br />
+          <Button
+            type="view_mode"
+            roundedRight
+            onClick={() => console.log(`Toggle view: List Mode`)}
+          >
+            <ListModeIcon />
+          </Button>
+        </div>
 
         <Header>PROPERTIES</Header>
 
@@ -36,7 +82,7 @@ class ComponentGallery extends React.Component {
         <Description>Description demo component. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis cumque delectus expedita iusto molestias provident repudiandae tempore? Commodi corporis delectus dicta dolorem eius enim iure maiores molestias, rem sed voluptates!</Description>
 
       </>
-    );
+    )
   }
 }
 
