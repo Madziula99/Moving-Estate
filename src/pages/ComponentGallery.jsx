@@ -1,5 +1,6 @@
 import React from "react";
-import Header from "../components/header/Header.jsx";
+import Header from "../components/Header/Header.jsx";
+import Subtitle from "../components/Subtitle/Subtitle.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -10,6 +11,9 @@ class ComponentGallery extends React.Component {
         <Header>PROPERTIES</Header>
 
         {/* prettier-ignore */}
+
+        <Subtitle>Subtitle Component</Subtitle>
+
       </>
     );
   }
