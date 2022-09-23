@@ -10,6 +10,14 @@ class ComponentGallery extends React.Component {
   render() {
     return (
       <>
+        {/* prettier-ignore */}
+
+        <Header>PROPERTIES</Header>
+
+        {/* prettier-ignore */}
+
+        <Subtitle>Subtitle Component</Subtitle>
+
         <h2>&lt;Button&gt;</h2>
         <div style={{margin: "1rem"}}>
           <Button
@@ -19,15 +27,6 @@ class ComponentGallery extends React.Component {
             onClick={() => console.log(`Page change: Previous page`)}
           >
             &lt;
-          </Button>
-          <br />
-          <Button
-            type="page"
-            roundedLeft
-            roundedRight
-            onClick={() => console.log(`Page change: Next page`)}
-          >
-            &gt;
           </Button>
           <br />
           <Button
@@ -71,8 +70,6 @@ class ComponentGallery extends React.Component {
             <ListModeIcon />
           </Button>
         </div>
-
-        <Header>PROPERTIES</Header>
 
         <h2>&lt;Pagination&gt;</h2>
         <Pagination pages={7} page={1} onChange={page => console.log(`Page changed to ${page}`)} />
