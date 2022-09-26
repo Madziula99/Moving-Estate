@@ -37,7 +37,8 @@ class ComponentGallery extends React.Component {
           beds={4}
           baths={3}
           style="centered"
-          id="A003N" />
+          id="A003N"
+          />
 
       </>
     );
