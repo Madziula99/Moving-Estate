@@ -1,0 +1,16 @@
+.list {
+  display: flex;
+  gap: 32px;
+  padding: 0;
+  font-size: 15px;
+}
+
+.list_item {
+  list-style-type: none;
+  display: flex;
+  gap: 7px;
+}
+
+.icon {
+  height: 18px;
+}
