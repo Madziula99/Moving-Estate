@@ -11,12 +11,12 @@
   background: #F1F3F6;
 }
 
-.roundedLeft {
+.rounded_left {
   border-top-left-radius: 0.1rem;
   border-bottom-left-radius: 0.1rem;
 }
 
-.roundedRight {
+.rounded_right {
   border-top-right-radius: 0.1rem;
   border-bottom-right-radius: 0.1rem;
   border-right: 1px solid #74777C;
