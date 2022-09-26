@@ -47,9 +47,9 @@ class Pagination extends React.Component {
 
     for (let i = start; i <= end; i++) {
       const props = { type: "page" };
-      i === start && (props.roundedLeft = true)
-      i === end && (props.roundedRight = true)
-      i === active && (props.isFocused = true)
+      i === start && (props.roundedLeft = true);
+      i === end && (props.roundedRight = true);
+      i === active && (props.isFocused = true);
       buttons.push(
         <Button
           {...props}
@@ -57,7 +57,8 @@ class Pagination extends React.Component {
           key={i}
         >
           {i}
-        </Button>);
+        </Button>
+      );
     }
     return buttons;
   }
