@@ -26,16 +26,13 @@
   border-left: 1px solid #E4E4E4;
 }
 
-.list .list_item:first-child::after {
+.list_item:first-child::after,
+.list_centered .id_provided:last-child,
+.list .id_provided:last-child::after {
   display: none;
 }
 
 .list .id_provided:last-child {
   position: absolute;
   right: 0;
-}
-
-.list_centered .id_provided:last-child,
-.list .id_provided:last-child::after {
-  display: none;
 }
