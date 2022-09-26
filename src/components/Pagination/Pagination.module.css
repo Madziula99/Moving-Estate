@@ -1,10 +1,10 @@
 .wrapper {
   display: block;
   text-align: center;
-  margin: 4rem 0;
+  margin: 63px 0;
 }
 
 .pages {
   display: inline-block;
-  margin: 0 0.6rem
+  margin: 0 10px
 }
