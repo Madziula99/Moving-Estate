@@ -26,10 +26,18 @@ class PropertyInfo extends React.Component {
     }
   }
 
-  addClassName() {
+  addListClassName() {
     const classes = [`${styles.list}`];
     
-    if (this.props.style === "centered") { classes.push(`${styles.list_centered}`); }
+    if (this.props.style === "centered") classes.push(`${styles.list_centered}`);
+
+    return classes.join(" ");
+  }
+
+  addListItemClassName() {
+    const classes = [`${styles.list_item}`];
+    
+    if (this.props.id) classes.push(`${styles.id_provided}`);
 
     return classes.join(" ");
   }
@@ -44,9 +52,9 @@ class PropertyInfo extends React.Component {
     if (this.props.baths) availableProps.push({ prop: this.props.baths, icon: BathsIcon });
     if (this.props.id) availableProps.push({ prop: `ID: ${this.props.id}` });
 
-    return <ul className={this.addClassName()}>
+    return <ul className={this.addListClassName()}>
       {availableProps.map((item, i) => {
-        return <li key={i} className={styles.list_item}>
+        return <li key={i} className={this.addListItemClassName()}>
           {this.showIcon(item.icon)}
           <span>{item.prop}</span>
         </li>
