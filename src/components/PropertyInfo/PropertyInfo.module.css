@@ -9,31 +9,3 @@
 .list_centered {
   justify-content: center;
 }
-
-.list_item {
-  position: relative;
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: #74777C;
-}
-
-.list_item::after {
-  content: "";
-  position: absolute;
-  left: -1rem;
-  height: 18px;
-  border-left: 1px solid #E4E4E4;
-}
-
-.list_item:first-child::after,
-.list_centered .id_provided:last-child,
-.list .id_provided:last-child::after {
-  display: none;
-}
-
-.list .id_provided:last-child {
-  position: absolute;
-  right: 0;
-}
