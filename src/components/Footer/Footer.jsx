@@ -9,7 +9,7 @@ class Footer extends React.Component {
       <div className={styles.wrapper}>
         <Logo isFooter={true} />
         <div className={styles.footer_contact}>
-          Contact Info
+          <span>Contact Info</span>
           <div className={styles.contact_info}>
             <ContactInfoItem type="address" isFooter={true}>24th Street, New York, USA</ContactInfoItem>
             <ContactInfoItem type="phone" isFooter={true}>+0 123-456-7890</ContactInfoItem>

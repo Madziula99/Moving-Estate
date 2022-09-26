@@ -18,7 +18,7 @@ class ContactInfoItem extends React.Component {
 
   className() {
     const names = [styles.icon];
-    this.props.isFooter && names.push(styles.footer);
+    this.props.isFooter && names.push(styles.footer_icon);
     return names.join(" ");
   }
 

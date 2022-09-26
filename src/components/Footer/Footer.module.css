@@ -5,24 +5,20 @@ footer {
 .wrapper {
     width: 60%;
     margin: auto;
-    display: flex;
-    font-size: 1.25rem;
+    font-size: 15px;
     color: #4D4F52;
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 50px 0;
 }
 
-.wrapper > svg {
-    flex: 1;
-    margin: 3rem 3rem 3rem 0;
-}
-
-.footer_contact {
-    flex: 3;
-    margin-top: 3rem;
+.footer_contact > span {
+    font-size: 20px;
 }
 
 .contact_info {
-    margin-top: 1.5rem;
+    margin-top: 25px;
     display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    grid-template-columns: auto auto auto;
 }
