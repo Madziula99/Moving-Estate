@@ -1,8 +1,8 @@
 import React from "react";
-import styles from './ContactInfoItem.module.css';
-import { ReactComponent as AddressIcon } from './address.svg';
-import { ReactComponent as PhoneIcon } from './phone.svg';
-import { ReactComponent as MailIcon } from './email.svg';
+import styles from "./ContactInfoItem.module.css";
+import { ReactComponent as AddressIcon } from "./address.svg";
+import { ReactComponent as PhoneIcon } from "./phone.svg";
+import { ReactComponent as MailIcon } from "./email.svg";
 
 class ContactInfoItem extends React.Component {
   render() {
