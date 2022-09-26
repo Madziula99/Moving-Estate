@@ -4,6 +4,7 @@ import Subtitle from "../components/Subtitle/Subtitle.jsx";
 import Description from "../components/Description/Description";
 import Footer from "../components/Footer/Footer.jsx";
 import ContactInfoItem from "../components/ContactInfoItem/ContactInfoItem.jsx";
+import PropertyInfo from "../components/PropertyInfo/PropertyInfo.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -28,6 +29,14 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;Footer&gt;</h2>
         <Footer />
+
+        <h2>&lt;Property Info&gt;</h2>
+        <PropertyInfo
+          type="townhouse"
+          area={1932}
+          beds={4}
+          baths={3}
+          id="A003N" />
 
       </>
     );
