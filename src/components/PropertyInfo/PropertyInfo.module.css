@@ -1,6 +1,6 @@
 .list {
   display: flex;
-  gap: 2rem;
+  gap: 32px;
   padding: 0;
   font-size: 15px;
   text-transform: capitalize;
