@@ -3,14 +3,14 @@
   list-style-type: none;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 7px;
   color: #74777C;
 }
 
 .list_item::after {
   content: "";
   position: absolute;
-  left: -1rem;
+  left: -16px;
   height: 18px;
   border-left: 1px solid #E4E4E4;
 }
