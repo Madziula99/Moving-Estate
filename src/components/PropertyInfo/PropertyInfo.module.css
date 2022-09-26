@@ -1,18 +1,41 @@
 .list {
   display: flex;
-  gap: 32px;
+  gap: 2rem;
   padding: 0;
   font-size: 15px;
 }
 
-.centered {
+.list_centered {
   justify-content: center;
 }
 
 .list_item {
+  position: relative;
   list-style-type: none;
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 0.4rem;
   color: #74777C;
+}
+
+.list_item::after {
+  content: "";
+  position: absolute;
+  left: -1rem;
+  height: 18px;
+  border-left: 1px solid #E4E4E4;
+}
+
+.list .list_item:last-child {
+  position: absolute;
+  right: 0;
+}
+
+.list .list_item:first-child::after,
+.list .list_item:last-child::after {
+  display: none;
+}
+
+.list_centered .list_item:last-child {
+  display: none;
 }

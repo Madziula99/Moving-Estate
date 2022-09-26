@@ -29,7 +29,7 @@ class PropertyInfo extends React.Component {
   addClassName() {
     const classes = [`${styles.list}`];
     
-    if (this.props.style === "centered") { classes.push(`${styles.centered}`); }
+    if (this.props.style === "centered") { classes.push(`${styles.list_centered}`); }
 
     return classes.join(" ");
   }
@@ -42,6 +42,7 @@ class PropertyInfo extends React.Component {
     if (this.props.area) availableProps.push({ prop: `${this.props.area}ft²`, icon: AreaIcon });
     if (this.props.beds) availableProps.push({ prop: this.props.beds, icon: BedsIcon });
     if (this.props.baths) availableProps.push({ prop: this.props.baths, icon: BathsIcon });
+    if (this.props.id) availableProps.push({ prop: `ID: ${this.props.id}` });
 
     return <ul className={this.addClassName()}>
       {availableProps.map((item, i) => {

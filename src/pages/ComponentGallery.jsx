@@ -24,6 +24,7 @@ class ComponentGallery extends React.Component {
           area={1932}
           beds={4}
           baths={3}
+          style="centered"
           id="A003N" />
 
       </>
