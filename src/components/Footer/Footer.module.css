@@ -10,11 +10,7 @@ footer {
     color: #4D4F52;
 }
 
-<<<<<<< HEAD
-.wrapper svg {
-=======
-.footer_logo {
->>>>>>> 96469be (Change css styles for Footer and ContactInfoItem)
+.wrapper > svg {
     flex: 1;
     margin: 3rem 3rem 3rem 0;
 }

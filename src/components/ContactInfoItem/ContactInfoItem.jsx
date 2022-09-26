@@ -1,24 +1,42 @@
 import React from "react";
 import styles from './ContactInfoItem.module.css';
+import { ReactComponent as AddressIcon } from './address.svg';
+import { ReactComponent as PhoneIcon } from './phone.svg';
+import { ReactComponent as MailIcon } from './email.svg';
 
 class ContactInfoItem extends React.Component {
   render() {
-    const type = this.props.type;
-
-    const classes = [styles.icon];
-    this.props.isFooter && classes.push(styles.footer);
-
-    let prefix = null;
-    type !== "address" && (prefix = (type === "email" ? "mailto:" : "tel:"))
-
     return <div className={styles.contact_info_item}>
-      <div className={classes.join(' ')}>
-        <img src={require(`./${type}.svg`)} alt="" />
+      <div className={this.className()}>
+        {this.icon()}
       </div>
-      <a className={styles.contact_link} href={prefix && prefix + this.props.children}>
+      <a className={styles.contact_link} href={this.urlFor()}>
         {this.props.children}
       </a>
     </div>
+  }
+
+  className() {
+    const names = [styles.icon];
+    this.props.isFooter && names.push(styles.footer);
+    return names.join(" ");
+  }
+
+  icon() {
+    switch(this.props.type) {
+      case "address": return <AddressIcon />;
+      case "phone": return <PhoneIcon />;
+      case "email": return <MailIcon />;
+      default: return null;
+    }
+  }
+
+  urlFor() {
+    switch(this.props.type) {
+      case "phone": return `tel:${this.props.children}`;
+      case "email": return `mailto:${this.props.children}`;
+      default: return null;
+    }
   }
 }
 
