@@ -6,11 +6,11 @@ class Pagination extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        {this.props.page !== 1 && this.switchPageButton('prev')}
+        {this.props.page !== 1 && this.switchPageButton("prev")}
         <div className={styles.pages}>
           {this.pageButtons()}
         </div>
-        {this.props.page !== this.props.pages && this.switchPageButton('next')}
+        {this.props.page !== this.props.pages && this.switchPageButton("next")}
       </div>
     )
   }
@@ -18,7 +18,7 @@ class Pagination extends React.Component {
   switchPageButton(direction) {
     const props = {roundedLeft: true, roundedRight: true};
     switch(direction) {
-      case 'prev': return (
+      case "prev": return (
         <Button type="page"
           {...props}
           onClick={() => this.props.onChange(this.props.page - 1)}
@@ -26,7 +26,7 @@ class Pagination extends React.Component {
           &lt;
         </Button>
       );
-      case 'next': return (
+      case "next": return (
         <Button type="page"
           {...props}
           onClick={() => this.props.onChange(this.props.page + 1)}
