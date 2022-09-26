@@ -5,12 +5,14 @@
   font-size: 15px;
 }
 
+.centered {
+  justify-content: center;
+}
+
 .list_item {
   list-style-type: none;
   display: flex;
+  align-items: center;
   gap: 7px;
-}
-
-.icon {
-  height: 18px;
+  color: #74777C;
 }
