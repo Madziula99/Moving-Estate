@@ -4,12 +4,12 @@
   height: 240px;
   border-top: 10px solid #e29999;
   color: #ffffff;
-  font-size: 3.2em;
-  line-height: 3.9em;
+  font-size: 32px;
+  line-height: 39px;
 }
 
 .header_center {
-  width: 1096px;
+  width: 60%;
   margin: 0 auto;
   padding-top: 40px;
 }

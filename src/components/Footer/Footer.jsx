@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Footer.module.css";
 import ContactInfoItem from "../ContactInfoItem/ContactInfoItem.jsx";
 import Logo from "../Logo/Logo.jsx";
+import styles from "./Footer.module.css";
 
 class Footer extends React.Component {
   render() {
