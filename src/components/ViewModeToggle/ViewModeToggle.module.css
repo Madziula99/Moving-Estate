@@ -1,0 +1,13 @@
+.view_mode_wrapper {
+  width: 60%;
+  margin: 35px auto;
+  font-size: 16px;
+  color: #74777C;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.view_mode_wrapper > span {
+  margin-right: 12px;
+}
