@@ -29,6 +29,8 @@
 
 .backdrop h4 {
   margin: 0;
+  line-height: 19px;
+  font-weight: 400;
 }
 
 .mode_wrapper {
