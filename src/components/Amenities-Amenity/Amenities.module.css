@@ -1,6 +1,6 @@
 .amenities {
   display: grid;
-  margin: 80px auto 100px auto;
-  max-width: 1092px;
+  margin: 0 auto;
+  width: 60%;
   grid-template-columns: auto auto auto;
 }
