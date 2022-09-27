@@ -42,7 +42,6 @@ class ComponentGallery extends React.Component {
           id="A003N"
           />
 
-<<<<<<< HEAD
         <Header>PROPERTIES</Header>
 
         {/* prettier-ignore */}
@@ -71,8 +70,58 @@ class ComponentGallery extends React.Component {
           id="A003N"
           />
 
-=======
->>>>>>> 14e34c5 (Fix Button rendering in Pagination)
+        <h2>&lt;Button&gt;</h2>
+        <div style={{margin: "1rem"}}>
+          <Button
+            type="page"
+            roundedLeft
+            roundedRight
+            onClick={() => console.log(`Page change: Previous page`)}
+          >
+            &lt;
+          </Button>
+          <br />
+          <Button
+            type="page"
+            roundedLeft
+            isFocused
+            onClick={() => console.log(`Page change: Page 1`)}
+          >
+            1
+          </Button>
+          <br />
+          <Button
+            type="page"
+            onClick={() => console.log(`Page change: Page 2`)}
+          >
+            2
+          </Button>
+          <br />
+          <Button
+            type="page"
+            roundedRight
+            onClick={() => console.log(`Page change: Page 3`)}
+          >
+            3
+          </Button>
+          <br />
+          <Button
+            type="view_mode"
+            roundedLeft
+            isFocused
+            onClick={() => console.log(`Toggle view: Grid Mode`)}
+          >
+            <GridModeIcon />
+          </Button>
+          <br />
+          <Button
+            type="view_mode"
+            roundedRight
+            onClick={() => console.log(`Toggle view: List Mode`)}
+          >
+            <ListModeIcon />
+          </Button>
+        </div>
 
         <h2>&lt;Pagination&gt;</h2>
         <Pagination pages={7} page={1} onChange={page => console.log(`Page changed to ${page}`)} />
