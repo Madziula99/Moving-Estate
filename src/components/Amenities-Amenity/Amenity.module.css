@@ -2,6 +2,7 @@
 .li_available {
   color: #74777c;
   font-size: 16px;
+  padding-left: 22px;
 }
 
 .li_available {
@@ -10,11 +11,4 @@
 
 .li_not_available {
   list-style-image: url("./svg/✗.svg");
-}
-
-li:before {
-  content: "";
-  display: inline-block;
-  height: 19px;
-  width: 22px;
 }
