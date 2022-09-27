@@ -32,7 +32,7 @@ class PropertyCard extends React.Component {
           mode={this.props.mode}
           price={this.props.price.toLocaleString().split(",").join(" ")}
         />
-        <img className={styles.property_card_image} src={CardImage} alt="" />
+        <img className={styles.property_card_image} src={CardImage} alt="Accommodation" />
         <div className={this.addWrapperClassName()}>
           <h3>{this.props.title}</h3>
           <a href="#" target="_blank">{this.props.location.join(", ")}</a>
