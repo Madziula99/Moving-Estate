@@ -15,16 +15,13 @@
   border-left: 1px solid #E4E4E4;
 }
 
-.list_item:first-child::after {
+.list_item:first-child::after,
+.centered:last-child,
+.id_provided:last-child::after {
   display: none;
 }
 
 .id_provided:last-child {
   position: absolute;
   right: 0;
-}
-
-.centered:last-child,
-.id_provided:last-child::after {
-  display: none;
 }
