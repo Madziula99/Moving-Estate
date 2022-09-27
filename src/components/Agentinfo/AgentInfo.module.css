@@ -1,0 +1,48 @@
+.agent_info {
+  width:60%;
+  display: flex;
+  margin:0 auto 150px;
+  border: 1px solid #e4e4e4;
+}
+
+.agent {
+  width: 220px;
+  height: 220px;
+  padding-right: 25px;
+}
+
+.info {
+  padding-top: 20px;
+}
+
+.info > h3,
+.info > h4 {
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+}
+
+.info > h3 {
+  font-size: 32px;
+  line-height: 39px;
+  color: #4d4f52;
+}
+
+.info > h4 {
+  font-size: 16px;
+  font-style: italic;
+  line-height: 19px;
+  color: #4d4f52;
+}
+
+.info > h5 {
+  font-size: 15px;
+  line-height: 18px;
+}
+
+.grey_line {
+  background-color: #e4e4e4;
+  width: 225px;
+  height: 1px;
+  margin: 15px 0;
+}

@@ -8,6 +8,8 @@ import PropertyInfo from "../components/PropertyInfo/PropertyInfo.jsx";
 import Pagination from "../components/Pagination/Pagination.jsx";
 import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
 import Title from "../components/Title/Title.jsx";
+import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
+import agentImg from "../components/Agentinfo/img.png";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -58,6 +60,16 @@ class ComponentGallery extends React.Component {
           bedrooms={4}
           bathrooms={3}
           id="A003N" />
+
+        <h2>&lt;AgentInfo&gt;</h2>
+        <AgentInfo
+          name="Adam Conover"
+          location="Los Angeles, California"
+          email="adam@example.com"
+          phone="+0 123-456-7890"
+          photo={agentImg}
+        />
+
       </>
     )
   }
