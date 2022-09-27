@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button/Button";
+import Button from "../Button/Button.jsx";
 import {ReactComponent as ListModeIcon} from './listMode.svg';
 import {ReactComponent as GridModeIcon} from './gridMode.svg';
 import styles from "./ViewModeToggle.module.css";
@@ -19,7 +19,7 @@ class ViewModeToggle extends React.Component {
     const currentMode = this.props.mode;
     const props = {
       type: "view_mode"
-    }
+    };
     mode === currentMode && (props.isFocused = true);
     mode === "grid" ? props.roundedLeft = true : props.roundedRight = true;
     return (
