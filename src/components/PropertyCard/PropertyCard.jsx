@@ -15,17 +15,13 @@ class PropertyCard extends React.Component {
   }
 
   addWrapperClassName() {
-    const classes = [];
-    
-    if (this.props.viewMode === "grid") classes.push(styles.grid_view_wrapper);
-    if (this.props.viewMode === "table") classes.push(styles.table_view_wrapper);
-
-    return classes.join(" ");
+    return this.props.viewMode === "grid"
+      ? styles.grid_view_wrapper
+      : styles.table_view_wrapper;
   }
 
   checkIsGridView() {
-    if (this.props.viewMode === "grid") return true;
-    if (this.props.viewMode === "table") return false;
+    return this.props.viewMode === "grid";
   }
 
   render() {
