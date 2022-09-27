@@ -1,19 +1,16 @@
 .subtitle_section_name {
-  font-family: "Inter", sans-serif;
   position: relative;
-  width: 1097px;
-  margin: 0;
+  margin: 100px 0 80px;
   text-transform: uppercase;
   text-align: center;
   line-height: 39px;
-  font-weight: 400;
   font-size: 32px;
   color: #DF434A;
 }
 
 .subtitle_section_name::after {
   position: absolute;
-  content: '';
+  content: "";
   height: 2px;
   bottom: -10px;
   margin: 0 auto;
