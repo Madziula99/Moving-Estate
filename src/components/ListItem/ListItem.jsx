@@ -28,6 +28,7 @@ class ListItem extends React.Component {
   }
 
   render() {
+    /* The second check is for cases of getting id-prop and area-prop, because we passed there not just a prop value, but a string including this prop value */
     if (typeof this.props.info === "undefined" || this.props.info.toString().includes("undefined")) return null;
 
     return <li className={this.addListItemClassName()}>
