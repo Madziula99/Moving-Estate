@@ -1,24 +1,24 @@
 footer {
-    background-color: #F1F3F6;
+  background-color: #F1F3F6;
 }
 
 .wrapper {
-    width: 60%;
-    margin: auto;
-    font-size: 15px;
-    color: #4D4F52;
-    display: grid;
-    grid-template-columns: auto auto;
-    padding: 50px 0;
+  width: 60%;
+  margin: auto;
+  font-size: 15px;
+  color: #4D4F52;
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 50px 0;
 }
 
 .footer_contact > span {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .contact_info {
-    margin-top: 25px;
-    display: grid;
-    gap: 10px;
-    grid-template-columns: auto auto auto;
+  margin-top: 25px;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: auto auto auto;
 }
