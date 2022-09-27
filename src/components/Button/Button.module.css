@@ -1,0 +1,41 @@
+.button {
+  border-width: 1px;
+  border-style: solid;
+  border-right: none;
+  background: transparent;
+  color: #74777C;
+  padding: 0;
+}
+
+.focused {
+  background: #F1F3F6;
+}
+
+.rounded_left {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.rounded_right {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+  border-right: 1px solid #74777C;
+}
+
+.page {
+  width: 48px;
+  height: 43px;
+  font-size: 16px;
+  border-color: #74777C;
+}
+
+.view_mode {
+  width: 40px;
+  height: 40px;
+  border-color: #ADB2B6;
+}
+
+.view_mode svg {
+  display: block;
+  margin: auto;
+}
