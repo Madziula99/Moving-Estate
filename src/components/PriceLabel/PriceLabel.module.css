@@ -47,3 +47,7 @@
 .mode_wrapper svg {
   width: 17px;
 }
+
+.mode_wrapper svg path {
+  fill: rgba(255, 255, 255, 0.6);
+}
