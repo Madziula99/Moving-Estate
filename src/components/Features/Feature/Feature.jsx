@@ -16,7 +16,7 @@ class Feature extends React.Component {
 
   checkIcon() {
     if (this.icons[this.props.icon]) {
-      return <div className={styles.feature_icon}>{this.icons[this.props.icon]}</div>
+      return this.icons[this.props.icon]
     }
   }
 
