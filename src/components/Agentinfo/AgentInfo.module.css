@@ -15,17 +15,21 @@
   padding-top: 20px;
 }
 
+.name,
+.location {
+  color: #4d4f52;
+  font-weight: 400;
+}
+
 .name {
   font-size: 32px;
-  line-height: 39px;
-  color: #4d4f52;
+  line-height: 39px;  
 }
 
 .location {
   font-size: 16px;
   font-style: italic;
-  line-height: 19px;
-  color: #4d4f52;  
+  line-height: 19px;  
 }
 
 .contacts {
