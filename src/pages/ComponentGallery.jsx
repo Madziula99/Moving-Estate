@@ -50,14 +50,14 @@ class ComponentGallery extends React.Component {
         <ViewModeToggle mode="list" onChange={mode => console.log(`View mode changed to ${mode}`)} />
 
         <h2>&lt;Title&gt;</h2>
-          <Title
-            name="Verona at Parkbridge II by DR Horton"
-            location={['Natomas', 'Sacramento']}
-            type="townhouse"
-            area={1932}
-            bedrooms={4}
-            bathrooms={3}
-            id="A003N" />
+        <Title
+          name="Verona at Parkbridge II by DR Horton"
+          location={['Natomas', 'Sacramento']}
+          type="townhouse"
+          area={1932}
+          bedrooms={4}
+          bathrooms={3}
+          id="A003N" />
       </>
     )
   }
