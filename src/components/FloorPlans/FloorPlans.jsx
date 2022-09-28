@@ -7,12 +7,12 @@ class FloorPlans extends React.Component {
     super(props);
 
     this.state = {
-      currentBtn: this.props.plans[0],
+      currentPlan: this.props.plans[0],
     };
   }
 
-  showImage(e) {
-    this.setState({ currentBtn: { name: e.target.innerText } });
+  showImage(plan) {
+    this.setState({ currentPlan: plan });
   }
 
   render() {
@@ -22,10 +22,10 @@ class FloorPlans extends React.Component {
         <div className={classes.floor_plans}>
           {this.props.plans.map((plan, i) => {
             return <React.Fragment key={`${i}-${plan.name}`}>
-              <button className={classes.plan_btn} onClick={(e) => this.showImage(e)}>{plan.name}</button> 
+              <button className={classes.plan_btn} onClick={() => this.showImage(plan)}>{plan.name}</button> 
             </React.Fragment>
           })}
-          <img className={classes.floor_img} src={this.props.plans[1].url} alt={this.props.plans[1].url} />       
+          <img className={classes.floor_img} src={this.state.currentPlan.url} alt={this.state.currentPlan.name} />       
         </div>        
       </section>
     );
