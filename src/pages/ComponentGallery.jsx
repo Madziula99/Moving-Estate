@@ -9,6 +9,7 @@ import Pagination from "../components/Pagination/Pagination.jsx";
 import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
 import Title from "../components/Title/Title.jsx";
 import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
+import FloorPlans from "../components/FloorPlans/FloorPlans.jsx";
 import agentImg from "../components/Agentinfo/img.png";
 import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
@@ -112,6 +113,10 @@ class ComponentGallery extends React.Component {
             {...property, id: 'A019'}, {...property, id: 'A020'}, {...property, id: 'A021'}
           ]}
         />
+
+        <h2>&lt;FloorPlans&gt;</h2>
+        <FloorPlans />
+
       </>
     )
   }
