@@ -5,7 +5,6 @@ import { ReactComponent as FenceIcon } from "./icons/fence.svg";
 import styles from "./Feature.module.css";
 
 class Feature extends React.Component {
-
   icon() {
     switch(this.props.icon) {
       case "paw": return <PawIcon />;
