@@ -11,18 +11,20 @@ class AgentInfo extends React.Component {
         <div className={classes.agent_info}>
           <img className={classes.agent} src={this.props.photo} alt="agent" />
           <div className={classes.info}>
-            <div className={classes.contacts}>
+            <div className={classes.name_location}>
               <h3 className={classes.name}>{this.props.name}</h3>
               <h4 className={classes.location}>{this.props.location}</h4>
             </div> 
-            <ContactInfoItem type="email" isFooter={false}>
-              {this.props.email}
-            </ContactInfoItem>
-            <ContactInfoItem type="phone" isFooter={false}>
-              {this.props.phone}
-            </ContactInfoItem>               
-          </div>
-        </div>
+            <div className={classes.destination_between}>
+              <ContactInfoItem type="email" isFooter={false}>
+                {this.props.email}
+              </ContactInfoItem>
+            </div>
+              <ContactInfoItem type="phone" isFooter={false}>
+                {this.props.phone}
+              </ContactInfoItem>  
+            </div>  
+          </div>        
       </section>
     );
   }
