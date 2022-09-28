@@ -1,4 +1,22 @@
-.floor_plans{
-  background-color: aqua;
+.floor_plans {
   margin: 0 auto;
+  width: 60%;
+  height: 615px; 
+  position: relative; 
+}
+
+.floor_img {
+  height: 615px;
+  object-fit: contain; 
+}
+
+.plan_btn {
+  position: absolute;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-right: 25px;
+  color: #4D4F52;
+  font-size: 20px;
 }

@@ -116,8 +116,8 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;FloorPlans&gt;</h2>
         <FloorPlans plans={[
-          { 'name': 'Ground Floor', url: 'https://viewer.diagrams.net/index.html?highlight=0000ff&edit=_blank&layers=1&nav=1&title=#Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fjgraph%2Fdrawio-diagrams%2Fmaster%2Fblog%2Ffloorplan-apartment.drawio' },
-          { 'name': '1st Floor', url: 'https://www.purelocations.com.au/wp-content/uploads/2022/05/Analise-Mornington_87201.jpg?v=1653962316' },
+          { name: "Ground Floor", url: "https://www.purelocations.com.au/wp-content/uploads/2022/05/Analise-Mornington_87201.jpg?v=1653962316" },
+          { name: "1st Floor", url: "https://www.purelocations.com.au/wp-content/uploads/2022/05/Analise-Mornington_87201.jpg?v=1653962316" },
           ]}
         />
 
