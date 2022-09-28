@@ -5,6 +5,7 @@
   background: transparent;
   color: #74777C;
   padding: 0;
+  cursor: pointer;
 }
 
 .focused {
