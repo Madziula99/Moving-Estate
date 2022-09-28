@@ -1,7 +1,7 @@
 import React from "react";
 import Subtitle from "../Subtitle/Subtitle.jsx";
-import classes from "./AgentInfo.module.css";
 import ContactInfoItem from "../ContactInfoItem/ContactInfoItem.jsx";
+import classes from "./AgentInfo.module.css";
 
 class AgentInfo extends React.Component {
   render() {
