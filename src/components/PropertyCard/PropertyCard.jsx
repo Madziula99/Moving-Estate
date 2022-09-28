@@ -35,7 +35,7 @@ class PropertyCard extends React.Component {
         <img className={styles.property_card_image} src={CardImage} alt="Accommodation" />
         <div className={this.addWrapperClassName()}>
           <h3>{this.props.title}</h3>
-          <a href="#" target="_blank">{this.props.location.join(", ")}</a>
+          <a href="#0" target="_blank">{this.props.location.join(", ")}</a>
           <p>{this.props.description}</p>
           <PropertyInfo
             area={1932}
