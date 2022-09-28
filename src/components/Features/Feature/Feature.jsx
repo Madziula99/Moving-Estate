@@ -15,9 +15,7 @@ class Feature extends React.Component {
   }
 
   checkIcon() {
-    if (this.icons[this.props.icon]) {
-      return this.icons[this.props.icon]
-    }
+    if (this.icons[this.props.icon]) { return this.icons[this.props.icon] }
   }
 
   render() {
