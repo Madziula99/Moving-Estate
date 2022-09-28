@@ -5,22 +5,19 @@ import { ReactComponent as FenceIcon } from "./icons/fence.svg";
 import styles from "./Feature.module.css";
 
 class Feature extends React.Component {
-  constructor(props) {
-    super(props);
-    this.icons = {
-      paw: <PawIcon />,
-      pool: <PoolIcon />,
-      fence: <FenceIcon />,
-    };
+
+  icon() {
+    switch(this.props.icon) {
+      case "paw": return <PawIcon />;
+      case "pool": return <PoolIcon />;
+      case "fence": return <FenceIcon />;
+      default: return null;
+    }
   }
 
-  checkIcon() {
-    if (this.icons[this.props.icon]) { return this.icons[this.props.icon] }
-  }
-
-  render() {
+    render() {
     return <div className={styles.feature_component}>
-      {this.checkIcon()}
+      {this.icon()}
       <span className={styles.feature_title}>{this.props.children}</span>
     </div>
   }
