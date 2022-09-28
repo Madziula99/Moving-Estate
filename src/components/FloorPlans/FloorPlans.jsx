@@ -8,12 +8,20 @@ class FloorPlans extends React.Component {
 
     this.state = {
       currentPlan: this.props.plans[0],
+      focused: 0,
     };
   }
 
   showImage(plan) {
-    this.setState({ currentPlan: plan });
-  }
+    this.setState({
+      currentPlan: plan,
+      focused: this.props.plans.indexOf(plan),
+    });
+  } 
+
+  computeClassName(i) {
+    return i===this.state.focused ? classes.plan_btn_focus: classes.plan_btn_not_focus
+  }  
 
   render() {
     return (
@@ -22,7 +30,7 @@ class FloorPlans extends React.Component {
         <div className={classes.floor_plans}>
           {this.props.plans.map((plan, i) => {
             return <React.Fragment key={`${i}-${plan.name}`}>
-              <button className={classes.plan_btn} onClick={() => this.showImage(plan)}>{plan.name}</button> 
+              <button className={this.computeClassName(i)} onClick={() => this.showImage(plan)}>{plan.name}</button>               
             </React.Fragment>
           })}
           <img className={classes.floor_img} src={this.state.currentPlan.url} alt={this.state.currentPlan.name} />       
