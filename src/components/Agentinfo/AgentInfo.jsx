@@ -14,12 +14,10 @@ class AgentInfo extends React.Component {
             <div className={classes.name_location}>
               <h3 className={classes.name}>{this.props.name}</h3>
               <h4 className={classes.location}>{this.props.location}</h4>
-            </div> 
-            <div className={classes.destination_between}>
-              <ContactInfoItem type="email" isFooter={false}>
+            </div>             
+              <ContactInfoItem type="email" isFooter={false} >
                 {this.props.email}
-              </ContactInfoItem>
-            </div>
+              </ContactInfoItem>            
               <ContactInfoItem type="phone" isFooter={false}>
                 {this.props.phone}
               </ContactInfoItem>  
