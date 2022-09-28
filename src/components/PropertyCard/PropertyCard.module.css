@@ -31,17 +31,14 @@ p {
 .property_card {
   position: relative;
   display: flex;
+  width: 100%;
 }
 
 .grid_view {
-  width: 350px;
-  height: 500px;
   flex-direction: column;
 }
 
 .list_view {
-  width: 1070px;
-  height: 305px;
   flex-direction: row;
   gap: 30px;
 }
@@ -55,8 +52,7 @@ p {
 }
 
 .property_card_image {
-  width: 345px;
-  height: 305px;
+  max-width: 100%;
   z-index: 0;
   margin-left: 6px;
 }
