@@ -95,14 +95,14 @@ class ComponentGallery extends React.Component {
           phone="+0 123-456-7890"
           photo={agentImg}
           />
-        
+
         <h2>&lt;Amenities&gt;</h2>
         <Amenities items={[
           { available: true, title: "Water Cooler" },
           { available: false, title: "Coffee Maker" },
           { available: true, title: "Cold water" },
           { available: false, title: "Gas" },
-        ]} /> 
+        ]} />
 
         <h2>&lt;Property Card&gt;</h2>
         <PropertyCard
