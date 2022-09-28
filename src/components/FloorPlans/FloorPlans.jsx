@@ -8,7 +8,7 @@ class FloorPlans extends React.Component {
       <section>
         <Subtitle>FLOOR PLANS</Subtitle>
         <div className={classes.floor_plans}>
-         img and else
+        
           
         </div>        
       </section>
