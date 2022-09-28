@@ -9,7 +9,7 @@ class PropertyCard extends React.Component {
     const classes = [styles.property_card];
     
     if (this.props.viewMode === "grid") classes.push(styles.grid_view);
-    if (this.props.viewMode === "table") classes.push(styles.table_view);
+    if (this.props.viewMode === "list") classes.push(styles.list_view);
 
     return classes.join(" ");
   }
@@ -17,7 +17,7 @@ class PropertyCard extends React.Component {
   addWrapperClassName() {
     return this.props.viewMode === "grid"
       ? styles.grid_view_wrapper
-      : styles.table_view_wrapper;
+      : styles.list_view_wrapper;
   }
 
   checkIsGridView() {

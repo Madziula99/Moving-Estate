@@ -39,7 +39,7 @@ p {
   flex-direction: column;
 }
 
-.table_view {
+.list_view {
   width: 1070px;
   height: 305px;
   flex-direction: row;
@@ -50,7 +50,7 @@ p {
   margin-left: 6px;
 }
 
-.table_view_wrapper {
+.list_view_wrapper {
   width: 100%;
 }
 
