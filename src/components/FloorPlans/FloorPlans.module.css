@@ -2,16 +2,16 @@
   margin: 0 auto;
   width: 60%;
   height: 615px; 
-  position: relative; 
 }
 
 .floor_img {
-  height: 615px;
-  object-fit: contain; 
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  margin: 0 auto;
 }
 
 .plan_btn {
-  position: absolute;
   background-color: transparent;
   border: none;
   cursor: pointer;
