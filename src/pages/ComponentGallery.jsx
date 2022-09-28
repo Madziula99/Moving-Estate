@@ -7,6 +7,7 @@ import ContactInfoItem from "../components/ContactInfoItem/ContactInfoItem.jsx";
 import PropertyInfo from "../components/PropertyInfo/PropertyInfo.jsx";
 import Pagination from "../components/Pagination/Pagination.jsx";
 import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
+import Title from "../components/Title/Title.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -47,6 +48,16 @@ class ComponentGallery extends React.Component {
         <h2>&lt;ViewModeToggle&gt;</h2>
         <ViewModeToggle mode="grid" onChange={mode => console.log(`View mode changed to ${mode}`)} />
         <ViewModeToggle mode="list" onChange={mode => console.log(`View mode changed to ${mode}`)} />
+
+        <h2>&lt;Title&gt;</h2>
+        <Title
+          name="Verona at Parkbridge II by DR Horton"
+          location={['Natomas', 'Sacramento']}
+          type="townhouse"
+          area={1932}
+          bedrooms={4}
+          bathrooms={3}
+          id="A003N" />
       </>
     )
   }
