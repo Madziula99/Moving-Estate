@@ -15,35 +15,21 @@
   padding-top: 20px;
 }
 
-.info > h3,
-.info > h4 {
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-}
-
-.info > h3 {
+.name {
   font-size: 32px;
   line-height: 39px;
   color: #4d4f52;
 }
 
-.info > h4 {
+.location {
   font-size: 16px;
   font-style: italic;
   line-height: 19px;
-  color: #4d4f52;
-  
-  
-}
-
-.info > h5 {
-  font-size: 15px;
-  line-height: 18px;
+  color: #4d4f52;  
 }
 
 .contacts {
-  margin-top:15px;
-  border-top: 1px solid #e4e4e4;
-  padding-top: 15px;
+  margin-bottom:15px;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 15px;
 }
