@@ -6,6 +6,7 @@ import Footer from "../components/Footer/Footer.jsx";
 import ContactInfoItem from "../components/ContactInfoItem/ContactInfoItem.jsx";
 import PropertyInfo from "../components/PropertyInfo/PropertyInfo.jsx";
 import Pagination from "../components/Pagination/Pagination.jsx";
+import Features from "../components/Features/Features.jsx";
 import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
 import Title from "../components/Title/Title.jsx";
 import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
@@ -46,6 +47,14 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;Pagination&gt;</h2>
         <Pagination pages={7} page={3} onChange={page => console.log(`Page changed to ${page}`)} />
+
+        <h2>&lt;Features&gt;</h2>
+        <Features
+          items={[
+            { icon: 'pool', title: 'Large pool outside' },
+            { icon: 'paw', title: 'Pets are allowed' },
+            { icon: 'fence', title: '850 Sq Ft Garden' },
+          ]} />
 
         <h2>&lt;ViewModeToggle&gt;</h2>
         <ViewModeToggle mode="grid" onChange={mode => console.log(`View mode changed to ${mode}`)} />
