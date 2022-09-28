@@ -74,7 +74,7 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Property Card&gt;</h2>
         <PropertyCard
           title="Dream Apartment for Young Family"
-          location={['Pasadena', 'California']}
+          location={["Pasadena", "California"]}
           image="http://....."
           description="Lorem ipsum..."
           type="townhouse"
