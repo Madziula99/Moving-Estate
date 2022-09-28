@@ -1,0 +1,43 @@
+.agent_info {
+  width:60%;
+  display: flex;
+  margin:0 auto 150px;
+  border: 1px solid #e4e4e4;
+}
+
+.agent {
+  width: 220px;
+  height: 220px;
+  padding-right: 25px;
+}
+
+.info {
+  padding-top: 20px;
+}
+
+.info div:nth-child(2) { 
+  padding-bottom: 8px; 
+}
+
+.name,
+.location {
+  color: #4d4f52;
+  font-weight: 400;
+}
+
+.name {
+  font-size: 32px;
+  line-height: 39px;  
+}
+
+.location {
+  font-size: 16px;
+  font-style: italic;
+  line-height: 19px;  
+}
+
+.name_location {
+  margin-bottom:15px;
+  border-bottom: 1px solid #e4e4e4;
+  padding-bottom: 15px;
+}
