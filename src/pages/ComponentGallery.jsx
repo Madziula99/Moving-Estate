@@ -10,6 +10,7 @@ import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
 import Title from "../components/Title/Title.jsx";
 import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
 import agentImg from "../components/Agentinfo/img.png";
+import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -70,6 +71,19 @@ class ComponentGallery extends React.Component {
           photo={agentImg}
         />
 
+        <h2>&lt;Property Card&gt;</h2>
+        <PropertyCard
+          title="Dream Apartment for Young Family"
+          location={["Pasadena", "California"]}
+          image={agentImg}
+          description="Lorem ipsum..."
+          type="townhouse"
+          mode="sale"
+          viewMode="grid"
+          price="100 500"
+          area={1320}
+          bedrooms={2}
+          bathrooms={2} />
       </>
     )
   }
