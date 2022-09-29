@@ -6,11 +6,10 @@ h3 {
   font-weight: 400;
 }
 
-a {
+span {
   font-size: 14px;
   font-style: italic;
   color: #777777;
-  text-decoration: none;
 }
 
 p {

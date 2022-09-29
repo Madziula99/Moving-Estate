@@ -75,12 +75,12 @@ class ComponentGallery extends React.Component {
         <PropertyCard
           title="Dream Apartment for Young Family"
           location={["Pasadena", "California"]}
-          image="http://....."
+          image={agentImg}
           description="Lorem ipsum..."
           type="townhouse"
           mode="sale"
           viewMode="grid"
-          price={100500}
+          price="100 500"
           area={1320}
           bedrooms={2}
           bathrooms={2} />

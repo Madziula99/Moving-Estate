@@ -1,7 +1,6 @@
 import React from "react";
 import PriceLabel from "../PriceLabel/PriceLabel.jsx";
 import PropertyInfo from "../PropertyInfo/PropertyInfo.jsx";
-import CardImage from "./default-card-image.svg";
 import styles from "./PropertyCard.module.css";
 
 class PropertyCard extends React.Component {
@@ -30,12 +29,12 @@ class PropertyCard extends React.Component {
         <PriceLabel
           type={this.props.type}
           mode={this.props.mode}
-          price={this.props.price.toLocaleString().split(",").join(" ")}
+          price={this.props.price}
         />
-        <img className={styles.property_card_image} src={CardImage} alt="Accommodation" />
+        <img className={styles.property_card_image} src={this.props.image} alt="Accommodation" />
         <div className={this.addWrapperClassName()}>
           <h3>{this.props.title}</h3>
-          <a href="#0" target="_blank">{this.props.location.join(", ")}</a>
+          <span>{this.props.location.join(", ")}</span>
           <p>{this.props.description}</p>
           <PropertyInfo
             area={1932}
