@@ -64,7 +64,7 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Pagination&gt;</h2>
         <Pagination pages={7} page={3} onChange={page => console.log(`Page changed to ${page}`)} />
 
-         <h2>&lt;ViewModeToggle&gt;</h2>
+        <h2>&lt;ViewModeToggle&gt;</h2>
         <ViewModeToggle mode="grid" onChange={mode => console.log(`View mode changed to ${mode}`)} />
         <ViewModeToggle mode="list" onChange={mode => console.log(`View mode changed to ${mode}`)} />
 
