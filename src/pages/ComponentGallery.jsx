@@ -118,7 +118,7 @@ class ComponentGallery extends React.Component {
         <FloorPlans plans={[
           { name: "Ground Floor", url: "https://www.purelocations.com.au/wp-content/uploads/2022/05/Analise-Mornington_87201.jpg?v=1653962316" },
           { name: "1st Floor", url: "https://wpmedia.roomsketcher.com/content/uploads/2022/01/06145219/Floor-plan-with-dimensions.jpg" },
-          { name: "2st Floor", url: "https://i.stack.imgur.com/qDhl7.jpg" }
+          { name: "2nd Floor", url: "https://i.stack.imgur.com/qDhl7.jpg" }
         ]}
         />
 
