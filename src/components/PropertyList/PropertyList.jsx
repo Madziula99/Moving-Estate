@@ -13,6 +13,7 @@ class PropertyList extends React.Component {
     let pageSize = this.props.defaultView === "grid" ? 12 : 8;
     let pages = Math.ceil(this.props.properties.length / pageSize);
     let propertiesList = [];
+
     for (let i = 0; i < this.props.properties.length; i += pageSize) {
       propertiesList.push(this.props.properties.slice(i, i + pageSize));
     }
@@ -28,10 +29,12 @@ class PropertyList extends React.Component {
 
   toggleViewMode(mode) {
     if (mode === this.props.currentMode) return;
+
     const newPageSize = (mode === "grid") ? 12 : 8;
     const pages = Math.ceil(this.props.properties.length / newPageSize);
     const page = (this.state.currentPage > pages) ? pages : this.state.currentPage;
     const propertiesList = [];
+
     for (let i = 0; i < this.props.properties.length; i += newPageSize) {
       propertiesList.push(this.props.properties.slice(i, i + newPageSize));
     }
@@ -47,7 +50,7 @@ class PropertyList extends React.Component {
 
   changePage(page) {
     if (page === this.props.currentPage) return;
-    this.propertyListRef.current.scrollIntoView({ behavior: 'smooth'});
+    this.propertyListRef.current.scrollIntoView({ behavior: "smooth"});
 
     this.setState({
       currentPage: page
