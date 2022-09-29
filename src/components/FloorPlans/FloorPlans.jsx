@@ -29,9 +29,11 @@ class FloorPlans extends React.Component {
         <Subtitle>FLOOR PLANS</Subtitle>
         <div className={classes.floor_plans}>
           {this.props.plans.map((plan, i) => {
-            return <>
-              <button className={this.computeClassName(i)} onClick={() => this.showImage(plan)} key={plan.name}>{plan.name}</button>               
-            </>
+            return (
+              <button className={this.computeClassName(i)} onClick={() => this.showImage(plan)} key={plan.name}>
+                {plan.name}
+              </button>
+            )
           })}
           <img className={classes.floor_img} src={this.state.currentPlan.url} alt={this.state.currentPlan.name} />       
         </div>        
