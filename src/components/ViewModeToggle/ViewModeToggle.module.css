@@ -1,6 +1,7 @@
 .view_mode_wrapper {
   width: 60%;
-  margin: 35px auto;
+  margin: 0 auto;
+  padding: 35px 0;
   font-size: 16px;
   color: #74777C;
   display: flex;
