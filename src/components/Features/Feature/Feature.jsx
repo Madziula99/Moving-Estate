@@ -17,7 +17,7 @@ class Feature extends React.Component {
   render() {
     return <div className={styles.feature_component}>
       {this.icon()}
-      <span className={styles.feature_title}>{this.props.children}</span>
+      {this.props.children}
     </div>
   }
 }
