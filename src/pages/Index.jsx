@@ -38,12 +38,13 @@ class Index extends React.Component {
         <Route path="/component_gallery">
           <ComponentGallery />
         </Route>
-        <Route path="properties/:property_id">
+        <Route path="/properties/:property_id">
           <Property  />
-        </Route>
-        <Route path="properties">
+        </Route>  
+        <Route path="/properties">
           <Properties  />
         </Route>
+             
         <Route path="/">
           <Header />
         </Route>
