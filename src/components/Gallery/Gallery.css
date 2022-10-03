@@ -1,0 +1,28 @@
+.carousel-root {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.carousel .thumbs-wrapper {
+  margin: 0;
+}
+
+.carousel .thumbs {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+}
+
+.carousel .thumb {
+  margin: 0;
+  padding: 0;
+  height: 155px;
+  width: 100%;
+  flex: 1;
+  border: none;
+}
+
+.carousel .thumb.selected {
+  border: none;
+}

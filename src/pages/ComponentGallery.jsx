@@ -15,6 +15,7 @@ import agentImg from "../components/Agentinfo/img.png";
 import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities-Amenity/Amenities.jsx";
+import Gallery from "../components/Gallery/Gallery.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -140,6 +141,15 @@ class ComponentGallery extends React.Component {
         ]}
         />
 
+        <h2>&lt;Gallery&gt;</h2>
+        <Gallery
+          images={[
+            "https://picsum.photos/700/400?img=1",
+            "https://picsum.photos/700/400?img=2",
+            "https://picsum.photos/700/400?img=3",
+            "https://picsum.photos/700/400?img=4",
+          ]}
+        />
       </>
     )
   }
