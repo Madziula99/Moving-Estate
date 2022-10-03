@@ -3,6 +3,31 @@
   margin: 0 auto;
 }
 
+.carousel.carousel-slider .control-arrow {
+  padding: 25px;
+  opacity: 1;
+}
+
+.carousel.carousel-slider .control-arrow:hover {
+  background-color: transparent;
+}
+
+.carousel .control-next.control-next::before,
+.carousel .control-prev.control-prev::before {
+  width: 45px;
+  height: 85px;
+  border: none;
+  margin: 0;
+}
+
+.carousel .control-next.control-next::before {
+  content: url("./rightArrow.svg");
+}
+
+.carousel .control-prev.control-prev::before {
+  content: url("./leftArrow.svg");
+}
+
 .carousel .thumbs-wrapper {
   margin: 0;
 }
@@ -17,12 +42,16 @@
 .carousel .thumb {
   margin: 0;
   padding: 0;
-  height: 155px;
-  width: 100%;
   flex: 1;
+  opacity: 50%;
+}
+
+.carousel .thumb,
+.carousel .thumb.selected,
+.carousel .thumb:hover {
   border: none;
 }
 
-.carousel .thumb.selected {
-  border: none;
+.carousel .thumb:hover {
+  cursor: pointer;
 }
