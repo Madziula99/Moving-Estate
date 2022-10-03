@@ -6,6 +6,11 @@
 .carousel.carousel-slider .control-arrow {
   padding: 25px;
   opacity: 1;
+  visibility: hidden;
+}
+
+.carousel.carousel-slider:hover .control-arrow {
+  visibility: visible;
 }
 
 .carousel.carousel-slider .control-arrow:hover {
@@ -43,7 +48,7 @@
   margin: 0;
   padding: 0;
   flex: 1;
-  opacity: 50%;
+  opacity: 0.5;
 }
 
 .carousel .thumb,
@@ -54,4 +59,8 @@
 
 .carousel .thumb:hover {
   cursor: pointer;
+}
+
+.carousel .thumb.selected {
+  opacity: 1;
 }
