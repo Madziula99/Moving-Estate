@@ -4,8 +4,7 @@ import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
 import Header from "../components/Header/Header.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 import ComponentGallery from "./ComponentGallery.jsx";
-import Property from "../components/Property/Property.jsx";
-import Properties from "../components/Property/Properties.jsx";
+import Property from "./Property.jsx";
 
 class Index extends React.Component {
   render() {
@@ -22,10 +21,7 @@ class Index extends React.Component {
         </li>
         <li>
           <NavLink to="/component_gallery">Component Gallery</NavLink>
-        </li>
-        {/* <li>
-          <NavLink to="/properties">Properties</NavLink>
-        </li> */}
+        </li>        
       </ul>
 
       <Switch>
@@ -41,9 +37,6 @@ class Index extends React.Component {
         <Route path="/:property_id">
           <Property  />
         </Route>  
-        {/* <Route path="/properties">
-          <Properties  />
-        </Route>              */}
         <Route path="/">
           <Header />
         </Route>
