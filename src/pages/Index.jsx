@@ -23,9 +23,9 @@ class Index extends React.Component {
         <li>
           <NavLink to="/component_gallery">Component Gallery</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/properties">Properties</NavLink>
-        </li>
+        </li> */}
       </ul>
 
       <Switch>
@@ -38,12 +38,12 @@ class Index extends React.Component {
         <Route path="/component_gallery">
           <ComponentGallery />
         </Route>
-        <Route path="/properties/:property_id">
+        <Route path="/:property_id">
           <Property  />
         </Route>  
-        <Route path="/properties">
+        {/* <Route path="/properties">
           <Properties  />
-        </Route>             
+        </Route>              */}
         <Route path="/">
           <Header />
         </Route>
