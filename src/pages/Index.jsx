@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink  } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 
 class Index extends React.Component {
   render() {
@@ -10,10 +10,10 @@ class Index extends React.Component {
         </li>
         <li>
           <NavLink to="/bar">Bar</NavLink>
-        </li>        
+        </li>         
       </ul>      
     </>
   }
 }
 
-export default Index;
+export default withRouter(Index);
