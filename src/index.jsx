@@ -15,7 +15,7 @@ root.render(
           <ComponentGallery />
         </Route>
         <Route path="/:property_id">
-          <Property  />
+          <Property />
         </Route>  
         <Route path="/">
           <Index />
