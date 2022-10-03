@@ -1,13 +1,13 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
-import PropertyList from "../components/PropertyList/PropertyList";
+import Header from "../components/Header/Header.jsx";
+import Footer from "../components/Footer/Footer.jsx";
+import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import properties from "../data.json";
 
 class Index extends React.Component {
   render() {
-    const newArr = properties.map(property => {
+    const necessaryProperties = properties.map(property => {
       return {
         id:property.id,
         title: property.title,
@@ -27,7 +27,7 @@ class Index extends React.Component {
       <Header>PROPERTIES</Header>
       <PropertyList
         defaultView="grid"
-        properties={newArr}
+        properties={necessaryProperties}
       />
       <Footer />
     </>
