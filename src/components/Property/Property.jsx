@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { useParams } from "react-router-dom";
+import { withRouter } from "react-router-dom"
 
 
 class Property extends Component {
-  render() {
-    return <h2>{this.props.match.params.id}</h2>
+  
+
+  render() {   
+    
+    return <h2>There is {this.props.match.params.property_id}</h2>
+    
   }
 }  
 
-export default Property;
+export default withRouter(Property)

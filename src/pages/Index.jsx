@@ -43,8 +43,7 @@ class Index extends React.Component {
         </Route>  
         <Route path="/properties">
           <Properties  />
-        </Route>
-             
+        </Route>             
         <Route path="/">
           <Header />
         </Route>
