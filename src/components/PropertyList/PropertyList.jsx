@@ -77,8 +77,7 @@ class PropertyList extends React.Component {
           return (
             <NavLink to={`${id}`} key={`${id}-link`}>
             <PropertyCard
-              key={id}
-              viewMode={this.state.currentMode}
+                viewMode={this.state.currentMode}
                 {...props}                
             />
           </NavLink>    
