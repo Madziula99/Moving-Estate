@@ -148,6 +148,9 @@ class ComponentGallery extends React.Component {
             "https://picsum.photos/700/400?img=2",
             "https://picsum.photos/700/400?img=3",
             "https://picsum.photos/700/400?img=4",
+            "https://picsum.photos/700/400?img=5",
+            "https://picsum.photos/700/400?img=6",
+            "https://picsum.photos/700/400?img=7",
           ]}
         />
       </>

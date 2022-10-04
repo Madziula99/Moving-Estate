@@ -32,35 +32,3 @@
 .carousel .control-prev.control-prev::before {
   content: url("./leftArrow.svg");
 }
-
-.carousel .thumbs-wrapper {
-  margin: 0;
-}
-
-.carousel .thumbs {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  display: flex;
-}
-
-.carousel .thumb {
-  margin: 0;
-  padding: 0;
-  flex: 1;
-  opacity: 0.5;
-}
-
-.carousel .thumb,
-.carousel .thumb.selected,
-.carousel .thumb:hover {
-  border: none;
-}
-
-.carousel .thumb:hover {
-  cursor: pointer;
-}
-
-.carousel .thumb.selected {
-  opacity: 1;
-}
