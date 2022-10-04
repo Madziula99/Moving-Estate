@@ -1,5 +1,5 @@
 import React from "react";
-import {Link, withRouter } from "react-router-dom"
+import {NavLink, withRouter } from "react-router-dom"
 import ViewModeToggle from "../ViewModeToggle/ViewModeToggle.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import PropertyCard from "../PropertyCard/PropertyCard.jsx";
@@ -75,13 +75,13 @@ class PropertyList extends React.Component {
         {this.state.propertiesList[this.state.currentPage - 1].map(property => {
           const { id, ...props } = property;          
           return (
-            <Link to={`${id}`}>
+            <NavLink to={`${id}`} key={`${id}-link`}>
             <PropertyCard
               key={id}
               viewMode={this.state.currentMode}
                 {...props}                
             />
-          </Link>    
+          </NavLink>    
           )
         })}
       </div>
