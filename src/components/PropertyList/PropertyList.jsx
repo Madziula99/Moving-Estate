@@ -1,4 +1,5 @@
 import React from "react";
+import {NavLink, withRouter } from "react-router-dom"
 import ViewModeToggle from "../ViewModeToggle/ViewModeToggle.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import PropertyCard from "../PropertyCard/PropertyCard.jsx";
@@ -74,11 +75,12 @@ class PropertyList extends React.Component {
         {this.state.propertiesList[this.state.currentPage - 1].map(property => {
           const { id, ...props } = property;
           return (
-            <PropertyCard
-              key={id}
-              viewMode={this.state.currentMode}
-              {...props}
-            />
+            <NavLink to={`${id}`} key={`${id}-link`}>
+              <PropertyCard
+                viewMode={this.state.currentMode}
+                {...props}
+              />
+            </NavLink>
           )
         })}
       </div>
@@ -91,4 +93,4 @@ class PropertyList extends React.Component {
   }
 }
 
-export default PropertyList;
+export default withRouter(PropertyList);

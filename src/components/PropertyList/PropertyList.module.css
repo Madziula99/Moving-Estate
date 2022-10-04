@@ -8,3 +8,8 @@
 .grid_view_mode {
   grid-template-columns: auto auto auto;
 }
+
+a {
+  outline: none;
+  text-decoration: none;
+}
