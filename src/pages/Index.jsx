@@ -9,7 +9,7 @@ class Index extends React.Component {
   render() {
     const necessaryProperties = properties.map(property => {
       return {
-        id:property.id,
+        id: property.id,
         title: property.title,
         location: property.location,
         image: property.images[0],
@@ -19,10 +19,10 @@ class Index extends React.Component {
         price: property.price,
         area: property.area,
         bedrooms: property.bedrooms,
-        bathrooms: property.bathrooms,
+        bathrooms: property.bathrooms
       }
-    })    
-
+    })
+    
     return <>
       <Header>PROPERTIES</Header>
       <PropertyList

@@ -76,10 +76,10 @@ class PropertyList extends React.Component {
           const { id, ...props } = property;          
           return (
             <NavLink to={`${id}`} key={`${id}-link`}>
-            <PropertyCard
+              <PropertyCard
                 viewMode={this.state.currentMode}
                 {...props}                
-            />
+              />
           </NavLink>    
           )
         })}
