@@ -73,14 +73,14 @@ class PropertyList extends React.Component {
       />
       <div className={this.addClasses()}>
         {this.state.propertiesList[this.state.currentPage - 1].map(property => {
-          const { id, ...props } = property;          
+          const { id, ...props } = property;
           return (
             <NavLink to={`${id}`} key={`${id}-link`}>
               <PropertyCard
                 viewMode={this.state.currentMode}
-                {...props}                
+                {...props}
               />
-          </NavLink>    
+            </NavLink>
           )
         })}
       </div>
