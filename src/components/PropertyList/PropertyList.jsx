@@ -9,8 +9,6 @@ class PropertyList extends React.Component {
   constructor(props) {
     super(props);
 
-    this.propertyListRef = React.createRef();
-
     let pageSize = this.props.defaultView === "grid" ? 12 : 8;
     let pages = Math.ceil(this.props.properties.length / pageSize);
     let propertiesList = [];
@@ -51,7 +49,11 @@ class PropertyList extends React.Component {
 
   changePage(page) {
     if (page === this.props.currentPage) return;
-    this.propertyListRef.current.scrollIntoView({ behavior: "smooth"});
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
 
     this.setState({
       currentPage: page
@@ -66,7 +68,7 @@ class PropertyList extends React.Component {
   }
 
   render() {
-    return <div ref={this.propertyListRef}>
+    return <>
       <ViewModeToggle
         mode={this.state.currentMode}
         onChange={mode => this.toggleViewMode(mode)}
@@ -89,7 +91,7 @@ class PropertyList extends React.Component {
         page={this.state.currentPage}
         onChange={page => this.changePage(page)}
       />
-    </div>
+    </>
   }
 }
 
