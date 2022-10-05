@@ -1,5 +1,6 @@
 .logo {
   padding-right: 30px;
+  cursor: pointer;
 }
 
 .logo_color path {
@@ -8,4 +9,5 @@
 
 .logo_color {
   stroke: #df434a;
+  cursor: auto;
 }
