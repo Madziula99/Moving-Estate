@@ -1,7 +1,8 @@
 .wrapper {
+  width: 1000px;
+  margin: 63px auto;
   display: block;
   text-align: center;
-  margin: 63px 0;
 }
 
 .pages {

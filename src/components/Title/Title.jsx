@@ -4,7 +4,7 @@ import styles from "./Title.module.css";
 
 class Title extends React.Component {
   render() {
-    return <>
+    return <div className={styles.wrapper}>
       <h2 className={styles.property_title}>{this.props.name}</h2>
       <span className={styles.property_city_area}>{this.props.location.join(", ")}</span>
       <PropertyInfo
@@ -15,7 +15,7 @@ class Title extends React.Component {
         isCentered={false}
         id={this.props.id}
       />
-    </>
+    </div>
   }
 }
 

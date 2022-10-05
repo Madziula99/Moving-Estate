@@ -3,8 +3,8 @@ footer {
 }
 
 .wrapper {
-  width: 60%;
-  margin: auto;
+  width: 1000px;
+  margin: 0 auto;
   font-size: 15px;
   color: #4D4F52;
   display: grid;
