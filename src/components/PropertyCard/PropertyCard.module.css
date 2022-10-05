@@ -4,13 +4,13 @@
   width: 100%;
 }
 
-.property_card span {
+.property_card_location {
   font-size: 14px;
   font-style: italic;
   color: #777777;
 }
 
-.property_card p {
+.property_card_description {
   color: #74777C;
   margin: 15px 0 24px;
   overflow: hidden;
