@@ -1,18 +1,16 @@
-h3 {
-  font-size: 20px;
-  color: #4D4F52;
-  margin: 20px 0 5px;
-  line-height: 24px;
-  font-weight: 400;
+.property_card {
+  position: relative;
+  display: flex;
+  width: 100%;
 }
 
-span {
+.property_card span {
   font-size: 14px;
   font-style: italic;
   color: #777777;
 }
 
-p {
+.property_card p {
   color: #74777C;
   margin: 15px 0 24px;
   overflow: hidden;
@@ -27,19 +25,21 @@ p {
   border-top: 1px solid #E3E3E3;
 }
 
-.property_card {
-  position: relative;
-  display: flex;
-  width: 100%;
-}
-
 .grid_view {
   flex-direction: column;
+}
+
+.grid_view img {
+  max-width: 100%;
 }
 
 .list_view {
   flex-direction: row;
   gap: 30px;
+}
+
+.list_view img {
+  max-width: 345px;
 }
 
 .grid_view_wrapper {
@@ -50,8 +50,16 @@ p {
   width: 100%;
 }
 
+.property_card_name {
+  font-size: 20px;
+  color: #4D4F52;
+  margin: 20px 0 5px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
 .property_card_image {
-  max-width: 100%;
   z-index: 0;
   margin-left: 6px;
+  max-height: 305px;
 }
