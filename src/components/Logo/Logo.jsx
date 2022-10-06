@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as Logotype } from "./logo.svg";
+import { ReactComponent as Logotype } from "./assets/logo.svg";
 import classes from "./Logo.module.css";
 
 class Logo extends React.Component {

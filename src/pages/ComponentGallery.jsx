@@ -11,10 +11,10 @@ import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
 import Title from "../components/Title/Title.jsx";
 import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
 import FloorPlans from "../components/FloorPlans/FloorPlans.jsx";
-import agentImg from "../components/Agentinfo/img.png";
+import agentImg from "../components/Agentinfo/assets/img.png";
 import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
-import Amenities from "../components/Amenities-Amenity/Amenities.jsx";
+import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
 
 class ComponentGallery extends React.Component {

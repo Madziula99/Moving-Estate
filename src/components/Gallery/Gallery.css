@@ -26,9 +26,9 @@
 }
 
 .carousel .control-next.control-next::before {
-  content: url("./rightArrow.svg");
+  content: url("assets/rightArrow.svg");
 }
 
 .carousel .control-prev.control-prev::before {
-  content: url("./leftArrow.svg");
+  content: url("assets/leftArrow.svg");
 }

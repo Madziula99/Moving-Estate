@@ -1,5 +1,5 @@
 import React from "react";
-import Amenity from "./Amenity.jsx";
+import Amenity from "./Amenity/Amenity.jsx";
 import classes from "./Amenities.module.css";
 import Subtitle from "../Subtitle/Subtitle.jsx";
 

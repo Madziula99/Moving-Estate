@@ -1,6 +1,6 @@
 import React from "react";
-import { ReactComponent as ApartmentIcon } from "../ListItem/apartment.svg";
-import { ReactComponent as TownhouseIcon } from "../ListItem/townhouse.svg";
+import { ReactComponent as ApartmentIcon } from "../PropertyInfo/ListItem/assets/apartment.svg";
+import { ReactComponent as TownhouseIcon } from "../PropertyInfo/ListItem/assets/townhouse.svg";
 import styles from "./PriceLabel.module.css";
 
 class PriceLabel extends React.Component {
