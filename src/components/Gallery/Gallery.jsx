@@ -10,16 +10,16 @@ const settingsMain = {
   slidesToScroll: 1,
   arrows: true,
   fade: true,
-  asNavFor: ".slider-nav",
+  infinite: false,
 };
 
 const settingsThumbs = {
   slidesToShow: 4,
   slidesToScroll: 1,
-  asNavFor: ".slider-for",
   focusOnSelect: true,
-  centerPadding: "0",
+  centerPadding: 0,
   arrows: false,
+  infinite: false,
 };
 
 class Gallery extends React.Component {
@@ -27,27 +27,27 @@ class Gallery extends React.Component {
     super(props);
 
     this.state = {
-      nav1: null,
-      nav2: null,
-      slider1: null,
-      slider2: null,
+      mainNavigation: null,
+      thumbsNavigation: null,
+      mainSlider: null,
+      thumbsSlider: null,
     };
 
-    this.setMainRef = slider => (this.setState({ slider1: slider }));
-    this.setCarouselRef = slider => (this.setState({ slider2: slider }));
-
-    this.setNavs = this.setNavs.bind(this);
+    this.setMainRef = slider => (this.setState({ mainSlider: slider }));
+    this.setCarouselRef = slider => (this.setState({ thumbsSlider: slider }));
   }
 
-  setNavs() {
-    this.setState({
-      nav1: this.state.slider1,
-      nav2: this.state.slider2
-    });
+  componentDidUpdate(_, prevState) {
+    if (prevState.mainSlider !== this.state.mainSlider && prevState.thumbsSlider !== this.state.thumbsSlider) {
+      this.setState({
+        mainNavigation: this.state.mainSlider,
+        thumbsNavigation: this.state.thumbsSlider
+      });
+    }
   }
 
   render() {
-    const { nav1, nav2 } = this.state;
+    const { mainNavigation, thumbsNavigation } = this.state;
 
     return <div className="wrapper">
       <PriceLabel
@@ -57,9 +57,8 @@ class Gallery extends React.Component {
       />
       <Slider
         {...settingsMain}
-        asNavFor={nav2}
+        asNavFor={thumbsNavigation}
         ref={this.setMainRef}
-        beforeChange={this.setNavs}
       >
         {this.props.images.map((image) => {
           return <img src={image} alt="Gallery main slide" className="main-slide" key={image} />
@@ -67,7 +66,7 @@ class Gallery extends React.Component {
       </Slider>
       <Slider
         {...settingsThumbs}
-        asNavFor={nav1}
+        asNavFor={mainNavigation}
         ref={this.setCarouselRef}
       >
         {this.props.images.map((image) => {

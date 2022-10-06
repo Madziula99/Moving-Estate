@@ -1,0 +1,66 @@
+.slick-slider {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.slick-slider:hover .slick-arrow {
+  visibility: visible;
+}
+
+.slick-track {
+  width: 100%;
+  transform: none;
+}
+
+.slick-arrow {
+  width: 45px;
+  height: 85px;
+  z-index: 1;
+  visibility: hidden;
+}
+
+.slick-disabled {
+  cursor: auto;
+}
+
+.slick-prev {
+  left: 25px;
+}
+
+.slick-next {
+  right: 25px;
+}
+
+.slick-next::before,
+.slick-prev::before {
+  opacity: 1;
+}
+
+.slick-next::before {
+  content: url("./rightArrow.svg");
+}
+
+.slick-prev::before {
+  content: url("./leftArrow.svg");
+}
+
+.slick-list,
+.main-slide {
+  max-height: 615px;
+}
+
+.carousel-slide {
+  max-height: 155px;
+}
+
+.carousel-slide:hover {
+  cursor: pointer;
+}
+
+.slick-slide {
+  opacity: .5;
+}
+
+.slick-current {
+  opacity: 1;
+}
