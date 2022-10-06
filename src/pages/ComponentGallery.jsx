@@ -16,9 +16,14 @@ import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
+<<<<<<< HEAD
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 
+=======
+import Input from "../components/Input/Input.jsx";
+import Select from "../components/Input/Select/Select.jsx";
+>>>>>>> 1e35b0b (Change input styles)
 
 class ComponentGallery extends React.Component {
   render() {
