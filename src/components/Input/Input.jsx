@@ -21,7 +21,7 @@ class Input extends React.Component {
     return (
       <input
         className={styles.input_field}
-        placeholder="Type here to translate!"
+        placeholder={this.props.placeholder}
         onChange={this.handleInput}
         value={this.state.text}
       />

@@ -1,10 +1,9 @@
 .input_field {
-  margin: 10px 15px;
+  width: 90%;
+  margin:10px 3%;
   border: 2px solid #979797;
   border-radius: 5px;
   background-color: #D3D3D3;
-  font-size: 18px;
-  line-height: 22px;
   padding: 10px;
-  color:#484848
+  color:#484848;
 }

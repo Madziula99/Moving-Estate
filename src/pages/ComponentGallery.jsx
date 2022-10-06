@@ -161,7 +161,7 @@ class ComponentGallery extends React.Component {
         <Button size="l" roundedLeft roundedRight>SEARCH</Button>
 
         <h2>&lt;Input&gt;</h2>
-        <Input>put</Input>
+        <Input placeholder="Property title, Property content, Exert" />
 
       </>
     )
