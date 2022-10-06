@@ -18,6 +18,9 @@ import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
+import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
+
+
 
 class ComponentGallery extends React.Component {
   render() {
@@ -159,10 +162,16 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Button&gt;</h2>
         <Button size="l" roundedLeft roundedRight>SEARCH</Button>
 
+
         <h2>&lt;Input&gt;</h2>
         <Input value = "some value" type="text" placeholder="Property title, Property content, Exert" onChange={ value => console.log(value)}/>
         <Input placeholder="Min. Year built" onChange={ value => console.log(value)}/>
         <Input type="number" placeholder="Number" onChange={ value => console.log(value)} />
+
+        <h2>&lt;Dropdown&gt;</h2>
+        <Dropdown id="nums-select" name="nums" options={['One', 'Two', 'Three', 'Four', 'Five']} />
+        <Dropdown id="cars-select" name="cars" options={['reno', 'volva', 'mercedes', 'feat', 'porch']} width="half" />
+        <Dropdown id="colors-select" name="colors" options={['pink', 'green', 'blue']} width="half"/>
 
       </>
     )
