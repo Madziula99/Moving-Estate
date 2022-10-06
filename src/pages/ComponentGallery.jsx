@@ -17,6 +17,8 @@ import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
 import { Button } from "../components/Button/Button.jsx";
+import { Input } from "../components/Input/Input.jsx";
+
 
 class ComponentGallery extends React.Component {
   render() {
@@ -157,6 +159,10 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;Button&gt;</h2>
         <Button size="l" roundedLeft roundedRight>SEARCH</Button>
+
+        <h2>&lt;Input&gt;</h2>
+        <Input>put</Input>
+
       </>
     )
   }
