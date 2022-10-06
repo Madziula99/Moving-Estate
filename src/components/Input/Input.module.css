@@ -1,14 +1,33 @@
-.input_field {
-  width: 90%;
-  margin:10px 3%;
+.input_field,
+.input_button {
   border: 2px solid #979797;
   border-radius: 5px;
-  background-color: #D3D3D3;
-  padding: 10px;
   color:#484848;
 }
 
-.input_field:focus{
+
+.input_field {
+  width: 90%;
+  margin: 10px 3%;
+  padding: 10px;
+  background-color: #D3D3D3;
+}
+
+.input_field:focus {
   outline: none !important;
   border: 2px solid #979797;
+}
+
+.input_button {
+  display: block;
+  width: 80px;
+  margin: 10px auto;
+  padding: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  background-color: #00FF00;
+}
+
+input[type="button"]:disabled {
+  background: #D3D3D3;
 }
