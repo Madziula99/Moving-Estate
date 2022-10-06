@@ -162,6 +162,8 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;Input&gt;</h2>
         <Input placeholder="Property title, Property content, Exert" />
+        <Input type="text" placeholder="Property title, Property content, Exert" />
+        <Input type="text" placeholder="Min. Year built" />
 
       </>
     )

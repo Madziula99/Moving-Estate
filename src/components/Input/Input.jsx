@@ -19,8 +19,9 @@ class Input extends React.Component {
 
   render() {
     return (
-      <input
+      this.props.type==="text" && <input
         className={styles.input_field}
+        type={this.props.type}
         placeholder={this.props.placeholder}
         onChange={this.handleInput}
         value={this.state.text}
