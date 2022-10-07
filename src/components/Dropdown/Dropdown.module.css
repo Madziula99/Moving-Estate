@@ -20,7 +20,7 @@
 
 select {
   background: linear-gradient(90deg,
-			transparent calc(100% - 32px), #484848 0, #484848 calc(100% - 30px), transparent 0);
+			transparent calc(100% - 31px), #484848 0, #484848 calc(100% - 30px), transparent 0);
   background-repeat: no-repeat !important;
   background-position-x: 100% !important;
   background-position-y: 50% !important;
