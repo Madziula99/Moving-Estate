@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import Logo from "../Logo/Logo.jsx";
 import classes from "./Header.module.css";
 
