@@ -7,7 +7,8 @@ class Gallery extends React.Component {
     super(props);
 
     this.state = {
-      currentImage: 0
+      currentImage: 0,
+      isMouseDown: false,
     };
 
     this.mainSliderRef = React.createRef();
@@ -20,6 +21,14 @@ class Gallery extends React.Component {
     this.setState({
       currentImage: index
     });
+  }
+
+  scrollThumbs(e) {
+    e.preventDefault();
+
+    const translateValue = Math.max(Math.min(e.clientX - this.thumbsRef.current.offsetLeft, 250 * (this.props.images.length - 4)), 0);
+
+    this.thumbsRef.current.style.transform = `translateX(-${translateValue}px)`;
   }
 
   componentDidUpdate(_, prevState) {
@@ -47,7 +56,14 @@ class Gallery extends React.Component {
           />
         })}
       </div>
-      <div className={styles.thumbs} ref={this.thumbsRef}>
+      <div
+        className={styles.thumbs}
+        ref={this.thumbsRef}
+        onMouseDown={() => this.setState({ isMouseDown: true })}
+        onMouseUp={() => this.setState({ isMouseDown: false })}
+        onMouseMove={(e) => this.state.isMouseDown && this.scrollThumbs(e)}
+        onMouseLeave={() => this.setState({ isMouseDown: false })}
+      >
         {this.props.images.map((image, i) => {
           return <img
             key={i}
