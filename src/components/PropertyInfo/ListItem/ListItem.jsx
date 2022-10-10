@@ -1,9 +1,9 @@
 import React from "react";
-import { ReactComponent as ApartmentIcon } from "./apartment.svg";
-import { ReactComponent as TownhouseIcon } from "./townhouse.svg";
-import { ReactComponent as AreaIcon } from "./area.svg";
-import { ReactComponent as BedsIcon } from "./beds.svg";
-import { ReactComponent as BathsIcon } from "./baths.svg";
+import { ReactComponent as ApartmentIcon } from "./assets/apartment.svg";
+import { ReactComponent as TownhouseIcon } from "./assets/townhouse.svg";
+import { ReactComponent as AreaIcon } from "./assets/area.svg";
+import { ReactComponent as BedsIcon } from "./assets/beds.svg";
+import { ReactComponent as BathsIcon } from "./assets/baths.svg";
 import styles from "./ListItem.module.css";
 
 class ListItem extends React.Component {

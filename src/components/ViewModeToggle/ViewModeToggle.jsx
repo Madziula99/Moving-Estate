@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../Button/Button.jsx";
-import {ReactComponent as ListModeIcon} from './listMode.svg';
-import {ReactComponent as GridModeIcon} from './gridMode.svg';
+import {ReactComponent as ListModeIcon} from './assets/listMode.svg';
+import {ReactComponent as GridModeIcon} from './assets/gridMode.svg';
 import styles from "./ViewModeToggle.module.css";
 
 class ViewModeToggle extends React.Component {

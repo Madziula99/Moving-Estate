@@ -5,7 +5,7 @@ import Title from "../components/Title/Title.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
 import Description from "../components/Description/Description.jsx";
 import FloorPlans from "../components/FloorPlans/FloorPlans";
-import Amenities from "../components/Amenities-Amenity/Amenities.jsx";
+import Amenities from "../components/Amenities/Amenities.jsx";
 import Features from "../components/Features/Features.jsx";
 import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
 import Footer from "../components/Footer/Footer";

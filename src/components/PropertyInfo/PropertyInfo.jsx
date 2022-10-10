@@ -1,5 +1,5 @@
 import React from "react";
-import ListItem from "../ListItem/ListItem.jsx";
+import ListItem from "./ListItem/ListItem.jsx";
 import styles from "./PropertyInfo.module.css";
 
 class PropertyInfo extends React.Component {
