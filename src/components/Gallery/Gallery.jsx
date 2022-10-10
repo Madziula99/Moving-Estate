@@ -9,6 +9,7 @@ class Gallery extends React.Component {
     this.state = {
       currentImage: 0,
       isMouseDown: false,
+      currentThumbTranslate: 0,
     };
 
     this.mainSliderRef = React.createRef();
@@ -16,6 +17,7 @@ class Gallery extends React.Component {
   }
 
   changeThumb(index) {
+    console.log(index);
     if (this.state.currentImage === index) return;
 
     this.setState({
@@ -26,9 +28,19 @@ class Gallery extends React.Component {
   scrollThumbs(e) {
     e.preventDefault();
 
-    const translateValue = Math.max(Math.min(e.clientX - this.thumbsRef.current.offsetLeft, 250 * (this.props.images.length - 4)), 0);
+    const translateValue = Math.min(Math.max(this.state.currentThumbTranslate - e.clientX - this.thumbsRef.current.offsetLeft, -250 * (this.props.images.length - 4)), 0);
 
-    this.thumbsRef.current.style.transform = `translateX(-${translateValue}px)`;
+    console.log(translateValue);
+
+    this.thumbsRef.current.style.transform = `translateX(${translateValue}px)`;
+  }
+
+  saveTranslateValue() {
+    const newThumbTranslate = this.thumbsRef.current.style.transform.replace(/[^\d.]/g, "");
+    console.log(newThumbTranslate);
+    this.setState({
+      currentThumbTranslate: newThumbTranslate
+    })
   }
 
   componentDidUpdate(_, prevState) {
@@ -46,6 +58,11 @@ class Gallery extends React.Component {
         mode={this.props.mode}
         price={this.props.price}
       />
+      {this.state.currentImage !== 0 && <button
+        onClick={() => this.changeThumb(this.state.currentImage - 1)}
+        className={`${styles.arrow} ${styles.arrow_prev}`}
+        />
+      }
       <div className={styles.main_slider} ref={this.mainSliderRef}>
         {this.props.images.map((image, i) => {
           return <img
@@ -56,13 +73,23 @@ class Gallery extends React.Component {
           />
         })}
       </div>
+      {this.state.currentImage !== this.props.images.length - 1 && <button
+        onClick={() => this.changeThumb(this.state.currentImage + 1)}
+        className={`${styles.arrow} ${styles.arrow_next}`} />
+      }
       <div
         className={styles.thumbs}
         ref={this.thumbsRef}
         onMouseDown={() => this.setState({ isMouseDown: true })}
-        onMouseUp={() => this.setState({ isMouseDown: false })}
+        onMouseUp={() => {
+          this.setState({ isMouseDown: false })
+          this.saveTranslateValue()
+        }}
         onMouseMove={(e) => this.state.isMouseDown && this.scrollThumbs(e)}
-        onMouseLeave={() => this.setState({ isMouseDown: false })}
+        onMouseLeave={() => {
+          this.setState({ isMouseDown: false })
+          this.saveTranslateValue()
+        }}
       >
         {this.props.images.map((image, i) => {
           return <img
