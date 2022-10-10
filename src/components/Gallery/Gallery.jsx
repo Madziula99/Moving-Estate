@@ -17,7 +17,6 @@ class Gallery extends React.Component {
   }
 
   changeThumb(index) {
-    console.log(index);
     if (this.state.currentImage === index) return;
 
     this.setState({
@@ -30,17 +29,23 @@ class Gallery extends React.Component {
 
     const translateValue = Math.min(Math.max(this.state.currentThumbTranslate - e.clientX - this.thumbsRef.current.offsetLeft, -250 * (this.props.images.length - 4)), 0);
 
-    console.log(translateValue);
-
     this.thumbsRef.current.style.transform = `translateX(${translateValue}px)`;
   }
 
   saveTranslateValue() {
     const newThumbTranslate = this.thumbsRef.current.style.transform.replace(/[^\d.]/g, "");
-    console.log(newThumbTranslate);
+
     this.setState({
       currentThumbTranslate: newThumbTranslate
     })
+  }
+
+  addThumbClassName(index) {
+    const classes = [styles.thumb_image];
+    
+    if (this.state.currentImage === index) classes.push(styles.thumb_image_current);
+
+    return classes.join(" ");
   }
 
   componentDidUpdate(_, prevState) {
@@ -94,7 +99,7 @@ class Gallery extends React.Component {
         {this.props.images.map((image, i) => {
           return <img
             key={i}
-            className={styles.thumb_image}
+            className={this.addThumbClassName(i)}
             src={image}
             alt=""
             onClick={() => this.changeThumb(i)}
