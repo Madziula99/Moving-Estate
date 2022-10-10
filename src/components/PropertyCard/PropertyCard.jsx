@@ -37,9 +37,9 @@ class PropertyCard extends React.Component {
           <span className={styles.property_card_location}>{this.props.location.join(", ")}</span>
           <p className={styles.property_card_description}>{this.props.description}</p>
           <PropertyInfo
-            area={1932}
-            beds={4}
-            baths={3}
+            area={this.props.area}
+            beds={this.props.bedrooms}
+            baths={this.props.bathrooms}
             isCentered={this.checkIsGridView()}
           />
         </div>
