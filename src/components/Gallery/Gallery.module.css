@@ -6,14 +6,12 @@
 }
 
 .main_slider {
-  white-space: nowrap;
-  overflow: hidden;
   max-height: 615px;
 }
 
 .main_image {
   width: 1000px;
-  object-fit: cover;
+  max-height: 615px;
 }
 
 .thumb_image {

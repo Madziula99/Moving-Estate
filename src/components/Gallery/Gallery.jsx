@@ -9,13 +9,25 @@ class Gallery extends React.Component {
     this.state = {
       currentImage: 0
     };
+
+    this.mainSliderRef = React.createRef();
+    this.thumbsRef = React.createRef();
   }
 
   changeThumb(index) {
     if (this.state.currentImage === index) return;
+
     this.setState({
       currentImage: index
     });
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.currentImage === this.state.currentImage) return;
+
+    const translateValue = 1000 * this.state.currentImage;
+
+    this.mainSliderRef.current.style.transform = `translateX(-${translateValue}px)`;
   }
 
   render() {
@@ -25,7 +37,7 @@ class Gallery extends React.Component {
         mode={this.props.mode}
         price={this.props.price}
       />
-      <div className={styles.main_slider}>
+      <div className={styles.main_slider} ref={this.mainSliderRef}>
         {this.props.images.map((image, i) => {
           return <img
             key={i}
@@ -35,7 +47,7 @@ class Gallery extends React.Component {
           />
         })}
       </div>
-      <div className={styles.thumbs}>
+      <div className={styles.thumbs} ref={this.thumbsRef}>
         {this.props.images.map((image, i) => {
           return <img
             key={i}
