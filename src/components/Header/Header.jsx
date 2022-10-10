@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink, withRouter } from "react-router-dom"
+import {NavLink } from "react-router-dom"
 import Logo from "../Logo/Logo.jsx";
 import classes from "./Header.module.css";
 
@@ -16,4 +16,4 @@ class Header extends React.Component {
   }
 }
 
-export default withRouter(Header);
+export default Header;
