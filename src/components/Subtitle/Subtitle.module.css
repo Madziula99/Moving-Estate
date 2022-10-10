@@ -1,6 +1,7 @@
 .subtitle_section_name {
+  width: 1000px;
+  margin: 100px auto 80px;
   position: relative;
-  margin: 100px 0 80px;
   text-transform: uppercase;
   text-align: center;
   line-height: 39px;

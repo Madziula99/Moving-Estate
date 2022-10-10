@@ -1,5 +1,5 @@
 .agent_info {
-  width:60%;
+  width: 1000px;
   display: flex;
   margin:0 auto 150px;
   border: 1px solid #e4e4e4;
@@ -15,8 +15,8 @@
   padding-top: 20px;
 }
 
-.info div:nth-child(2) { 
-  padding-bottom: 8px; 
+.info div:nth-child(2) {
+  padding-bottom: 8px;
 }
 
 .name,
@@ -27,13 +27,13 @@
 
 .name {
   font-size: 32px;
-  line-height: 39px;  
+  line-height: 39px;
 }
 
 .location {
   font-size: 16px;
   font-style: italic;
-  line-height: 19px;  
+  line-height: 19px;
 }
 
 .name_location {

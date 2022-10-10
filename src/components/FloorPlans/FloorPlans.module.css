@@ -1,6 +1,6 @@
 .floor_plans {
   margin: 0 auto;
-  width: 60%;
+  width: 1000px;
   height: 615px;
 }
 
@@ -17,12 +17,12 @@
   border: none;
   cursor: pointer;
   padding: 0;
-  margin-right: 25px;  
+  margin-right: 25px;
   font-size: 20px;
 }
 
 .plan_btn_focus {
-  color: #4D4F52;  
+  color: #4D4F52;
 }
 
 .plan_btn_not_focus {
