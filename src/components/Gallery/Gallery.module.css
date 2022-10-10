@@ -1,0 +1,23 @@
+.wrapper {
+  width: 1000px;
+  margin: 0 auto;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.main_slider {
+  white-space: nowrap;
+  overflow: hidden;
+  max-height: 615px;
+}
+
+.main_image {
+  width: 1000px;
+  object-fit: cover;
+}
+
+.thumb_image {
+  width: 250px;
+  max-height: 150px;
+  object-fit: cover;
+}

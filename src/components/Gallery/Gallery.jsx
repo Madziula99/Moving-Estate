@@ -1,78 +1,51 @@
 import React from "react";
 import PriceLabel from "../PriceLabel/PriceLabel.jsx";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./gallery.css";
-
-const settingsMain = {
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  arrows: true,
-  fade: true,
-  infinite: false,
-};
-
-const settingsThumbs = {
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  focusOnSelect: true,
-  centerPadding: 0,
-  arrows: false,
-  infinite: false,
-};
+import styles from "./Gallery.module.css";
 
 class Gallery extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      mainNavigation: null,
-      thumbsNavigation: null,
-      mainSlider: null,
-      thumbsSlider: null,
+      currentImage: 0
     };
-
-    this.setMainRef = slider => (this.setState({ mainSlider: slider }));
-    this.setCarouselRef = slider => (this.setState({ thumbsSlider: slider }));
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.mainSlider !== this.state.mainSlider && prevState.thumbsSlider !== this.state.thumbsSlider) {
-      this.setState({
-        mainNavigation: this.state.mainSlider,
-        thumbsNavigation: this.state.thumbsSlider
-      });
-    }
+  changeThumb(index) {
+    if (this.state.currentImage === index) return;
+    this.setState({
+      currentImage: index
+    });
   }
 
   render() {
-    const { mainNavigation, thumbsNavigation } = this.state;
-
-    return <div className="wrapper">
+    return <div className={styles.wrapper}>
       <PriceLabel
         type={this.props.type}
         mode={this.props.mode}
         price={this.props.price}
       />
-      <Slider
-        {...settingsMain}
-        asNavFor={thumbsNavigation}
-        ref={this.setMainRef}
-      >
-        {this.props.images.map((image) => {
-          return <img src={image} alt="Gallery main slide" className="main-slide" key={image} />
+      <div className={styles.main_slider}>
+        {this.props.images.map((image, i) => {
+          return <img
+            key={i}
+            className={styles.main_image}
+            src={image}
+            alt=""
+          />
         })}
-      </Slider>
-      <Slider
-        {...settingsThumbs}
-        asNavFor={mainNavigation}
-        ref={this.setCarouselRef}
-      >
-        {this.props.images.map((image) => {
-          return <img src={image} alt="Gallery carousel slide" className="carousel-slide" key={image} />
+      </div>
+      <div className={styles.thumbs}>
+        {this.props.images.map((image, i) => {
+          return <img
+            key={i}
+            className={styles.thumb_image}
+            src={image}
+            alt=""
+            onClick={() => this.changeThumb(i)}
+          />
         })}
-      </Slider>
+      </div>
     </div>
   }
 }
