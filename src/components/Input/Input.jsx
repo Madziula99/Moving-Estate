@@ -6,15 +6,18 @@ class Input extends React.Component {
     super(props);
     this.state = {
       text: '',
-    };
-    this.handleInput = this.handleInput.bind(this);
+    }
   }
 
-  handleInput(e){
-    let textInput = e.target.value;
-    this.setState({
-      text: textInput
-    })
+  handleInput(e) {
+    const currentValue = e.target.value;
+    if (currentValue === this.state.text) {
+      return;
+    } else {
+      this.setState({
+        text: currentValue
+      });
+    }
   }
 
   render() {
@@ -27,7 +30,7 @@ class Input extends React.Component {
         type={this.props.type || "text"}
         placeholder={this.props.placeholder}
         value={this.state.text}
-        onChange={this.handleInput}
+        onBlur={this.handleInput}
       />
     )
   }
