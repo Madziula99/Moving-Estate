@@ -172,7 +172,6 @@ class ComponentGallery extends React.Component {
         <Dropdown id="nums-select" name="nums" options={['One', 'Two', 'Three', 'Four', 'Five']} />
         <Dropdown id="cars-select" name="cars" options={['reno', 'volva', 'mercedes', 'feat', 'porch']} width="half" />
         <Dropdown id="colors-select" name="colors" options={['pink', 'green', 'blue']} width="half"/>
-
       </>
     )
   }
