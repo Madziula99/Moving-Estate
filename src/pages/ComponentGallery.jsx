@@ -169,9 +169,17 @@ class ComponentGallery extends React.Component {
         <Input type="number" placeholder="Number" onChange={ value => console.log(value)} />
 
         <h2>&lt;Dropdown&gt;</h2>
-        <Dropdown id="nums-select" name="nums" options={['One', 'Two', 'Three', 'Four', 'Five']} />
-        <Dropdown id="cars-select" name="cars" options={['reno', 'volva', 'mercedes', 'feat', 'porch']} width="half" />
-        <Dropdown id="colors-select" name="colors" options={['pink', 'green', 'blue']} width="half"/>
+        <Dropdown placeholder="Type" options={[
+          { 'value': 'single', 'label': 'Single-family' },
+          { 'value': 'house', 'label': 'Townhouse' },
+          { 'value': 'apt', 'label': 'Apartment' },
+        ]} />
+        <Dropdown options={[
+          { 'value': 'cat', 'label': 'animals' },
+          { 'value': 'dog', 'label': 'size' },
+          { 'value': 'bird', 'label': 'good' },
+        ]} width="half" />
+
       </>
     )
   }
