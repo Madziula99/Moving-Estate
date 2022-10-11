@@ -8,6 +8,14 @@
   cursor: pointer;
 }
 
+.medium_button {
+  height: 35px;
+}
+
+.large_button {
+  height: 39px;
+}
+
 .focused {
   background: #F1F3F6;
 }

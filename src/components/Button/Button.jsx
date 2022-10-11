@@ -15,6 +15,8 @@ class Button extends React.Component {
     this.props.roundedLeft && names.push(styles.rounded_left);
     this.props.roundedRight && names.push(styles.rounded_right);
     this.props.isFocused && names.push(styles.focused);
+    this.props.size === "m" && names.push(styles.medium_button);
+    this.props.size === "l" && names.push(styles.large_button);
     return names.join(" ");
   }
 }
