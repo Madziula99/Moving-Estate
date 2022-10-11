@@ -15,7 +15,7 @@ import agentImg from "../components/Agentinfo/assets/img.png";
 import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
-import Gallery from "../components/Gallery/Gallery.jsx";
+import { Gallery } from "../components/Gallery/Gallery.jsx";
 import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx";
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";

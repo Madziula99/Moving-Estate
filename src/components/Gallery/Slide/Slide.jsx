@@ -2,23 +2,26 @@ import React from "react";
 import styles from "./Slide.module.css";
 
 class Slide extends React.Component {
-  addThumbClassName() {
-    let classes = [];
+  className() {
+    const classes = [];
+    const { isMainSlide, isFocused } = this.props;
 
-    if (this.props.isMainSlide) {
+    if (isMainSlide) {
       classes.push(styles.main_image);
     } else {
       classes.push(styles.thumb_image);
 
-      if (this.props.focused) classes.push(styles.thumb_image_current);
+      if (isFocused) classes.push(styles.thumb_image_current);
     }
 
     return classes.join(" ");
   }
 
   render() {
-    return <img className={this.addThumbClassName()} onClick={this.props.handleSlideClick} src={this.props.image} alt="" />
+    const { image, handleSlideClick } = this.props;
+
+    return <img className={this.className()} onClick={handleSlideClick} src={image} alt="" />
   }
 }
 
-export default Slide;
+export { Slide };

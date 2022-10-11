@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import Title from "../components/Title/Title.jsx";
-import Gallery from "../components/Gallery/Gallery.jsx";
+import { Gallery } from "../components/Gallery/Gallery.jsx";
 import Description from "../components/Description/Description.jsx";
 import FloorPlans from "../components/FloorPlans/FloorPlans";
 import Amenities from "../components/Amenities/Amenities.jsx";

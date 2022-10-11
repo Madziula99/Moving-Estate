@@ -1,6 +1,6 @@
 import React from "react";
 import PriceLabel from "../PriceLabel/PriceLabel.jsx";
-import Slide from "./Slide/Slide.jsx";
+import { Slide } from "./Slide/Slide.jsx";
 import styles from "./Gallery.module.css";
 
 class Gallery extends React.Component {
@@ -15,28 +15,32 @@ class Gallery extends React.Component {
     this.thumbsRef = React.createRef();
   }
 
-  changeThumb(index) {
-    if (this.state.currentImage === index) return;
+  changeImage(currentImageIndex) {
+    if (this.state.currentImage === currentImageIndex) return;
 
     this.setState({
-      currentImage: index
+      currentImage: currentImageIndex
     });
   }
 
   componentDidUpdate(_, prevState) {
-    if (prevState.currentImage === this.state.currentImage) return;
+    const { images } = this.props;
+    const { currentImage } = this.state;
 
-    const translateMainValue = 1000 * this.state.currentImage;
+    if (prevState.currentImage === currentImage) return;
+
+    const translateMainValue = 1000 * currentImage;
     let translateThumbsValue = 0;
     const styledTransition = "all .5s ease-out";
+    const thumbWidth = 250;
 
-    if (this.state.currentImage >= this.props.images.length - 2) {
-      translateThumbsValue = 250 * (this.props.images.length - 4);
-    } else if (this.state.currentImage > 0) {
-      if (prevState.currentImage > this.state.currentImage) {
-        translateThumbsValue = 250 * this.state.currentImage - 500;
+    if (currentImage >= images.length - 2) {
+      translateThumbsValue = thumbWidth * (images.length - 4);
+    } else if (currentImage > 0) {
+      if (prevState.currentImage > currentImage) {
+        translateThumbsValue = thumbWidth * currentImage - thumbWidth * 2;
       } else {
-        translateThumbsValue = 250 * this.state.currentImage - 250;
+        translateThumbsValue = thumbWidth * currentImage - thumbWidth;
       }
     }
 
@@ -47,6 +51,9 @@ class Gallery extends React.Component {
   }
 
   render() {
+    const { images } = this.props;
+    const { currentImage } = this.state;
+
     return <div className={styles.wrapper}>
       <PriceLabel
         type={this.props.type}
@@ -54,31 +61,29 @@ class Gallery extends React.Component {
         price={this.props.price}
       />
       <div className={styles.main_slider_wrapper}>
-        {this.state.currentImage !== 0 &&
+        {currentImage !== 0 &&
         <button
-          onClick={() => this.changeThumb(this.state.currentImage - 1)}
+          onClick={() => this.changeImage(currentImage - 1)}
           className={`${styles.arrow} ${styles.arrow_prev}`}
         />}
         <div className={styles.main_slider} ref={this.mainSliderRef}>
-          {this.props.images.map(image => {
-            return <Slide image={image} key={image} isMainSlide />
-          })}
+          {images.map(image => <Slide image={image} key={image} isMainSlide />)}
         </div>
-        {this.state.currentImage !== this.props.images.length - 1 &&
+        {currentImage !== images.length - 1 &&
         <button
-          onClick={() => this.changeThumb(this.state.currentImage + 1)}
+          onClick={() => this.changeImage(currentImage + 1)}
           className={`${styles.arrow} ${styles.arrow_next}`}
         />}
       </div>
       <div ref={this.thumbsRef}>
-        {this.props.images.map((image, i) => {
-          const isFocused = this.state.currentImage === i;
+        {images.map((image, i) => {
+          const isFocused = currentImage === i;
 
-          return <Slide image={image} key={image} handleSlideClick={() => this.changeThumb(i)} focused={isFocused} />
+          return <Slide image={image} key={image} handleSlideClick={() => this.changeImage(i)} isFocused={isFocused} />
         })}
       </div>
     </div>
   }
 }
 
-export default Gallery;
+export { Gallery };
