@@ -1,6 +1,6 @@
 import React from "react";
 import PriceLabel from "../PriceLabel/PriceLabel.jsx";
-import Slide from "./Slide/Slide";
+import Slide from "./Slide/Slide.jsx";
 import styles from "./Gallery.module.css";
 
 class Gallery extends React.Component {
