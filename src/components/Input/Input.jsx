@@ -1,7 +1,11 @@
 import React from "react";
 import styles from "./Input.module.css";
 
+<<<<<<< HEAD
 class InputField extends React.Component {
+=======
+class Input extends React.Component {
+>>>>>>> 4e6327e (Add Input folder)
   constructor(props) {
     super(props);
     this.state = {
@@ -12,6 +16,7 @@ class InputField extends React.Component {
 
   handleInput(e) {
     const currentValue = e.target.value;
+<<<<<<< HEAD
     console.log(`text = ${this.state.text}`);
     console.log(`prevState = ${this.prevState}`)
     console.log(currentValue);
@@ -19,6 +24,11 @@ class InputField extends React.Component {
     if (currentValue === this.prevState) {
       console.log("remember this")
       return <></>;
+=======
+
+    if (currentValue === this.state.text) {
+      return null;
+>>>>>>> 4e6327e (Add Input folder)
     } else {
       this.setState({
         text: currentValue
@@ -42,8 +52,5 @@ class InputField extends React.Component {
   }
 }
 
-<<<<<<< HEAD
+
 export { Input };
-=======
-export default InputField;
->>>>>>> fc9d9a2 (Rename InputField)
