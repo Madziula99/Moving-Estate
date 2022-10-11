@@ -1,5 +1,6 @@
 import React from "react";
 import PriceLabel from "../PriceLabel/PriceLabel.jsx";
+import Slide from "./Slide/Slide";
 import styles from "./Gallery.module.css";
 
 class Gallery extends React.Component {
@@ -8,7 +9,6 @@ class Gallery extends React.Component {
 
     this.state = {
       currentImage: 0,
-      currentThumbTranslate: 0,
     };
 
     this.mainSliderRef = React.createRef();
@@ -23,30 +23,27 @@ class Gallery extends React.Component {
     });
   }
 
-  addThumbClassName(index) {
-    const classes = [styles.thumb_image];
-    
-    if (this.state.currentImage === index) classes.push(styles.thumb_image_current);
-
-    return classes.join(" ");
-  }
-
   componentDidUpdate(_, prevState) {
     if (prevState.currentImage === this.state.currentImage) return;
 
     const translateMainValue = 1000 * this.state.currentImage;
     let translateThumbsValue = 0;
+    const styledTransition = "all .5s ease-out";
 
     if (this.state.currentImage >= this.props.images.length - 2) {
       translateThumbsValue = 250 * (this.props.images.length - 4);
     } else if (this.state.currentImage > 0) {
-      translateThumbsValue = 250 * this.state.currentImage - 250;
+      if (prevState.currentImage > this.state.currentImage) {
+        translateThumbsValue = 250 * this.state.currentImage - 500;
+      } else {
+        translateThumbsValue = 250 * this.state.currentImage - 250;
+      }
     }
 
     this.mainSliderRef.current.style.transform = `translateX(-${translateMainValue}px)`;
-    this.mainSliderRef.current.style.transition = "all .5s ease-out";
+    this.mainSliderRef.current.style.transition = styledTransition;
     this.thumbsRef.current.style.transform = `translateX(-${translateThumbsValue}px)`;
-    this.thumbsRef.current.style.transition = "all .5s ease-out";
+    this.thumbsRef.current.style.transition = styledTransition;
   }
 
   render() {
@@ -56,34 +53,26 @@ class Gallery extends React.Component {
         mode={this.props.mode}
         price={this.props.price}
       />
-      {this.state.currentImage !== 0 && <button
+      {this.state.currentImage !== 0 &&
+      <button
         onClick={() => this.changeThumb(this.state.currentImage - 1)}
         className={`${styles.arrow} ${styles.arrow_prev}`}
-        />
-      }
+      />}
       <div className={styles.main_slider} ref={this.mainSliderRef}>
-        {this.props.images.map((image, i) => {
-          return <img
-            key={i}
-            className={styles.main_image}
-            src={image}
-            alt=""
-          />
+        {this.props.images.map(image => {
+          return <Slide image={image} key={image} isMainSlide />
         })}
       </div>
-      {this.state.currentImage !== this.props.images.length - 1 && <button
+      {this.state.currentImage !== this.props.images.length - 1 &&
+      <button
         onClick={() => this.changeThumb(this.state.currentImage + 1)}
-        className={`${styles.arrow} ${styles.arrow_next}`} />
-      }
+        className={`${styles.arrow} ${styles.arrow_next}`}
+      />}
       <div ref={this.thumbsRef}>
         {this.props.images.map((image, i) => {
-          return <img
-            key={i}
-            className={this.addThumbClassName(i)}
-            src={image}
-            alt=""
-            onClick={() => this.changeThumb(i)}
-          />
+          const isFocused = this.state.currentImage === i;
+
+          return <Slide image={image} key={image} handleSlideClick={() => this.changeThumb(i)} focused={isFocused} />
         })}
       </div>
     </div>

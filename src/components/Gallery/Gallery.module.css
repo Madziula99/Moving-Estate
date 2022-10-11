@@ -4,6 +4,7 @@
   white-space: nowrap;
   overflow: hidden;
   position: relative;
+  padding-bottom: 65px;
 }
 
 .wrapper:hover .arrow {
@@ -35,24 +36,4 @@
 .arrow_next {
   background-image: url("./rightArrow.svg");
   right: 25px;
-}
-
-.main_image {
-  width: 1000px;
-  max-height: 615px;
-}
-
-.thumb_image {
-  width: 250px;
-  max-height: 150px;
-  object-fit: cover;
-  opacity: 0.5;
-}
-
-.thumb_image:hover {
-  cursor: pointer;
-}
-
-.thumb_image_current {
-  opacity: 1;
 }
