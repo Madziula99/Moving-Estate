@@ -4,10 +4,10 @@
   white-space: nowrap;
   overflow: hidden;
   position: relative;
-  padding-bottom: 65px;
+  margin-bottom: 65px;
 }
 
-.wrapper:hover .arrow {
+.main_slider_wrapper:hover .arrow {
   visibility: visible;
 }
 

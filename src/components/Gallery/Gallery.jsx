@@ -53,21 +53,23 @@ class Gallery extends React.Component {
         mode={this.props.mode}
         price={this.props.price}
       />
-      {this.state.currentImage !== 0 &&
-      <button
-        onClick={() => this.changeThumb(this.state.currentImage - 1)}
-        className={`${styles.arrow} ${styles.arrow_prev}`}
-      />}
-      <div className={styles.main_slider} ref={this.mainSliderRef}>
-        {this.props.images.map(image => {
-          return <Slide image={image} key={image} isMainSlide />
-        })}
+      <div className={styles.main_slider_wrapper}>
+        {this.state.currentImage !== 0 &&
+        <button
+          onClick={() => this.changeThumb(this.state.currentImage - 1)}
+          className={`${styles.arrow} ${styles.arrow_prev}`}
+        />}
+        <div className={styles.main_slider} ref={this.mainSliderRef}>
+          {this.props.images.map(image => {
+            return <Slide image={image} key={image} isMainSlide />
+          })}
+        </div>
+        {this.state.currentImage !== this.props.images.length - 1 &&
+        <button
+          onClick={() => this.changeThumb(this.state.currentImage + 1)}
+          className={`${styles.arrow} ${styles.arrow_next}`}
+        />}
       </div>
-      {this.state.currentImage !== this.props.images.length - 1 &&
-      <button
-        onClick={() => this.changeThumb(this.state.currentImage + 1)}
-        className={`${styles.arrow} ${styles.arrow_next}`}
-      />}
       <div ref={this.thumbsRef}>
         {this.props.images.map((image, i) => {
           const isFocused = this.state.currentImage === i;
