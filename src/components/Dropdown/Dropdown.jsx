@@ -18,7 +18,9 @@ class Dropdown extends React.Component {
   }
 
   onOptionChangeHandler (event)  {
-    console.log("User Selected Value - ", event.target.value)
+    this.setState({
+      value: event.target.value
+    });
   }
 
   render() {
