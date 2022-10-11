@@ -19,6 +19,7 @@ import Gallery from "../components/Gallery/Gallery.jsx";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 
@@ -35,6 +36,9 @@ import InputField from "../components/Input/Input.jsx";
 =======
 import InputField from "../components/Inputfield/Inputfield.jsx";
 >>>>>>> bbce70f (Rename Input to Inputfield)
+=======
+import Input from "../components/Input/Input.jsx";
+>>>>>>> 3157e93 (Rename Inputfield to Input)
 
 class ComponentGallery extends React.Component {
   render() {
@@ -179,6 +183,7 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Input&gt;</h2>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Input placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Min. Year built" />
@@ -193,6 +198,11 @@ class ComponentGallery extends React.Component {
         <InputField id="last-input" placeholder="Min. Year built" />
         <InputField id="num-input" type="number" placeholder="Number" />
 >>>>>>> fc9d9a2 (Rename InputField)
+=======
+        <Input id="1st-input" type="text" placeholder="Property title, Property content, Exert" />
+        <Input id="last-input" placeholder="Min. Year built" />
+        <Input id="num-input" type="number" placeholder="Number" />
+>>>>>>> 3157e93 (Rename Inputfield to Input)
       </>
     )
   }
