@@ -7,6 +7,7 @@ class InputField extends React.Component {
     this.state = {
       text: '',
     }
+    this.handleInput = this.handleInput.bind(this);
   }
 
   handleInput(e) {
@@ -17,7 +18,7 @@ class InputField extends React.Component {
 
     if (currentValue === this.prevState) {
       console.log("remember this")
-      return ;
+      return <></>;
     } else {
       this.setState({
         text: currentValue
