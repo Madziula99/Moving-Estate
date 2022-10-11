@@ -1,21 +1,23 @@
 import React from "react";
 import styles from "./Input.module.css";
 
-class Input extends React.Component {
+class InputField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: 'cat',
+      text: '',
     }
   }
 
   handleInput(e) {
     const currentValue = e.target.value;
-    console.log(currentValue)
-    if (currentValue === this.state.text) {
-      this.setState((prevState, props) => {
-        return { text: prevState.text };
-      });
+    console.log(`text = ${this.state.text}`);
+    console.log(`prevState = ${this.prevState}`)
+    console.log(currentValue);
+
+    if (currentValue === this.prevState) {
+      console.log("remember this")
+      return ;
     } else {
       this.setState({
         text: currentValue
@@ -39,4 +41,8 @@ class Input extends React.Component {
   }
 }
 
+<<<<<<< HEAD
 export { Input };
+=======
+export default InputField;
+>>>>>>> fc9d9a2 (Rename InputField)

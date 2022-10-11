@@ -17,6 +17,7 @@ import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 
@@ -27,6 +28,9 @@ import Select from "../components/Input/Select/Select.jsx";
 >>>>>>> 1e35b0b (Change input styles)
 =======
 >>>>>>> ad29cbd (Fix input component)
+=======
+import InputField from "../components/Input/Input.jsx";
+>>>>>>> fc9d9a2 (Rename InputField)
 
 class ComponentGallery extends React.Component {
   render() {
@@ -170,6 +174,7 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;Input&gt;</h2>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Input placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Min. Year built" />
@@ -179,6 +184,11 @@ class ComponentGallery extends React.Component {
         <Input id="last-input" placeholder="Min. Year built" />
         <Input id="num-input" type="number" placeholder="Number" />
 >>>>>>> 10ce4a9 (Refactor types of input by default)
+=======
+        <InputField id="1st-input" type="text" placeholder="Property title, Property content, Exert" />
+        <InputField id="last-input" placeholder="Min. Year built" />
+        <InputField id="num-input" type="number" placeholder="Number" />
+>>>>>>> fc9d9a2 (Rename InputField)
       </>
     )
   }
