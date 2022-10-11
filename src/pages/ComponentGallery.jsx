@@ -18,6 +18,7 @@ import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 
@@ -31,6 +32,9 @@ import Select from "../components/Input/Select/Select.jsx";
 =======
 import InputField from "../components/Input/Input.jsx";
 >>>>>>> fc9d9a2 (Rename InputField)
+=======
+import InputField from "../components/Inputfield/Inputfield.jsx";
+>>>>>>> bbce70f (Rename Input to Inputfield)
 
 class ComponentGallery extends React.Component {
   render() {
