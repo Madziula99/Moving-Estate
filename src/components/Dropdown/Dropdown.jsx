@@ -6,7 +6,7 @@ class Dropdown extends React.Component {
     super(props);
     this.state = {
       select: "",
-      value: this.props.placeholder,
+      value: "default",
     };
     this.onOptionChangeHandler = this.onOptionChangeHandler.bind(this);
   }
@@ -23,10 +23,10 @@ class Dropdown extends React.Component {
 
   render() {
     return (
-      <select className={this.addClasses()} onChange={this.onOptionChangeHandler}>
+      <select className={this.addClasses()} onChange={this.onOptionChangeHandler} value={this.state.value}>
         <option value="default" disabled hidden>{this.props.placeholder}</option>
         {this.props.options.map((option, index) => {
-          return <option key={index + "select"} >
+          return <option key={option.value} >
             {option.value}
           </option>
         })}
