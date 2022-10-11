@@ -5,14 +5,17 @@ class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
+      text: 'cat',
     }
   }
 
   handleInput(e) {
     const currentValue = e.target.value;
+    console.log(currentValue)
     if (currentValue === this.state.text) {
-      return;
+      this.setState((prevState, props) => {
+        return { text: prevState.text };
+      });
     } else {
       this.setState({
         text: currentValue
@@ -29,7 +32,7 @@ class Input extends React.Component {
         className={styles.input_field}
         type={this.props.type || "text"}
         placeholder={this.props.placeholder}
-        value={this.state.text}
+        defaultValue={this.state.text}
         onBlur={this.handleInput}
       />
     )
