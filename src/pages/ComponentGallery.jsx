@@ -169,10 +169,16 @@ class ComponentGallery extends React.Component {
         <Button size="l" roundedLeft roundedRight>SEARCH</Button>
 
         <h2>&lt;Input&gt;</h2>
+<<<<<<< HEAD
         <Input placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Min. Year built" />
 
+=======
+        <Input id="1st-input" type="text" placeholder="Property title, Property content, Exert" />
+        <Input id="last-input" placeholder="Min. Year built" />
+        <Input id="num-input" type="number" placeholder="Number" />
+>>>>>>> 10ce4a9 (Refactor types of input by default)
       </>
     )
   }

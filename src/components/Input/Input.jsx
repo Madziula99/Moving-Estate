@@ -6,7 +6,6 @@ class Input extends React.Component {
     super(props);
     this.state = {
       text: '',
-      disabled: true,
     };
     this.handleInput = this.handleInput.bind(this);
   }
@@ -20,27 +19,16 @@ class Input extends React.Component {
 
   render() {
     return (
-    <>
-      {
-          this.props.type === "text" && <input
-          id={this.props.id}
-          className={styles.input_field}
-          type={this.props.type}
-          placeholder={this.props.placeholder}
-          onChange={this.handleInput}
-          value={this.state.text}
-        />
-      }
-      {
-        this.props.type === "button" && <input
+      (this.props.type === undefined ||
+      this.props.type === "text" ||
+      this.props.type === "number" ) && <input
         id={this.props.id}
-        className={styles.input_button}
-        type={this.props.type}
-        value={this.props.value}
-        disabled={this.state.disabled}
-        />
-      }
-    </>
+        className={styles.input_field}
+        type={this.props.type || "text"}
+        placeholder={this.props.placeholder}
+        value={this.state.text}
+        onChange={this.handleInput}
+      />
     )
   }
 }
