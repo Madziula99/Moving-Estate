@@ -22,8 +22,11 @@ import { Input } from "../components/Input/Input.jsx";
 
 =======
 import Input from "../components/Input/Input.jsx";
+<<<<<<< HEAD
 import Select from "../components/Input/Select/Select.jsx";
 >>>>>>> 1e35b0b (Change input styles)
+=======
+>>>>>>> ad29cbd (Fix input component)
 
 class ComponentGallery extends React.Component {
   render() {
