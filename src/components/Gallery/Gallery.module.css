@@ -29,11 +29,11 @@
 }
 
 .arrow_prev {
-  background-image: url("./leftArrow.svg");
+  background-image: url("./assets/leftArrow.svg");
   left: 25px;
 }
 
 .arrow_next {
-  background-image: url("./rightArrow.svg");
+  background-image: url("./assets/rightArrow.svg");
   right: 25px;
 }
