@@ -1,44 +1,37 @@
 import React from "react";
-import Select from 'react-select';
+import Select, { StylesConfig } from 'react-select';
 import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      select: "",
-      value: "default"
-    };
-    this.onOptionChangeHandler = this.onOptionChangeHandler.bind(this);
-  }
-
   addClasses() {
     const classes = [styles.select];
     this.props.width === "half" && classes.push(styles.select_half);
     return classes.join(" ");
   }
 
-  onOptionChangeHandler (event)  {
-    this.setState({
-      value: event.target.value
-    });
-  }
-
   render() {
-    const { options } =this.props
-    return (<>
-      <select className={this.addClasses()} onChange={this.onOptionChangeHandler} value={this.state.value}>
-        <option value="default" disabled hidden>{this.props.placeholder}</option>
-        {this.props.options.map((option, index) => {
-          return <option key={option.value} >
-            {option.value}
-          </option>
-        })}
-      </select>
-      <Select options={ options } />
-      </>
+
+    const customStyles = {
+      option: (provided, state) => ({
+        ...provided,
+        borderBottom: '2px solid #df434a',
+        color: state.isSelected ? '#484848' : 'black',
+        backgroundColor: state.isSelected ? '#df434a' : '#D3D3D3',
+        cursor: "pointer"
+      }),
+      control: (provided) => ({
+        ...provided,
+        marginTop: "5%",
+      })
+    };
+
+    const { options } = this.props;
+
+    return (
+      <Select className={this.addClasses()} options={ options } styles = { customStyles }/>
     );
   }
+
 }
 
 export { Dropdown };

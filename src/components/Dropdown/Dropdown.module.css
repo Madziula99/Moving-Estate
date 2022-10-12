@@ -1,29 +1,8 @@
 .select {
   width: 90%;
   margin: 10px 3%;
-  padding: 10px;
-  background-color: #D3D3D3;
-  border: 2px solid #979797;
-  border-radius: 5px;
-  color:#484848;
-  cursor: pointer;
-}
-
-.select:focus {
-  outline: none !important;
-  border: 2px solid #979797;
 }
 
 .select_half {
   width: 42%;
 }
-
-select {
-  background: linear-gradient(90deg,
-			transparent calc(100% - 31px), #484848 0, #484848 calc(100% - 30px), transparent 0);
-  background-repeat: no-repeat !important;
-  background-position-x: 100% !important;
-  background-position-y: 50% !important;
-}
-
-/*#f2f2f2*/

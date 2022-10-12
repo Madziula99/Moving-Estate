@@ -170,14 +170,14 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;Dropdown&gt;</h2>
         <Dropdown placeholder="Type" options={[
-          { 'value': 'single', 'label': 'Single-family' },
-          { 'value': 'house', 'label': 'Townhouse' },
-          { 'value': 'apt', 'label': 'Apartment' },
+          { 'value': 'single-v', 'label': 'Single-family-l' },
+          { 'value': 'house-v', 'label': 'Townhouse-l' },
+          { 'value': 'apt-v', 'label': 'Apartment-l' },
         ]} />
         <Dropdown options={[
-          { 'value': 'cat', 'label': 'animals' },
-          { 'value': 'dog', 'label': 'size' },
-          { 'value': 'bird', 'label': 'good' },
+          { 'value': 'cat-v', 'label': 'animals-l' },
+          { 'value': 'dog-v', 'label': 'size-l' },
+          { 'value': 'bird-v', 'label': 'good-l' },
         ]} width="half" />
         <Dropdown placeholder="XZ" options={[]} />
 
