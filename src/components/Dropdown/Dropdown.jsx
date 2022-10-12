@@ -31,11 +31,11 @@ class Dropdown extends React.Component {
       })
     };
 
-    const { options } = this.props;
+    const { options,  placeholder} = this.props;
 
     return (
       <Select className={this.addClasses()} options={options} styles={customStyles}
-      onChange={this.handleChange} autoFocus={true} />
+      onChange={this.handleChange} autoFocus={true} placeholder={placeholder}/>
     );
   }
 }
