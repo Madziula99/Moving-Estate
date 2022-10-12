@@ -8,9 +8,11 @@ class Input extends React.Component {
 >>>>>>> 4e6327e (Add Input folder)
   constructor(props) {
     super(props);
+
     this.state = {
-      text: '',
+      text: "",
     }
+
     this.handleInput = this.handleInput.bind(this);
   }
 
