@@ -11,7 +11,7 @@ class Button extends React.Component {
   }
 
   className() {
-    const names = [styles.button, styles[this.props.type]];
+    const names = [styles.button];
     this.props.roundedLeft && names.push(styles.rounded_left);
     this.props.roundedRight && names.push(styles.rounded_right);
     this.props.isFocused && names.push(styles.focused);
@@ -21,4 +21,4 @@ class Button extends React.Component {
   }
 }
 
-export default Button;
+export { Button };

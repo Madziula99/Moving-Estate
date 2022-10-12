@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "../Button/Button.jsx";
+import { Button } from "../Button/Button.jsx";
 import styles from "./Pagination.module.css";
 
 class Pagination extends React.Component {
@@ -19,7 +19,7 @@ class Pagination extends React.Component {
     const props = {roundedLeft: true, roundedRight: true};
     switch(direction) {
       case "prev": return (
-        <Button type="page"
+        <Button size="m"
           {...props}
           onClick={() => this.props.onChange(this.props.page - 1)}
         >
@@ -27,7 +27,7 @@ class Pagination extends React.Component {
         </Button>
       );
       case "next": return (
-        <Button type="page"
+        <Button size="m"
           {...props}
           onClick={() => this.props.onChange(this.props.page + 1)}
         >
@@ -46,7 +46,7 @@ class Pagination extends React.Component {
     const buttons = [];
 
     for (let i = start; i <= end; i++) {
-      const props = { type: "page" };
+      const props = { size: "m" };
       i === start && (props.roundedLeft = true);
       i === end && (props.roundedRight = true);
       i === active && (props.isFocused = true);
