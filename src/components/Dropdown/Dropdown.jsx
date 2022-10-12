@@ -4,6 +4,10 @@ import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
 
+  state = {
+    selectedOption: null,
+  }
+
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
     console.log(`Option selected:`, selectedOption);
