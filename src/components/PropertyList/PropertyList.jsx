@@ -9,7 +9,7 @@ class PropertyList extends React.Component {
   constructor(props) {
     super(props);
 
-    let pageSize = this.props.defaultView === "grid" ? 12 : 8;
+    let pageSize = 8;
     let pages = Math.ceil(this.props.properties.length / pageSize);
     let propertiesList = [];
 
@@ -19,7 +19,6 @@ class PropertyList extends React.Component {
 
     this.state = {
       currentMode: this.props.defaultView,
-      pageSize: pageSize,
       propertiesList: propertiesList,
       pages: pages,
       currentPage: 1
@@ -29,21 +28,8 @@ class PropertyList extends React.Component {
   toggleViewMode(mode) {
     if (mode === this.props.currentMode) return;
 
-    const newPageSize = (mode === "grid") ? 12 : 8;
-    const pages = Math.ceil(this.props.properties.length / newPageSize);
-    const page = (this.state.currentPage > pages) ? pages : this.state.currentPage;
-    const propertiesList = [];
-
-    for (let i = 0; i < this.props.properties.length; i += newPageSize) {
-      propertiesList.push(this.props.properties.slice(i, i + newPageSize));
-    }
-
     this.setState({
       currentMode: mode,
-      pageSize: newPageSize,
-      propertiesList: propertiesList,
-      pages: pages,
-      currentPage: page
     });
   }
 

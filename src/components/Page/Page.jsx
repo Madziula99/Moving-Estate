@@ -5,7 +5,7 @@ import styles from "./Page.module.css";
 
 class Page extends React.Component {
   className() {
-    if (this.props.hasSidebar) return `${styles.main_wrapper}`;
+    if (this.props.hasSidebar) return styles.main_wrapper;
   }
 
   render() {
