@@ -5,17 +5,27 @@ import styles from "./Input.module.css";
 class InputField extends React.Component {
 =======
 class Input extends React.Component {
+<<<<<<< HEAD
 >>>>>>> 4e6327e (Add Input folder)
   constructor(props) {
     super(props);
-
-    this.state = {
-      text: "",
-    }
-
-    this.handleInput = this.handleInput.bind(this);
+=======
+  state = {
+    text: ""
   }
 
+  handleInputBlur = (inputText) => {
+    const currentValue = inputText.target.value;
+>>>>>>> e7cfb7a (Add onChange to props)
+
+    if (currentValue === this.state.text) return;
+
+    this.setState({
+      text: currentValue
+    });
+  }
+
+<<<<<<< HEAD
   handleInput(e) {
     const currentValue = e.target.value;
 <<<<<<< HEAD
@@ -36,6 +46,12 @@ class Input extends React.Component {
         text: currentValue
       });
     }
+=======
+  componentDidUpdate(_, prevState) {
+    if (prevState.text === this.state.text) return;
+
+    this.props.onChange(this.state.text);
+>>>>>>> e7cfb7a (Add onChange to props)
   }
 
   render() {
@@ -48,7 +64,7 @@ class Input extends React.Component {
         type={this.props.type || "text"}
         placeholder={this.props.placeholder}
         defaultValue={this.state.text}
-        onBlur={this.handleInput}
+        onBlur={this.handleInputBlur}
       />
     )
   }

@@ -188,6 +188,7 @@ class ComponentGallery extends React.Component {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Input placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Property title, Property content, Exert" />
         <Input type="text" placeholder="Min. Year built" />
@@ -207,6 +208,11 @@ class ComponentGallery extends React.Component {
         <Input id="last-input" placeholder="Min. Year built" />
         <Input id="num-input" type="number" placeholder="Number" />
 >>>>>>> 3157e93 (Rename Inputfield to Input)
+=======
+        <Input id="1st-input" type="text" placeholder="Property title, Property content, Exert" onChange={ value => console.log(value)}/>
+        <Input id="last-input" placeholder="Min. Year built" onChange={ value => console.log(value)}/>
+        <Input id="num-input" type="number" placeholder="Number" onChange={ value => console.log(value)} />
+>>>>>>> e7cfb7a (Add onChange to props)
       </>
     )
   }
