@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink, withRouter } from "react-router-dom"
+import { NavLink, withRouter } from "react-router-dom"
 import ViewModeToggle from "../ViewModeToggle/ViewModeToggle.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import PropertyCard from "../PropertyCard/PropertyCard.jsx";
@@ -60,7 +60,7 @@ class PropertyList extends React.Component {
     });
   }
 
-  addClasses() {
+  className() {
     const classes = [styles.properties_wrapper];
     this.state.currentMode === "grid" && classes.push(styles.grid_view_mode);
 
@@ -73,7 +73,7 @@ class PropertyList extends React.Component {
         mode={this.state.currentMode}
         onChange={mode => this.toggleViewMode(mode)}
       />
-      <div className={this.addClasses()}>
+      <div className={this.className()}>
         {this.state.propertiesList[this.state.currentPage - 1].map(property => {
           const { id, ...props } = property;
           return (

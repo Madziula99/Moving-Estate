@@ -3,7 +3,7 @@ import styles from "./Sidebar.module.css";
 
 class Sidebar extends React.Component {
   render() {
-    return <div className={styles.sidebar}></div>
+    return <aside className={styles.sidebar}></aside>
   }
 }
 
