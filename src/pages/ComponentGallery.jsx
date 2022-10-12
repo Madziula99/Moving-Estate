@@ -177,13 +177,13 @@ class ComponentGallery extends React.Component {
           { 'value': 'single-v', 'label': 'Single-family-l' },
           { 'value': 'house-v', 'label': 'Townhouse-l' },
           { 'value': 'apt-v', 'label': 'Apartment-l' },
-        ]} />
+        ]} onChange={ value => console.log(value)}/>
         <Dropdown options={[
           { 'value': 'cat-v', 'label': 'animals-l' },
           { 'value': 'dog-v', 'label': 'size-l' },
           { 'value': 'bird-v', 'label': 'good-l' },
-        ]} width="half" />
-        <Dropdown placeholder="XZ" options={[]} />
+        ]} width="half" onChange={ value => console.log(value)}/>
+        <Dropdown placeholder="XZ" options={[]} onChange={ value => console.log(value)}/>
 
       </>
     )
