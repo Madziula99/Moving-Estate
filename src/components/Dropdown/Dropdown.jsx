@@ -29,13 +29,19 @@ class Dropdown extends React.Component {
         ...provided,
         borderBottom: '2px solid #df434a',
         color: state.isSelected ? '#484848' : 'black',
-        backgroundColor: state.isSelected ? '#df434a' : '#D3D3D3',
-        cursor: "pointer"
+        backgroundColor: state.isSelected ? '#df434a' : '#F0F0F0',
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "#D8D8D8"
+        }
       }),
       control: (provided) => ({
         ...provided,
         backgroundColor: "#F5F5F5",
-        cursor: "pointer"
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: "#D8D8D8"
+        }
       })
     };
 
