@@ -8,7 +8,7 @@ class Dropdown extends React.Component {
   }
 
   handleChange = (selectedOption) => {
-    selectedOption === null ? this.setState({ selectedOption: undefined }): this.setState({ selectedOption });
+    selectedOption === null ? this.setState({ selectedOption: undefined }) : this.setState({ selectedOption });
   }
 
   className() {
