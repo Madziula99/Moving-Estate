@@ -54,5 +54,8 @@ class Input extends React.Component {
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0f0b804 (Change import)
 export { Input };

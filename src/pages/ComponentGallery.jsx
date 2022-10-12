@@ -20,6 +20,7 @@ import Gallery from "../components/Gallery/Gallery.jsx";
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 
@@ -39,6 +40,9 @@ import InputField from "../components/Inputfield/Inputfield.jsx";
 =======
 import Input from "../components/Input/Input.jsx";
 >>>>>>> 3157e93 (Rename Inputfield to Input)
+=======
+import { Input } from "../components/Input/Input.jsx";
+>>>>>>> 0f0b804 (Change import)
 
 class ComponentGallery extends React.Component {
   render() {
