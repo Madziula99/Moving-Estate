@@ -39,7 +39,7 @@ class Dropdown extends React.Component {
 
     return (
       <Select className={this.addClasses()} options={options} styles={customStyles}
-      onChange={this.handleChange} autoFocus={true} placeholder={placeholder}/>
+      onChange={this.handleChange} autoFocus={true} placeholder={placeholder} isClearable />
     );
   }
 }

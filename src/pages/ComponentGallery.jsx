@@ -16,10 +16,14 @@ import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
+<<<<<<< HEAD
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
 
+=======
+import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
+>>>>>>> bc3aa5a (Add isClearable)
 
 
 class ComponentGallery extends React.Component {
