@@ -1,8 +1,14 @@
 import React from "react";
-import Select, { StylesConfig } from 'react-select';
+import Select from 'react-select';
 import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
+
+  handleChange = (selectedOption) => {
+    this.setState({ selectedOption });
+    console.log(`Option selected:`, selectedOption);
+  }
+
   addClasses() {
     const classes = [styles.select];
     this.props.width === "half" && classes.push(styles.select_half);
@@ -28,10 +34,10 @@ class Dropdown extends React.Component {
     const { options } = this.props;
 
     return (
-      <Select className={this.addClasses()} options={ options } styles = { customStyles }/>
+      <Select className={this.addClasses()} options={options} styles={customStyles}
+      onChange={this.handleChange} autoFocus={true} />
     );
   }
-
 }
 
 export { Dropdown };
