@@ -68,7 +68,7 @@ class PropertyList extends React.Component {
   }
 
   render() {
-    return <>
+    return <div>
       <ViewModeToggle
         mode={this.state.currentMode}
         onChange={mode => this.toggleViewMode(mode)}
@@ -91,7 +91,7 @@ class PropertyList extends React.Component {
         page={this.state.currentPage}
         onChange={page => this.changePage(page)}
       />
-    </>
+    </div>
   }
 }
 
