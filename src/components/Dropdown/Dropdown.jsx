@@ -6,7 +6,7 @@ class Dropdown extends React.Component {
     super(props);
     this.state = {
       select: "",
-      value: "default",
+      value: "default"
     };
     this.onOptionChangeHandler = this.onOptionChangeHandler.bind(this);
   }

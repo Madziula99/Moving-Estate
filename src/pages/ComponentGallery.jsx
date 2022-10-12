@@ -179,6 +179,7 @@ class ComponentGallery extends React.Component {
           { 'value': 'dog', 'label': 'size' },
           { 'value': 'bird', 'label': 'good' },
         ]} width="half" />
+        <Dropdown placeholder="XZ" options={[]} />
 
       </>
     )
