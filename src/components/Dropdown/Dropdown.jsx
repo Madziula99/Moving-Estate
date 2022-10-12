@@ -3,7 +3,6 @@ import Select from 'react-select';
 import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
-
   state = {
     selectedOption: null,
   }
@@ -20,7 +19,6 @@ class Dropdown extends React.Component {
   }
 
   render() {
-
     const customStyles = {
       option: (provided, state) => ({
         ...provided,
@@ -31,7 +29,8 @@ class Dropdown extends React.Component {
       }),
       control: (provided) => ({
         ...provided,
-        marginTop: "5%",
+        backgroundColor: "#F5F5F5",
+        cursor: "pointer"
       })
     };
 
