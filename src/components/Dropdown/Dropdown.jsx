@@ -1,4 +1,5 @@
 import React from "react";
+import Select from 'react-select';
 import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
@@ -24,7 +25,8 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    return (
+    const { options } =this.props
+    return (<>
       <select className={this.addClasses()} onChange={this.onOptionChangeHandler} value={this.state.value}>
         <option value="default" disabled hidden>{this.props.placeholder}</option>
         {this.props.options.map((option, index) => {
@@ -33,6 +35,8 @@ class Dropdown extends React.Component {
           </option>
         })}
       </select>
+      <Select options={ options } />
+      </>
     );
   }
 }
