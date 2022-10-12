@@ -11,7 +11,7 @@ class Dropdown extends React.Component {
     this.setState({ selectedOption })
   }
 
-  addClasses() {
+  className() {
     const classes = [styles.select];
     this.props.width === "half" && classes.push(styles.select_half);
     return classes.join(" ");
@@ -42,8 +42,8 @@ class Dropdown extends React.Component {
     const { options,  placeholder} = this.props;
 
     return (
-      <Select className={this.addClasses()} options={options} styles={customStyles}
-      onChange={this.handleChange} placeholder={placeholder} isClearable autoFocus/>
+      <Select className={this.className()} options={options} styles={customStyles}
+      onChange={this.handleChange} placeholder={placeholder} isClearable />
     );
   }
 }
