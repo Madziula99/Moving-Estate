@@ -3,23 +3,25 @@ import styles from "./Input.module.css";
 
 class Input extends React.Component {
   state = {
-    text: ""
+    value: this.props.value || ""
   }
 
   handleInputBlur = (inputText) => {
     const currentValue = inputText.target.value;
 
-    if (currentValue === this.state.text) return;
+    if (currentValue === this.state.value) return;
 
     this.setState({
-      text: currentValue
+      value: currentValue
     });
   }
 
   componentDidUpdate(_, prevState) {
-    if (prevState.text === this.state.text) return;
 
-    this.props.onChange(this.state.text);
+    //TODO: if propsy !=== no onchange
+    if (prevState.value === this.state.value) return;
+
+    this.props.onChange(this.state.value);
   }
 
   render() {
@@ -29,11 +31,11 @@ class Input extends React.Component {
       (type === undefined ||
       type === "text" ||
       type === "number" ) && <input
-        className={ styles.input_field }
-        type={ type || "text" }
-        placeholder={ placeholder }
-        defaultValue={ this.state.text }
-        onBlur={ this.handleInputBlur }
+        className = { styles.input_field }
+        type = { type || "text" }
+        placeholder = { placeholder }
+        defaultValue = { this.state.value }
+        onBlur = { this.handleInputBlur }
         key={ key++ }
       />
     )
