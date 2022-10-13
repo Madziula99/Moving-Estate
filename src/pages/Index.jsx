@@ -1,8 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import Header from "../components/Header/Header.jsx";
-import Footer from "../components/Footer/Footer.jsx";
+import { Page } from "../components/Page/Page.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
+import { Sidebar } from "../components/Sidebar/Sidebar.jsx";
 import properties from "../data.json";
 
 class Index extends React.Component {
@@ -21,16 +21,15 @@ class Index extends React.Component {
         bedrooms: property.bedrooms,
         bathrooms: property.bathrooms
       }
-    })
-    
-    return <>
-      <Header>PROPERTIES</Header>
+    });
+
+    return <Page title="PROPERTIES" hasSidebar>
+      <Sidebar />
       <PropertyList
         defaultView="grid"
         properties={necessaryProperties}
       />
-      <Footer />
-    </>
+    </Page>
   }
 }
 

@@ -1,5 +1,5 @@
 import React from "react";
-import {NavLink, withRouter } from "react-router-dom"
+import { NavLink, withRouter } from "react-router-dom"
 import ViewModeToggle from "../ViewModeToggle/ViewModeToggle.jsx";
 import Pagination from "../Pagination/Pagination.jsx";
 import PropertyCard from "../PropertyCard/PropertyCard.jsx";
@@ -9,7 +9,7 @@ class PropertyList extends React.Component {
   constructor(props) {
     super(props);
 
-    let pageSize = this.props.defaultView === "grid" ? 12 : 8;
+    let pageSize = 8;
     let pages = Math.ceil(this.props.properties.length / pageSize);
     let propertiesList = [];
 
@@ -19,7 +19,6 @@ class PropertyList extends React.Component {
 
     this.state = {
       currentMode: this.props.defaultView,
-      pageSize: pageSize,
       propertiesList: propertiesList,
       pages: pages,
       currentPage: 1
@@ -29,21 +28,8 @@ class PropertyList extends React.Component {
   toggleViewMode(mode) {
     if (mode === this.props.currentMode) return;
 
-    const newPageSize = (mode === "grid") ? 12 : 8;
-    const pages = Math.ceil(this.props.properties.length / newPageSize);
-    const page = (this.state.currentPage > pages) ? pages : this.state.currentPage;
-    const propertiesList = [];
-
-    for (let i = 0; i < this.props.properties.length; i += newPageSize) {
-      propertiesList.push(this.props.properties.slice(i, i + newPageSize));
-    }
-
     this.setState({
       currentMode: mode,
-      pageSize: newPageSize,
-      propertiesList: propertiesList,
-      pages: pages,
-      currentPage: page
     });
   }
 
@@ -60,7 +46,7 @@ class PropertyList extends React.Component {
     });
   }
 
-  addClasses() {
+  className() {
     const classes = [styles.properties_wrapper];
     this.state.currentMode === "grid" && classes.push(styles.grid_view_mode);
 
@@ -68,12 +54,12 @@ class PropertyList extends React.Component {
   }
 
   render() {
-    return <>
+    return <div>
       <ViewModeToggle
         mode={this.state.currentMode}
         onChange={mode => this.toggleViewMode(mode)}
       />
-      <div className={this.addClasses()}>
+      <div className={this.className()}>
         {this.state.propertiesList[this.state.currentPage - 1].map(property => {
           const { id, ...props } = property;
           return (
@@ -91,7 +77,7 @@ class PropertyList extends React.Component {
         page={this.state.currentPage}
         onChange={page => this.changePage(page)}
       />
-    </>
+    </div>
   }
 }
 
