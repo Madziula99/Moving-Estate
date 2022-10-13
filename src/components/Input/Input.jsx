@@ -23,17 +23,18 @@ class Input extends React.Component {
   }
 
   render() {
-    const { type, placeholder, id } = this.props;
+    const { type, placeholder } = this.props;
+    let key = 1;
     return (
       (type === undefined ||
       type === "text" ||
       type === "number" ) && <input
-        className={styles.input_field}
-        type={type || "text"}
-        placeholder={placeholder}
-        defaultValue={this.state.text}
-        onBlur={this.handleInputBlur}
-        key={id}
+        className={ styles.input_field }
+        type={ type || "text" }
+        placeholder={ placeholder }
+        defaultValue={ this.state.text }
+        onBlur={ this.handleInputBlur }
+        key={ key++ }
       />
     )
   }

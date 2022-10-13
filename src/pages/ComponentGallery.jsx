@@ -160,9 +160,9 @@ class ComponentGallery extends React.Component {
         <Button size="l" roundedLeft roundedRight>SEARCH</Button>
 
         <h2>&lt;Input&gt;</h2>
-        <Input id="1st-input" type="text" placeholder="Property title, Property content, Exert" onChange={ value => console.log(value)}/>
-        <Input id="last-input" placeholder="Min. Year built" onChange={ value => console.log(value)}/>
-        <Input id="num-input" type="number" placeholder="Number" onChange={ value => console.log(value)} />
+        <Input type="text" placeholder="Property title, Property content, Exert" onChange={ value => console.log(value)}/>
+        <Input placeholder="Min. Year built" onChange={ value => console.log(value)}/>
+        <Input type="number" placeholder="Number" onChange={ value => console.log(value)} />
 
       </>
     )
