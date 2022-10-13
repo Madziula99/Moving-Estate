@@ -3,9 +3,26 @@
   border-style: solid;
   border-right: none;
   background: transparent;
-  color: #74777C;
+  border-color: #ADB2B6;
+  color: #ADB2B6;
   padding: 0;
   cursor: pointer;
+}
+
+.button svg {
+  display: block;
+  margin: auto;
+}
+
+.medium_button {
+  height: 35px;
+  min-width: 40px;
+  padding: 0 5px;
+}
+
+.large_button {
+  height: 39px;
+  padding: 0 15px;
 }
 
 .focused {
@@ -20,23 +37,5 @@
 .rounded_right {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
-  border-right: 1px solid #74777C;
-}
-
-.page {
-  width: 48px;
-  height: 43px;
-  font-size: 16px;
-  border-color: #74777C;
-}
-
-.view_mode {
-  width: 40px;
-  height: 40px;
-  border-color: #ADB2B6;
-}
-
-.view_mode svg {
-  display: block;
-  margin: auto;
+  border-right: 1px solid #ADB2B6;
 }

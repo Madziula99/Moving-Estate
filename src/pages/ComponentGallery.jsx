@@ -16,6 +16,7 @@ import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
+import { Button } from "../components/Button/Button.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -153,6 +154,9 @@ class ComponentGallery extends React.Component {
             "https://picsum.photos/700/400?img=7",
           ]}
         />
+
+        <h2>&lt;Button&gt;</h2>
+        <Button size="l" roundedLeft roundedRight>SEARCH</Button>
       </>
     )
   }
