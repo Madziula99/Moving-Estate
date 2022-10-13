@@ -25,7 +25,7 @@ class Index extends React.Component {
 
     const extract = (key) => [
       ...new Set(necessaryProperties.map((property => property[key])))
-    ]
+    ];
 
     const area = extract("area");
     const price = extract("price").map(str => Number(str.replaceAll(" ", "")));
@@ -37,7 +37,7 @@ class Index extends React.Component {
       status: extract("mode"),
       bedrooms: extract("bedrooms"),
       bathrooms: extract("bathrooms"),
-      location: extract("location").map(loc => loc[1]),
+      location: [...new Set(necessaryProperties.map((property => property["location"][1])))],
       minPrice: price,
       maxPrice: price
     };
