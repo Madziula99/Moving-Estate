@@ -17,8 +17,6 @@ class Input extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-
-    //TODO: if propsy !=== no onchange
     if (prevState.value === this.state.value) return;
 
     this.props.onChange(this.state.value);
@@ -26,7 +24,6 @@ class Input extends React.Component {
 
   render() {
     const { type, placeholder } = this.props;
-    let key = 1;
     return (
       (type === undefined ||
       type === "text" ||
@@ -36,7 +33,6 @@ class Input extends React.Component {
         placeholder = { placeholder }
         defaultValue = { this.state.value }
         onBlur = { this.handleInputBlur }
-        key={ key++ }
       />
     )
   }
