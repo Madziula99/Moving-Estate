@@ -7,19 +7,15 @@ class Input extends React.Component {
   }
 
   handleInputBlur = (inputText) => {
-    const currentValue = inputText.target.value;
-
-    if (currentValue === this.state.value) return;
-
-    this.setState({
-      value: currentValue
-    });
+    this.props.onChange(inputText.target.value);
   }
 
   componentDidUpdate(_, prevState) {
-    if (prevState.value === this.state.value) return;
+    if (prevState.inputValue === this.state.value) return;
 
-    this.props.onChange(this.state.value);
+    this.setState({
+      value: this.props.value,
+    });
   }
 
   render() {
