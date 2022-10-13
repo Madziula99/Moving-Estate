@@ -16,33 +16,8 @@ import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
-
-=======
-import Input from "../components/Input/Input.jsx";
-<<<<<<< HEAD
-import Select from "../components/Input/Select/Select.jsx";
->>>>>>> 1e35b0b (Change input styles)
-=======
->>>>>>> ad29cbd (Fix input component)
-=======
-import InputField from "../components/Input/Input.jsx";
->>>>>>> fc9d9a2 (Rename InputField)
-=======
-import InputField from "../components/Inputfield/Inputfield.jsx";
->>>>>>> bbce70f (Rename Input to Inputfield)
-=======
-import Input from "../components/Input/Input.jsx";
->>>>>>> 3157e93 (Rename Inputfield to Input)
-=======
-import { Input } from "../components/Input/Input.jsx";
->>>>>>> 0f0b804 (Change import)
 
 class ComponentGallery extends React.Component {
   render() {
@@ -185,34 +160,10 @@ class ComponentGallery extends React.Component {
         <Button size="l" roundedLeft roundedRight>SEARCH</Button>
 
         <h2>&lt;Input&gt;</h2>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <Input placeholder="Property title, Property content, Exert" />
-        <Input type="text" placeholder="Property title, Property content, Exert" />
-        <Input type="text" placeholder="Min. Year built" />
-
-=======
-        <Input id="1st-input" type="text" placeholder="Property title, Property content, Exert" />
-        <Input id="last-input" placeholder="Min. Year built" />
-        <Input id="num-input" type="number" placeholder="Number" />
->>>>>>> 10ce4a9 (Refactor types of input by default)
-=======
-        <InputField id="1st-input" type="text" placeholder="Property title, Property content, Exert" />
-        <InputField id="last-input" placeholder="Min. Year built" />
-        <InputField id="num-input" type="number" placeholder="Number" />
->>>>>>> fc9d9a2 (Rename InputField)
-=======
-        <Input id="1st-input" type="text" placeholder="Property title, Property content, Exert" />
-        <Input id="last-input" placeholder="Min. Year built" />
-        <Input id="num-input" type="number" placeholder="Number" />
->>>>>>> 3157e93 (Rename Inputfield to Input)
-=======
         <Input id="1st-input" type="text" placeholder="Property title, Property content, Exert" onChange={ value => console.log(value)}/>
         <Input id="last-input" placeholder="Min. Year built" onChange={ value => console.log(value)}/>
         <Input id="num-input" type="number" placeholder="Number" onChange={ value => console.log(value)} />
->>>>>>> e7cfb7a (Add onChange to props)
+
       </>
     )
   }
