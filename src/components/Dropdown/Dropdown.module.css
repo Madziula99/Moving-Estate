@@ -1,8 +1,9 @@
 .select {
-  width: 90%;
+  width: calc(100% - 20px);
   margin: 10px 3%;
 }
 
 .select_half {
-  width: 42%;
+  width: calc(50% - 20px);
+  display: inline-block;
 }

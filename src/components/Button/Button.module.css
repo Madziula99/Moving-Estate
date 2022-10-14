@@ -23,6 +23,8 @@
 .large_button {
   height: 39px;
   padding: 0 15px;
+  margin: 0 auto;
+  display: block;
 }
 
 .focused {
