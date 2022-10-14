@@ -13,7 +13,7 @@ class Dropdown extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.selectedOption !== this.props.selectedOption) this.updatePropsState()
-    console.log(this.props.state, this.state)
+    console.log(this.props.selected, this.state)
   }
 
  updatePropsState() {
@@ -50,11 +50,11 @@ class Dropdown extends React.Component {
       })
     };
 
-    const { options,  placeholder, value} = this.props;
+    const { options, placeholder } = this.props;
 
     return (
       <Select onChange={this.handleChange} options={options} styles={customStyles}
-        className={this.className()} placeholder={placeholder} isClearable />
+        className={this.className()} placeholder={placeholder} isClearable value={ this.state.selectedOption } />
     );
   }
 }
