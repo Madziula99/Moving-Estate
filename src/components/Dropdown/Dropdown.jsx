@@ -4,25 +4,28 @@ import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
   state = {
-    selectedOption: undefined,
+    selectedOption: this.props.value || undefined,
   }
 
   handleChange = (selectedOption) => {
     selectedOption === null ? this.setState({ selectedOption: undefined }) : this.setState({ selectedOption });
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedOption !== this.props.selectedOption) this.updatePropsState()
+    console.log(this.props.state, this.state)
+  }
+
+ updatePropsState() {
+    this.setState({
+      selectedOption: this.props.selectedOption
+    })
+  }
+
   className() {
     const classes = [styles.select];
     this.props.width === "half" && classes.push(styles.select_half);
     return classes.join(" ");
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedOption === this.props.selectedOption) return;
-
-    this.setState({
-      selectedOption: this.props.selectedOption
-    })
   }
 
   render() {
@@ -47,11 +50,11 @@ class Dropdown extends React.Component {
       })
     };
 
-    const { options,  placeholder} = this.props;
+    const { options,  placeholder, value} = this.props;
 
     return (
-      <Select className={this.className()} options={options} styles={customStyles}
-      onChange={this.handleChange} placeholder={placeholder} isClearable />
+      <Select onChange={this.handleChange} options={options} styles={customStyles}
+        className={this.className()} placeholder={placeholder} isClearable />
     );
   }
 }

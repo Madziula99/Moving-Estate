@@ -171,7 +171,7 @@ class ComponentGallery extends React.Component {
           { 'value': 'single-v', 'label': 'Single-family-l' },
           { 'value': 'house-v', 'label': 'Townhouse-l' },
           { 'value': 'apt-v', 'label': 'Apartment-l' },
-        ]} onChange={ value => console.log(value)}/>
+        ]} onChange={ value => console.log(value)} selected='house-v'/>
         <Dropdown options={[
           { 'value': 'cat-v', 'label': 'animals-l' },
           { 'value': 'dog-v', 'label': 'size-l' },
