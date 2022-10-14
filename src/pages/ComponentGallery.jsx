@@ -164,7 +164,7 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Input&gt;</h2>
         <Input value = "some value" type="text" placeholder="Property title, Property content, Exert" onChange={ value => console.log(value)}/>
         <Input placeholder="Min. Year built" onChange={ value => console.log(value)}/>
-        <Input type="number" placeholder="Number" onChange={ value => console.log(value)} />
+        <Input type="number" placeholder="Number" onChange={ value => console.log(value)} width="half"/>
 
         <h2>&lt;Dropdown&gt;</h2>
         <Dropdown placeholder="Type" options={[

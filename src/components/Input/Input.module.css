@@ -12,3 +12,7 @@
   outline: none !important;
   border: 2px solid #979797;
 }
+
+.input_field_half {
+  width: 40%;
+}

@@ -17,10 +17,12 @@ class Dropdown extends React.Component {
     return classes.join(" ");
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.selectedOption === this.state.selectedOption) return;
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedOption === this.props.selectedOption) return;
 
-    this.props.onChange(this.state.selectedOption);
+    this.setState({
+      selectedOption: this.props.selectedOption
+    })
   }
 
   render() {
