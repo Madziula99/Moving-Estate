@@ -6,16 +6,22 @@ class Input extends React.Component {
     value: this.props.value || ""
   }
 
-  handleInputBlur = (inputText) => {
-    this.props.onChange(inputText.target.value);
+  updateValue = (inputText) => {
+    this.setState({
+      value: inputText.target.value
+    });
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.inputValue === this.state.value) return;
+  notifyParameter = (goFromField) => {
+    if (this.props.value === this.state.value) return;
+    this.props.onChange(this.state.value)
+  }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.value === this.props.value) return;
     this.setState({
-      value: this.props.value,
-    });
+      value: this.props.value
+    })
   }
 
   render() {
@@ -27,8 +33,9 @@ class Input extends React.Component {
         className = { styles.input_field }
         type = { type || "text" }
         placeholder = { placeholder }
-        defaultValue = { this.state.value }
-        onBlur = { this.handleInputBlur }
+        value = { this.state.value }
+        onBlur = { this.notifyParameter }
+        onChange = {this.updateValue}
       />
     )
   }

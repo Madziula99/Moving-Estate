@@ -20,14 +20,6 @@ import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
 
-<<<<<<< HEAD
-=======
-import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
->>>>>>> bc3aa5a (Add isClearable)
-
-
-=======
->>>>>>> 0ccd92d (Rebase to main)
 class ComponentGallery extends React.Component {
   render() {
     const property = {
