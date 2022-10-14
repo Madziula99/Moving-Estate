@@ -18,6 +18,7 @@ import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
+import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -159,10 +160,24 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Button&gt;</h2>
         <Button size="l" roundedLeft roundedRight>SEARCH</Button>
 
+
         <h2>&lt;Input&gt;</h2>
         <Input value = "some value" type="text" placeholder="Property title, Property content, Exert" onChange={ value => console.log(value)}/>
         <Input placeholder="Min. Year built" onChange={ value => console.log(value)}/>
-        <Input type="number" placeholder="Number" onChange={ value => console.log(value)} />
+        <Input type="number" placeholder="Number" onChange={ value => console.log(value)} width="half"/>
+
+        <h2>&lt;Dropdown&gt;</h2>
+        <Dropdown placeholder="Type" options={[
+          { 'value': 'single-v', 'label': 'Single-family-l' },
+          { 'value': 'house-v', 'label': 'Townhouse-l' },
+          { 'value': 'apt-v', 'label': 'Apartment-l' },
+        ]} onChange={value => console.log(value)} value={{ 'value': 'single-v', 'label': 'Single-family-l' }} />
+        <Dropdown options={[
+          { 'value': 'cat-v', 'label': 'animals-l' },
+          { 'value': 'dog-v', 'label': 'size-l' },
+          { 'value': 'bird-v', 'label': 'good-l' },
+        ]} width="half" onChange={ value => console.log(value)}/>
+        <Dropdown placeholder="XZ" options={[]} onChange={ value => console.log(value)}/>
 
       </>
     )
