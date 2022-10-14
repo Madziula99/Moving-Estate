@@ -12,7 +12,7 @@ class Input extends React.Component {
     });
   }
 
-  notifyParameter = (goFromField) => {
+  notifyParameter = () => {
     if (this.props.value === this.state.value) return;
     this.props.onChange(this.state.value)
   }

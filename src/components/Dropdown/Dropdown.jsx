@@ -8,18 +8,15 @@ class Dropdown extends React.Component {
   }
 
   handleChange = (selectedOption) => {
-    selectedOption === null ? this.setState({ selectedOption: undefined }) : this.setState({ selectedOption });
+    selectedOption === null ? this.setState({ selectedOption: undefined }) : this.setState({ selectedOption: selectedOption });
   }
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedOption !== this.props.selectedOption) this.updatePropsState()
-    console.log(this.props.selected, this.state)
+  updatePropsState() {
+    this.props.onChange(this.state.selectedOption)
   }
 
- updatePropsState() {
-    this.setState({
-      selectedOption: this.props.selectedOption
-    })
+  componentDidUpdate() {
+    if (this.props.value !== this.state.selectedOption) this.updatePropsState()
   }
 
   className() {
@@ -54,7 +51,7 @@ class Dropdown extends React.Component {
 
     return (
       <Select onChange={this.handleChange} options={options} styles={customStyles}
-        className={this.className()} placeholder={placeholder} isClearable value={ this.state.selectedOption } />
+      className={this.className()} placeholder={placeholder} isClearable value={ this.state.selectedOption } />
     );
   }
 }
