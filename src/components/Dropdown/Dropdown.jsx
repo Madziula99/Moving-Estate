@@ -3,25 +3,24 @@ import Select from 'react-select';
 import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
-  state = {
-    selectedOption: this.props.value || null,
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedOption: this.props.value || null
+    }
   }
 
   handleChange = (selectedOption) => {
-    this.setState({ selectedOption: selectedOption });
-  }
-
-  updatePropsState() {
     let value = null;
-    if (this.state.selectedOption) {
-      value = this.state.selectedOption.value
-    }
-
-    this.props.onChange(value)
+    if (selectedOption) value = selectedOption.value
+    this.setState({ selectedOption: value });
+    this.props.onChange(value);
   }
 
-  componentDidUpdate() {
-    if (this.props.value !== this.state.selectedOption) this.updatePropsState()
+  componentDidUpdate(prevprops, _) {
+    if (prevprops.value === this.props.value) return;
+    this.setState({ selectedOption: this.props.value })
   }
 
   className() {
@@ -55,8 +54,15 @@ class Dropdown extends React.Component {
     const { options, placeholder } = this.props;
 
     return (
-      <Select onChange={this.handleChange} options={options} styles={customStyles}
-      className={this.className()} placeholder={placeholder} isClearable value={ this.state.selectedOption } />
+      <Select
+        onChange={this.handleChange}
+        options={options}
+        styles={customStyles}
+        className={this.className()}
+        placeholder={placeholder}
+        isClearable
+        value={this.state.selectedOption ? { "value": this.state.selectedOption, "label": this.state.selectedOption } : null}
+      />
     );
   }
 }
