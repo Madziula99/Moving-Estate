@@ -68,11 +68,7 @@ class PropertyFilter extends React.Component {
 
       <Input type="number" placeholder="Max. Price" onChange={value => this.setFilterParams("maxPrice", value)} width="half"/>
 
-      <Dropdown placeholder="Location" options={[options.location.map((location) => {
-        value: location,
-        label: location
-
-      )]}
+      <Dropdown placeholder="Location" options={[options.location.map(loc => {value: loc, label: loc})]}
       onChange={value => this.setFilterParams("location", value)} />
 
       <Input placeholder="Min. Year Built" type="number" onChange={value => this.setFilterParams("minYear", value)}
