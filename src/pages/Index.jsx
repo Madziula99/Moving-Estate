@@ -33,19 +33,12 @@ class Index extends React.Component {
       ...new Set(allProperties.map((property => property[key])))
     ];
 
-    const area = extract("area") || [];
-    const price = extract("price").map(str => Number(str.replaceAll(" ", ""))) || [];
-
     const options = {
-      type: extract("type") || [],
-      minArea: area || [],
-      maxArea: area || [],
-      status: extract("mode") || [],
-      bedrooms: extract("bedrooms") || [],
-      bathrooms: extract("bathrooms") || [],
-      location: [...new Set(allProperties.map((property => property["location"][1])))] || [],
-      minPrice: price,
-      maxPrice: price
+      type: extract("type").sort() || [],
+      status: extract("mode").sort() || [],
+      bedrooms: extract("bedrooms").sort((a, b) => {return a-b}) || [],
+      bathrooms: extract("bathrooms").sort((a, b) => { return a - b }) || [],
+      location: [...new Set(allProperties.map((property => property["location"][1])))].sort() || []
     };
 
     return options;
@@ -60,9 +53,7 @@ class Index extends React.Component {
       const value = item[key];
 
       if (key === "type" || key === "mode") return value === filterValue;
-      /* zero values in "bedrooms" and "bathrooms" props mean "3+" value from PropertyFilter dropdowns
-      in order not to use strings as values and leave them as numbers */
-      if (key === "bathrooms" || key === "bedrooms") return filterValue === 0 ? value >= 3 : value === filterValue;
+      if (key === "bathrooms" || key === "bedrooms") return value === filterValue;
       if (key === "location") return value[1] === filterValue;
       if (key === "minArea") return item["area"] >= filterValue;
       if (key === "maxArea") return item["area"] <= filterValue;
@@ -82,7 +73,11 @@ class Index extends React.Component {
     const { allProperties, selectedOptions } = this.state;
 
     return <Page title="PROPERTIES" hasSidebar>
-      <PropertyFilter values={{ ...selectedOptions }} options={ this.optionsObject(allProperties)} onSubmit={(filters) => this.filterProperties(filters)} />
+      <PropertyFilter
+        values={{ ...selectedOptions }}
+        options={ this.optionsObject(allProperties)}
+        onSubmit={(filters) => this.filterProperties(filters)}
+      />
       <PropertyList
         defaultView="grid"
         properties={allProperties}
