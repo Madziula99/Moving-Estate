@@ -12,6 +12,13 @@ class PropertyFilter extends React.Component {
     this.filterParams = props.values || {};
   }
 
+  componentDidUpdate(prevprops, _) {
+    console.log("PropertyFilter Update");
+    if (JSON.stringify(prevprops.values) === JSON.stringify(this.props.values)) return;
+    console.log("Different props");
+    this.filterParams = this.props.values;
+  }
+
   setFilterParams(type, value) {
     this.filterParams[type] = value;
   }
@@ -25,7 +32,8 @@ class PropertyFilter extends React.Component {
   }
 
   render() {
-    const { options, values } = this.props;
+    const { options } = this.props;
+    console.log(this.filterParams);
     return <form className={styles.property_filter} onSubmit={event => {
         event.preventDefault();
         this.props.onSubmit(this.sendFilterParams());
@@ -36,7 +44,7 @@ class PropertyFilter extends React.Component {
         placeholder="Property title, Property Content, Exerpt"
         type="text"
         onChange={value => this.setFilterParams("title", value)}
-        value={values.title}
+        value={this.filterParams.title}
       />
 
       <Dropdown
@@ -48,19 +56,19 @@ class PropertyFilter extends React.Component {
           }
         })}
         onChange={value => this.setFilterParams("type", value)}
-        value={values.title}
+        value={{ "value": this.filterParams.type, "label": this.filterParams.type }}
       />
 
       <Dropdown
         placeholder="Status"
-        options={options.status.map(item => {
+        options={options.mode.map(item => {
           return {
             "value": item,
             "label": item
           }
         })}
         onChange={value => this.setFilterParams("mode", value)}
-        value={values.mode}
+        value={{ "value": this.filterParams.mode, "label": this.filterParams.mode }}
       />
 
       <Input
@@ -68,7 +76,7 @@ class PropertyFilter extends React.Component {
         placeholder="Min. Area"
         onChange={value => this.setFilterParams("minArea", value)}
         width="half"
-        value={values.minArea}
+        value={this.filterParams.minArea}
       />
 
       <Input
@@ -76,7 +84,7 @@ class PropertyFilter extends React.Component {
         placeholder="Max. Area"
         onChange={value => this.setFilterParams("maxArea", value)}
         width="half"
-        value={values.maxArea}
+        value={this.filterParams.maxArea}
       />
 
       <Dropdown
@@ -89,7 +97,7 @@ class PropertyFilter extends React.Component {
         })}
         width="half"
         onChange={value => this.setFilterParams("bedrooms", value)}
-        value={values.bedrooms}
+        value={this.filterParams.bedrooms}
       />
 
       <Dropdown
@@ -102,7 +110,7 @@ class PropertyFilter extends React.Component {
         })}
         width="half"
         onChange={value => this.setFilterParams("bathrooms", value)}
-        value={values.bathrooms}
+        value={this.filterParams.bathrooms}
       />
 
       <Input
@@ -110,7 +118,7 @@ class PropertyFilter extends React.Component {
         placeholder="Min. Price"
         onChange={value => this.setFilterParams("minPrice", value)}
         width="half"
-        value={values.minPrice}
+        value={this.filterParams.minPrice}
       />
 
       <Input
@@ -118,7 +126,7 @@ class PropertyFilter extends React.Component {
         placeholder="Max. Price"
         onChange={value => this.setFilterParams("maxPrice", value)}
         width="half"
-        value={values.maxPrice}
+        value={this.filterParams.maxPrice}
       />
 
       <Dropdown
@@ -136,7 +144,7 @@ class PropertyFilter extends React.Component {
         placeholder="Min. Year Built"
         type="number"
         onChange={value => this.setFilterParams("minYear", value)}
-        value={values.minYear}
+        value={this.filterParams.minYear}
       />
 
       <Button

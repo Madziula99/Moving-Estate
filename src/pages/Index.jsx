@@ -27,7 +27,6 @@ class Index extends React.Component {
     })
 
     this.state = {
-      filterOptions: {},
       allProperties: allProperties,
       filteredProperties: allProperties,
       selectedOptions: {}
@@ -35,17 +34,16 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    console.log("Component Mounted");
-    const options = queryString.parse(this.props.location.search)
-    this.setState({ filterOptions: options});
+    console.log("Index mount")
+    const options = queryString.parse(this.props.location.search);
+    this.setState({ selectedOptions: options});
   }
 
   componentDidUpdate(prevprops, _) {
-    console.log("Component Update");
+    console.log("Index updated")
     if (prevprops.location.search === this.props.location.search) return;
-    console.log("Search params from url changed");
     const options = queryString.parse(this.props.location.search)
-    this.setState({ filterOptions: options });
+    this.setState({ selectedOptions: options });
   }
 
   serializeToUrl(options) {
@@ -55,13 +53,6 @@ class Index extends React.Component {
     });
   }
 
-  formSubmit(selectedOptions) {
-    this.setState({
-      options: selectedOptions
-    });
-    this.serializeToUrl(selectedOptions);
-  }
-
   optionsObject(allProperties) {
     const extract = (key) => [
       ...new Set(allProperties.map((property => property[key])))
@@ -69,7 +60,7 @@ class Index extends React.Component {
 
     const options = {
       type: extract("type").sort() || [],
-      status: extract("mode").sort() || [],
+      mode: extract("mode").sort() || [],
       bedrooms: extract("bedrooms").sort((a, b) => {return a-b}) || [],
       bathrooms: extract("bathrooms").sort((a, b) => { return a - b }) || [],
       location: [...new Set(allProperties.map((property => property["location"][1])))].sort() || []
@@ -100,18 +91,21 @@ class Index extends React.Component {
     }));
 
     this.setState({
-      filteredProperties: filteredProperties
+      filteredProperties: filteredProperties,
+      selectedOptions: filters
     });
 
-    return filteredProperties
+    this.serializeToUrl(filters);
   }
 
   render() {
+    console.log("Index render");
+    console.log(this.state.selectedOptions);
     const { allProperties, filteredProperties, selectedOptions } = this.state;
 
     return <Page title="PROPERTIES" hasSidebar>
       <PropertyFilter
-        values={{ ...selectedOptions }}
+        values={selectedOptions}
         options={ this.optionsObject(allProperties) }
         onSubmit={(filters) => this.filterProperties(filters)}
       />
