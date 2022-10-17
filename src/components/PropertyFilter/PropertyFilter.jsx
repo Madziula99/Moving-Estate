@@ -25,6 +25,8 @@ class PropertyFilter extends React.Component {
   }
 
   render() {
+    const { options } = this.props;
+    console.log(options)
     return <form className={styles.property_filter} onSubmit={event => {
       event.preventDefault();
       this.props.onSubmit(this.sendFilterParams());
@@ -38,7 +40,7 @@ class PropertyFilter extends React.Component {
       { "value": "single-v", "label": "Single-family-l" },
       { "value": "house-v", "label": "Townhouse-l" },
       { "value": "apt-v", "label": "Apartment-l" },
-        ]} onChange={value => this.setFilterParams("type", value)} />
+        ]} onChange={value => this.setFilterParams("type", value)} value={this.props.values.title}/>
 
       <Dropdown placeholder="Status" options={[
       { "value": "single-v", "label": "Status 1" },
@@ -65,13 +67,13 @@ class PropertyFilter extends React.Component {
       <Input type="number" placeholder="Min. Price" onChange={value => this.setFilterParams("minPrice", value)} width="half" />
 
       <Input type="number" placeholder="Max. Price" onChange={value => this.setFilterParams("maxPrice", value)} width="half"/>
-      
-      
-      <Dropdown placeholder="Location" options={[
-      { "value": "single-v", "label": "New York" },
-      { "value": "house-v", "label": "Los Angeles" },
-      { "value": "apt-v", "label": "San Francisco" },
-        ]} onChange={value => this.setFilterParams("location", value)} />
+
+      <Dropdown placeholder="Location" options={[options.location.map((location) => {
+        value: location,
+        label: location
+
+      )]}
+      onChange={value => this.setFilterParams("location", value)} />
 
       <Input placeholder="Min. Year Built" type="number" onChange={value => this.setFilterParams("minYear", value)}
              value={this.props.values.minYear} />
