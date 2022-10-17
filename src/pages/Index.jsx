@@ -33,14 +33,42 @@ class Index extends React.Component {
     }
   }
 
+  filterProperties(filters) {
+    this.serializeToUrl(filters);
+
+    const filterKeys = Object.keys(filters);
+    const { allProperties } = this.state;
+
+    const filteredProperties = allProperties.filter(item => filterKeys.every(key => {
+      const filterValue = filters[key];
+
+      if (key === "type") return item["type"] === filterValue;
+      if (key === "mode") return item["mode"] === filterValue;
+      if (key === "bathrooms") return item["bathrooms"] === filterValue;
+      if (key === "bedrooms") return item["bedrooms"] === filterValue;
+      if (key === "location") return item["location"][1] === filterValue;
+      if (key === "minArea") return item["area"] >= filterValue;
+      if (key === "maxArea") return item["area"] <= filterValue;
+      if (key === "minPrice") return item["price"] >= filterValue;
+      if (key === "maxPrice") return item["price"] <= filterValue;
+      if (key === "minYearBuilt") return item["year"] >= filterValue;
+
+      return true;
+    }));
+
+    this.setState({
+      filteredProperties: filteredProperties,
+      selectedOptions: filters
+    });
+  }
+
   componentDidMount() {
-    console.log("Index mount")
     const options = queryString.parse(this.props.location.search);
     this.setState({ selectedOptions: options});
+    this.filterProperties(options);
   }
 
   componentDidUpdate(prevprops, _) {
-    console.log("Index updated")
     if (prevprops.location.search === this.props.location.search) return;
     const options = queryString.parse(this.props.location.search)
     this.setState({ selectedOptions: options });
@@ -69,38 +97,7 @@ class Index extends React.Component {
     return options;
   }
 
-  filterProperties(filters) {
-    const filterKeys = Object.keys(filters);
-    const { allProperties } = this.state;
-
-    const filteredProperties = allProperties.filter(item => filterKeys.every(key => {
-      const filterValue = filters[key];
-
-      if (key === "type") return item["type"] === filterValue;
-      if (key === "mode") return item["mode"] === filterValue;
-      if (key === "bathrooms") return item["bathrooms"] === filterValue;
-      if (key === "bedrooms") return item["bedrooms"] === filterValue;
-      if (key === "location") return item["location"][1] === filterValue;
-      if (key === "minArea") return item["area"] >= filterValue;
-      if (key === "maxArea") return item["area"] <= filterValue;
-      if (key === "minPrice") return item["price"] >= filterValue;
-      if (key === "maxPrice") return item["price"] <= filterValue;
-      if (key === "minYearBuilt") return item["year"] >= filterValue;
-
-      return true;
-    }));
-
-    this.setState({
-      filteredProperties: filteredProperties,
-      selectedOptions: filters
-    });
-
-    this.serializeToUrl(filters);
-  }
-
   render() {
-    console.log("Index render");
-    console.log(this.state.selectedOptions);
     const { allProperties, filteredProperties, selectedOptions } = this.state;
 
     return <Page title="PROPERTIES" hasSidebar>
