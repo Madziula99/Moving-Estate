@@ -49,12 +49,10 @@ class Index extends React.Component {
   }
 
   filterProperties(filters) {
-    console.log(filters);
     const filterKeys = Object.keys(filters);
     const { allProperties } = this.state;
 
     const filteredProperties = allProperties.filter(item => filterKeys.every(key => {
-      console.log(key);
       const filterValue = filters[key];
 
       if (key === "type") return item["type"] === filterValue;

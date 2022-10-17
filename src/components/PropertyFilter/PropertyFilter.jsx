@@ -59,8 +59,8 @@ class PropertyFilter extends React.Component {
             "label": item
           }
         })}
-        onChange={value => this.setFilterParams("status", value)}
-        value={values.status}
+        onChange={value => this.setFilterParams("mode", value)}
+        value={values.mode}
       />
 
       <Input
