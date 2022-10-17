@@ -6,8 +6,10 @@ import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx"
 import properties from "../data.json";
 
 class Index extends React.Component {
-  state = {
-    allProperties: properties.map(property => {
+  constructor(props) {
+    super(props);
+
+    const allProperties = properties.map(property => {
       return {
         id: property.id,
         title: property.title,
@@ -21,12 +23,14 @@ class Index extends React.Component {
         bedrooms: property.bedrooms,
         bathrooms: property.bathrooms
       }
-    }),
-    selectedOptions: {
-      bedrooms: 2,
-      bathrooms: 1
+    })
+
+    this.state = {
+      allProperties: allProperties,
+      filteredProperties: allProperties,
+      selectedOptions: {}
     }
-  };
+  }
 
   optionsObject(allProperties) {
     const extract = (key) => [
@@ -45,16 +49,19 @@ class Index extends React.Component {
   }
 
   filterProperties(filters) {
+    console.log(filters);
     const filterKeys = Object.keys(filters);
     const { allProperties } = this.state;
 
     const filteredProperties = allProperties.filter(item => filterKeys.every(key => {
+      console.log(key);
       const filterValue = filters[key];
-      const value = item[key];
 
-      if (key === "type" || key === "mode") return value === filterValue;
-      if (key === "bathrooms" || key === "bedrooms") return value === filterValue;
-      if (key === "location") return value[1] === filterValue;
+      if (key === "type") return item["type"] === filterValue;
+      if (key === "mode") return item["mode"] === filterValue;
+      if (key === "bathrooms") return item["bathrooms"] === filterValue;
+      if (key === "bedrooms") return item["bedrooms"] === filterValue;
+      if (key === "location") return item["location"][1] === filterValue;
       if (key === "minArea") return item["area"] >= filterValue;
       if (key === "maxArea") return item["area"] <= filterValue;
       if (key === "minPrice") return item["price"] >= filterValue;
@@ -65,22 +72,24 @@ class Index extends React.Component {
     }));
 
     this.setState({
-      allProperties: filteredProperties
+      filteredProperties: filteredProperties
     });
+
+    return filteredProperties
   }
 
   render() {
-    const { allProperties, selectedOptions } = this.state;
+    const { allProperties, filteredProperties, selectedOptions } = this.state;
 
     return <Page title="PROPERTIES" hasSidebar>
       <PropertyFilter
         values={{ ...selectedOptions }}
-        options={ this.optionsObject(allProperties)}
+        options={ this.optionsObject(allProperties) }
         onSubmit={(filters) => this.filterProperties(filters)}
       />
       <PropertyList
         defaultView="grid"
-        properties={allProperties}
+        properties={filteredProperties}
       />
     </Page>
   }

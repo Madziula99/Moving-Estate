@@ -25,6 +25,24 @@ class PropertyList extends React.Component {
     };
   }
 
+  componentDidUpdate(prevprops, _) {
+    if (JSON.stringify(prevprops.properties) === JSON.stringify(this.props.properties)) return;
+
+    let pageSize = 8;
+    let pages = Math.ceil(this.props.properties.length / pageSize);
+    let propertiesList = [];
+
+    for (let i = 0; i < this.props.properties.length; i += pageSize) {
+      propertiesList.push(this.props.properties.slice(i, i + pageSize));
+    }
+
+    this.setState({
+      propertiesList: propertiesList,
+      pages: pages,
+      currentPage: 1
+    });
+  }
+
   toggleViewMode(mode) {
     if (mode === this.props.currentMode) return;
 

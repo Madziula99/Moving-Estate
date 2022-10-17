@@ -12,7 +12,12 @@ class Dropdown extends React.Component {
   }
 
   updatePropsState() {
-    this.props.onChange(this.state.selectedOption)
+    let value = null;
+    if (this.state.selectedOption) {
+      value = this.state.selectedOption.value
+    }
+
+    this.props.onChange(value)
   }
 
   componentDidUpdate() {

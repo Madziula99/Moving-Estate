@@ -26,11 +26,10 @@ class PropertyFilter extends React.Component {
 
   render() {
     const { options, values } = this.props;
-    console.log(options)
     return <form className={styles.property_filter} onSubmit={event => {
-      event.preventDefault();
-      this.props.onSubmit(this.sendFilterParams());
-    }}>
+        event.preventDefault();
+        this.props.onSubmit(this.sendFilterParams());
+      }}>
       <Subtitle>PROPERTY SEARCH</Subtitle>
 
       <Input
