@@ -4,11 +4,11 @@ import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
   state = {
-    selectedOption: this.props.value || undefined,
+    selectedOption: this.props.value || null,
   }
 
   handleChange = (selectedOption) => {
-    selectedOption === null ? this.setState({ selectedOption: undefined }) : this.setState({ selectedOption: selectedOption });
+    this.setState({ selectedOption: selectedOption });
   }
 
   updatePropsState() {

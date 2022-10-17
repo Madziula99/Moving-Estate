@@ -6,67 +6,8 @@ import { Sidebar } from "../components/Sidebar/Sidebar.jsx";
 import properties from "../data.json";
 
 class Index extends React.Component {
-  render() {
-    const necessaryProperties = properties.map(property => {
-    return {
-      id: property.id,
-      title: property.title,
-      location: property.location,
-      image: property.images[0],
-      description: property.description,
-      type: property.type,
-      mode: property.mode,
-      price: property.price,
-      area: property.area,
-      bedrooms: property.bedrooms,
-      bathrooms: property.bathrooms
-    }
-    });
-
-    const extract = (key) => [
-      ...new Set(necessaryProperties.map((property => property[key])))
-    ]
-
-    const area = extract("area");
-    const price = extract("price").map(str => Number(str.replaceAll(" ", "")));
-
-    const options = {
-      type: extract("type"),
-      minArea: area,
-      maxArea: area,
-      status: extract("mode"),
-      bedrooms: extract("bedrooms"),
-      bathrooms: extract("bathrooms"),
-      location: extract("location").map(loc => loc[1]),
-      minPrice: price,
-      maxPrice: price
-    };
-    //TODO: price and are maybe array with some step?? or Math.ceil to some bigger value
-    console.log(options)
-
-<<<<<<< HEAD
-    const types = [...new Set(necessaryProperties.map((property => property.type)))];
-    const area = [...new Set(necessaryProperties.map((property => property.area)))];
-    const statuses = [...new Set(necessaryProperties.map((property => property.mode)))];
-    const bedrooms = [...new Set(necessaryProperties.map((property => property.bedrooms)))];
-    const bathrooms = [...new Set(necessaryProperties.map((property => property.bathrooms)))];
-    const locations = [...new Set(necessaryProperties.map((property => property.location[1])))];
-    // TODO: price data view: 100 000 or 100000?
-    const price = [...new Set(necessaryProperties.map((property => property.price.split(" ").join(""))))];
-    options.type = types;
-    options.minArea = Math.min(...area);
-    options.maxArea = Math.max(...area);
-    options.status = statuses;
-    options.bedrooms = bedrooms;
-    options.bathrooms = bathrooms;
-    options.location = locations;
-    options.minPrice = Math.min(...price.map(Number));
-    options.maxPrice = Math.max(...price.map(Number));
-  }
-
-  render() {
-<<<<<<< HEAD
-    const necessaryProperties = properties.map(property => {
+  state = {
+    allProperties: properties.map(property => {
       return {
         id: property.id,
         title: property.title,
@@ -80,19 +21,67 @@ class Index extends React.Component {
         bedrooms: property.bedrooms,
         bathrooms: property.bathrooms
       }
+    })
+  };
+
+  optionsObject(allProperties) {
+    const extract = (key) => [
+      ...new Set(allProperties.map((property => property[key])))
+    ];
+
+    const area = extract("area") || [];
+    const price = extract("price").map(str => Number(str.replaceAll(" ", ""))) || [];
+
+    const options = {
+      type: extract("type") || [],
+      minArea: area || [],
+      maxArea: area || [],
+      status: extract("mode") || [],
+      bedrooms: extract("bedrooms") || [],
+      bathrooms: extract("bathrooms") || [],
+      location: [...new Set(allProperties.map((property => property["location"][1])))] || [],
+      minPrice: price,
+      maxPrice: price
+    };
+
+    return options;
+  }
+
+  filterProperties(filters) {
+    const filterKeys = Object.keys(filters);
+    const { allProperties } = this.state;
+
+    const filteredProperties = allProperties.filter(item => filterKeys.every(key => {
+      const filterValue = filters[key];
+      const value = item[key];
+
+      if (key === "type" || key === "mode") return value === filterValue;
+      /* zero values in "bedrooms" and "bathrooms" props mean "3+" value from PropertyFilter dropdowns
+      in order not to use strings as values and leave them as numbers */
+      if (key === "bathrooms" || key === "bedrooms") return filterValue === 0 ? value >= 3 : value === filterValue;
+      if (key === "location") return value[1] === filterValue;
+      if (key === "minArea") return item["area"] >= filterValue;
+      if (key === "maxArea") return item["area"] <= filterValue;
+      if (key === "minPrice") return item["price"] >= filterValue;
+      if (key === "maxPrice") return item["price"] <= filterValue;
+      if (key === "minYearBuilt") return item["year"] >= filterValue;
+
+      return true;
+    }));
+
+    this.setState({
+      allProperties: filteredProperties
     });
+  }
+
+  render() {
+    const { allProperties } = this.state;
 
     return <Page title="PROPERTIES" hasSidebar>
-      <Sidebar />
-=======
-=======
->>>>>>> 574a5d8 (Refactor code)
-    return <>
-      <Header>PROPERTIES</Header>
->>>>>>> 505c9b4 (Build an options configuration object)
+      <Sidebar onSubmitHandler={(filters) => this.filterProperties(filters)} />
       <PropertyList
         defaultView="grid"
-        properties={necessaryProperties}
+        properties={allProperties}
       />
     </Page>
   }
