@@ -6,28 +6,16 @@ class Input extends React.Component {
     value: this.props.value || ""
   }
 
-  updateValue = (inputText) => {
+  handleInputBlur = (inputText) => {
+    this.props.onChange(inputText.target.value);
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (prevState.inputValue === this.state.value) return;
+
     this.setState({
-      value: inputText.target.value
+      value: this.props.value,
     });
-  }
-
-  notifyParameter = () => {
-    if (this.props.value === this.state.value) return;
-    this.props.onChange(this.state.value)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.value === this.props.value) return;
-    this.setState({
-      value: this.props.value
-    })
-  }
-
-  className() {
-    const classes = [styles.input_field];
-    this.props.width === "half" && classes.push(styles.input_field_half);
-    return classes.join(" ");
   }
 
   render() {
@@ -36,12 +24,11 @@ class Input extends React.Component {
       (type === undefined ||
       type === "text" ||
       type === "number" ) && <input
-        className = { this.className() }
+        className = { styles.input_field }
         type = { type || "text" }
         placeholder = { placeholder }
-        value = { this.state.value }
-        onBlur = { this.notifyParameter }
-        onChange = {this.updateValue}
+        defaultValue = { this.state.value }
+        onBlur = { this.handleInputBlur }
       />
     )
   }

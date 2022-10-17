@@ -16,6 +16,7 @@ import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Gallery from "../components/Gallery/Gallery.jsx";
+import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx";
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
@@ -36,7 +37,7 @@ class ComponentGallery extends React.Component {
     }
 
     return (
-      <>
+      <>        
         <h2>&lt;Header&gt;</h2>
         <Header>PROPERTIES</Header>
 
@@ -178,6 +179,10 @@ class ComponentGallery extends React.Component {
           { 'value': 'bird-v', 'label': 'good-l' },
         ]} width="half" onChange={ value => console.log(value)}/>
         <Dropdown placeholder="XZ" options={[]} onChange={ value => console.log(value)}/>
+
+        <h2>Property Filter</h2>
+        <PropertyFilter values={{minYear: 1984, title: "Apartment"}}
+                        onSubmit={(nextValues) => console.log(`Next values are: ${JSON.stringify(nextValues)}`)} />
 
       </>
     )
