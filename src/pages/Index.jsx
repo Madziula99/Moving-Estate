@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { Page } from "../components/Page/Page.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
-import { Sidebar } from "../components/Sidebar/Sidebar.jsx";
+import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx";
 import properties from "../data.json";
 
 class Index extends React.Component {
@@ -21,7 +21,11 @@ class Index extends React.Component {
         bedrooms: property.bedrooms,
         bathrooms: property.bathrooms
       }
-    })
+    }),
+    selectedOptions: {
+      bedrooms: 2,
+      bathrooms: 1
+    }
   };
 
   optionsObject(allProperties) {
@@ -75,10 +79,10 @@ class Index extends React.Component {
   }
 
   render() {
-    const { allProperties } = this.state;
+    const { allProperties, selectedOptions } = this.state;
 
     return <Page title="PROPERTIES" hasSidebar>
-      <Sidebar onSubmitHandler={(filters) => this.filterProperties(filters)} />
+      <PropertyFilter values={{ ...selectedOptions }} options={ this.optionsObject(allProperties)} onSubmit={(filters) => this.filterProperties(filters)} />
       <PropertyList
         defaultView="grid"
         properties={allProperties}
