@@ -1,3 +1,9 @@
+.wrapper {
+  position: relative;
+  width: 1010px;
+  margin: 0 auto;
+}
+
 .carousel-root {
   width: 1000px;
   margin: 0 auto;

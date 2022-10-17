@@ -25,7 +25,7 @@ class Property extends Component {
           bathrooms={property.bathrooms}
           id={property.id}
         />
-        <Gallery images={property.images} />
+        <Gallery images={property.images} type={property.type} mode={property.mode} price={property.price} />
         <Description>{property.description}</Description>
         {property.floor_plans && <FloorPlans plans={property.floor_plans} />}
         <Amenities
