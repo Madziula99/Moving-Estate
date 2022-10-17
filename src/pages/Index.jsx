@@ -10,8 +10,27 @@ class Index extends React.Component {
   constructor(props) {
     super(props);
 
+    const allProperties = properties.map(property => {
+      return {
+        id: property.id,
+        title: property.title,
+        location: property.location,
+        image: property.images[0],
+        description: property.description,
+        type: property.type,
+        mode: property.mode,
+        price: property.price,
+        area: property.area,
+        bedrooms: property.bedrooms,
+        bathrooms: property.bathrooms
+      }
+    })
+
     this.state = {
-      filterOptions: {}
+      filterOptions: {},
+      allProperties: allProperties,
+      filteredProperties: allProperties,
+      selectedOptions: {}
     }
   }
 
