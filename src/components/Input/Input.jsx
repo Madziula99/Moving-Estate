@@ -2,20 +2,30 @@ import React from "react";
 import styles from "./Input.module.css";
 
 class Input extends React.Component {
-  state = {
-    value: this.props.value || ""
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      value: this.props.value || ""
+    }
   }
 
   handleInputBlur = (inputText) => {
     this.props.onChange(inputText.target.value);
   }
 
-  componentDidUpdate(_, prevState) {
-    if (prevState.inputValue === this.state.value) return;
+  componentDidUpdate(prevprops, _) {
+    if (prevprops.value === this.props.value) return;
 
     this.setState({
       value: this.props.value,
     });
+  }
+
+  className() {
+    const classes = [styles.input_field];
+    this.props.width === "half" && classes.push(styles.input_field_half);
+    return classes.join(" ");
   }
 
   render() {
@@ -24,7 +34,7 @@ class Input extends React.Component {
       (type === undefined ||
       type === "text" ||
       type === "number" ) && <input
-        className = { styles.input_field }
+        className = { this.className() }
         type = { type || "text" }
         placeholder = { placeholder }
         defaultValue = { this.state.value }

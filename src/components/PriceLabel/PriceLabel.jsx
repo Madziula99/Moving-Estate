@@ -19,7 +19,7 @@ class PriceLabel extends React.Component {
           {this.showIcon(this.props.type)}
           <h4> For {this.props.mode}</h4>
         </div>
-        <h3>{this.props.price} $</h3>
+        <h3>{new Intl.NumberFormat("en-US", { maximumSignificantDigits: 3 }).format(this.props.price).replaceAll(",", " ")} $</h3>
       </div>
     )
   }
