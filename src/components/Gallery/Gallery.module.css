@@ -6,34 +6,3 @@
   position: relative;
   margin-bottom: 65px;
 }
-
-.main_slider_wrapper:hover .arrow {
-  visibility: visible;
-}
-
-.main_slider {
-  max-height: 615px;
-}
-
-.arrow {
-  visibility: hidden;
-  position: absolute;
-  width: 50px;
-  height: 90px;
-  background: transparent;
-  border: none;
-  top: 35%;
-  padding: 0;
-  z-index: 1;
-  cursor: pointer;
-}
-
-.arrow_prev {
-  background-image: url("./assets/leftArrow.svg");
-  left: 25px;
-}
-
-.arrow_next {
-  background-image: url("./assets/rightArrow.svg");
-  right: 25px;
-}

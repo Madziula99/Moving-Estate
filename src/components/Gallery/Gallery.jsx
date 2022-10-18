@@ -1,6 +1,7 @@
 import React from "react";
 import PriceLabel from "../PriceLabel/PriceLabel.jsx";
-import { Slide } from "./Slide/Slide.jsx";
+import { Thumbs } from "./Thumbs/Thumbs.jsx";
+import { MainSlider } from "./MainSlider/MainSlider.jsx";
 import styles from "./Gallery.module.css";
 
 class Gallery extends React.Component {
@@ -23,21 +24,17 @@ class Gallery extends React.Component {
     });
   }
 
-  componentDidUpdate(_, prevState) {
+  offsets(prevImage) {
     const { images } = this.props;
     const { currentImage } = this.state;
-
-    if (prevState.currentImage === currentImage) return;
-
     const translateMainValue = 1000 * currentImage;
     let translateThumbsValue = 0;
-    const styledTransition = "all .5s ease-out";
     const thumbWidth = 250;
 
     if (currentImage >= images.length - 2) {
       translateThumbsValue = thumbWidth * (images.length - 4);
     } else if (currentImage > 0) {
-      if (prevState.currentImage > currentImage) {
+      if (prevImage > currentImage) {
         translateThumbsValue = thumbWidth * currentImage - thumbWidth * 2;
       } else {
         translateThumbsValue = thumbWidth * currentImage - thumbWidth;
@@ -45,9 +42,16 @@ class Gallery extends React.Component {
     }
 
     this.mainSliderRef.current.style.transform = `translateX(-${translateMainValue}px)`;
-    this.mainSliderRef.current.style.transition = styledTransition;
     this.thumbsRef.current.style.transform = `translateX(-${translateThumbsValue}px)`;
-    this.thumbsRef.current.style.transition = styledTransition;
+  }
+
+  componentDidUpdate(_, prevState) {
+    const { currentImage } = this.state;
+    const prevImage = prevState.currentImage;
+
+    if (prevImage === currentImage) return;
+
+    this.offsets(prevImage);
   }
 
   render() {
@@ -60,28 +64,18 @@ class Gallery extends React.Component {
         mode={this.props.mode}
         price={this.props.price}
       />
-      <div className={styles.main_slider_wrapper}>
-        {currentImage !== 0 &&
-        <button
-          onClick={() => this.changeImage(currentImage - 1)}
-          className={`${styles.arrow} ${styles.arrow_prev}`}
-        />}
-        <div className={styles.main_slider} ref={this.mainSliderRef}>
-          {images.map(image => <Slide image={image} key={image} isMainSlide />)}
-        </div>
-        {currentImage !== images.length - 1 &&
-        <button
-          onClick={() => this.changeImage(currentImage + 1)}
-          className={`${styles.arrow} ${styles.arrow_next}`}
-        />}
-      </div>
-      <div ref={this.thumbsRef}>
-        {images.map((image, i) => {
-          const isFocused = currentImage === i;
-
-          return <Slide image={image} key={image} handleSlideClick={() => this.changeImage(i)} isFocused={isFocused} />
-        })}
-      </div>
+      <MainSlider
+        slides={images}
+        mainSliderRef={this.mainSliderRef}
+        currentImage={currentImage}
+        changeSlide={(index) => this.changeImage(index)}
+      />
+      <Thumbs
+        thumbsRef={this.thumbsRef}
+        slides={images}
+        currentImage={currentImage}
+        changeSlide={(index) => this.changeImage(index)}
+      />
     </div>
   }
 }
