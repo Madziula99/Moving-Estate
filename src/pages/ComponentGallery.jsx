@@ -36,8 +36,16 @@ class ComponentGallery extends React.Component {
       bathrooms: 2
     }
 
+    const options = {
+      type: ["townhouse", "apartment"],
+      mode: ["rent", "sale"],
+      bedrooms: [1, 2, 3, 4, 5],
+      bathrooms: [1, 2, 3],
+      location: ["California", "Vermont"]
+    }
+
     return (
-      <>        
+      <>
         <h2>&lt;Header&gt;</h2>
         <Header>PROPERTIES</Header>
 
@@ -73,9 +81,9 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Features&gt;</h2>
         <Features
           items={[
-            { icon: 'pool', title: 'Large pool outside' },
-            { icon: 'paw', title: 'Pets are allowed' },
-            { icon: 'fence', title: '850 Sq Ft Garden' },
+            { icon: "pool", title: "Large pool outside" },
+            { icon: "paw", title: "Pets are allowed" },
+            { icon: "fence", title: "850 Sq Ft Garden" },
           ]} />
 
         <h2>&lt;ViewModeToggle&gt;</h2>
@@ -85,7 +93,7 @@ class ComponentGallery extends React.Component {
         <h2>&lt;Title&gt;</h2>
         <Title
           name="Verona at Parkbridge II by DR Horton"
-          location={['Natomas', 'Sacramento']}
+          location={["Natomas", "Sacramento"]}
           type="townhouse"
           area={1932}
           bedrooms={4}
@@ -127,13 +135,13 @@ class ComponentGallery extends React.Component {
         <PropertyList
           defaultView="grid"
           properties={[
-            {...property, id: 'A001'}, {...property, id: 'A002'}, {...property, id: 'A003'},
-            {...property, id: 'A004'}, {...property, id: 'A005'}, {...property, id: 'A006'},
-            {...property, id: 'A007'}, {...property, id: 'A008'}, {...property, id: 'A009'},
-            {...property, id: 'A010'}, {...property, id: 'A011'}, {...property, id: 'A012'},
-            {...property, id: 'A013'}, {...property, id: 'A014'}, {...property, id: 'A015'},
-            {...property, id: 'A016'}, {...property, id: 'A017'}, {...property, id: 'A018'},
-            {...property, id: 'A019'}, {...property, id: 'A020'}, {...property, id: 'A021'}
+            {...property, id: "A001"}, {...property, id: "A002"}, {...property, id: "A003"},
+            {...property, id: "A004"}, {...property, id: "A005"}, {...property, id: "A006"},
+            {...property, id: "A007"}, {...property, id: "A008"}, {...property, id: "A009"},
+            {...property, id: "A010"}, {...property, id: "A011"}, {...property, id: "A012"},
+            {...property, id: "A013"}, {...property, id: "A014"}, {...property, id: "A015"},
+            {...property, id: "A016"}, {...property, id: "A017"}, {...property, id: "A018"},
+            {...property, id: "A019"}, {...property, id: "A020"}, {...property, id: "A021"}
           ]}
         />
 
@@ -169,20 +177,17 @@ class ComponentGallery extends React.Component {
 
         <h2>&lt;Dropdown&gt;</h2>
         <Dropdown placeholder="Type" options={[
-          { 'value': 'single-v', 'label': 'Single-family-l' },
-          { 'value': 'house-v', 'label': 'Townhouse-l' },
-          { 'value': 'apt-v', 'label': 'Apartment-l' },
-        ]} onChange={value => console.log(value)} value={{ 'value': 'single-v', 'label': 'Single-family-l' }} />
-        <Dropdown options={[
-          { 'value': 'cat-v', 'label': 'animals-l' },
-          { 'value': 'dog-v', 'label': 'size-l' },
-          { 'value': 'bird-v', 'label': 'good-l' },
-        ]} width="half" onChange={ value => console.log(value)}/>
-        <Dropdown placeholder="XZ" options={[]} onChange={ value => console.log(value)}/>
+          { "value": "single-v", "label": "Single-family-l" },
+          { "value": "house-v", "label": "Townhouse-l" },
+          { "value": "apt-v", "label": "Apartment-l" },
+        ]} onChange={value => console.log(value)} value={"single-v"} />
 
         <h2>Property Filter</h2>
-        <PropertyFilter values={{minYear: 1984, title: "Apartment"}}
-                        onSubmit={(nextValues) => console.log(`Next values are: ${JSON.stringify(nextValues)}`)} />
+        <PropertyFilter
+          values={{minYear: 1984, title: "Apartment"}}
+          options={options}
+          onSubmit={(filters) => console.log(filters)}
+        />
 
       </>
     )
