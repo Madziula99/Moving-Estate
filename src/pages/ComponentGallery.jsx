@@ -164,6 +164,9 @@ class ComponentGallery extends React.Component {
             "https://picsum.photos/700/400?img=6",
             "https://picsum.photos/700/400?img=7",
           ]}
+          type="townhouse"
+          mode="sale"
+          price="300000"
         />
 
         <h2>&lt;Button&gt;</h2>

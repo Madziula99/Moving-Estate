@@ -1,5 +1,5 @@
 import React from "react";
-import { Slide } from "../Slide/Slide";
+import { Slide } from "../Slide/Slide.jsx";
 import styles from "./Thumbs.module.css";
 
 class Thumbs extends React.Component {

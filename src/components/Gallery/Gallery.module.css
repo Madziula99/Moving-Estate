@@ -1,8 +1,13 @@
-.wrapper {
-  width: 1000px;
+.gallery_wrapper {
+  width: 1006px;
   margin: 0 auto;
-  white-space: nowrap;
-  overflow: hidden;
   position: relative;
   margin-bottom: 65px;
+}
+
+.sliders_wrapper {
+  width: 1000px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 6px;
 }

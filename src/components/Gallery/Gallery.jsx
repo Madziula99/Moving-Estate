@@ -1,81 +1,21 @@
 import React from "react";
 import PriceLabel from "../PriceLabel/PriceLabel.jsx";
-import { Thumbs } from "./Thumbs/Thumbs.jsx";
-import { MainSlider } from "./MainSlider/MainSlider.jsx";
+import { Sliders } from "./Sliders/Sliders.jsx";
 import styles from "./Gallery.module.css";
 
 class Gallery extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentImage: 0,
-    };
-
-    this.mainSliderRef = React.createRef();
-    this.thumbsRef = React.createRef();
-  }
-
-  changeImage(currentImageIndex) {
-    if (this.state.currentImage === currentImageIndex) return;
-
-    this.setState({
-      currentImage: currentImageIndex
-    });
-  }
-
-  offsets(prevImage) {
-    const { images } = this.props;
-    const { currentImage } = this.state;
-    const translateMainValue = 1000 * currentImage;
-    let translateThumbsValue = 0;
-    const thumbWidth = 250;
-
-    if (currentImage >= images.length - 2) {
-      translateThumbsValue = thumbWidth * (images.length - 4);
-    } else if (currentImage > 0) {
-      if (prevImage > currentImage) {
-        translateThumbsValue = thumbWidth * currentImage - thumbWidth * 2;
-      } else {
-        translateThumbsValue = thumbWidth * currentImage - thumbWidth;
-      }
-    }
-
-    this.mainSliderRef.current.style.transform = `translateX(-${translateMainValue}px)`;
-    this.thumbsRef.current.style.transform = `translateX(-${translateThumbsValue}px)`;
-  }
-
-  componentDidUpdate(_, prevState) {
-    const { currentImage } = this.state;
-    const prevImage = prevState.currentImage;
-
-    if (prevImage === currentImage) return;
-
-    this.offsets(prevImage);
-  }
-
   render() {
-    const { images } = this.props;
-    const { currentImage } = this.state;
+    const { images, type, mode, price } = this.props;
 
-    return <div className={styles.wrapper}>
+    return <div className={styles.gallery_wrapper}>
       <PriceLabel
-        type={this.props.type}
-        mode={this.props.mode}
-        price={this.props.price}
+        type={type}
+        mode={mode}
+        price={price}
       />
-      <MainSlider
-        slides={images}
-        mainSliderRef={this.mainSliderRef}
-        currentImage={currentImage}
-        changeSlide={(index) => this.changeImage(index)}
-      />
-      <Thumbs
-        thumbsRef={this.thumbsRef}
-        slides={images}
-        currentImage={currentImage}
-        changeSlide={(index) => this.changeImage(index)}
-      />
+      <div className={styles.sliders_wrapper}>
+        <Sliders slides={images} />
+      </div>
     </div>
   }
 }
