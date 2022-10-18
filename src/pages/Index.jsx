@@ -44,14 +44,14 @@ class Index extends React.Component {
 
       if (key === "type") return item["type"] === filterValue;
       if (key === "mode") return item["mode"] === filterValue;
-      if (key === "bathrooms") return item["bathrooms"] === filterValue;
-      if (key === "bedrooms") return item["bedrooms"] === filterValue;
+      if (key === "bathrooms") return item["bathrooms"] === Number(filterValue);
+      if (key === "bedrooms") return item["bedrooms"] === Number(filterValue);
       if (key === "location") return item["location"][1] === filterValue;
-      if (key === "minArea") return item["area"] >= filterValue;
-      if (key === "maxArea") return item["area"] <= filterValue;
-      if (key === "minPrice") return item["price"] >= filterValue;
-      if (key === "maxPrice") return item["price"] <= filterValue;
-      if (key === "minYearBuilt") return item["year"] >= filterValue;
+      if (key === "minArea") return item["area"] >= Number(filterValue);
+      if (key === "maxArea") return item["area"] <= Number(filterValue);
+      if (key === "minPrice") return item["price"] >= Number(filterValue);
+      if (key === "maxPrice") return item["price"] <= Number(filterValue);
+      if (key === "minYearBuilt") return item["year"] >= Number(filterValue);
 
       return true;
     }));

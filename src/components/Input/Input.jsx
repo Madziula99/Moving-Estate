@@ -22,13 +22,19 @@ class Input extends React.Component {
     });
   }
 
+  className() {
+    const classes = [styles.input_field];
+    this.props.width === "half" && classes.push(styles.input_field_half);
+    return classes.join(" ");
+  }
+
   render() {
     const { type, placeholder } = this.props;
     return (
       (type === undefined ||
       type === "text" ||
       type === "number" ) && <input
-        className = { styles.input_field }
+        className = { this.className() }
         type = { type || "text" }
         placeholder = { placeholder }
         defaultValue = { this.state.value }
