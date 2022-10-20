@@ -15,7 +15,7 @@ import agentImg from "../components/Agentinfo/assets/img.png";
 import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import Amenities from "../components/Amenities/Amenities.jsx";
-import Gallery from "../components/Gallery/Gallery.jsx";
+import { Gallery } from "../components/Gallery/Gallery.jsx";
 import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx";
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
@@ -164,6 +164,9 @@ class ComponentGallery extends React.Component {
             "https://picsum.photos/700/400?img=6",
             "https://picsum.photos/700/400?img=7",
           ]}
+          type="townhouse"
+          mode="sale"
+          price="300000"
         />
 
         <h2>&lt;Button&gt;</h2>
