@@ -10,6 +10,8 @@ async function main() {
   const api = await fetch('/api/status').then(r => r.json());
   console.log(`API is ${api.status}`);
 
+  const { properties, options } = await fetch("/api/properties").then(r => r.json());
+
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
@@ -22,7 +24,7 @@ async function main() {
             <Property />
           </Route>
           <Route path="/">
-            <Index />
+            <Index properties={properties} options={options}/>
           </Route>
         </Switch>
       </BrowserRouter>
