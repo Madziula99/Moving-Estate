@@ -34,6 +34,7 @@ class Input extends React.Component {
     return (
       (type === undefined ||
       type === "text" ||
+      type === "email" ||
       type === "number" ) && <input
         className = { this.className() }
         type = { type || "text" }

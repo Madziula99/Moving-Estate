@@ -38,6 +38,7 @@ class ContactForm extends React.Component {
         <Input
           placeholder="Your Email*"
           onChange={value => console.log("Your email", value)}
+          type="email"
           width="half" required/>
       </div>
       <Textarea placeholder="Message to agent*"
