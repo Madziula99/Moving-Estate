@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import { Page } from "../components/Page/Page.jsx";
 import PropertyList from "../components/PropertyList/PropertyList.jsx";
 import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx";
-import queryString from 'query-string';
 
 class Index extends React.Component {
   constructor(props) {
@@ -15,8 +14,17 @@ class Index extends React.Component {
     }
   }
 
+  paramsToObject(params) {
+  const filters = {}
+  for (const [key, value] of params) {
+    filters[key] = value;
+  }
+  return filters;
+}
+
   componentDidMount() {
-    const options = queryString.parse(this.props.location.search);
+    const params = new URLSearchParams(this.props.location.search);
+    const options = this.paramsToObject(params);
     this.setState({ selectedOptions: options});
   }
 
@@ -24,7 +32,8 @@ class Index extends React.Component {
     if (prevprops.location.search === this.props.location.search) return;
 
     const { properties } = await fetch("/api/properties").then(r => r.json());
-    const options = queryString.parse(this.props.location.search)
+    const params = new URLSearchParams(this.props.location.search);
+    const options = this.paramsToObject(params);
 
     this.setState({
       selectedOptions: options,
@@ -33,7 +42,7 @@ class Index extends React.Component {
   }
 
   serializeToUrl(options) {
-    const filterOptions = queryString.stringify(options);
+    const filterOptions = new URLSearchParams(options).toString();
     this.props.history.push({
       search: `?${filterOptions}`,
     });
@@ -59,7 +68,7 @@ class Index extends React.Component {
       />
       <PropertyList
         defaultView="grid"
-        properties={filteredProperties}
+        properties={ filteredProperties }
       />
     </Page>
   }
