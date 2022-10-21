@@ -8,6 +8,7 @@ import Amenities from "../components/Amenities/Amenities.jsx";
 import Features from "../components/Features/Features.jsx";
 import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
 import { Page } from "../components/Page/Page.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Property extends Component {
   state = {
@@ -31,7 +32,7 @@ class Property extends Component {
   render() {
     const { property } = this.state;
 
-    if (property === undefined) return <p>Loading</p>
+    if (property === undefined) return <div style={{ height: "100vh" }}><Spinner /></div>
 
     return <Page title={property.title}>
       <Title
