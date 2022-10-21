@@ -41,6 +41,8 @@ class Input extends React.Component {
         placeholder = { placeholder }
         defaultValue = { this.state.value }
         onBlur = { this.handleInputBlur }
+        minLength = { this.props.minlength }
+        maxLength = { this.props.maxlength }
       />
     )
   }

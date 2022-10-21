@@ -34,7 +34,7 @@ class ContactForm extends React.Component {
         <Input
           placeholder="Your Name*"
           onChange={value => console.log("Your name", value)}
-          width="half" minlength="2" maxlength="20" required/>
+          width="half" minlength="2" maxlength="10" required/>
         <Input
           placeholder="Your Email*"
           onChange={value => console.log("Your email", value)}
