@@ -4,7 +4,21 @@ import ContactInfoItem from "../ContactInfoItem/ContactInfoItem.jsx";
 import classes from "./AgentInfo.module.css";
 
 class AgentInfo extends React.Component {
+  async postMessage(clientMessage) {
+    const { message } = await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message: clientMessage })
+    }).then(r => r.json());
+
+    console.log(message);
+  }
+
   render() {
+    this.postMessage("Hello, call me!");
+
     return (
       <section>
         <Subtitle>AGENT INFORMATION</Subtitle>
@@ -14,15 +28,15 @@ class AgentInfo extends React.Component {
             <div className={classes.name_location}>
               <h3 className={classes.name}>{this.props.name}</h3>
               <h4 className={classes.location}>{this.props.location}</h4>
-            </div>             
-              <ContactInfoItem type="email" isFooter={false} >
-                {this.props.email}
-              </ContactInfoItem>            
-              <ContactInfoItem type="phone" isFooter={false}>
-                {this.props.phone}
-              </ContactInfoItem>  
-            </div>  
-          </div>        
+            </div>
+            <ContactInfoItem type="email" isFooter={false} >
+              {this.props.email}
+            </ContactInfoItem>
+            <ContactInfoItem type="phone" isFooter={false}>
+              {this.props.phone}
+            </ContactInfoItem>
+          </div>
+        </div>
       </section>
     );
   }
