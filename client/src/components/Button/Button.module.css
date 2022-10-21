@@ -41,3 +41,18 @@
   border-bottom-right-radius: 2px;
   border-right: 1px solid #ADB2B6;
 }
+
+.right_button {
+  margin-left: 75%;
+  transition: all ease-in .2s;
+}
+
+.right_button:active {
+  background-color: green;
+  color:#000;
+}
+
+.right_button:disabled {
+  background-color: #df434a;
+  color:#000;
+}

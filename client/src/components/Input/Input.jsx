@@ -25,6 +25,7 @@ class Input extends React.Component {
   className() {
     const classes = [styles.input_field];
     this.props.width === "half" && classes.push(styles.input_field_half);
+    this.props.required === true && classes.push(styles.input_field_agent);
     return classes.join(" ");
   }
 
