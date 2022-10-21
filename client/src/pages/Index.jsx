@@ -3,19 +3,18 @@ import { withRouter } from "react-router-dom";
 import { Page } from "../components/Page/Page.jsx";
 import { PropertyList } from "../components/PropertyList/PropertyList.jsx";
 import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Index extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      filteredProperties: {},
+      filteredProperties: [],
       selectedOptions: {},
       options: {},
-      pagination: {
-        page: 1,
-        pages: null
-      }
+      pages: null,
+      isLoading: false
     }
   }
 
@@ -27,38 +26,36 @@ class Index extends React.Component {
     return filters;
   }
 
-  async getProperties(urlQueryParams) {
-    const {properties, options, pagination} = await fetch("/api/properties" + urlQueryParams).then(r => r.json());
-    this.setState({
-      filteredProperties: properties,
-      options: options,
-      pagination: pagination
-    });
-  }
-
   componentDidMount() {
-    this.getProperties(this.props.location.search);
     const params = new URLSearchParams(this.props.location.search);
-    const allOptions = this.paramsToObject(params);
-    if (allOptions.page === undefined) allOptions.page = this.state.pagination.page
-    this.serializeToUrl(allOptions);
-    const { page, ...selectedOptions } = allOptions;
-    this.setState({
-      selectedOptions: selectedOptions
-    });
+    const selectedOptions = this.paramsToObject(params);
+
+    if (selectedOptions.page === undefined) selectedOptions.page = 1;
+
+    this.updateOptions(selectedOptions);
   }
 
-  async componentDidUpdate(prevprops, _) {
-    if (prevprops.location.search === this.props.location.search) return;
+  componentDidUpdate(_, prevState) {
+    if (JSON.stringify(this.state.selectedOptions) === JSON.stringify(prevState.selectedOptions)) return;
 
-    const params = new URLSearchParams(this.props.location.search);
-    const { page, ...selectedOptions } = this.paramsToObject(params);
+    this.getProperties();
+  }
 
-    this.getProperties(this.props.location.search);
+  async getProperties() {
+    this.setState({ isLoading: true });
 
-    this.setState({
-      selectedOptions: selectedOptions
-    });
+    const urlQueryParams = new URLSearchParams(this.state.selectedOptions).toString();
+
+    await fetch("/api/properties?" + urlQueryParams)
+      .then(r => r.json())
+      .then(({ properties, options, pages }) => {
+        this.setState({
+          filteredProperties: properties,
+          options: options,
+          pages: pages,
+          isLoading: false
+        })
+      });
   }
 
   serializeToUrl(options) {
@@ -68,41 +65,39 @@ class Index extends React.Component {
     });
   }
 
-  filterProperties(filters) {
-    this.setState({
-      selectedOptions: filters
-    });
+  updateOptions(newOptions) {
+    this.setState({ selectedOptions: newOptions });
+    this.serializeToUrl(newOptions);
+  }
 
-    filters.page = 1;
-    this.serializeToUrl(filters);
+  filterProperties(filters) {
+    this.updateOptions({ ...filters, page: 1 })
   }
 
   changePage(page) {
-    const filterParams = this.state.selectedOptions;
-    filterParams.page = page;
-    const urlQueryParams = new URLSearchParams(filterParams)
-    this.serializeToUrl(urlQueryParams);
-    this.getProperties(`?${urlQueryParams.toString()}`);
+    this.updateOptions({ ...this.state.selectedOptions, page: page })
   }
 
   render() {
-    const { filteredProperties, selectedOptions, options, pagination } = this.state;
+    const { filteredProperties, selectedOptions, options, pages, isLoading } = this.state;
 
-    if(Object.keys(options).length === 0) return;
+    if (Object.keys(options).length === 0) return;
 
     return <Page title="PROPERTIES" hasSidebar>
       <PropertyFilter
-        values={ selectedOptions }
-        options={ options }
-        onSubmit={ (filters) => this.filterProperties(filters) }
+        values={selectedOptions}
+        options={options}
+        onSubmit={(filters) => this.filterProperties(filters)}
       />
       <PropertyList
-        pages={ pagination.pages }
-        page={ pagination.page }
+        pages={pages}
+        page={selectedOptions.page}
         defaultView="grid"
-        properties={ filteredProperties }
-        changePage={ (page) => this.changePage(page) }
-      />
+        properties={filteredProperties}
+        changePage={(page) => this.changePage(page)}
+      >
+        {isLoading && <Spinner />}
+      </PropertyList>
     </Page>
   }
 }

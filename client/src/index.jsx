@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter,Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ComponentGallery from "./pages/ComponentGallery.jsx";
 import Property from "./pages/Property.jsx";
 import Index from "./pages/Index.jsx";
@@ -22,7 +22,7 @@ async function main() {
             <Property />
           </Route>
           <Route path="/">
-            <Index/>
+            <Index />
           </Route>
         </Switch>
       </BrowserRouter>

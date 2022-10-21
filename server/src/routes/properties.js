@@ -14,7 +14,7 @@ async function read(req, res) {
 function filterProperties(filters) {
   const filterKeys = Object.keys(filters);
 
-  const filteredProperties = allProperties.filter(item => filterKeys.every(key => {
+  const filteredProperties = properties.filter(item => filterKeys.every(key => {
     const filterValue = filters[key];
 
     if (!item.hasOwnProperty(key)) return false;
@@ -38,7 +38,7 @@ function filterProperties(filters) {
 
 function optionsObject() {
   const extract = (key) => [
-    ...new Set(allProperties.map((property => property[key])))
+    ...new Set(properties.map((property => property[key])))
   ];
 
   const options = {
@@ -46,7 +46,7 @@ function optionsObject() {
     mode: extract("mode").sort() || [],
     bedrooms: extract("bedrooms").sort((a, b) => { return a - b }) || [],
     bathrooms: extract("bathrooms").sort((a, b) => { return a - b }) || [],
-    location: [...new Set(allProperties.map((property => property["location"][1])))].sort() || []
+    location: [...new Set(properties.map((property => property["location"][1])))].sort() || []
   };
 
   return options;
@@ -73,7 +73,6 @@ async function index(req, res) {
   });
 
   const pageSize = 8;
-  let pageNum = Number(page);
   let propertiesPages = [];
 
   for (let i = 0; i < filteredProperties.length; i += pageSize) {
@@ -81,15 +80,12 @@ async function index(req, res) {
   }
 
   res.json({
-    properties: propertiesPages[page-1] || {},
+    properties: propertiesPages[Number(page) - 1] || [],
     options: options,
-    pagination: {
-      page: pageNum,
-      pages: propertiesPages.length
-    }
+    pages: propertiesPages.length
   });
 }
 
 module.exports = Router()
-  .get('/', index)
+  .get("/", index)
   .get("/:id", read)
