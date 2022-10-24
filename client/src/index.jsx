@@ -22,11 +22,7 @@ async function main() {
             <Property />
           </Route>
           <Route path="/">
-<<<<<<< HEAD
             <Index />
-=======
-            <Index/>
->>>>>>> 0d1303c (Fix fetch on Index page and add pagination values to response)
           </Route>
         </Switch>
       </BrowserRouter>
