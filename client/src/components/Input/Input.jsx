@@ -43,6 +43,7 @@ class Input extends React.Component {
         onBlur = { this.handleInputBlur }
         minLength = { this.props.minlength }
         maxLength = { this.props.maxlength }
+        pattern = { this.props.pattern }
       />
     )
   }

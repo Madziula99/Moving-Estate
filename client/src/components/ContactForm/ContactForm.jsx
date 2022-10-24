@@ -17,9 +17,9 @@ class ContactForm extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    if (this.state.isDisabled) return;
-    //TODO: have to update disabled
+  componentDidUpdate(_, prevState) {
+    if (JSON.stringify(prevState.contactFormParams) === JSON.stringify(this.state.contactFormParams)) return;
+    this.checkForm();
   }
 
   setContactFormParams= (type, value)=> {
@@ -27,30 +27,22 @@ class ContactForm extends React.Component {
     this.setState({
       contactFormParams: contactFormParams
     });
-
-    this.state.contactFormParams.name.length >= 2
-      && this.state.contactFormParams.email.includes('@')
-      && this.state.contactFormParams.email.includes('.')
-      && this.state.contactFormParams.textArea.length > 0
-      ? this.setState({ isDisabled: false }) : this.setState({ isDisabled: true })
-
-    //console.log(`there i am set contactFormParams ${JSON.stringify(this.state.contactFormParams)}`)
-    //console.log(this.state.contactFormParams.email.includes('@'), "do 2")
   }
 
-  sendContactFormParams() {
-    const sendingParams = {}
-    for (let key in this.state.contactFormParams) {
-      if (this.state.contactFormParams[key]) sendingParams[key] = this.state.contactFormParams[key]
+  checkForm() {
+    console.log(this.state.contactFormParams)
+    let isDisabled = false;
+    const emailExpression = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (Object.values(this.state.contactFormParams).some(val => val === "") || emailExpression.test(this.state.contactFormParams.email) === false) {
+      isDisabled = true
     }
-    //console.log(`sended params ${sendingParams}`)
-    return sendingParams;
+    this.setState({ isDisabled: isDisabled })
   }
 
   submitHandler(event) {
     event.preventDefault();
 
-    this.props.onSubmit(this.sendContactFormParams());
+    this.props.onSubmit(this.state.contactFormParams);
 
     this.setState({
       contactFormParams: {
@@ -60,7 +52,6 @@ class ContactForm extends React.Component {
       },
       isDisabled: true
     })
-    //console.log(`submitHandler`)
   }
 
   render() {
@@ -68,23 +59,24 @@ class ContactForm extends React.Component {
     return <form className={styles.contact_form} onSubmit={e => this.submitHandler(e)}>
       <div className={styles.row}>
         <Input
-          placeholder="Your Name*"
-          value={ contactFormParams.name}
-          onChange={value => this.setContactFormParams("name", value)}
-          width="half" minlength="2" maxlength="50" required/>
+          placeholder = "Your Name*"
+          value = { contactFormParams.name }
+          onChange = {value => this.setContactFormParams("name", value)}
+          width = "half" minlength = "1" maxlength = "50" required/>
         <Input
-          placeholder="Your Email*"
-          value={ contactFormParams.email }
-          onChange={value => this.setContactFormParams("email", value)}
-          type="email"
-          width="half" required/>
+          placeholder = "Your Email*"
+          value = { contactFormParams.email }
+          onChange = {value => this.setContactFormParams("email", value)}
+          type = "email"
+          pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+          width="half" required />
       </div>
-      <Textarea placeholder="Message to agent*"
-        value={ contactFormParams.textArea}
-        onChange={value => this.setContactFormParams("textArea", value)} required
-        maxlength="550"
+      <Textarea placeholder = "Message to agent*"
+        value = { contactFormParams.textArea}
+        onChange = {value => this.setContactFormParams("textArea", value)} required
+        maxlength = "550"
       />
-      <Button type="submit" size="l" position="right" roundedLeft roundedRight disabled={this.state.isDisabled}>
+      <Button type = "submit" size = "l" position = "right" roundedLeft roundedRight disabled={this.state.isDisabled}>
         Send message
       </Button>
     </form>
