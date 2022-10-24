@@ -26,7 +26,7 @@ class Pagination extends React.Component {
 
     return (
       <div className={styles.wrapper}>
-        {page > 1 && <Button size="m"
+        {page > 1 && page < pages && <Button size="m"
           roundedLeft
           roundedRight
           onClick={() => this.props.onChange(this.props.page - 1)}

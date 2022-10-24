@@ -49,7 +49,7 @@ class PropertyList extends React.Component {
         onChange={mode => this.toggleViewMode(mode)}
       />
       <div className={this.className()}>
-        {properties && properties.map(property => {
+        {Object.keys(properties).length !== 0 && properties.map(property => {
           const { id, ...props } = property;
           return (
             <NavLink to={`${id}`} key={`${id}-link`}>
