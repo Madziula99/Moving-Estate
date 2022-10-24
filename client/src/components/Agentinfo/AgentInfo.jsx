@@ -4,21 +4,29 @@ import ContactInfoItem from "../ContactInfoItem/ContactInfoItem.jsx";
 import classes from "./AgentInfo.module.css";
 
 class AgentInfo extends React.Component {
-  async postMessage(clientMessage) {
-    const { message } = await fetch("/api/contact", {
+  async postMessage(clientData) {
+    await fetch("/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ message: clientMessage })
+      body: JSON.stringify({ ...clientData })
     }).then(r => r.json());
+  }
 
-    console.log(message);
+  // this func will be called on submit
+  submitHandler() {
+    const clientData = {
+      clientName: "Joe",
+      clientEmail: "joe@email.com",
+      clientMessage: "Hello, call me!",
+      agentEmail: this.props.email
+    };
+
+    this.postMessage(clientData);
   }
 
   render() {
-    this.postMessage("Hello, call me!");
-
     return (
       <section>
         <Subtitle>AGENT INFORMATION</Subtitle>
