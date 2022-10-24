@@ -55,6 +55,7 @@ function optionsObject() {
 async function index(req, res) {
   const options = optionsObject();
   const { page, ...filters } = req.query;
+
   const filteredProperties = filterProperties(filters).map(property => {
     return {
       id: property.id,
