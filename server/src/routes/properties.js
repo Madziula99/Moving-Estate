@@ -82,7 +82,7 @@ async function index(req, res) {
     properties: propertiesPages[pageNum-1],
     options: options,
     pagination: {
-      page: pageNum,
+      page: Number(pageNum),
       pages: propertiesPages.length
     }
   });

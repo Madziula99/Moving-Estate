@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { Page } from "../components/Page/Page.jsx";
-import PropertyList from "../components/PropertyList/PropertyList.jsx";
+import { PropertyList } from "../components/PropertyList/PropertyList.jsx";
 import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx";
 
 class Index extends React.Component {
@@ -60,37 +60,45 @@ class Index extends React.Component {
 
   serializeToUrl(options) {
     let filterOptions = new URLSearchParams(options).toString();
-    filterOptions += filterOptions.length > 0 && "&";
-    filterOptions += `page=${this.state.pagination.page}`
     this.props.history.push({
       search: `?${filterOptions}`,
     });
   }
 
   filterProperties(filters) {
-    this.serializeToUrl(filters);
-
     this.setState({
       selectedOptions: filters
     });
+
+    filters.page = 1;
+    this.serializeToUrl(filters);
+  }
+
+  changePage(page) {
+    const filterParams = this.state.selectedOptions;
+    filterParams.page = page;
+    const urlQueryParams = new URLSearchParams(filterParams)
+    this.serializeToUrl(urlQueryParams);
+    this.getProperties(`?${urlQueryParams}`);
   }
 
   render() {
     const { filteredProperties, selectedOptions, options, pagination } = this.state;
 
-    if (Object.keys(filteredProperties).length === 0 || Object.keys(options).length === 0) return;
+    if (options === undefined || Object.keys(options).length === 0) return;
 
     return <Page title="PROPERTIES" hasSidebar>
       <PropertyFilter
         values={ selectedOptions }
         options={ options }
-        onSubmit={(filters) => this.filterProperties(filters)}
+        onSubmit={ (filters) => this.filterProperties(filters) }
       />
       <PropertyList
-        pages={pagination.pages}
-        page={pagination.page}
+        pages={ pagination.pages }
+        page={ pagination.page }
         defaultView="grid"
         properties={ filteredProperties }
+        changePage={ (page) => this.changePage(page) }
       />
     </Page>
   }
