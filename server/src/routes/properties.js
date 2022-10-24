@@ -55,7 +55,10 @@ function optionsObject() {
 async function index(req, res) {
   const options = optionsObject();
   const { page, ...filters } = req.query;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0d1303c (Fix fetch on Index page and add pagination values to response)
   const filteredProperties = filterProperties(filters).map(property => {
     return {
       id: property.id,
@@ -72,17 +75,34 @@ async function index(req, res) {
     }
   });
 
+<<<<<<< HEAD
   const pageSize = 8;
   let propertiesPages = [];
+=======
+  let propertiesPages = [];
+  const pageSize = 8;
+>>>>>>> 0d1303c (Fix fetch on Index page and add pagination values to response)
 
   for (let i = 0; i < filteredProperties.length; i += pageSize) {
     propertiesPages.push(filteredProperties.slice(i, i + pageSize));
   }
 
+<<<<<<< HEAD
   res.json({
     properties: propertiesPages[Number(page) - 1] || [],
     options: options,
     pages: propertiesPages.length
+=======
+  let pageNum = page || 1;
+
+  res.json({
+    properties: propertiesPages[pageNum-1],
+    options: options,
+    pagination: {
+      page: pageNum,
+      pages: propertiesPages.length
+    }
+>>>>>>> 0d1303c (Fix fetch on Index page and add pagination values to response)
   });
 }
 
