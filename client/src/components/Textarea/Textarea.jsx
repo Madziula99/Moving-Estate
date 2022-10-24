@@ -31,7 +31,9 @@ class Textarea extends React.Component {
       <textarea className={this.className()} rows={5} type="text"
         placeholder={placeholder}
         defaultValue={this.state.textAreaValue}
-        onBlur={this.handleTextareaBlur} />
+        onBlur={this.handleTextareaBlur}
+        maxLength = { this.props.maxlength }
+      />
     )
   }
 }

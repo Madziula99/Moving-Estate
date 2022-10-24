@@ -34,7 +34,7 @@ class ContactForm extends React.Component {
         <Input
           placeholder="Your Name*"
           onChange={value => console.log("Your name", value)}
-          width="half" minlength="2" maxlength="10" required/>
+          width="half" minlength="2" maxlength="50" required/>
         <Input
           placeholder="Your Email*"
           onChange={value => console.log("Your email", value)}
@@ -42,7 +42,9 @@ class ContactForm extends React.Component {
           width="half" required/>
       </div>
       <Textarea placeholder="Message to agent*"
-        onChange={value => console.log("Your message", value)} required/>
+        onChange={value => console.log("Your message", value)} required
+        maxlength="550"
+      />
       <Button type="submit" size="l" position="right" roundedLeft roundedRight disabled={this.state.isDisabled}>
         Send message
       </Button>
