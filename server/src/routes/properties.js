@@ -17,6 +17,8 @@ function filterProperties(filters) {
   const filteredProperties = allProperties.filter(item => filterKeys.every(key => {
     const filterValue = filters[key];
 
+    if (!item.hasOwnProperty(key)) return false;
+
     if (key === "type") return item["type"] === filterValue;
     if (key === "mode") return item["mode"] === filterValue;
     if (key === "bathrooms") return item["bathrooms"] === Number(filterValue);
@@ -53,6 +55,7 @@ function optionsObject() {
 async function index(req, res) {
   const options = optionsObject();
   const { page, ...filters } = req.query;
+
   const filteredProperties = filterProperties(filters).map(property => {
     return {
       id: property.id,
@@ -69,17 +72,16 @@ async function index(req, res) {
     }
   });
 
-  let propertiesPages = [];
   const pageSize = 8;
+  let propertiesPages = [];
+  let pageNum = page || 1;
 
   for (let i = 0; i < filteredProperties.length; i += pageSize) {
     propertiesPages.push(filteredProperties.slice(i, i + pageSize));
   }
 
-  let pageNum = page || 1;
-
   res.json({
-    properties: propertiesPages[pageNum-1],
+    properties: propertiesPages[pageNum-1] || {},
     options: options,
     pagination: {
       page: Number(pageNum),
