@@ -39,7 +39,10 @@ class Index extends React.Component {
   componentDidMount() {
     this.getProperties(this.props.location.search);
     const params = new URLSearchParams(this.props.location.search);
-    const { page, ...selectedOptions } = this.paramsToObject(params);
+    const allOptions = this.paramsToObject(params);
+    if (allOptions.page === undefined) allOptions.page = this.state.pagination.page
+    this.serializeToUrl(allOptions);
+    const { page, ...selectedOptions } = allOptions;
     this.setState({
       selectedOptions: selectedOptions
     });
@@ -51,7 +54,7 @@ class Index extends React.Component {
     const params = new URLSearchParams(this.props.location.search);
     const { page, ...selectedOptions } = this.paramsToObject(params);
 
-    this.getProperties(this.props.location.search)
+    this.getProperties(this.props.location.search);
 
     this.setState({
       selectedOptions: selectedOptions
@@ -85,7 +88,7 @@ class Index extends React.Component {
   render() {
     const { filteredProperties, selectedOptions, options, pagination } = this.state;
 
-    if (options === undefined || Object.keys(options).length === 0) return;
+    if(Object.keys(options).length === 0) return;
 
     return <Page title="PROPERTIES" hasSidebar>
       <PropertyFilter
