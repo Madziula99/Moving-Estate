@@ -58,6 +58,7 @@ class ContactForm extends React.Component {
         email: "",
         textArea: ""
       },
+      isDisabled: true
     })
     //console.log(`submitHandler`)
   }
