@@ -19,6 +19,7 @@ class ContactForm extends React.Component {
 
   componentDidUpdate() {
     if (this.state.isDisabled) return;
+    //TODO: have to update disabled
   }
 
   setContactFormParams= (type, value)=> {
