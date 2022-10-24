@@ -13,9 +13,7 @@ class ContactForm extends React.Component {
         email: "",
         textArea: ""
       },
-      isDisabled: true,
-      confirmDirty: false,
-      loading: false
+      isDisabled: true
     }
   }
 
@@ -25,7 +23,7 @@ class ContactForm extends React.Component {
     this.setState({
       contactFormParams: this.state.contactFormParams.values
     })
-    console.log('contactForm did update')
+    //console.log('contactForm did update')
   }
 
   setContactFormParams= (type, value)=> {
@@ -37,8 +35,8 @@ class ContactForm extends React.Component {
     this.state.contactFormParams.name.length >= 2 && this.state.contactFormParams.email.includes('@') && this.state.contactFormParams.email.includes('.')
       ? this.setState({ isDisabled: false }) : this.setState({ isDisabled: true })
 
-    console.log(`there i am set contactFormParams ${JSON.stringify(this.state.contactFormParams)}`)
-    console.log(this.state.contactFormParams.email.includes('@'), "do 2")
+    //console.log(`there i am set contactFormParams ${JSON.stringify(this.state.contactFormParams)}`)
+    //console.log(this.state.contactFormParams.email.includes('@'), "do 2")
   }
 
   sendFilterParams() {
@@ -46,7 +44,7 @@ class ContactForm extends React.Component {
     for (let key in this.state.contactFormParams) {
       if (this.state.contactFormParams[key]) sendingParams[key] = this.state.contactFormParams[key]
     }
-    console.log(`sended params ${sendingParams}`)
+    //console.log(`sended params ${sendingParams}`)
     return sendingParams;
   }
 
@@ -54,7 +52,7 @@ class ContactForm extends React.Component {
     event.preventDefault();
 
     this.props.onSubmit(this.sendFilterParams());
-    //TODO: put text with Thanks message
+
     this.setState({
       contactFormParams: {
         name: "",
@@ -62,7 +60,7 @@ class ContactForm extends React.Component {
         textArea: ""
       },
     })
-    console.log(`submitHandler`)
+    //console.log(`submitHandler`)
   }
 
   checkDisabledState=()=> {
