@@ -9,40 +9,59 @@ class Index extends React.Component {
     super(props);
 
     this.state = {
-      filteredProperties: this.props.properties,
-      selectedOptions: {}
+      filteredProperties: {},
+      selectedOptions: {},
+      options: {},
+      pagination: {
+        page: 1,
+        pages: null
+      }
     }
   }
 
   paramsToObject(params) {
-  const filters = {}
-  for (const [key, value] of params) {
-    filters[key] = value;
+    const filters = {}
+    for (const [key, value] of params) {
+      filters[key] = value;
+    }
+    return filters;
   }
-  return filters;
-}
+
+  async getProperties(urlQueryParams) {
+    const {properties, options, pagination} = await fetch("/api/properties" + urlQueryParams).then(r => r.json());
+    this.setState({
+      filteredProperties: properties,
+      options: options,
+      pagination: pagination
+    });
+  }
 
   componentDidMount() {
+    this.getProperties(this.props.location.search);
     const params = new URLSearchParams(this.props.location.search);
-    const options = this.paramsToObject(params);
-    this.setState({ selectedOptions: options});
+    const { page, ...selectedOptions } = this.paramsToObject(params);
+    this.setState({
+      selectedOptions: selectedOptions
+    });
   }
 
   async componentDidUpdate(prevprops, _) {
     if (prevprops.location.search === this.props.location.search) return;
 
-    const { properties } = await fetch("/api/properties").then(r => r.json());
     const params = new URLSearchParams(this.props.location.search);
-    const options = this.paramsToObject(params);
+    const { page, ...selectedOptions } = this.paramsToObject(params);
+
+    this.getProperties(this.props.location.search)
 
     this.setState({
-      selectedOptions: options,
-      filteredProperties: properties
+      selectedOptions: selectedOptions
     });
   }
 
   serializeToUrl(options) {
-    const filterOptions = new URLSearchParams(options).toString();
+    let filterOptions = new URLSearchParams(options).toString();
+    filterOptions += filterOptions.length > 0 && "&";
+    filterOptions += `page=${this.state.pagination.page}`
     this.props.history.push({
       search: `?${filterOptions}`,
     });
@@ -57,8 +76,9 @@ class Index extends React.Component {
   }
 
   render() {
-    const { options } = this.props;
-    const { filteredProperties, selectedOptions } = this.state;
+    const { filteredProperties, selectedOptions, options, pagination } = this.state;
+
+    if (Object.keys(filteredProperties).length === 0 || Object.keys(options).length === 0) return;
 
     return <Page title="PROPERTIES" hasSidebar>
       <PropertyFilter
@@ -67,6 +87,8 @@ class Index extends React.Component {
         onSubmit={(filters) => this.filterProperties(filters)}
       />
       <PropertyList
+        pages={pagination.pages}
+        page={pagination.page}
         defaultView="grid"
         properties={ filteredProperties }
       />

@@ -50,18 +50,9 @@ function optionsObject() {
   return options;
 }
 
-function paramsToObject(params) {
-  const filters = {}
-  for (const [key, value] of params) {
-    filters[key] = value;
-  }
-  return filters;
-}
-
 async function index(req, res) {
   const options = optionsObject();
-  const params = new URLSearchParams(req.headers.referer.split("?")[1]);
-  const filters = paramsToObject(params);
+  const { page, ...filters } = req.query;
   const filteredProperties = filterProperties(filters).map(property => {
     return {
       id: property.id,
@@ -77,7 +68,24 @@ async function index(req, res) {
       bathrooms: property.bathrooms
     }
   });
-  res.json({ properties: filteredProperties, options: options });
+
+  let propertiesPages = [];
+  const pageSize = 8;
+
+  for (let i = 0; i < filteredProperties.length; i += pageSize) {
+    propertiesPages.push(filteredProperties.slice(i, i + pageSize));
+  }
+
+  let pageNum = page || 1;
+
+  res.json({
+    properties: propertiesPages[pageNum-1],
+    options: options,
+    pagination: {
+      page: pageNum,
+      pages: propertiesPages.length
+    }
+  });
 }
 
 module.exports = Router()
