@@ -73,6 +73,7 @@ async function index(req, res) {
   });
 
   const pageSize = 8;
+  let pageNum = Number(page);
   let propertiesPages = [];
 
   for (let i = 0; i < filteredProperties.length; i += pageSize) {
