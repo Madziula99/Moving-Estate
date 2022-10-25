@@ -1,7 +1,9 @@
-const { Router } = require('express');
-const status = require('./status.js');
-const things = require('./things.js');
+const { Router } = require("express");
+const status = require("./status.js");
+const things = require("./things.js");
+const properties = require("./properties.js");
 
 module.exports = Router()
-    .use('/things', things)
-    .get('/status', status);
+  .use("/things", things)
+  .use("/properties", properties)
+  .get("/status", status);

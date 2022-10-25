@@ -20,6 +20,7 @@ import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx"
 import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -192,6 +193,8 @@ class ComponentGallery extends React.Component {
           onSubmit={(filters) => console.log(filters)}
         />
 
+        <h2>Spinner</h2>
+        <Spinner />
       </>
     )
   }
