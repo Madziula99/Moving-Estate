@@ -22,7 +22,7 @@ class ContactForm extends React.Component {
     this.checkForm();
   }
 
-  setContactFormParams= (type, value)=> {
+  setContactFormParams = (type, value) => {
     let contactFormParams = {...this.state.contactFormParams, [type]: value};
     this.setState({
       contactFormParams: contactFormParams
@@ -30,7 +30,6 @@ class ContactForm extends React.Component {
   }
 
   checkForm() {
-    console.log(this.state.contactFormParams)
     let isDisabled = false;
     const emailExpression = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (Object.values(this.state.contactFormParams).some(val => val === "") || emailExpression.test(this.state.contactFormParams.email) === false) {
@@ -57,24 +56,20 @@ class ContactForm extends React.Component {
   }
 
   render() {
-    const { contactFormParams } = this.state;
     return <form className={styles.contact_form} onSubmit={e => this.submitHandler(e)}>
       <div className={styles.row}>
         <Input
           placeholder = "Your Name*"
-          value = { contactFormParams.name }
           onChange = {value => this.setContactFormParams("name", value)}
           width = "half" minlength = "1" maxlength = "50" required/>
         <Input
           placeholder = "Your Email*"
-          value = { contactFormParams.email }
           onChange = {value => this.setContactFormParams("email", value)}
           type = "email"
           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
           width="half" required />
       </div>
       <Textarea placeholder = "Message to agent*"
-        value = { contactFormParams.textArea}
         onChange = {value => this.setContactFormParams("textArea", value)} required
         maxlength = "550"
       />
