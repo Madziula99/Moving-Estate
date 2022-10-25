@@ -52,6 +52,8 @@ class ContactForm extends React.Component {
       },
       isDisabled: true
     })
+
+    event.target.reset();
   }
 
   render() {
