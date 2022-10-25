@@ -10,7 +10,7 @@ class AgentInfo extends React.Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ ...clientData })
+      body: JSON.stringify({ clientData })
     }).then(r => r.json());
   }
 
@@ -37,7 +37,7 @@ class AgentInfo extends React.Component {
               <h3 className={classes.name}>{this.props.name}</h3>
               <h4 className={classes.location}>{this.props.location}</h4>
             </div>
-            <ContactInfoItem type="email" isFooter={false} >
+            <ContactInfoItem type="email" isFooter={false}>
               {this.props.email}
             </ContactInfoItem>
             <ContactInfoItem type="phone" isFooter={false}>
