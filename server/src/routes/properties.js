@@ -73,18 +73,18 @@ async function index(req, res) {
   });
 
   const pageSize = 8;
+  let pageNum = Number(page);
   let propertiesPages = [];
-  let pageNum = page || 1;
 
   for (let i = 0; i < filteredProperties.length; i += pageSize) {
     propertiesPages.push(filteredProperties.slice(i, i + pageSize));
   }
 
   res.json({
-    properties: propertiesPages[pageNum-1] || {},
+    properties: propertiesPages[page-1] || {},
     options: options,
     pagination: {
-      page: Number(pageNum),
+      page: pageNum,
       pages: propertiesPages.length
     }
   });

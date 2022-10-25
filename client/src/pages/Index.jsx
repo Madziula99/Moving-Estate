@@ -82,7 +82,7 @@ class Index extends React.Component {
     filterParams.page = page;
     const urlQueryParams = new URLSearchParams(filterParams)
     this.serializeToUrl(urlQueryParams);
-    this.getProperties(`?${urlQueryParams}`);
+    this.getProperties(`?${urlQueryParams.toString()}`);
   }
 
   render() {
