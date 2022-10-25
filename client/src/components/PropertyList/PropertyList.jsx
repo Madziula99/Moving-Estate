@@ -48,19 +48,22 @@ class PropertyList extends React.Component {
         mode={this.state.currentMode}
         onChange={mode => this.toggleViewMode(mode)}
       />
-      <div className={this.className()}>
-        {Object.keys(properties).length !== 0 && properties.map(property => {
-          const { id, ...props } = property;
-          return (
-            <NavLink to={`${id}`} key={`${id}-link`}>
-              <PropertyCard
-                viewMode={this.state.currentMode}
-                {...props}
-              />
-            </NavLink>
-          )
-        })}
-      </div>
+      {this.props.children ?
+        this.props.children :
+        <div className={this.className()}>
+          {Object.keys(properties).length !== 0 && properties.map(property => {
+            const { id, ...props } = property;
+            return (
+              <NavLink to={`${id}`} key={`${id}-link`}>
+                <PropertyCard
+                  viewMode={this.state.currentMode}
+                  {...props}
+                />
+              </NavLink>
+            )
+          })}
+        </div>
+      }
       <Pagination
         pages={pages}
         page={page}
