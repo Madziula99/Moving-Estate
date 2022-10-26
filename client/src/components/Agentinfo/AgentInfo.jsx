@@ -10,7 +10,7 @@ class AgentInfo extends React.Component {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ clientData })
+      body: JSON.stringify({ ...clientData })
     }).then(r => r.json());
   }
 
