@@ -27,7 +27,6 @@ class Index extends React.Component {
   }
 
   componentDidMount() {
-    this.getProperties(this.props.location.search);
     const params = new URLSearchParams(this.props.location.search);
     const selectedOptions = this.paramsToObject(params);
 
