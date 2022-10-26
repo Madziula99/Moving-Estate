@@ -1,9 +1,16 @@
 import React from "react";
 import Subtitle from "../Subtitle/Subtitle.jsx";
 import { ContactForm } from "../ContactForm/ContactForm.jsx";
+import { Spinner } from "../Spinner/Spinner.jsx";
 import classes from "./AgentInfo.module.css";
 
 class AgentInfo extends React.Component {
+  state = {
+    loading: false,
+    success: false,
+    contactForm: true
+  }
+
   render() {
     return (
       <section>
@@ -16,7 +23,9 @@ class AgentInfo extends React.Component {
                 <h4 className={classes.location}>{this.props.location}</h4>
               </div>
           </div>
-          <ContactForm onSubmit={this.props.onSubmit}/>
+          {this.state.contactForm && <ContactForm onSubmit={this.props.onSubmit} />}
+          {this.state.success && <h2>Thank you!</h2>}
+          {this.state.loading && <Spinner/>}
         </div>
       </section>
     );
