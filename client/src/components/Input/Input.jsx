@@ -25,6 +25,7 @@ class Input extends React.Component {
   className() {
     const classes = [styles.input_field];
     this.props.width === "half" && classes.push(styles.input_field_half);
+    this.props.required === true && classes.push(styles.input_field_agent);
     return classes.join(" ");
   }
 
@@ -33,12 +34,16 @@ class Input extends React.Component {
     return (
       (type === undefined ||
       type === "text" ||
+      type === "email" ||
       type === "number" ) && <input
         className = { this.className() }
         type = { type || "text" }
         placeholder = { placeholder }
         defaultValue = { this.state.value }
         onBlur = { this.handleInputBlur }
+        minLength = { this.props.minlength }
+        maxLength = { this.props.maxlength }
+        pattern = { this.props.pattern }
       />
     )
   }

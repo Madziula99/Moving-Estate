@@ -21,6 +21,7 @@ import { Button } from "../components/Button/Button.jsx";
 import { Input } from "../components/Input/Input.jsx";
 import { Dropdown } from "../components/Dropdown/Dropdown.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import { ContactForm } from "../components/ContactForm/ContactForm.jsx";
 
 class ComponentGallery extends React.Component {
   render() {
@@ -195,6 +196,10 @@ class ComponentGallery extends React.Component {
 
         <h2>Spinner</h2>
         <Spinner />
+
+        <h2>Contact form</h2>
+        <ContactForm onSubmit={(text) => console.log(text)} />
+
       </>
     )
   }
