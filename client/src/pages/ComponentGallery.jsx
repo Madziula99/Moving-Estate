@@ -107,9 +107,9 @@ class ComponentGallery extends React.Component {
           name="Adam Conover"
           location="Los Angeles, California"
           email="adam@example.com"
-          phone="+0 123-456-7890"
           photo={agentImg}
-          />
+          onSubmit = {(text) => console.log(text)}
+        />
 
         <h2>&lt;Amenities&gt;</h2>
         <Amenities items={[

@@ -16,7 +16,7 @@ class AgentInfo extends React.Component {
                 <h4 className={classes.location}>{this.props.location}</h4>
               </div>
           </div>
-          <ContactForm />
+          <ContactForm onSubmit={this.props.onSubmit}/>
         </div>
       </section>
     );
