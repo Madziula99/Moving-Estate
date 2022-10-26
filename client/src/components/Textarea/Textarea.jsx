@@ -28,7 +28,7 @@ class Textarea extends React.Component {
   render() {
     const { placeholder } = this.props;
     return (
-      <textarea className={this.className()} rows={5} type="text"
+      <textarea className={this.className()} rows={8} type="text"
         placeholder={placeholder}
         defaultValue={this.state.textAreaValue}
         onBlur={this.handleTextareaBlur}
