@@ -2,11 +2,12 @@
   "name": "moving-estate",
   "private": true,
   "scripts": {
-    "install:client": "cd client && yarn install",
     "install:server": "cd server && yarn install",
-    "install": "yarn install:client && yarn install:server",
-
-    "start:client": "cd client && yarn start",
+    "install": "yarn install:server",
     "start:server": "cd server && yarn start"
+  },
+  "dependencies": {
+    "config": "^3.3.8",
+    "proxy": "^1.0.2"
   }
 }

@@ -1,8 +1,11 @@
 FROM node:18-alpine
 WORKDIR /app
-COPY server/ /app
-COPY client/build/ /app/static
 ENV NODE_ENV=production
-RUN yarn install --production
+COPY . /app
+RUN yarn install:client
+RUN yarn build:client
+RUN yarn copy:built_client
+RUN rm -r ./client
+RUN yarn install:server:prod
 EXPOSE 80
-CMD ["yarn", "start:prod"]
+CMD ["yarn", "start:server:prod"]
