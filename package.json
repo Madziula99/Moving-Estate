@@ -3,8 +3,10 @@
   "private": true,
   "scripts": {
     "install:server": "cd server && yarn install",
+    "install:client": "cd client && yarn install",
     "install": "yarn install:server",
-    "start:server": "cd server && yarn start"
+    "start:server": "cd server && yarn start",
+    "start:client": "cd client && yarn start"
   },
   "dependencies": {
     "config": "^3.3.8",
