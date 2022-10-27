@@ -1,8 +1,11 @@
 .agent_info {
   width: 1000px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin:0 auto 150px;
   border: 1px solid #e4e4e4;
+  background-color: #F1F3F6;
 }
 
 .agent {
@@ -12,6 +15,11 @@
 
 .info {
   width: 220px;
+  background-color: #fff;
+}
+
+.message {
+  width: 780px;
 }
 
 .name_location {
