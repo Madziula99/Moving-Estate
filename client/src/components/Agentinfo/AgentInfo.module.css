@@ -31,20 +31,41 @@
 }
 
 .name,
-.location {
+.location,
+.thank_you,
+.your_message {
   color: #4d4f52;
   font-weight: 400;
+}
+
+.name,
+.location {
   width: 220px;
 }
 
-.name {
+.name,
+.thank_you {
   font-size: 32px;
   line-height: 39px;
 }
 
-.location {
+.location,
+.your_message {
   font-size: 16px;
   font-style: italic;
   line-height: 19px;
   padding: 15px 0;
+}
+
+.your_message,
+.thank_you {
+  margin: 0 auto;
+}
+
+.thank_you {
+  padding-left: 35%;
+}
+
+.your_message{
+  padding-left: 10%;
 }

@@ -6,8 +6,8 @@ import styles from "./AgentInfo.module.css";
 
 class AgentInfo extends React.Component {
   state = {
-    loading: true,
-    success: false,
+    loading: false,
+    success: true,
     contactForm: false
   }
 
@@ -25,7 +25,8 @@ class AgentInfo extends React.Component {
           </div>
           <div className={styles.message}>
             {this.state.contactForm && <ContactForm onSubmit={this.props.onSubmit} />}
-            {this.state.success && <h2>Thank you!</h2>}
+            {this.state.success && <><p className={styles.thank_you}>Thank you!</p>
+            <p className={styles.your_message}>Your message was sent successfully. Our agent will contact you as soon as possible! </p></>}
             {this.state.loading && <Spinner />}
           </div>
         </div>
