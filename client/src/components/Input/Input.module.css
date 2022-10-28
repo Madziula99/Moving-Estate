@@ -6,6 +6,7 @@
   margin: 10px 3%;
   padding: 10px;
   background-color: #F5F5F5;
+  font: inherit;
 }
 
 .input_field_half {
