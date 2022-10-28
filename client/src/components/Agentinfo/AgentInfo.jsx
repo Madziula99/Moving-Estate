@@ -5,10 +5,36 @@ import { Spinner } from "../Spinner/Spinner.jsx";
 import styles from "./AgentInfo.module.css";
 
 class AgentInfo extends React.Component {
-  state = {
-    isLoading: false,
-    isSuccess: true,
-    contactForm: false
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      isSuccess: true,
+      contactForm: false
+    }
+  }
+
+  async postMessage(clientData) {
+    await fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ...clientData })
+    }).then(r => r.json());
+  }
+
+  // this func will be called on submit
+  submitHandler = () => {
+    const { email, propertyId } = this.props;
+    const clientData = {
+      clientName: "Joe",//name
+      clientEmail: "joe@email.com",//email
+      clientMessage: "Hello, call me!",//textArea
+      agentEmail: email,
+      propertyId: propertyId
+    };
+    this.postMessage(clientData);
   }
 
   render() {
@@ -24,7 +50,7 @@ class AgentInfo extends React.Component {
               </div>
           </div>
           <div className={styles.message}>
-            {this.state.contactForm && <ContactForm onSubmit={this.props.onSubmit} />}
+            {this.state.contactForm && <ContactForm onSubmit={this.submitHandler} />}
             {this.state.isSuccess && <><p className={styles.thank_you}>Thank you!</p>
             <p className={styles.your_message}>Your message was sent successfully. Our agent will contact you as soon as possible! </p></>}
             {this.state.isLoading && <Spinner />}
