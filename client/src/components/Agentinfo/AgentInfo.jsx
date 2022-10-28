@@ -21,21 +21,38 @@ class AgentInfo extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ ...clientData })
-    }).then(r => r.json());
+    })
+      .then((r) => {
+        setTimeout(() => {
+          this.setState({
+            isLoading: true,
+            contactForm: false
+          })
+          return r;
+        }, 2000)
+      }
+    )
+      .then(r => {
+      r.json();
+      this.setState({
+        isLoading: false,
+        isSuccess: true
+      })
+    });
+
   }
 
-  submitHandler = () => {
+  submitHandler = (messageToAgent) => {
     const { email, propertyId } = this.props;
     const clientData = {
-      clientName: "Joe",//name
-      clientEmail: "joe@email.com",//email
-      clientMessage: "Hello, call me!",//textArea
+      clientName: messageToAgent.name,
+      clientEmail: messageToAgent.email,
+      clientMessage: messageToAgent.textArea,
       agentEmail: email,
-      propertyId: propertyId
+      propertyId: propertyId,
     };
     this.postMessage(clientData);
   }
-
 
   render() {
     return (
@@ -50,10 +67,10 @@ class AgentInfo extends React.Component {
               </div>
           </div>
           <div className={styles.message}>
-            {this.state.contactForm && <ContactForm onSubmit={this.submitHandler} />}
+            {this.state.contactForm && <ContactForm onSubmit={(messageToAgent) => this.submitHandler(messageToAgent)} />}
+            {this.state.isLoading && <Spinner />}
             {this.state.isSuccess && <><p className={styles.thank_you}>Thank you!</p>
             <p className={styles.your_message}>Your message was sent successfully. Our agent will contact you as soon as possible! </p></>}
-            {this.state.isLoading && <Spinner />}
           </div>
         </div>
       </section>
