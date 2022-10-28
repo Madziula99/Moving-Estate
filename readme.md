@@ -11,6 +11,5 @@
 * In separate terminal run `yarn start:client` to start Front-nd in dev mode
 
 ## Docker usage
-* Run `docker build .`
-* Run `docker images` to see the list of Docker images and copy id of last created image
-* Run `docker run -it -p 80:80 copied_id`. -it is an optional param for joining into interactive console after running the container
+* Run `docker build -t server .`
+* Run `docker run -it -p 80:80 server`. -it is an optional param for joining into interactive console after running the container
