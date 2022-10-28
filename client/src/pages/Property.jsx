@@ -55,7 +55,7 @@ class Property extends Component {
       {property.floor_plans && <FloorPlans plans={property.floor_plans} />}
       <Amenities items={property.amenities} />
       <Features items={property.features} />
-      <AgentInfo {...property.agent} propertyId={property.id} />
+      <AgentInfo {...property.agent} />
     </Page>
   }
 }
