@@ -15,24 +15,17 @@ class AgentInfo extends React.Component {
   }
 
   async postMessage(clientData) {
+    this.setState({
+        isLoading: true,
+        contactForm: false
+      });
     await fetch("/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ ...clientData })
-    })
-      .then((r) => {
-        setTimeout(() => {
-          this.setState({
-            isLoading: true,
-            contactForm: false
-          })
-          return r;
-        }, 2000)
-      }
-    )
-      .then(r => {
+    }).then(r => {
       r.json();
       this.setState({
         isLoading: false,
