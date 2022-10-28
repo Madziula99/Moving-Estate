@@ -4,9 +4,14 @@
   "scripts": {
     "install:client": "cd client && yarn install",
     "install:server": "cd server && yarn install",
+    "install:server:prod": "cd ./server && yarn install --production",
     "install": "yarn install:client && yarn install:server",
 
+    "build:client": "cd client && yarn build",
+    "copy:built_client": "cp -r ./client/build/* ./server/public",
+
     "start:client": "cd client && yarn start",
-    "start:server": "cd server && yarn start"
+    "start:server": "cd server && yarn start",
+    "start:server:prod": "cd server && yarn start:prod"
   }
 }
