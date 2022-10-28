@@ -16,11 +16,14 @@ class AgentInfo extends React.Component {
 
   // this func will be called on submit
   submitHandler() {
+    const { email, propertyId } = this.props;
+
     const clientData = {
       clientName: "Joe",
       clientEmail: "joe@email.com",
       clientMessage: "Hello, call me!",
-      agentEmail: this.props.email
+      agentEmail: email,
+      propertyId: propertyId
     };
 
     this.postMessage(clientData);
