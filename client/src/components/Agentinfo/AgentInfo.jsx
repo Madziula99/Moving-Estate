@@ -9,8 +9,8 @@ class AgentInfo extends React.Component {
     super(props);
     this.state = {
       isLoading: false,
-      isSuccess: true,
-      contactForm: false
+      isSuccess: false,
+      contactForm: true
     }
   }
 
@@ -24,7 +24,6 @@ class AgentInfo extends React.Component {
     }).then(r => r.json());
   }
 
-  // this func will be called on submit
   submitHandler = () => {
     const { email, propertyId } = this.props;
     const clientData = {
@@ -36,6 +35,7 @@ class AgentInfo extends React.Component {
     };
     this.postMessage(clientData);
   }
+
 
   render() {
     return (
