@@ -6,7 +6,7 @@ import Description from "../components/Description/Description.jsx";
 import FloorPlans from "../components/FloorPlans/FloorPlans";
 import Amenities from "../components/Amenities/Amenities.jsx";
 import Features from "../components/Features/Features.jsx";
-import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
+import { AgentInfo } from "../components/Agentinfo/AgentInfo.jsx";
 import { Page } from "../components/Page/Page.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import styles from "./Property.module.css";

@@ -35,4 +35,4 @@ class AgentInfo extends React.Component {
   }
 }
 
-export default AgentInfo;
+export { AgentInfo };

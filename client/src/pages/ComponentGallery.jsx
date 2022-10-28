@@ -9,7 +9,7 @@ import { Pagination } from "../components/Pagination/Pagination.jsx";
 import Features from "../components/Features/Features.jsx";
 import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
 import Title from "../components/Title/Title.jsx";
-import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
+import { AgentInfo } from "../components/Agentinfo/AgentInfo.jsx";
 import FloorPlans from "../components/FloorPlans/FloorPlans.jsx";
 import agentImg from "../components/Agentinfo/assets/img.png";
 import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
