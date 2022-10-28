@@ -43,8 +43,10 @@
 }
 
 .right_button {
-  margin-left: 81%;
+  margin-right: 3%;
   transition: all ease-in .2s;
+  text-transform: uppercase;
+  font: inherit;
 }
 
 .right_button:active {
@@ -54,5 +56,5 @@
 
 .right_button:disabled {
   background-color: #df434a;
-  color:#000;
+  color:#fff;
 }

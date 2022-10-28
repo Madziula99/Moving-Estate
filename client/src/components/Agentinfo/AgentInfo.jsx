@@ -5,26 +5,31 @@ import { Spinner } from "../Spinner/Spinner.jsx";
 import styles from "./AgentInfo.module.css";
 
 class AgentInfo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isLoading: false,
-      isSuccess: false,
-      contactForm: true
-    }
-  }
+  state = {
+    isLoading: false,
+    isSuccessful: false,
+    isContactForm: true
+  };
 
   async postMessage(clientData) {
     this.setState({
+<<<<<<< HEAD
         isLoading: true,
         contactForm: false
       });
+=======
+      isLoading: true,
+      isContactForm: false
+    });
+
+>>>>>>> e74d05e3fb36dcd840e3ded9b999827f103543c6
     await fetch("/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({ ...clientData })
+<<<<<<< HEAD
     }).then(r => {
       r.json();
       this.setState({
@@ -32,7 +37,17 @@ class AgentInfo extends React.Component {
         isSuccess: true
       })
     });
+=======
+    })
+      .then(r => {
+        r.json();
+>>>>>>> e74d05e3fb36dcd840e3ded9b999827f103543c6
 
+        this.setState({
+          isLoading: false,
+          isSuccessful: true,
+        });
+      })
   }
 
   submitHandler = (messageToAgent) => {
@@ -44,10 +59,13 @@ class AgentInfo extends React.Component {
       agentEmail: email,
       propertyId: propertyId,
     };
+
     this.postMessage(clientData);
   }
 
   render() {
+    const { isLoading, isSuccessful, isContactForm} = this.state;
+
     return (
       <section>
         <Subtitle>AGENT INFORMATION</Subtitle>
@@ -60,10 +78,13 @@ class AgentInfo extends React.Component {
               </div>
           </div>
           <div className={styles.message}>
-            {this.state.contactForm && <ContactForm onSubmit={(messageToAgent) => this.submitHandler(messageToAgent)} />}
-            {this.state.isLoading && <Spinner />}
-            {this.state.isSuccess && <><p className={styles.thank_you}>Thank you!</p>
-            <p className={styles.your_message}>Your message was sent successfully. Our agent will contact you as soon as possible! </p></>}
+            {isContactForm && <ContactForm onSubmit={(messageToAgent) => this.submitHandler(messageToAgent)} />}
+            {isLoading && <Spinner />}
+            {isSuccessful &&
+            <>
+              <p className={styles.thank_you}>Thank you!</p>
+              <p className={styles.your_message}>Your message was sent successfully. Our agent will contact you as soon as possible!</p>
+            </>}
           </div>
         </div>
       </section>
