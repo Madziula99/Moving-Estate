@@ -9,7 +9,7 @@ import { Pagination } from "../components/Pagination/Pagination.jsx";
 import Features from "../components/Features/Features.jsx";
 import ViewModeToggle from "../components/ViewModeToggle/ViewModeToggle.jsx";
 import Title from "../components/Title/Title.jsx";
-import AgentInfo from "../components/Agentinfo/AgentInfo.jsx";
+import { AgentInfo } from "../components/Agentinfo/AgentInfo.jsx";
 import FloorPlans from "../components/FloorPlans/FloorPlans.jsx";
 import agentImg from "../components/Agentinfo/assets/img.png";
 import PropertyCard from "../components/PropertyCard/PropertyCard.jsx";
@@ -107,9 +107,9 @@ class ComponentGallery extends React.Component {
           name="Adam Conover"
           location="Los Angeles, California"
           email="adam@example.com"
-          phone="+0 123-456-7890"
           photo={agentImg}
-          />
+          onSubmit = {(text) => console.log(text)}
+        />
 
         <h2>&lt;Amenities&gt;</h2>
         <Amenities items={[
