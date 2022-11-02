@@ -1,9 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { SignIn } from "../components/SignIn/SignIn";
-import './IndexAgent.css';
+import { SignIn } from "../components/SignIn/SignIn.jsx";
 
-class IndexAgent extends React.Component {
+class AgentIndex extends React.Component {
   render() {
     return <>
       <h3>There will all Agent Sign-in Page</h3>
@@ -12,4 +11,4 @@ class IndexAgent extends React.Component {
   }
 }
 
-export default withRouter(IndexAgent);
+export default withRouter(AgentIndex);
