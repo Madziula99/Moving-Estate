@@ -4,9 +4,11 @@
   "scripts": {
     "install:client": "cd client && yarn install",
     "install:server": "cd server && yarn install",
-    "install": "yarn install:client && yarn install:server",
+    "install:admin": "cd admin && yarn install",
+    "install": "yarn install:client && yarn install:server && yarn install:admin",
 
     "start:client": "cd client && yarn start",
-    "start:server": "cd server && yarn start"
+    "start:server": "cd server && yarn start",
+    "start:admin": "cd admin && yarn start"
   }
 }
