@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AgentIndex from './pages/AgentIndex.jsx';
+import AdminIndex from './pages/AdminIndex.jsx';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
       <BrowserRouter>
         <Switch>
           <Route path="/agent">
-            <AgentIndex />
+            <AdminIndex />
           </Route>
           <Route path="/">
             <h3>Go to path="/agent"</h3>
