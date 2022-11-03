@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { AdminPropertiesList } from "../components/AdminPropertiesList/AdminPropertiesList.jsx"
+import { AdminPropertyTable } from "../components/AdminPropertyTable/AdminPropertyTable.jsx";
 
 class AdminsProperties extends React.Component {
   state = {
@@ -19,12 +19,11 @@ class AdminsProperties extends React.Component {
     const { isCookies, isLoading } = this.state;
 
     return <section>
-      {isCookies && <AdminPropertiesList
-        defaultView="grid"
+      {isCookies && <AdminPropertyTable
         //properties={filteredByAdminProperties}
       >
         {isLoading && <Spinner />}
-      </AdminPropertiesList>}
+      </AdminPropertyTable>}
       {!isCookies && <Redirect to="/admin" />}
     </section>
   }
