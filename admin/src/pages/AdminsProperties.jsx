@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom"
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class AdminsProperties extends React.Component {
@@ -16,9 +17,10 @@ class AdminsProperties extends React.Component {
   render() {
     const { isCookies } = this.state;
 
-    if (isCookies) return <div>AdminsProperties</div>
-
-    return <h2><Spinner /></h2>
+    return <section>
+      {isCookies && <h2>Show list</h2>}
+      {!isCookies && <Redirect to="/admin" />}
+    </section>
   }
 }
 
