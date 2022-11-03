@@ -1,12 +1,13 @@
 import React from "react";
-import { Redirect } from "react-router-dom"
+import { Redirect } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import { AdminPropertiesList } from "../components/AdminPropertiesList/AdminPropertiesList.jsx"
 
 class AdminsProperties extends React.Component {
   state = {
     isCookies: true,
+    isLoading: false,
   };
-
 
   /*componentDidMount() {
     const id = this.props.match.params.property_id;
@@ -15,10 +16,15 @@ class AdminsProperties extends React.Component {
   }*/
 
   render() {
-    const { isCookies } = this.state;
+    const { isCookies, isLoading } = this.state;
 
     return <section>
-      {isCookies && <h2>Show list</h2>}
+      {isCookies && <AdminPropertiesList
+        defaultView="grid"
+        //properties={filteredByAdminProperties}
+      >
+        {isLoading && <Spinner />}
+      </AdminPropertiesList>}
       {!isCookies && <Redirect to="/admin" />}
     </section>
   }
