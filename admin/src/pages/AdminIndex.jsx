@@ -5,22 +5,26 @@ import { SignIn } from "../components/SignIn/SignIn.jsx";
 class AdminIndex extends React.Component {
   constructor(props) {
     super(props);
+
     this.checkAuth = this.checkAuth.bind(this);
+
     this.state = {
       isLoggedIn: false
-    }
+    };
   }
 
   checkAuth() {
     const baseURL = "/api/auth/login/";
-    
+
     fetch(baseURL + "protected").then(async res => {
       if (res.status === 401) {
-        this.setState({isLoggedIn: false})
+        this.setState({isLoggedIn: false});
       } else {
-        this.setState({isLoggedIn: true})
+        this.setState({isLoggedIn: true});
+
         const {user} = await res.json();
-        document.cookie = `user_email=${user._json.email}`
+
+        document.cookie = `user_email=${user._json.email}`;
       }
     })
   }
@@ -28,7 +32,7 @@ class AdminIndex extends React.Component {
   componentDidMount() {
     this.checkAuth();
   }
-  
+
   render() {
     if (this.state.isLoggedIn) return <Redirect to="/properties" />
     return <SignIn google_client_id={this.props.google_client_id} />
