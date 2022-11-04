@@ -25,6 +25,8 @@ class AdminsProperties extends React.Component {
       filteredByAdminProperties: rows,
       isCookies: true,
       isLoading: false,
+      agentEmail: "adam@example.com",
+      agentName: "Jon Smith"
     }
   }
 
@@ -35,10 +37,10 @@ class AdminsProperties extends React.Component {
   }*/
 
   render() {
-    const { filteredByAdminProperties, isCookies, isLoading } = this.state;
+    const { filteredByAdminProperties, isCookies, isLoading, agentName } = this.state;
 
     return <section>
-      {isCookies && <AdminPropertyTable agentName = "Jon Lennon" agentEmail = "adam@example.com"
+      {isCookies && <AdminPropertyTable agentName = { agentName }
         adminProperties={filteredByAdminProperties}
       >
         {isLoading && <Spinner />}
