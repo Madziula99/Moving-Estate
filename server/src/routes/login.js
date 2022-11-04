@@ -29,7 +29,7 @@ passport.deserializeUser(function(user, done) {
 
 module.exports = Router()
   .get("/google",
-    passport.authenticate("google", { scope : ["profile", "email"] }))
+    passport.authenticate("google", { scope: ["profile", "email"], prompt: "select_account" }))
   .get("/google/callback",
     passport.authenticate("google", {
       failureRedirect: "/api/login/error",
