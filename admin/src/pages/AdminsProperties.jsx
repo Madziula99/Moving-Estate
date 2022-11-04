@@ -19,7 +19,7 @@ class AdminsProperties extends React.Component {
     const { isCookies, isLoading } = this.state;
 
     return <section>
-      {isCookies && <AdminPropertyTable
+      {isCookies && <AdminPropertyTable agentName="Jon Lennon"
         //properties={filteredByAdminProperties}
       >
         {isLoading && <Spinner />}

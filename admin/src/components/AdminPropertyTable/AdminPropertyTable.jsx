@@ -1,15 +1,17 @@
 import React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 
+const onPageRows = 25;
+
 const columns = [
-  { field: 'id', headerName: 'ID', width: 60 },
-  { field: 'location', headerName: 'Location', width: 90 },
-  { field: 'type', headerName: 'Type', width: 90 },
-  { field: 'mode', headerName: 'Mode', width: 90 },
-  { field: 'price', headerName: 'Price', type: 'number', width: 90 },
-  { field: 'area', headerName: 'Area', type: 'number', width: 90 },
-  { field: 'bedrooms', headerName: 'Bedrooms', type: 'number', width: 90 },
-  { field: 'bathrooms', headerName: 'Bathrooms', type: 'number', width: 90 },
+  { field: 'id', headerName: 'ID', width: 80 },
+  { field: 'location', headerName: 'Location', width: 100 },
+  { field: 'type', headerName: 'Type', width: 150 },
+  { field: 'mode', headerName: 'Mode', width: 100 },
+  { field: 'price', headerName: 'Price', type: 'number', width: 100 },
+  { field: 'area', headerName: 'Area', type: 'number', width: 100 },
+  { field: 'bedrooms', headerName: 'Bedrooms', type: 'number', width: 100 },
+  { field: 'bathrooms', headerName: 'Bathrooms', type: 'number', width: 100 },
 ];
 
 //https://mui.com/material-ui/react-table/#data-table
@@ -22,13 +24,13 @@ const rows = [
 class AdminPropertyTable extends React.Component {
   render() {
     return (<section>
-      <h2>{this.props.agentName}, you are welcome!</h2>
-        <div style={{ height: 400, width: '80%', marginLeft: "10%" }}>
+      <h2 style={{ marginLeft: "15%" }}>{this.props.agentName}, you are welcome!</h2>
+        <div style={{ height: 1000, width: '80%', marginLeft: "10%" }}>
         <DataGrid
           rows={rows}
           columns={columns}
-          pageSize={5}
-          rowsPerPageOptions={[5]}
+          pageSize={onPageRows}
+          rowsPerPageOptions={[onPageRows]}
           checkboxSelection
         />
         </div>
