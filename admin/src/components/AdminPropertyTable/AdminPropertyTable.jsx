@@ -6,7 +6,6 @@ const onPageRows = 10;
 const photoHeight = 130;
 const rowHeight = 150;
 
-
 const columns = [
   { field: "picture", headerName: "Picture", width: 150,
     renderCell: (params) => {
@@ -18,7 +17,7 @@ const columns = [
       />
     }
     },
-  { field: 'id', headerName: 'ID', width: 80 },
+  { field: 'id', headerName: 'ID', width: 100 },
   { field: 'location', headerName: 'Location', width: 100 },
   { field: 'type', headerName: 'Type', width: 150 },
   { field: 'mode', headerName: 'Mode', width: 100 },
@@ -28,20 +27,7 @@ const columns = [
   { field: 'bathrooms', headerName: 'Bathrooms', type: 'number', width: 100 },
 ];
 
-//https://mui.com/material-ui/react-table/#data-table
-const rows = [
-  { picture: {
-    avatar: "https://assets.materialup.com/uploads/bebad102-7f40-4941-99cd-54366113003e/avatar-08.png"
-  },
-    id: "A1", location: 'Snow', type: 'Jon', mode: "sale", price: 200, area: 150, bedrooms: 3, bathrooms: 0
-  },
-  { picture: {
-    avatar: "https://preview.redd.it/s9edy9i5mbp41.jpg?auto=webp&s=232205a320f206393fbd55fe283564a6ccd95253"
-  }, id: "B2", location: 'new', type: 'york', mode: "rent", price: 50,  area: 50, bedrooms:50, bathrooms:5},
-  { picture: {
-    avatar: ""
-  }, id: "C3", location: 'minsk', type: 'old', mode: "clean", price: 1000,  area: 1000, bedrooms:1000, bathrooms:10},
-];
+
 
 class AdminPropertyTable extends React.Component {
 
@@ -52,7 +38,7 @@ class AdminPropertyTable extends React.Component {
         <DataGrid
           rowHeight={rowHeight}
           autoHeight
-          rows={rows}
+          rows={this.props.adminProperties}
           columns={columns}
           pageSize={onPageRows}
           rowsPerPageOptions={[onPageRows]}
