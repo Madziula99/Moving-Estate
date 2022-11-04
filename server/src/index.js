@@ -7,6 +7,7 @@ const path = require("path");
 express()
   .use(express.json())
   .use(express.static("public"))
+  .use(express.static("public/admin"))
   .use("/api", router)
   .use((_, res) => {
     res.status(404).sendFile(path.join(__dirname, "../public", "index.html"));
