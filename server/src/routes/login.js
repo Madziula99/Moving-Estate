@@ -1,7 +1,6 @@
 const passport = require("passport");
 const GoogleStrategy = require("passport-google-oauth20");
 const { Router } = require("express");
-const session = require("express-session");
 
 const GOOGLE_CLIENT_ID = "778039279925-l3o03a49ocrdm5lsl80ue5c5hhgs2bo6.apps.googleusercontent.com";
 const GOOGLE_CLIENT_SECRET = "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";
@@ -29,13 +28,6 @@ passport.deserializeUser(function(user, done) {
 });
 
 module.exports = Router()
-  .use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: "bla bla bla"
-  }))
-  .use(passport.initialize())
-  .use(passport.session())
   .get("/google",
     passport.authenticate("google", { scope : ["profile", "email"] }))
   .get("/google/callback",
