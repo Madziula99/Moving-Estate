@@ -33,6 +33,7 @@ class AdminsProperties extends React.Component {
     }
   }
 
+  /*TODO: have to filter all on server site and delete data.json there
   async getAgentsProperties() {
     this.setState({ isLoading: true });
 
@@ -46,7 +47,7 @@ class AdminsProperties extends React.Component {
           isLoading: false
         })
       });
-  }
+  }*/
 
   render() {
     const { filteredByAdminProperties, isCookies, isLoading, agentName } = this.state;
