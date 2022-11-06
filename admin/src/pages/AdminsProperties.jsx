@@ -2,47 +2,58 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { AdminPropertyTable } from "../components/AdminPropertyTable/AdminPropertyTable.jsx";
+import Data from "../data.json"
 
-const rows = [
-  { picture: {
-    avatar: "https://assets.materialup.com/uploads/bebad102-7f40-4941-99cd-54366113003e/avatar-08.png"
-  },
-    id: "A1", location: 'Snow', type: 'Jon', mode: "sale", price: 200, area: 150, bedrooms: 3, bathrooms: 0
-  },
-  { picture: {
-    avatar: "https://preview.redd.it/s9edy9i5mbp41.jpg?auto=webp&s=232205a320f206393fbd55fe283564a6ccd95253"
-  }, id: "B2", location: 'new', type: 'york', mode: "rent", price: 50,  area: 50, bedrooms:50, bathrooms:5},
-  { picture: {
-    avatar: ""
-  }, id: "C3", location: 'minsk', type: 'old', mode: "clean", price: 1000,  area: 1000, bedrooms:1000, bathrooms:10},
-];
+const emailToFilter = "adam@example.com"
+const filterByEmailRows = Data.filter(e => e.agent.email === emailToFilter)
+const filteredProperties =filterByEmailRows.map(property => {
+  return {
+      picture: { avatar: property.images[0] },
+      id: property.id,
+      location: property.location,
+      type: property.type,
+      mode: property.mode,
+      price: property.price,
+      area: property.area,
+      bedrooms: property.bedrooms,
+      bathrooms: property.bathrooms
+    }
+  });
 
 class AdminsProperties extends React.Component {
    constructor(props) {
     super(props);
 
     this.state = {
-      filteredByAdminProperties: rows,
+      filteredByAdminProperties: filteredProperties,
+      agentEmail: emailToFilter,
+      agentName: filterByEmailRows[0].agent.name,
       isCookies: true,
       isLoading: false,
-      agentEmail: "adam@example.com",
-      agentName: "Jon Smith"
     }
   }
 
-  /*componentDidMount() {
-    const id = this.props.match.params.property_id;
+  async getAgentsProperties() {
+    this.setState({ isLoading: true });
 
-    this.fetchProperty(id);
-  }*/
+    const urlQueryParams = new URLSearchParams(this.state.selectedOptions).toString();
+
+    await fetch("/admin/properties?" + urlQueryParams)
+      .then(r => r.json())
+      .then(({ properties }) => {
+        this.setState({
+          filteredByAdminProperties: properties,
+          isLoading: false
+        })
+      });
+  }
 
   render() {
     const { filteredByAdminProperties, isCookies, isLoading, agentName } = this.state;
 
     return <section>
       {isCookies && <AdminPropertyTable agentName = { agentName }
-        adminProperties={filteredByAdminProperties}
-      >
+        adminProperties={filteredByAdminProperties}>
         {isLoading && <Spinner />}
       </AdminPropertyTable>}
       {!isCookies && <Redirect to="/admin" />}

@@ -2,12 +2,13 @@ import React from "react";
 import { DataGrid } from '@mui/x-data-grid';
 import Avatar from '@mui/material/Avatar';
 
-const onPageRows = 10;
+const onPageRows = 6;
 const photoHeight = 130;
 const rowHeight = 150;
+const widthInTable = 150;
 
 const columns = [
-  { field: "picture", headerName: "Picture", width: 150,
+  { field: "picture", headerName: "Picture", width: 250,
     renderCell: (params) => {
       return <Avatar
         alt="first image"
@@ -17,14 +18,14 @@ const columns = [
       />
     }
     },
-  { field: 'id', headerName: 'ID', width: 100 },
-  { field: 'location', headerName: 'Location', width: 100 },
-  { field: 'type', headerName: 'Type', width: 150 },
-  { field: 'mode', headerName: 'Mode', width: 100 },
-  { field: 'price', headerName: 'Price', type: 'number', width: 100 },
-  { field: 'area', headerName: 'Area', type: 'number', width: 100 },
-  { field: 'bedrooms', headerName: 'Bedrooms', type: 'number', width: 100 },
-  { field: 'bathrooms', headerName: 'Bathrooms', type: 'number', width: 100 },
+  { field: 'id', headerName: 'ID', width: widthInTable },
+  { field: 'location', headerName: 'Location', width: widthInTable },
+  { field: 'type', headerName: 'Type', width: widthInTable },
+  { field: 'mode', headerName: 'Mode', width: widthInTable },
+  { field: 'price', headerName: 'Price', type: 'number', width: widthInTable },
+  { field: 'area', headerName: 'Area', type: 'number', width: widthInTable },
+  { field: 'bedrooms', headerName: 'Bedrooms', type: 'number', width: widthInTable },
+  { field: 'bathrooms', headerName: 'Bathrooms', type: 'number', width: widthInTable },
 ];
 
 
@@ -34,7 +35,7 @@ class AdminPropertyTable extends React.Component {
   render() {
     return (<section>
       <h2 style={{ marginLeft: "15%" }}>{this.props.agentName}, you are welcome!</h2>
-        <div style={{ height: 1000, width: '90%', marginLeft: "5%" }}>
+        <div style={{ height: 1000, width: '70%', marginLeft: "15%" }}>
         <DataGrid
           rowHeight={rowHeight}
           autoHeight
