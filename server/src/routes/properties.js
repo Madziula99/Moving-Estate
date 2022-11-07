@@ -76,10 +76,10 @@ async function index(req, res) {
     }
   });
 
-  console.log(filteredProperties)
   if ( filters.email ) {
     res.json({
-      properties: filteredProperties || []
+      properties: filteredProperties || [],
+      agentName: properties.find(property => property.agent.email === filters.email).agent.name
     });
   } else {
     const pageSize = 8;
