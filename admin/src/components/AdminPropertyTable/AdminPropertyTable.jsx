@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import { DataGrid } from '@mui/x-data-grid';
 import Avatar from '@mui/material/Avatar';
 
@@ -28,9 +29,12 @@ const columns = [
   { field: 'bathrooms', headerName: 'Bathrooms', type: 'number', width: widthInTable },
 ];
 
-
-
 class AdminPropertyTable extends React.Component {
+
+  toMessage = (row) => {
+    console.log(row.id, "was clicked");
+    <Redirect to="/admin/property/messages" />
+  }
 
   render() {
     return (<section>
@@ -43,7 +47,10 @@ class AdminPropertyTable extends React.Component {
           columns={columns}
           pageSize={onPageRows}
           rowsPerPageOptions={[onPageRows]}
-          onRowClick = {e=>console.log(e.id, "was clicked")}
+          onRowClick={(row) => {
+            console.log(row.id, "was clicked");
+            this.props.history.push('/admin/property/messages', row.id)
+          }}
         />
         </div>
       </section>

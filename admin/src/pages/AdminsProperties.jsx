@@ -16,7 +16,6 @@ class AdminsProperties extends React.Component {
     }
   }
 
-  //TODO: have to filter all on server site and delete data.json there
   async getAgentsProperties() {
     this.setState({ isLoading: true });
 
@@ -41,10 +40,9 @@ class AdminsProperties extends React.Component {
     const { filteredByAdminProperties, isCookies, isLoading, agentName } = this.state;
 
     return <section>
-      {isCookies && <AdminPropertyTable agentName = { agentName }
-        adminProperties={filteredByAdminProperties}>
-        {isLoading && <Spinner />}
-      </AdminPropertyTable>}
+      {isLoading && <Spinner />}
+      {isCookies && !isLoading && <AdminPropertyTable agentName={agentName}
+        adminProperties={filteredByAdminProperties} />}
       {!isCookies && <Redirect to="/admin" />}
     </section>
   }
