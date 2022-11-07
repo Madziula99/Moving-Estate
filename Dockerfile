@@ -1,6 +1,6 @@
 FROM node:18-alpine
-WORKDIR /app/client
 ENV NODE_ENV=production
+WORKDIR /app/client
 COPY client .
 RUN yarn install
 RUN yarn build
