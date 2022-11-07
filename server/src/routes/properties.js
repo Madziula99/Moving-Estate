@@ -71,22 +71,30 @@ async function index(req, res) {
       price: property.price,
       area: property.area,
       bedrooms: property.bedrooms,
-      bathrooms: property.bathrooms
+      bathrooms: property.bathrooms,
+      picture: { avatar: property.images[0] } //TODO: try put from image
     }
   });
 
-  const pageSize = 8;
-  let propertiesPages = [];
+  console.log(filteredProperties)
+  if ( filters.email ) {
+    res.json({
+      properties: filteredProperties || []
+    });
+  } else {
+    const pageSize = 8;
+    let propertiesPages = [];
 
-  for (let i = 0; i < filteredProperties.length; i += pageSize) {
-    propertiesPages.push(filteredProperties.slice(i, i + pageSize));
+    for (let i = 0; i < filteredProperties.length; i += pageSize) {
+      propertiesPages.push(filteredProperties.slice(i, i + pageSize));
+    }
+
+    res.json({
+      properties: propertiesPages[Number(page) - 1] || [],
+      options: options,
+      pages: propertiesPages.length
+    });
   }
-
-  res.json({
-    properties: propertiesPages[Number(page) - 1] || [],
-    options: options,
-    pages: propertiesPages.length
-  });
 }
 
 async function retrive(req, res) {
