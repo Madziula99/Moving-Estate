@@ -71,8 +71,7 @@ async function index(req, res) {
       price: property.price,
       area: property.area,
       bedrooms: property.bedrooms,
-      bathrooms: property.bathrooms,
-      picture: { avatar: property.images[0] } //TODO: try put from image
+      bathrooms: property.bathrooms
     }
   });
 

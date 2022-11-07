@@ -19,7 +19,7 @@ class AdminsProperties extends React.Component {
   async getAgentsProperties() {
     this.setState({ isLoading: true });
 
-    const urlQueryParams = new URLSearchParams({ email: this.state.agentEmail }).toString().replace(".", "%2E");
+    const urlQueryParams = new URLSearchParams({ email: this.state.agentEmail }).toString();
 
     await fetch("/api/properties?" + urlQueryParams)
       .then(r => r.json())
