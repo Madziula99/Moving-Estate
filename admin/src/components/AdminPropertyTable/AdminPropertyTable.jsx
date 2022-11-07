@@ -43,6 +43,7 @@ class AdminPropertyTable extends React.Component {
           columns={columns}
           pageSize={onPageRows}
           rowsPerPageOptions={[onPageRows]}
+          onRowClick = {e=>console.log(e.id, "was clicked")}
         />
         </div>
       </section>
