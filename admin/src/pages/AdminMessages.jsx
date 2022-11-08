@@ -4,7 +4,8 @@ import { AdminPropertyMessages } from "../components/AdminPropertyMessages/Admin
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import Data from "../dataMessages.json"
 
-//TODO: create endpoint and put take data from server
+//TODO: create endpoint and take data from server
+//TODO: went to the database and put there a process with filtering
 const chooseProperty = "A001";
 const filterByIdRows = Data.filter(e => e.id === chooseProperty);
 const filteredMessages =filterByIdRows.map(message => {
