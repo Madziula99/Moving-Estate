@@ -10,8 +10,8 @@ RUN yarn install
 RUN yarn build
 WORKDIR /app
 COPY server .
-RUN cp -r ./client/build/* ./public
-RUN mkdir ./public/admin && cp -r ./admin/build/* ./public/admin
+RUN mv ./client/build/* ./public
+RUN mkdir ./public/admin && mv ./admin/build/* ./public/admin
 RUN rm -r ./client
 RUN rm -r ./admin
 RUN yarn install --production
