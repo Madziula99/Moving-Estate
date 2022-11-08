@@ -11,11 +11,17 @@ async function main() {
     <React.StrictMode>
       <BrowserRouter basename="/admin">
         <Switch>
-          <Route path="/properties">
-            <h3>PROPS</h3>
+          <Route path="/admin/properties">
+            <h3>Change to AdminsProperties</h3>
           </Route>
-          <Route>
-            <AdminIndex google_client_id={config.google_client_id} />
+          <Route path="/admin/messages/:id">
+            <AdminMessages />
+          </Route>
+          <Route path="/admin">
+            <AdminIndex />
+          </Route>
+          <Route path="/">
+            <h3>Go to path="/admin"</h3>
           </Route>
         </Switch>
       </BrowserRouter>
