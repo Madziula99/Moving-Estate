@@ -6,12 +6,20 @@
     "install:server": "cd server && yarn install",
     "install:admin": "cd admin && yarn install",
     "install": "yarn install:client && yarn install:server && yarn install:admin",
-
     "start:client": "cd client && yarn start",
     "start:server": "cd server && yarn start",
+<<<<<<< HEAD
     "start:admin": "cd admin && yarn start",
 
     "db:migrate": "cd server && yarn db:migrate",
     "db:seed": "cd server && yarn db:seed"
+=======
+    "start:admin": "cd admin && yarn start"
+  },
+  "dependencies": {
+    "sequelize": "^6.25.4",
+    "sequelize-cli": "^6.5.2",
+    "sqlite3": "^5.1.2"
+>>>>>>> 22d051d (wip google auth)
   }
 }

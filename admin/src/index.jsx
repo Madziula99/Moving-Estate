@@ -5,7 +5,9 @@ import AdminIndex from './pages/AdminIndex.jsx';
 import { SignIn } from "./components/SignIn/SignIn.jsx";
 import './index.css';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+async function main() {
+  const config = await fetch("/api/config").then(res => res.json());
+  const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
       <BrowserRouter>
@@ -14,9 +16,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
             <AdminIndex />
           </Route>
           <Route path="/">
-            <SignIn />
+            <SignIn google_client_id={config.google_client_id} />
           </Route>
         </Switch>
       </BrowserRouter>
     </React.StrictMode>
   );
+}
+main();
