@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import AdminIndex from './pages/AdminIndex.jsx';
+import { SignIn } from "./components/SignIn/SignIn.jsx";
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -13,7 +14,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
             <AdminIndex />
           </Route>
           <Route path="/">
-            <h3>Go to path="/agent"</h3>
+            <SignIn />
           </Route>
         </Switch>
       </BrowserRouter>
