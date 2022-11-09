@@ -17,7 +17,11 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
+    "db:migrate": "sequelize db:migrate",
+    "db:seed": "sequelize db:seed:all",
+
     "start": "nodemon src/",
+    "prestart:prod": "yarn db:migrate",
     "start:prod": "node ./src"
   }
 }
