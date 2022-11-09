@@ -13,6 +13,9 @@ client/coverage/
 # production
 client/build/
 
+# dev database
+server/db/main.db
+
 # misc
 .DS_Store
 .env.local

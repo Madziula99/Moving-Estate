@@ -9,6 +9,9 @@
 
     "start:client": "cd client && yarn start",
     "start:server": "cd server && yarn start",
-    "start:admin": "cd admin && yarn start"
+    "start:admin": "cd admin && yarn start",
+
+    "db:migrate": "cd server && yarn db:migrate",
+    "db:seed": "cd server && yarn db:seed"
   }
 }
