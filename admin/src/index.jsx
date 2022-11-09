@@ -12,7 +12,10 @@ async function main() {
     <React.StrictMode>
       <BrowserRouter>
         <Switch>
-          <Route path="/agent">
+          <Route path="/admin/properties">
+            <h3>TEST PROPS</h3>
+          </Route>
+          <Route path="/admin">
             <AdminIndex />
           </Route>
           <Route path="/">

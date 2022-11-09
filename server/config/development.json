@@ -1,6 +1,7 @@
 {
   "port": 3500,
   "database_url": "sqlite://db/main.db",
+  "google_client_id": "57265931498-h67mi7nrf8po0uhabnom895c6kliii4m.apps.googleusercontent.com",
   "mail": {
     "host": "smtp.ethereal.email",
     "port": 587,
