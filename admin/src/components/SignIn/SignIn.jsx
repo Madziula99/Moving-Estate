@@ -10,6 +10,7 @@ class SignIn extends React.Component {
   }
   
   render() {
+    this.checkAuth()
     return <div>
       <div id="g_id_onload"
         data-client_id={this.props.google_client_id}
