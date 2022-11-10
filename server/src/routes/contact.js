@@ -2,9 +2,17 @@ const { Router } = require("express");
 const nodeMailer = require("nodemailer");
 const config = require("config");
 const MAIL = config.get("mail");
+const { Message } = require("../models")
 
 async function create(req, res) {
   const { clientName, clientEmail, clientMessage, agentEmail, propertyId } = req.body;
+
+  Message.create({
+    client_name: clientName,
+    client_email: clientEmail,
+    message: clientMessage,
+    property_id: propertyId
+  })
 
   const transporter = nodeMailer.createTransport(MAIL);
 
