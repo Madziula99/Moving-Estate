@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AdminIndex from './pages/AdminIndex.jsx';
-import { SignIn } from "./components/SignIn/SignIn.jsx";
+import { AdminIndex } from './pages/AdminIndex.jsx';
 import './index.css';
 
 async function main() {
@@ -10,16 +9,13 @@ async function main() {
   const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename="/admin">
         <Switch>
-          <Route path="/admin/properties">
-            <h3>TEST PROPS</h3>
+          <Route path="/properties">
+            <h3>PROPS</h3>
           </Route>
-          <Route path="/admin">
-            <AdminIndex />
-          </Route>
-          <Route path="/">
-            <SignIn google_client_id={config.google_client_id} />
+          <Route>
+            <AdminIndex google_client_id={config.google_client_id} />
           </Route>
         </Switch>
       </BrowserRouter>

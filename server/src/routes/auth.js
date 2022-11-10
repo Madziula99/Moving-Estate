@@ -40,11 +40,16 @@ module.exports = Router()
   .get("/login/google/callback",
     passport.authenticate("google", {
       failureRedirect: "/api/auth/login/error",
-      successRedirect: "/api/auth/login/protected"
+      successRedirect: "http://localhost:3000/admin"
     })
   )
   .get("/login/error", (_, res) => res.json({ error: "An error has occurred" }))
-  .get("/login/protected", isLoggedIn, (_, res) => res.json({ message: "User logged in" }))
+  .get("/login/protected", isLoggedIn, (req, res) => {
+    res.json({
+      message: "User logged in",
+      user: req.user
+    });
+  })
   .get("/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
