@@ -20,11 +20,8 @@ async function main() {
           <Route path="/messages/:id">
             <Messages />
           </Route>
-          <Route path="/admin">
+          <Route>
             <AdminIndex google_client_id={config.google_client_id} />
-          </Route>
-          <Route path="/">
-            <h3>Go to path="/admin"</h3>
           </Route>
         </Switch>
       </BrowserRouter>
