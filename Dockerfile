@@ -11,9 +11,10 @@ RUN yarn build
 WORKDIR /app
 COPY server .
 RUN mv ./client/build/* ./public
-RUN mkdir ./public/admin && mv ./admin/build/* ./public/admin
+RUN mv ./admin/build ./public/admin
 RUN rm -r ./client
 RUN rm -r ./admin
 RUN yarn install --production
 EXPOSE 80
 CMD ["yarn", "start:prod"]
+
