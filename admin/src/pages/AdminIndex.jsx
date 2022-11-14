@@ -1,6 +1,6 @@
 import React from "react";
-import { SignIn } from "../components/SignIn/SignIn.jsx";
 import { Redirect } from "react-router-dom";
+import { SignIn } from "../components/SignIn/SignIn.jsx";
 
 class AdminIndex extends React.Component {
   constructor(props) {
