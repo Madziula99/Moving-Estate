@@ -18,6 +18,8 @@ function filterProperties(filters) {
   const filteredProperties = properties.filter(item => filterKeys.every(key => {
     const filterValue = filters[key];
 
+    if (key === "email") return item.agent.email === filterValue;
+
     if (!item.hasOwnProperty(key)) return false;
 
     if (key === "type") return item["type"] === filterValue;
@@ -88,22 +90,12 @@ async function index(req, res) {
 }
 
 async function retrive(req, res) {
-  //get email address from req.session?
-  const testAgentEmail = "adam@example.com";
-
-  //update function to filter by email
-  //available in card 58
-  const agentProperties = filterProperties({ email: testAgentEmail });
   const { id } = req.params;
 
-  const access = agentProperties.some(property => property.id === id);
+  const messages = await Message.findAll({ where: { property_id: id } })
 
-  if (access) {
-    await Message.findAll({ where: { property_id: id } }).then(messages => res.json(messages));
-  }
-  else {
-    res.status(401).json({ message: "Unauthorized agent" });
-  }
+  if (messages === null) res.json({ messages: [] });
+  else res.json(messages);
 }
 
 module.exports = Router()
