@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const properties = require("../data.json");
+const { Message } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
@@ -86,6 +87,26 @@ async function index(req, res) {
   });
 }
 
+async function retrive(req, res) {
+  //get email address from req.session?
+  const testAgentEmail = "adam@example.com";
+
+  //update function to filter by email
+  //available in card 58
+  const agentProperties = filterProperties({ email: testAgentEmail });
+  const { id } = req.params;
+
+  const access = agentProperties.some(property => property.id === id);
+
+  if (access) {
+    await Message.findAll({ where: { property_id: id } }).then(messages => res.json(messages));
+  }
+  else {
+    res.status(401).json({ message: "Unauthorized agent" });
+  }
+}
+
 module.exports = Router()
   .get("/", index)
+  .get("/messages/:id", retrive)
   .get("/:id", read)
