@@ -9,13 +9,7 @@
     "start:client": "cd client && yarn start",
     "start:server": "cd server && yarn start",
     "start:admin": "cd admin && yarn start",
-
     "db:migrate": "cd server && yarn db:migrate",
     "db:seed": "cd server && yarn db:seed"
-  },
-  "dependencies": {
-    "sequelize": "^6.25.4",
-    "sequelize-cli": "^6.5.2",
-    "sqlite3": "^5.1.2"
   }
 }
