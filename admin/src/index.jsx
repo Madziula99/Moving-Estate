@@ -1,21 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import AdminIndex from './pages/AdminIndex.jsx';
+import { AdminIndex } from './pages/AdminIndex.jsx';
 import './index.css';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+async function main() {
+  const config = await fetch("/api/config").then(res => res.json());
+  const root = ReactDOM.createRoot(document.getElementById("root"));
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename="/admin">
         <Switch>
-          <Route path="/agent">
-            <AdminIndex />
+          <Route path="/properties">
+            <h3>PROPS</h3>
           </Route>
-          <Route path="/">
-            <h3>Go to path="/agent"</h3>
+          <Route>
+            <AdminIndex google_client_id={config.google_client_id} />
           </Route>
         </Switch>
       </BrowserRouter>
     </React.StrictMode>
   );
+}
+main();

@@ -4,6 +4,7 @@ const { Router } = require("express");
 const session = require("express-session");
 const config = require("config");
 const AUTH = config.get("auth");
+const admin_url = config.get("admin_url");
 
 function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
@@ -40,11 +41,16 @@ module.exports = Router()
   .get("/login/google/callback",
     passport.authenticate("google", {
       failureRedirect: "/api/auth/login/error",
-      successRedirect: "/api/auth/login/protected"
+      successRedirect: `${admin_url}/admin`
     })
   )
   .get("/login/error", (_, res) => res.json({ error: "An error has occurred" }))
-  .get("/login/protected", isLoggedIn, (_, res) => res.json({ message: "User logged in" }))
+  .get("/login/protected", isLoggedIn, (req, res) => {
+    res.json({
+      message: "User logged in",
+      user: req.user
+    });
+  })
   .get("/logout", (req, res, next) => {
     req.logout((err) => {
       if (err) return next(err);
