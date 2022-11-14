@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const properties = require("../data.json");
+const { Message } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
@@ -16,6 +17,8 @@ function filterProperties(filters) {
 
   const filteredProperties = properties.filter(item => filterKeys.every(key => {
     const filterValue = filters[key];
+
+    if (key === "email") return item.agent.email === filterValue;
 
     if (!item.hasOwnProperty(key)) return false;
 
@@ -86,6 +89,16 @@ async function index(req, res) {
   });
 }
 
+async function retrive(req, res) {
+  const { id } = req.params;
+
+  const messages = await Message.findAll({ where: { property_id: id } })
+
+  if (messages === null) res.json({ messages: [] });
+  else res.json(messages);
+}
+
 module.exports = Router()
   .get("/", index)
+  .get("/messages/:id", retrive)
   .get("/:id", read)
