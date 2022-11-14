@@ -7,11 +7,12 @@ class AdminsProperties extends React.Component {
    constructor(props) {
     super(props);
 
+    this.signOut = this.signOut.bind(this);
+
     this.state = {
       filteredByAdminProperties: [],
-      agentEmail: "john@example.com",
       agentName: "",
-      isCookies: true,//TODO: delete if it not need after
+      hasCookie: document.cookie.length > 0 || false,
       isLoading: false,
     }
   }
@@ -19,9 +20,7 @@ class AdminsProperties extends React.Component {
   async getAgentsProperties() {
     this.setState({ isLoading: true });
 
-    const urlQueryParams = new URLSearchParams({ email: this.state.agentEmail }).toString();
-
-    await fetch("/api/properties?" + urlQueryParams)
+    await fetch("/api/properties")
       .then(r => r.json())
       .then(({ properties, agentName })  => {
         this.setState({
@@ -32,20 +31,33 @@ class AdminsProperties extends React.Component {
       });
   }
 
+  async signOut() {
+    await fetch("/api/auth/logout").then(() => {
+      document.cookie = "user_email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+      this.setState({ hasCookie: false });
+    });
+  }
+
   componentDidMount() {
     this.getAgentsProperties();
   }
 
   render() {
-    const { filteredByAdminProperties, isCookies, isLoading, agentName } = this.state;
+    const { filteredByAdminProperties, hasCookie, isLoading, agentName } = this.state;
 
-    return <section>
-      {isLoading && <Spinner />}
-      {isCookies && !isLoading && <AdminPropertyTable agentName={agentName}
-        adminProperties={filteredByAdminProperties} />}
-      {!isCookies && <Redirect to="/admin" />}
-    </section>
+    if (isLoading) return <Spinner />;
+
+    if (hasCookie) {
+      return <AdminPropertyTable
+        agentName={agentName}
+        adminProperties={filteredByAdminProperties}
+        signOut={() => this.signOut()}
+      />
+    }
+
+    return <Redirect to="/" />
   }
 }
 
-export {AdminsProperties};
+export { AdminsProperties };

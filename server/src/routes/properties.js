@@ -58,6 +58,15 @@ function optionsObject() {
 async function index(req, res) {
   const options = optionsObject();
   const { page, ...filters } = req.query;
+  const email = req.rawHeaders.find(header => {
+    return header.includes("user_email")
+  }).split(" ").find(cookie => {
+    return cookie.includes("user_email")
+  }).split("=")[1].replace(";", "");
+
+  if (email) {
+    filters.email = email;
+  }
 
   const filteredProperties = filterProperties(filters).map(property => {
     return {
@@ -75,10 +84,10 @@ async function index(req, res) {
     }
   });
 
-  if ( filters.email ) {
+  if (email) {
     res.json({
       properties: filteredProperties || [],
-      agentName: properties.find(property => property.agent.email === filters.email).agent.name
+      agentName: properties.find(property => property.agent.email === email).agent.name || ""
     });
   } else {
     const pageSize = 8;
