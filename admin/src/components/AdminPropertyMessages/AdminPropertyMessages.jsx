@@ -1,33 +1,36 @@
 import React from "react";
-import { DataGrid } from '@mui/x-data-grid';
+import { DataGrid } from "@mui/x-data-grid";
+import styles from "./AdminPropertyMessages.module.css";
 
 const onPageRows = 8;
 const rowHeight = 135;
-const widthInTable = 230;
+const widthInTable = 200;
+const messageWidth = 398
 
 const columns = [
-  { field: 'from', headerName: 'From', width: widthInTable },
-  { field: 'time', headerName: 'Time', width: widthInTable },
-  { field: 'text', headerName: 'Text', width: 500 }
+  { field: "client_email", headerName: "Client Email", width: widthInTable },
+  { field: "client_name", headerName: "Client Name", width: widthInTable },
+  { field: "createdAt", headerName: "Time", width: widthInTable },
+  { field: "message", headerName: "Text", width: messageWidth }
 ];
 
 class AdminPropertyMessages extends React.Component {
 
   render() {
-    return (<section>
-      <h2 style={{ margin: "20px auto", width: 1000 }}>{ this.props.adminProperty } receive next messages:</h2>
-        <div style={{ width: 1000, margin: "0 auto" }}>
-          <DataGrid
-            rowHeight={rowHeight}
-            autoHeight
-            rows={this.props.filteredPropertyMessages}
-            columns={columns}
-            pageSize={onPageRows}
-            rowsPerPageOptions={[onPageRows]}
-          />
-        </div>
-      </section>
-    )
+    const { propertyMessages, propertyId } = this.props;
+    return <>
+      <h2 className={styles.header}>{propertyId} receive next messages:</h2>
+      <div className={styles.table}>
+        <DataGrid
+          rowHeight={rowHeight}
+          autoHeight
+          rows={propertyMessages}
+          columns={columns}
+          pageSize={onPageRows}
+          rowsPerPageOptions={[onPageRows]}
+        />
+      </div>
+    </>
   }
 }
 

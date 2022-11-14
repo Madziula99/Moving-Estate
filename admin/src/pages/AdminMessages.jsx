@@ -2,42 +2,26 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { AdminPropertyMessages } from "../components/AdminPropertyMessages/AdminPropertyMessages.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import Data from "../dataMessages.json"
-
-//TODO: create endpoint and take data from server
-//TODO: went to the database and put there a process with filtering
-const chooseProperty = "A001";
-const filterByIdRows = Data.filter(e => e.id === chooseProperty);
-const filteredMessages =filterByIdRows.map(message => {
-  return {
-    id: message["message-ID"],
-    from: message.from.replace("Ethereal Email ", ""),
-    time: message.time,
-    text: message.text
-    }
-  });
 
 class AdminMessages extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      filteredPropertyMessages: filteredMessages,
-      adminProperty: chooseProperty,
+      propertyMessages: [],
       isLoading: false,
     }
   }
 
-  /*async getPropertyMessages() {
+  async getPropertyMessages() {
     this.setState({ isLoading: true });
+    const id = this.props.match.params.id;
 
-    const urlQueryParams = new URLSearchParams({ id: this.state.adminProperty }).toString();
-
-    await fetch("/api/properties?" + urlQueryParams)
-      .then(r => r.json())
-      .then(({ messages, id })  => {
+    await fetch(`/api/properties/messages/${id}`)
+      .then(res => res.json())
+      .then(messages => {
         this.setState({
-          filteredPropertyMessages: messages,
+          propertyMessages: messages,
           isLoading: false
         })
       });
@@ -45,15 +29,15 @@ class AdminMessages extends React.Component {
 
   componentDidMount() {
     this.getPropertyMessages();
-  }*/
-
+  }
 
   render() {
-    const { filteredPropertyMessages, isLoading, adminProperty } = this.state;
-    return (<section>
-      {isLoading && <Spinner />}
-      {!isLoading && <AdminPropertyMessages adminProperty={adminProperty} filteredPropertyMessages={filteredPropertyMessages} />}
-    </section>)
+    const { propertyMessages, isLoading } = this.state;
+    if (isLoading) return <Spinner />
+    return <AdminPropertyMessages
+      propertyId={this.props.match.params.id}
+      propertyMessages={propertyMessages}
+    />
   }
 }
 
