@@ -7,7 +7,7 @@ import Index from "./pages/Index.jsx";
 import "./index.css";
 
 async function main() {
-  const api = await fetch('/api/status').then(r => r.json());
+  const api = await fetch('/api/config').then(r => r.json());
   console.log(`API is ${api.status}`);
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
