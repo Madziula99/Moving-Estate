@@ -1,5 +1,6 @@
 {
   "port": 80,
+  "database_url": "sqlite://db/main.db",
   "mail": {
     "host": "smtp.ethereal.email",
     "port": 587,
