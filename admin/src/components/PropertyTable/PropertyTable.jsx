@@ -1,7 +1,6 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
-import { Button } from "@mui/material";
 import styles from "./PropertyTable.module.css";
 
 const onPageRows = 6;
@@ -32,23 +31,17 @@ const columns = [
 
 class PropertyTable extends React.Component {
   render() {
-    return <>
-      <div className={styles.header}>
-        <h2>{this.props.agentName}, welcome!</h2>
-        <Button variant="contained" onClick={this.props.signOut}>Sign Out</Button>
-      </div>
-      <div className={styles.table}>
-        <DataGrid
-          rowHeight={rowHeight}
-          autoHeight
-          rows={this.props.adminProperties}
-          columns={columns}
-          pageSize={onPageRows}
-          rowsPerPageOptions={[onPageRows]}
-          onRowClick = {e => window.location = `/admin/messages/${e.id}`}
-        />
-      </div>
-    </>
+    return <div className={styles.table}>
+      <DataGrid
+        rowHeight={rowHeight}
+        autoHeight
+        rows={this.props.adminProperties}
+        columns={columns}
+        pageSize={onPageRows}
+        rowsPerPageOptions={[onPageRows]}
+        onRowClick = {e => window.location = `/admin/messages/${e.id}`}
+      />
+    </div>
   }
 }
 

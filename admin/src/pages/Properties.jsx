@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
+import { SignOut } from "../components/SignOut/SignOut.jsx";
 
 class Properties extends React.Component {
    constructor(props) {
@@ -49,11 +50,10 @@ class Properties extends React.Component {
     if (isLoading) return <Spinner />;
 
     if (hasCookie) {
-      return <PropertyTable
-        agentName={agentName}
-        adminProperties={filteredByAdminProperties}
-        signOut={() => this.signOut()}
-      />
+      return <>
+        <SignOut agentName={agentName} signOut={() => this.signOut()} />
+        <PropertyTable adminProperties={filteredByAdminProperties} />
+      </>
     }
 
     return <Redirect to="/" />
