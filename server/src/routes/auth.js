@@ -5,6 +5,7 @@ const session = require("express-session");
 const config = require("config");
 const AUTH = config.get("auth");
 const admin_url = config.get("admin_url");
+const port = config.get("port");
 
 function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
@@ -13,7 +14,7 @@ function isLoggedIn(req, res, next) {
 passport.use(new GoogleStrategy({
   clientID: AUTH.GOOGLE_CLIENT_ID,
   clientSecret: AUTH.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:3500/api/auth/login/google/callback",
+  callbackURL: `http://localhost:${port}/api/auth/login/google/callback`,
   },
   function verify(accessToken, refreshToken, profile, done) {
     return done(null, profile);
