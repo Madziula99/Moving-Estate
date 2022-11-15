@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
 import { Button } from "@mui/material";
-import styles from "./AdminPropertyTable.module.css";
+import styles from "./PropertyTable.module.css";
 
 const onPageRows = 6;
 const photoHeight = 130;
@@ -30,7 +30,7 @@ const columns = [
   { field: "bathrooms", headerName: "Bathrooms", type: "number", width: widthInTable },
 ];
 
-class AdminPropertyTable extends React.Component {
+class PropertyTable extends React.Component {
   render() {
     return <>
       <div className={styles.header}>
@@ -52,4 +52,4 @@ class AdminPropertyTable extends React.Component {
   }
 }
 
-export { AdminPropertyTable };
+export { PropertyTable };

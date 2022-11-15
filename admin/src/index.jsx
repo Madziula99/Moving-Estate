@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { AdminIndex } from './pages/AdminIndex.jsx';
 import Messages from "./pages/Messages.jsx";
-import { AdminsProperties } from "./pages/AdminsProperties.jsx";
+import { Index } from "./pages/Index.jsx";
+import { Properties } from "./pages/Properties.jsx";
 import "./index.css";
 
 async function main() {
@@ -15,13 +15,13 @@ async function main() {
       <BrowserRouter basename="/admin">
         <Switch>
           <Route path="/properties">
-            <AdminsProperties />
+            <Properties />
           </Route>
           <Route path="/messages/:id">
             <Messages />
           </Route>
           <Route>
-            <AdminIndex google_client_id={config.google_client_id} />
+            <Index google_client_id={config.google_client_id} />
           </Route>
         </Switch>
       </BrowserRouter>

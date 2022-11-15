@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { SignIn } from "../components/SignIn/SignIn.jsx";
 
-class AdminIndex extends React.Component {
+class Index extends React.Component {
   constructor(props) {
     super(props);
 
@@ -39,4 +39,4 @@ class AdminIndex extends React.Component {
   }
 }
 
-export { AdminIndex };
+export { Index };

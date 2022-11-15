@@ -1,9 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { AdminPropertyTable } from "../components/AdminPropertyTable/AdminPropertyTable.jsx";
+import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
 
-class AdminsProperties extends React.Component {
+class Properties extends React.Component {
    constructor(props) {
     super(props);
 
@@ -49,7 +49,7 @@ class AdminsProperties extends React.Component {
     if (isLoading) return <Spinner />;
 
     if (hasCookie) {
-      return <AdminPropertyTable
+      return <PropertyTable
         agentName={agentName}
         adminProperties={filteredByAdminProperties}
         signOut={() => this.signOut()}
@@ -60,4 +60,4 @@ class AdminsProperties extends React.Component {
   }
 }
 
-export { AdminsProperties };
+export { Properties };
