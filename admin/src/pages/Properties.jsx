@@ -5,18 +5,12 @@ import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 
 class Properties extends React.Component {
-   constructor(props) {
-    super(props);
-
-    this.signOut = this.signOut.bind(this);
-
-    this.state = {
-      filteredByAdminProperties: [],
-      agentName: "",
-      isLoggedIn: false,
-      isLoading: true,
-    }
-  }
+  state = {
+    filteredProperties: [],
+    agentName: "",
+    isLoggedIn: false,
+    isLoading: true,
+  };
 
   async getAgentsProperties() {
     this.setState({ isLoading: true });
@@ -36,7 +30,7 @@ class Properties extends React.Component {
         .then(r => r.json())
         .then(({ properties, agentName }) => {
           this.setState({
-            filteredByAdminProperties: properties,
+            filteredProperties: properties,
             agentName: agentName,
             isLoading: false,
             isLoggedIn: true
@@ -45,24 +39,18 @@ class Properties extends React.Component {
     }
   }
 
-  async signOut() {
-    await fetch("/api/auth/logout").then(() => {
-      this.setState({ isLoggedIn: false });
-    });
-  }
-
   componentDidMount() {
     this.getAgentsProperties();
   }
 
   render() {
-    const { filteredByAdminProperties, isLoggedIn, isLoading, agentName } = this.state;
+    const { filteredProperties, isLoggedIn, isLoading, agentName } = this.state;
 
     if (isLoading) return <Spinner />;
 
     if (isLoggedIn) return <>
-      <SignOut agentName={agentName} signOut={() => this.signOut()} />
-      <PropertyTable adminProperties={filteredByAdminProperties} />
+      <SignOut headerMessage={`${agentName}, welcome!`} />
+      <PropertyTable adminProperties={filteredProperties} />
     </>
 
     return <Redirect to="/" />
