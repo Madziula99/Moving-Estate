@@ -1,6 +1,6 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import styles from "./AdminPropertyMessages.module.css";
+import styles from "./PropertyMessages.module.css";
 
 const onPageRows = 8;
 const rowHeight = 135;
@@ -14,12 +14,12 @@ const columns = [
   { field: "message", headerName: "Text", width: messageWidth }
 ];
 
-class AdminPropertyMessages extends React.Component {
+class PropertyMessages extends React.Component {
 
   render() {
     const { propertyMessages, propertyId } = this.props;
     return <>
-      <h2 className={styles.header}>{propertyId} receive next messages:</h2>
+      <h2 className={styles.header}>Messages regarding property: {propertyId}</h2>
       <div className={styles.table}>
         <DataGrid
           rowHeight={rowHeight}
@@ -34,4 +34,4 @@ class AdminPropertyMessages extends React.Component {
   }
 }
 
-export { AdminPropertyMessages };
+export { PropertyMessages };

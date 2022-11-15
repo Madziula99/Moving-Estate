@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { AdminPropertyMessages } from "../components/AdminPropertyMessages/AdminPropertyMessages.jsx";
+import { PropertyMessages } from "../components/PropertyMessages/PropertyMessages.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 
-class AdminMessages extends React.Component {
+class Messages extends React.Component {
   constructor(props) {
     super(props);
 
@@ -34,11 +34,11 @@ class AdminMessages extends React.Component {
   render() {
     const { propertyMessages, isLoading } = this.state;
     if (isLoading) return <Spinner />
-    return <AdminPropertyMessages
+    return <PropertyMessages
       propertyId={this.props.match.params.id}
       propertyMessages={propertyMessages}
     />
   }
 }
 
-export default withRouter(AdminMessages);
+export default withRouter(Messages);
