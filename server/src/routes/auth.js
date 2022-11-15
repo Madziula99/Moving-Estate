@@ -46,7 +46,7 @@ module.exports = Router()
     })
   )
   .get("/login/error", (_, res) => res.json({ error: "An error has occurred" }))
-  .get("/login/protected", isLoggedIn, (req, res) => {
+  .get("/current_user", isLoggedIn, (req, res) => {
     res.json({
       message: "User logged in",
       user: req.user

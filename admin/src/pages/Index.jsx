@@ -14,19 +14,15 @@ class Index extends React.Component {
   }
 
   checkAuth() {
-    const baseURL = "/api/auth/login/";
+    const baseURL = "/api/auth/current_user";
 
-    fetch(baseURL + "protected").then(async res => {
+    fetch(baseURL).then(async res => {
       if (res.status === 401) {
-        this.setState({isLoggedIn: false});
+        this.setState({ isLoggedIn: false });
       } else {
-        this.setState({isLoggedIn: true});
-
-        const {user} = await res.json();
-
-        document.cookie = `user_email=${user._json.email}`;
+        this.setState({ isLoggedIn: true });
       }
-    })
+    });
   }
 
   componentDidMount() {

@@ -13,30 +13,41 @@ class Properties extends React.Component {
     this.state = {
       filteredByAdminProperties: [],
       agentName: "",
-      hasCookie: document.cookie.length > 0 || false,
-      isLoading: false,
+      isLoggedIn: false,
+      isLoading: true,
     }
   }
 
   async getAgentsProperties() {
     this.setState({ isLoading: true });
 
-    await fetch("/api/properties")
-      .then(r => r.json())
-      .then(({ properties, agentName })  => {
-        this.setState({
-          filteredByAdminProperties: properties,
-          agentName: agentName,
-          isLoading: false
-        })
-      });
+    const email = await fetch("/api/auth/current_user")
+      .then(r => {
+        if (r.status === 401) {
+          this.setState({ isLoading: false });
+          return null;
+        } else {
+          return r.json().then(({ user }) => user.emails[0].value);
+        }
+      })
+
+    if (email) {
+      await fetch("/api/properties?email=" + email)
+        .then(r => r.json())
+        .then(({ properties, agentName }) => {
+          this.setState({
+            filteredByAdminProperties: properties,
+            agentName: agentName,
+            isLoading: false,
+            isLoggedIn: true
+          })
+        });
+    }
   }
 
   async signOut() {
     await fetch("/api/auth/logout").then(() => {
-      document.cookie = "user_email=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-
-      this.setState({ hasCookie: false });
+      this.setState({ isLoggedIn: false });
     });
   }
 
@@ -45,16 +56,14 @@ class Properties extends React.Component {
   }
 
   render() {
-    const { filteredByAdminProperties, hasCookie, isLoading, agentName } = this.state;
+    const { filteredByAdminProperties, isLoggedIn, isLoading, agentName } = this.state;
 
     if (isLoading) return <Spinner />;
 
-    if (hasCookie) {
-      return <>
-        <SignOut agentName={agentName} signOut={() => this.signOut()} />
-        <PropertyTable adminProperties={filteredByAdminProperties} />
-      </>
-    }
+    if (isLoggedIn) return <>
+      <SignOut agentName={agentName} signOut={() => this.signOut()} />
+      <PropertyTable adminProperties={filteredByAdminProperties} />
+    </>
 
     return <Redirect to="/" />
   }

@@ -58,15 +58,6 @@ function optionsObject() {
 async function index(req, res) {
   const options = optionsObject();
   const { page, ...filters } = req.query;
-  const email = req.rawHeaders.find(header => {
-    return header.includes("user_email")
-  }).split(" ").find(cookie => {
-    return cookie.includes("user_email")
-  }).split("=")[1].replace(";", "");
-
-  if (email) {
-    filters.email = email;
-  }
 
   const filteredProperties = filterProperties(filters).map(property => {
     return {
@@ -84,10 +75,10 @@ async function index(req, res) {
     }
   });
 
-  if (email) {
+  if (filters.email) {
     res.json({
       properties: filteredProperties || [],
-      agentName: properties.find(property => property.agent.email === email).agent.name || ""
+      agentName: properties.find(property => property.agent.email === filters.email).agent.name || ""
     });
   } else {
     const pageSize = 8;
@@ -105,10 +96,10 @@ async function index(req, res) {
   }
 }
 
-async function retrive(req, res) {
+async function retrieve(req, res) {
   const { id } = req.params;
 
-  const messages = await Message.findAll({ where: { property_id: id } })
+  const messages = await Message.findAll({ where: { property_id: id } });
 
   if (messages === null) res.json({ messages: [] });
   else res.json(messages);
@@ -116,5 +107,5 @@ async function retrive(req, res) {
 
 module.exports = Router()
   .get("/", index)
-  .get("/messages/:id", retrive)
+  .get("/messages/:id", retrieve)
   .get("/:id", read)
