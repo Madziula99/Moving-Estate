@@ -102,8 +102,10 @@ async function retrieve(req, res) {
   
   const agentProperties = filterProperties({ email: email }).map(property => property.id);
   const hasAccess = agentProperties.includes(id);
+
   if (hasAccess) {
     const messages = await Message.findAll({ where: { property_id: id } });
+
     if (messages === null) res.json({ messages: [] });
     else res.json(messages);
   } else {
