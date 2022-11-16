@@ -8,7 +8,8 @@
 ## Usage
 * Run `yarn install` to fetch all dependencies
 * Run `yarn start:server` to start Back-End in dev mode
-* In separate terminal run `yarn start:client` to start Front-nd in dev mode
+* In separate terminal run `yarn start:client` to start Front-end in dev mode
+* In separate terminal run `yarn start:admin` to start Front-end in dev mode
 
 ## Docker usage
 * Run `docker build -t server .`

@@ -42,11 +42,11 @@ module.exports = Router()
   .get("/login/google/callback",
     passport.authenticate("google", {
       failureRedirect: "/api/auth/login/error",
-      successRedirect: `${admin_url}/admin`
+      successRedirect: `${admin_url}/admin/properties`
     })
   )
   .get("/login/error", (_, res) => res.json({ error: "An error has occurred" }))
-  .get("/login/protected", isLoggedIn, (req, res) => {
+  .get("/current_user", isLoggedIn, (req, res) => {
     res.json({
       message: "User logged in",
       user: req.user
@@ -57,5 +57,5 @@ module.exports = Router()
       if (err) return next(err);
     });
     req.session.destroy();
-    res.json({ message: "User logged out" });
+    res.redirect(`${admin_url}/admin`);
   })

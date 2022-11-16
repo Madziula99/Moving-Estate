@@ -6,7 +6,7 @@ import styles from "./PropertyCard.module.css";
 class PropertyCard extends React.Component {
   addCardClassName() {
     const classes = [styles.property_card];
-    
+
     if (this.props.viewMode === "grid") classes.push(styles.grid_view);
     if (this.props.viewMode === "list") classes.push(styles.list_view);
 

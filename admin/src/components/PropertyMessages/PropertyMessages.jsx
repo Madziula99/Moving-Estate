@@ -15,22 +15,19 @@ const columns = [
 ];
 
 class PropertyMessages extends React.Component {
-
   render() {
-    const { propertyMessages, propertyId } = this.props;
-    return <>
-      <h2 className={styles.header}>Messages regarding property: {propertyId}</h2>
-      <div className={styles.table}>
-        <DataGrid
-          rowHeight={rowHeight}
-          autoHeight
-          rows={propertyMessages}
-          columns={columns}
-          pageSize={onPageRows}
-          rowsPerPageOptions={[onPageRows]}
-        />
-      </div>
-    </>
+    const { propertyMessages } = this.props;
+
+    return <div className={styles.table}>
+      <DataGrid
+        rowHeight={rowHeight}
+        autoHeight
+        rows={propertyMessages}
+        columns={columns}
+        pageSize={onPageRows}
+        rowsPerPageOptions={[onPageRows]}
+      />
+    </div>
   }
 }
 

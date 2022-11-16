@@ -75,24 +75,31 @@ async function index(req, res) {
     }
   });
 
-  const pageSize = 8;
-  let propertiesPages = [];
+  if (filters.email) {
+    res.json({
+      properties: filteredProperties || [],
+      agentName: properties.find(property => property.agent.email === filters.email).agent.name || ""
+    });
+  } else {
+    const pageSize = 8;
+    let propertiesPages = [];
 
-  for (let i = 0; i < filteredProperties.length; i += pageSize) {
-    propertiesPages.push(filteredProperties.slice(i, i + pageSize));
+    for (let i = 0; i < filteredProperties.length; i += pageSize) {
+      propertiesPages.push(filteredProperties.slice(i, i + pageSize));
+    }
+
+    res.json({
+      properties: propertiesPages[Number(page) - 1] || [],
+      options: options,
+      pages: propertiesPages.length
+    });
   }
-
-  res.json({
-    properties: propertiesPages[Number(page) - 1] || [],
-    options: options,
-    pages: propertiesPages.length
-  });
 }
 
-async function retrive(req, res) {
+async function retrieve(req, res) {
   const { id } = req.params;
 
-  const messages = await Message.findAll({ where: { property_id: id } })
+  const messages = await Message.findAll({ where: { property_id: id } });
 
   if (messages === null) res.json({ messages: [] });
   else res.json(messages);
@@ -100,5 +107,5 @@ async function retrive(req, res) {
 
 module.exports = Router()
   .get("/", index)
-  .get("/messages/:id", retrive)
+  .get("/messages/:id", retrieve)
   .get("/:id", read)
