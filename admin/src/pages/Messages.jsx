@@ -44,7 +44,7 @@ class Messages extends React.Component {
         });
     }
   }
-  
+
   componentDidMount() {
     this.getPropertyMessages();
   }
@@ -52,7 +52,7 @@ class Messages extends React.Component {
   render() {
     const { propertyMessages, isLoading, isLoggedIn, hasAccess } = this.state;
     const propertyId = this.props.match.params.id;
-    
+
     if (isLoading) return <Spinner />
 
     if (isLoggedIn && hasAccess) return <>
