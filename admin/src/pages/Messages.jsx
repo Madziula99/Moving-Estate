@@ -39,9 +39,9 @@ class Messages extends React.Component {
               isLoggedIn: true,
               isLoading: false,
               hasAccess: true
-            })
+            });
           });
-        })
+        });
     }
   }
   
