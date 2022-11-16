@@ -1,18 +1,15 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { PropertyMessages } from "../components/PropertyMessages/PropertyMessages.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Messages extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      propertyMessages: [],
-      isLoggedIn: false,
-      isLoading: false,
-    }
+  state = {
+    propertyMessages: [],
+    isLoggedIn: false,
+    isLoading: true,
+    hasAccess: false
   }
 
   async getPropertyMessages() {
@@ -25,6 +22,7 @@ class Messages extends React.Component {
           this.setState({ isLoading: false });
           return null;
         } else {
+          this.setState({ isLoggedIn: true })
           return r.json().then(({ user }) => user.emails[0].value);
         }
       })
@@ -32,7 +30,6 @@ class Messages extends React.Component {
     if (email) {
       await fetch(`/api/properties/messages/${id}?email=${email}`)
         .then(res => {
-          console.log(res)
           if (res.status === 401) {
             this.setState({ isLoading: false });
             return null;
@@ -40,27 +37,32 @@ class Messages extends React.Component {
             this.setState({
               propertyMessages: messages,
               isLoggedIn: true,
-              isLoading: false
+              isLoading: false,
+              hasAccess: true
             })
           });
         })
     }
   }
-
+  
   componentDidMount() {
     this.getPropertyMessages();
   }
 
   render() {
-    const { propertyMessages, isLoading } = this.state;
+    const { propertyMessages, isLoading, isLoggedIn, hasAccess } = this.state;
     const propertyId = this.props.match.params.id;
-
+    
     if (isLoading) return <Spinner />
 
-    return <>
+    if (isLoggedIn && hasAccess) return <>
       <SignOut headerMessage={`Messages regarding property: ${propertyId}`} />
       <PropertyMessages propertyMessages={propertyMessages} />
     </>
+
+    if (isLoggedIn) return <Redirect to="/admin/properties" />
+
+    return <Redirect to="/admin" />
   }
 }
 

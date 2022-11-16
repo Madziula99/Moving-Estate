@@ -106,8 +106,9 @@ async function retrieve(req, res) {
     const messages = await Message.findAll({ where: { property_id: id } });
     if (messages === null) res.json({ messages: [] });
     else res.json(messages);
+  } else {
+    res.status(401).json({ message: "Not Authorized" });
   }
-  res.status(401);
 }
 
 module.exports = Router()
