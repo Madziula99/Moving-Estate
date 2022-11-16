@@ -98,11 +98,16 @@ async function index(req, res) {
 
 async function retrieve(req, res) {
   const { id } = req.params;
-
-  const messages = await Message.findAll({ where: { property_id: id } });
-
-  if (messages === null) res.json({ messages: [] });
-  else res.json(messages);
+  const { email } = req.query;
+  
+  const agentProperties = filterProperties({ email: email }).map(property => property.id);
+  const hasAccess = agentProperties.includes(id);
+  if (hasAccess) {
+    const messages = await Message.findAll({ where: { property_id: id } });
+    if (messages === null) res.json({ messages: [] });
+    else res.json(messages);
+  }
+  res.status(401);
 }
 
 module.exports = Router()

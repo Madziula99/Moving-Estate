@@ -10,6 +10,7 @@ class Messages extends React.Component {
 
     this.state = {
       propertyMessages: [],
+      isLoggedIn: false,
       isLoading: false,
     }
   }
@@ -18,14 +19,32 @@ class Messages extends React.Component {
     this.setState({ isLoading: true });
     const id = this.props.match.params.id;
 
-    await fetch(`/api/properties/messages/${id}`)
-      .then(res => res.json())
-      .then(messages => {
-        this.setState({
-          propertyMessages: messages,
-          isLoading: false
+    const email = await fetch("/api/auth/current_user")
+      .then(r => {
+        if (r.status === 401) {
+          this.setState({ isLoading: false });
+          return null;
+        } else {
+          return r.json().then(({ user }) => user.emails[0].value);
+        }
+      })
+
+    if (email) {
+      await fetch(`/api/properties/messages/${id}?email=${email}`)
+        .then(res => {
+          console.log(res)
+          if (res.status === 401) {
+            this.setState({ isLoading: false });
+            return null;
+          } else return res.json().then(messages => {
+            this.setState({
+              propertyMessages: messages,
+              isLoggedIn: true,
+              isLoading: false
+            })
+          });
         })
-      });
+    }
   }
 
   componentDidMount() {
