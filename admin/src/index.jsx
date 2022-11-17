@@ -5,6 +5,7 @@ import Messages from "./pages/Messages.jsx";
 import { Index } from "./pages/Index.jsx";
 import { Properties } from "./pages/Properties.jsx";
 import { Agents } from "./pages/Agents.jsx";
+import { Agent } from "./components/Agent/Agent.jsx";
 import "./index.css";
 
 async function main() {
@@ -20,6 +21,9 @@ async function main() {
           </Route>
           <Route path="/messages/:id">
             <Messages />
+          </Route>
+          <Route path="/agents/1">
+            <Agent name="Adam Smith" email="adam@gmail.com" location="California" id={1} />
           </Route>
           <Route path="/agents">
             <Agents />

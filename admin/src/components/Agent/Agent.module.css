@@ -1,0 +1,10 @@
+.agent_form {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.agent_form img {
+  width: 200px;
+  height: 200px;
+  background-color: aquamarine;
+}
