@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Messages from "./pages/Messages.jsx";
 import { Index } from "./pages/Index.jsx";
 import { Properties } from "./pages/Properties.jsx";
+import { Agents } from "./pages/Agents.jsx";
 import "./index.css";
 
 async function main() {
@@ -19,6 +20,9 @@ async function main() {
           </Route>
           <Route path="/messages/:id">
             <Messages />
+          </Route>
+          <Route path="/agents">
+            <Agents />
           </Route>
           <Route>
             <Index google_client_id={config.google_client_id} />
