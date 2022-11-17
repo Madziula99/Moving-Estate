@@ -59,13 +59,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "T001",
@@ -96,13 +90,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "John Smith",
-      "location": "Springfield, Illinois",
-      "email": "john@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/698/300"
-    }
+    "agentId": 2
   },
   {
     "id": "A003",
@@ -129,13 +117,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Anna Johnson",
-      "location": "New York, New York",
-      "email": "anna@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/631/300"
-    }
+    "agentId": 3
   },
   {
     "id": "A004",
@@ -162,13 +144,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "A005",
@@ -195,13 +171,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "John Smith",
-      "location": "Springfield, Illinois",
-      "email": "john@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/698/300"
-    }
+    "agentId": 2
   },
   {
     "id": "T002",
@@ -232,13 +202,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "T003",
@@ -269,13 +233,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "John Smith",
-      "location": "Springfield, Illinois",
-      "email": "john@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/698/300"
-    }
+    "agentId": 2
   },
   {
     "id": "A006",
@@ -302,13 +260,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "John Smith",
-      "location": "Springfield, Illinois",
-      "email": "john@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/698/300"
-    }
+    "agentId": 2
   },
   {
     "id": "T004",
@@ -339,13 +291,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Gregory Brown",
-      "location": "Tallahassee, Florida",
-      "email": "gregory@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/687/300"
-    }
+    "agentId": 4
   },
   {
     "id": "T005",
@@ -376,13 +322,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Mark Williams",
-      "location": "Nashville, Tennessee",
-      "email": "mark@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/613/300"
-    }
+    "agentId": 5
   },
   {
     "id": "A007",
@@ -409,13 +349,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Mark Williams",
-      "location": "Nashville, Tennessee",
-      "email": "mark@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/613/300"
-    }
+    "agentId": 5
   },
   {
     "id": "A008",
@@ -442,13 +376,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Mark Williams",
-      "location": "Nashville, Tennessee",
-      "email": "mark@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/613/300"
-    }
+    "agentId": 5
   },
   {
     "id": "A009",
@@ -479,13 +407,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "T006",
@@ -516,13 +438,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "T007",
@@ -553,13 +469,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Elizabeth Davis",
-      "location": "Montpelier, Vermont",
-      "email": "elizabeth@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/605/300"
-    }
+    "agentId": 6
   },
   {
     "id": "A010",
@@ -586,13 +496,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Anna Johnson",
-      "location": "New York, New York",
-      "email": "anna@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/631/300"
-    }
+    "agentId": 3
   },
   {
     "id": "A011",
@@ -619,13 +523,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "John Smith",
-      "location": "Springfield, Illinois",
-      "email": "john@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/698/300"
-    }
+    "agentId": 2
   },
   {
     "id": "T008",
@@ -656,13 +554,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Mark Williams",
-      "location": "Nashville, Tennessee",
-      "email": "mark@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/613/300"
-    }
+    "agentId": 5
   },
   {
     "id": "A012",
@@ -693,13 +585,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "A013",
@@ -726,13 +612,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "T009",
@@ -759,13 +639,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Mark Williams",
-      "location": "Nashville, Tennessee",
-      "email": "mark@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/613/300"
-    }
+    "agentId": 5
   },
   {
     "id": "T010",
@@ -792,13 +666,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "John Smith",
-      "location": "Springfield, Illinois",
-      "email": "john@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/698/300"
-    }
+    "agentId": 2
   },
   {
     "id": "T011",
@@ -829,13 +697,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "adam@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "T012",
@@ -862,13 +724,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Anna Johnson",
-      "location": "New York, New York",
-      "email": "anna@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/631/300"
-    }
+    "agentId": 3
   },
   {
     "id": "T013",
@@ -899,13 +755,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Gregory Brown",
-      "location": "Tallahassee, Florida",
-      "email": "gregory@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/687/300"
-    }
+    "agentId": 4
   },
   {
     "id": "T014",
@@ -936,13 +786,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Matthew Miller",
-      "location": "Phoenix, Arizona",
-      "email": "matthew@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/670/300"
-    }
+    "agentId": 7
   },
   {
     "id": "A014",
@@ -969,13 +813,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Matthew Miller",
-      "location": "Phoenix, Arizona",
-      "email": "matthew@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/670/300"
-    }
+    "agentId": 7
   },
   {
     "id": "T015",
@@ -1006,13 +844,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Anna Johnson",
-      "location": "New York, New York",
-      "email": "anna@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/631/300"
-    }
+    "agentId": 3
   },
   {
     "id": "A015",
@@ -1039,13 +871,7 @@
       { "icon": "pool", "title": "Large pool outside" },
       { "icon": "paw", "title": "Pets are allowed" }
     ],
-    "agent": {
-      "name": "Anna Johnson",
-      "location": "New York, New York",
-      "email": "anna@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/631/300"
-    }
+    "agentId": 3
   },
   {
     "id": "A016",
@@ -1076,12 +902,6 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Anna Johnson",
-      "location": "New York, New York",
-      "email": "anna@example.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/631/300"
-    }
+    "agentId": 3
   }
 ]

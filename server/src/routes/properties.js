@@ -5,15 +5,16 @@ const { Message, Agent } = require("../models");
 async function read(req, res) {
   const { id } = req.params;
 
-  const property = properties.find(property => property.id === id);
-  property && Agent.find({ where: { id: property.agentId } }).then(agent => property.agent = {
-    name: agent.name,
-    location: agent.location,
-    email: agent.email,
-    photo: agent.photo || "https://picsum.photos/id/600/300"
+  const propertyObject = properties.find(property => property.id === id);
+
+  if (!propertyObject) return res.status(404).json({ error: `Property with id ${id} not found` });
+
+  propertyObject.agent = await Agent.findOne({
+    attributes: ['name', 'location', 'photo'],
+    where: { id: propertyObject.agentId }
   })
 
-  if (!property) return res.status(404).json({ error: `Property with id ${id} not found` });
+  const { agentId, ...property } = propertyObject;
 
   res.json({ property });
 }
