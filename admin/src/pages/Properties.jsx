@@ -26,7 +26,7 @@ class Properties extends React.Component {
       })
 
     if (email) {
-      await fetch("/api/properties?email=" + email)
+      await fetch(`/api/properties?email=${email}`)
         .then(r => r.json())
         .then(({ properties, agentName }) => {
           this.setState({

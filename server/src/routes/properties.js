@@ -98,11 +98,19 @@ async function index(req, res) {
 
 async function retrieve(req, res) {
   const { id } = req.params;
+  const { email } = req.query;
+  
+  const agentProperties = filterProperties({ email: email }).map(property => property.id);
+  const hasAccess = agentProperties.includes(id);
 
-  const messages = await Message.findAll({ where: { property_id: id } });
+  if (hasAccess) {
+    const messages = await Message.findAll({ where: { property_id: id } });
 
-  if (messages === null) res.json({ messages: [] });
-  else res.json(messages);
+    if (messages === null) res.json({ messages: [] });
+    else res.json(messages);
+  } else {
+    res.status(401).json({ message: "Not Authorized" });
+  }
 }
 
 module.exports = Router()
