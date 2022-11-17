@@ -11,7 +11,6 @@ module.exports = {
       { name: 'Box', color: 'gray', createdAt, updatedAt },
       { name: 'Toy Train', size: 3, createdAt, updatedAt }
     ]);
-    
   },
 
   async down (queryInterface, Sequelize) {
