@@ -23,7 +23,7 @@ async function main() {
             <Messages />
           </Route>
           <Route path="/agents/1">
-            <Agent name="Adam Smith" email="adam@gmail.com" location="California" id={1} />
+            <Agent name="Adam Smith" email="adam@gmail.com" location="California" id={1} photo="https://picsum.photos/id/600/300" />
           </Route>
           <Route path="/agents">
             <Agents />
