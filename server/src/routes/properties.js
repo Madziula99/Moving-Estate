@@ -1,11 +1,17 @@
 const { Router } = require("express");
 const properties = require("../data.json");
-const { Message } = require("../models");
+const { Message, Agent } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
 
   const property = properties.find(property => property.id === id);
+  property && Agent.find({ where: { id: property.agentId } }).then(agent => property.agent = {
+    name: agent.name,
+    location: agent.location,
+    email: agent.email,
+    photo: agent.photo || "https://picsum.photos/id/600/300"
+  })
 
   if (!property) return res.status(404).json({ error: `Property with id ${id} not found` });
 
@@ -99,7 +105,7 @@ async function index(req, res) {
 async function retrieve(req, res) {
   const { id } = req.params;
   const { email } = req.query;
-  
+
   const agentProperties = filterProperties({ email: email }).map(property => property.id);
   const hasAccess = agentProperties.includes(id);
 

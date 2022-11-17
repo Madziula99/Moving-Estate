@@ -28,13 +28,7 @@
       { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
       { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
     ],
-    "agent": {
-      "name": "Adam Conover",
-      "location": "Los Angeles, California",
-      "email": "jsmastery2022@gmail.com",
-      "phone": "+0 123-456-7890",
-      "photo": "https://picsum.photos/id/600/300"
-    }
+    "agentId": 1
   },
   {
     "id": "A002",
