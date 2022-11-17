@@ -55,7 +55,7 @@ class Agents extends React.Component {
 
     if (isLoggedIn) return <>
       <SignOut headerMessage={"Manager Panel"} />
-      <AgentsTable agents={agents} />
+      <AgentsTable agents={agents} /> 
     </>
 
     return <Redirect to="/" />
