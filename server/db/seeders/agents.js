@@ -6,7 +6,7 @@ module.exports = {
     const createdAt = new Date();
     const updatedAt = new Date();
 
-    queryInterface.bulkInsert("Agents", [
+    await queryInterface.bulkInsert("Agents", [
       {
         name: "Adam Conover",
         location: "Los Angeles, California",
@@ -67,6 +67,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    queryInterface.bulkDelete("Agents", null);
+    await queryInterface.bulkDelete("Agents", null);
   }
 };
