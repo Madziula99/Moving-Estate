@@ -1,37 +1,52 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
-import { Form } from "../components/Form/Form.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 import styles from "./Agent.module.css";
 
 class Agent extends React.Component {
   state = {
-    isEditing: false
+    // agentData: {}, - it is commented because we can't get data from api yet, so we use the fake one now
+    agentData: { name: "Kelly Lo", email: "lo@gmail.com", location: "Spain", id: 1, photo: "https://picsum.photos/id/500/300" },
+    isLoading: true
   };
 
-  enableEditMode() {
-    this.setState({ isEditing: true });
+  async getAgent() {
+    // this.setState({ isLoading: true });
+
+    // const agentId = this.props.match.params.id;
+
+    // await fetch(`/api/agents/${agentId}`)
+    //   .then(r => r.json())
+    //   .then(agentData => {
+    //     this.setState({
+    //       agentData: agentData,
+    //       isLoading: false
+    //     })
+    //   });
+    this.setState({ isLoading: false });
   }
 
-  disableEditMode() {
-    this.setState({ isEditing: false });
+  componentDidMount() {
+    this.getAgent();
   }
 
   render() {
-    const { id, photo, name, location, email } = this.props;
-    const { isEditing } = this.state;
+    const { isLoading, agentData } = this.state;
+    const agentId = this.props.match.params.id;
 
-    if (isEditing) return <Form mode="edit" values={this.props} disableEditMode={() => this.disableEditMode()} />
+    if (isLoading) return <Spinner />;
 
     return <div className={styles.agent_form_wrapper}>
-      <MenuButton text="Edit agent" enableMode={() => this.enableEditMode()} /* href={`/api/agents/${id}/edit`} */ />
+      <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
       <div className={styles.agent_form}>
-        <img src={photo} alt="Agent" />
-        <p>Name: {name}</p>
-        <p>Email: {email}</p>
-        <p>Location: {location}</p>
+        <img src={agentData.photo} alt="Agent" />
+        <p>Name: {agentData.name}</p>
+        <p>Email: {agentData.email}</p>
+        <p>Location: {agentData.location}</p>
       </div>
     </div>
   }
 }
 
-export { Agent };
+export default withRouter(Agent);

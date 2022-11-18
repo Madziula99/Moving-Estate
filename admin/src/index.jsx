@@ -5,7 +5,8 @@ import Messages from "./pages/Messages.jsx";
 import { Index } from "./pages/Index.jsx";
 import { Properties } from "./pages/Properties.jsx";
 import { Agents } from "./pages/Agents.jsx";
-import { Agent } from "./pages/Agent.jsx";
+import Agent from "./pages/Agent.jsx";
+import Form from "./components/Form/Form.jsx";
 import "./index.css";
 
 async function main() {
@@ -22,8 +23,14 @@ async function main() {
           <Route path="/messages/:id">
             <Messages />
           </Route>
+          <Route path="/agents/:id/edit">
+            <Form />
+          </Route>
+          <Route path="/agents/new">
+            <Form />
+          </Route>
           <Route path="/agents/:id">
-            <Agent name="Adam Smith" email="adam@gmail.com" location="California" id={1} photo="https://picsum.photos/id/600/300" />
+            <Agent />
           </Route>
           <Route path="/agents">
             <Agents />

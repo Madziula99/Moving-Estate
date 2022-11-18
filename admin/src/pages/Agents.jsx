@@ -8,7 +8,11 @@ const managerEmail = "jsmastery2022@gmail.com"; // will be replaced with email f
 
 class Agents extends React.Component {
   state = {
-    agents: [],
+    // agents: [], - it is commented because we can't get data from api yet, so we use the fake one now
+    agents: [
+      { name: "Adam Smith", email: "adam@gmail.com", location: "California", id: 1, photo: "https://picsum.photos/id/600/300" },
+      { name: "Mary White", email: "mary@gmail.com", location: "Florida", id: 2, photo: "https://picsum.photos/id/700/300" }
+    ],
     isLoggedIn: false,
     isLoading: true,
   };
@@ -27,20 +31,19 @@ class Agents extends React.Component {
       })
 
     if (email === managerEmail) {
-        this.setState({
-            //agents: agents,
-            isLoading: false,
-            isLoggedIn: true
-          })
-    //   await fetch("/api/agents")
-    //     .then(r => r.json())
-    //     .then(({ agents }) => {
-    //       this.setState({
-    //         agents: agents,
-    //         isLoading: false,
-    //         isLoggedIn: true
-    //       })
-    //     });
+      this.setState({
+        isLoading: false,
+        isLoggedIn: true
+      })
+      // await fetch("/api/agents")
+      //   .then(r => r.json())
+      //   .then(agents => {
+      //     this.setState({
+      //       agents: agents,
+      //       isLoading: false,
+      //       isLoggedIn: true
+      //     })
+      //   });
     }
   }
 
