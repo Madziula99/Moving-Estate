@@ -5,9 +5,15 @@ module.exports = (sequelize, DataTypes) => {
   class Agent extends Model {}
 
   Agent.init({
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     location: DataTypes.STRING,
-    email: DataTypes.STRING,
+    email:{
+      type: DataTypes.STRING,
+      allowNull: false
+    },
     photo: DataTypes.STRING
   }, {
     sequelize,
