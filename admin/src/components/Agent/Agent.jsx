@@ -23,7 +23,7 @@ class Agent extends React.Component {
     if (isEditing) return <EditAgentForm values={this.props} disableEditMode={() => this.disableEditMode()} />
 
     return <div className={styles.agent_form_wrapper}>
-      <MenuButton text="Edit agent" enableEditMode={() => this.enableEditMode()} /* href={`/api/agents/${id}/edit`} */ />
+      <MenuButton text="Edit agent" enableMode={() => this.enableEditMode()} /* href={`/api/agents/${id}/edit`} */ />
       <div className={styles.agent_form}>
         <img src={photo} alt="Agent" />
         <p>Name: {name}</p>

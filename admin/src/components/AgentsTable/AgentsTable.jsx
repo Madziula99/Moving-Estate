@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
 import { MenuButton } from "../MenuButton/MenuButton";
 import styles from "./AgentsTable.module.css";
+import { CreateAgentForm } from "../CreateAgentForm/CreateAgentForm";
 
 const onPageRows = 6;
 const photoHeight = 130;
@@ -26,9 +27,25 @@ const columns = [
 ];
 
 class AgentsTable extends React.Component {
+  state = {
+    isCreating: false
+  };
+
+  enableCreateMode() {
+    this.setState({ isCreating: true });
+  }
+
+  disableCreateMode() {
+    this.setState({ isCreating: false });
+  }
+  
   render() {
+    const { isCreating } = this.state;
+
+    if (isCreating) return <CreateAgentForm disableCreateMode={() => this.disableCreateMode()} />
+
     return <div className={styles.table}>
-      <MenuButton text="Create agent" href="/api/agents/new" />
+      <MenuButton text="Create agent" enableMode={() => this.enableCreateMode()} /* href="/api/agents/new" */ />
       <DataGrid
         rowHeight={rowHeight}
         autoHeight

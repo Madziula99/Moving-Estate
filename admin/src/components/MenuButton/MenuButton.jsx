@@ -4,11 +4,9 @@ import styles from "./MenuButton.module.css";
 
 class MenuButton extends React.Component {
   render() {
-    const { text, href, enableEditMode, type } = this.props;
+    const { text, href, enableMode, type } = this.props;
 
-    return <div className={styles.btn_wrapper}>
-      <Button variant="contained" href={href} onClick={enableEditMode} type={type} className={styles.btn}>{text}</Button>
-    </div>
+    return <Button variant="contained" href={href} onClick={enableMode} type={type} className={styles.btn}>{text}</Button>
   }
 }
 

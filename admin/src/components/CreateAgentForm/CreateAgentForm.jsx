@@ -2,14 +2,14 @@ import React from "react";
 import { Formik } from "formik";
 import { Input } from "../Input/Input.jsx";
 import { MenuButton } from "../MenuButton/MenuButton.jsx";
-import styles from "./EditAgentForm.module.css";
+import styles from "./CreateAgentForm.module.css";
 
-class EditAgentForm extends React.Component {
+class CreateAgentForm extends React.Component {
   render() {
-    const { values, disableEditMode } = this.props;
+    const { disableCreateMode } = this.props;
 
     return <Formik
-      initialValues={values}
+      initialValues={{ name: "", email: "", location: "", photo: "" }}
       validate={values => {
         const errors = {};
 
@@ -26,8 +26,7 @@ class EditAgentForm extends React.Component {
         return errors;
       }}
       onSubmit={(values, actions) => {
-        disableEditMode();
-
+        disableCreateMode()
         // updating data in database needed
 
         actions.setSubmitting(false);
@@ -37,7 +36,7 @@ class EditAgentForm extends React.Component {
         <form onSubmit={props.handleSubmit} className={styles.form}>
           <div className={styles.buttons_wrapper}>
             <MenuButton type="submit" text="Save" />
-            <MenuButton href="/admin/agents/1" text="Cancel" />
+            <MenuButton href="/admin/agents" text="Cancel" />
           </div>
           <Input label="Name: " type="text" name="name" data={props} />
           <Input label="Email: " type="email" name="email" data={props} />
@@ -49,4 +48,4 @@ class EditAgentForm extends React.Component {
   }
 }
 
-export { EditAgentForm };
+export { CreateAgentForm };
