@@ -10,7 +10,7 @@ async function read(req, res) {
   if (!propertyObject) return res.status(404).json({ error: `Property with id ${id} not found` });
 
   propertyObject.agent = await Agent.findOne({
-    attributes: ['name', 'location', 'photo'],
+    attributes: ["name", "location", "photo"],
     where: { id: propertyObject.agentId }
   })
 

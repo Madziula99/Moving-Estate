@@ -5,6 +5,18 @@ function index(req, res) {
   Agent.findAll().then(agents => res.status(200).json({ agents }));
 }
 
+function read(req, res) {
+  const { id } = req.params;
+
+  Agent.findOne({
+    attributes: ["name", "location", "email", "photo"],
+    where: { id: id }
+  }).then(agent => {
+    if (agent === null) res.status(404).json({ message: `Agent with id = ${id} doesn't exist` })
+    else res.status(200).json({ agent })
+  })
+}
+
 function create(req, res) {
   const { name, location, email, photo } = req.body;
 
@@ -27,5 +39,6 @@ function update(req, res) {
 
 module.exports = Router()
   .get("/", index)
+  .get("/:id", read)
   .post("/", create)
   .put("/:id", update)
