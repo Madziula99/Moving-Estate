@@ -10,12 +10,27 @@ class EditAgentForm extends React.Component {
 
     return <Formik
       initialValues={values}
+      validate={values => {
+        const errors = {};
+
+        if (!values.name) {
+          errors.name = "Required field";
+        }
+
+        if (!values.email) {
+          errors.email = "Required field";
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+          errors.email = "Invalid email address";
+        }
+
+        return errors;
+      }}
       onSubmit={(values, actions) => {
-        setTimeout(() => {
-          disableEditMode();
-          // alert(JSON.stringify(values, null, 2));
-          actions.setSubmitting(false);
-        }, 1000);
+        disableEditMode();
+
+        // updating data in database needed
+
+        actions.setSubmitting(false);
       }}
     >
       {props => (
@@ -25,7 +40,6 @@ class EditAgentForm extends React.Component {
           <Input label="Email: " type="email" name="email" data={props} />
           <Input label="Location: " type="text" name="location" data={props} />
           <Input label="Photo: " type="text" name="photo" data={props} />
-          {/* {props.errors.name && <div id="feedback">{props.errors.name}</div>} */}
         </form>
       )}
     </Formik>
