@@ -1,6 +1,6 @@
 import React from "react";
-import { MenuButton } from "../MenuButton/MenuButton.jsx";
-import { Form } from "../Form/Form.jsx";
+import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
+import { Form } from "../components/Form/Form.jsx";
 import styles from "./Agent.module.css";
 
 class Agent extends React.Component {

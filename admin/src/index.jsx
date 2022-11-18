@@ -5,7 +5,7 @@ import Messages from "./pages/Messages.jsx";
 import { Index } from "./pages/Index.jsx";
 import { Properties } from "./pages/Properties.jsx";
 import { Agents } from "./pages/Agents.jsx";
-import { Agent } from "./components/Agent/Agent.jsx";
+import { Agent } from "./pages/Agent.jsx";
 import "./index.css";
 
 async function main() {
