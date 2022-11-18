@@ -2,14 +2,20 @@ import React from "react";
 import { Formik } from "formik";
 import { Input } from "../Input/Input.jsx";
 import { Menu } from "../Menu/Menu.jsx";
-import styles from "./EditAgentForm.module.css";
+import styles from "./Form.module.css";
 
-class EditAgentForm extends React.Component {
+class Form extends React.Component {
   render() {
-    const { values, disableEditMode } = this.props;
+    const { values, disableEditMode, disableCreateMode, mode } = this.props;
+    const isEditMode = mode === "edit";
+    const baseUrl = "/admin/agents";
+
+    const initialValues = isEditMode ? values : { name: "", email: "", location: "", photo: "" };
+    const disableMode = isEditMode ? disableEditMode : disableCreateMode;
+    const redirect = isEditMode ? `${baseUrl}/${values.id}` : baseUrl;
 
     return <Formik
-      initialValues={values}
+      initialValues={initialValues}
       validate={values => {
         const errors = {};
 
@@ -26,7 +32,7 @@ class EditAgentForm extends React.Component {
         return errors;
       }}
       onSubmit={(values, actions) => {
-        disableEditMode();
+        disableMode();
 
         // updating data in database needed
 
@@ -35,7 +41,7 @@ class EditAgentForm extends React.Component {
     >
       {props => (
         <form onSubmit={props.handleSubmit} className={styles.form}>
-          <Menu href="/admin/agents/1" />
+          <Menu href={redirect} />
           <Input label="Name: " type="text" name="name" data={props} />
           <Input label="Email: " type="email" name="email" data={props} />
           <Input label="Location: " type="text" name="location" data={props} />
@@ -46,4 +52,4 @@ class EditAgentForm extends React.Component {
   }
 }
 
-export { EditAgentForm };
+export { Form };

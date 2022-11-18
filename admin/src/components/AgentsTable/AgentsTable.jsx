@@ -2,7 +2,7 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
 import { MenuButton } from "../MenuButton/MenuButton.jsx";
-import { CreateAgentForm } from "../CreateAgentForm/CreateAgentForm.jsx";
+import { Form } from "../Form/Form.jsx";
 import styles from "./AgentsTable.module.css";
 
 const onPageRows = 6;
@@ -42,7 +42,7 @@ class AgentsTable extends React.Component {
   render() {
     const { isCreating } = this.state;
 
-    if (isCreating) return <CreateAgentForm disableCreateMode={() => this.disableCreateMode()} />
+    if (isCreating) return <Form disableCreateMode={() => this.disableCreateMode()} />
 
     return <div className={styles.table}>
       <MenuButton text="Create agent" enableMode={() => this.enableCreateMode()} /* href="/api/agents/new" */ />
