@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik } from "formik";
 import { Input } from "../Input/Input.jsx";
-import { MenuButton } from "../MenuButton/MenuButton.jsx";
+import { Menu } from "../Menu/Menu.jsx";
 import styles from "./EditAgentForm.module.css";
 
 class EditAgentForm extends React.Component {
@@ -35,10 +35,7 @@ class EditAgentForm extends React.Component {
     >
       {props => (
         <form onSubmit={props.handleSubmit} className={styles.form}>
-          <div className={styles.buttons_wrapper}>
-            <MenuButton type="submit" text="Save" />
-            <MenuButton href="/admin/agents/1" text="Cancel" />
-          </div>
+          <Menu href="/admin/agents/1" />
           <Input label="Name: " type="text" name="name" data={props} />
           <Input label="Email: " type="email" name="email" data={props} />
           <Input label="Location: " type="text" name="location" data={props} />

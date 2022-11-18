@@ -1,9 +1,9 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
-import { MenuButton } from "../MenuButton/MenuButton";
+import { MenuButton } from "../MenuButton/MenuButton.jsx";
+import { CreateAgentForm } from "../CreateAgentForm/CreateAgentForm.jsx";
 import styles from "./AgentsTable.module.css";
-import { CreateAgentForm } from "../CreateAgentForm/CreateAgentForm";
 
 const onPageRows = 6;
 const photoHeight = 130;
@@ -38,7 +38,7 @@ class AgentsTable extends React.Component {
   disableCreateMode() {
     this.setState({ isCreating: false });
   }
-  
+
   render() {
     const { isCreating } = this.state;
 

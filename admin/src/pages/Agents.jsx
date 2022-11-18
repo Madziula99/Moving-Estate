@@ -4,7 +4,7 @@ import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { AgentsTable } from "../components/AgentsTable/AgentsTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 
-const managerEmail = "jsmastery2022@gmail.com";
+const managerEmail = "jsmastery2022@gmail.com"; // will be replaced with email from congif
 
 class Agents extends React.Component {
   state = {
