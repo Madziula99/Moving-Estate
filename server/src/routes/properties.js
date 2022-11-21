@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const properties = require("../data.json");
-const { Message } = require("../models");
+const { Message, Agent } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
@@ -9,7 +9,14 @@ async function read(req, res) {
 
   if (!property) return res.status(404).json({ error: `Property with id ${id} not found` });
 
-  res.json({ property });
+  try {
+    property.agent = await Agent.findByPk(property.agentId, {
+      attributes: ["name", "location", "email", "photo"]
+    })
+    return res.json({ property });
+  } catch (error) {
+    res.status(500).json({ error })
+  }
 }
 
 function filterProperties(filters) {
@@ -99,7 +106,7 @@ async function index(req, res) {
 async function retrieve(req, res) {
   const { id } = req.params;
   const { email } = req.query;
-  
+
   const agentProperties = filterProperties({ email: email }).map(property => property.id);
   const hasAccess = agentProperties.includes(id);
 
