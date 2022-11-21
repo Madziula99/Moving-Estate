@@ -9,12 +9,14 @@ async function read(req, res) {
 
   if (!property) return res.status(404).json({ error: `Property with id ${id} not found` });
 
-  property.agent = await Agent.findOne({
-    attributes: ["name", "location", "email", "photo"],
-    where: { id: property.agentId }
-  })
-
-  res.json({ property });
+  try {
+    property.agent = await Agent.findByPk(property.agentId, {
+      attributes: ["name", "location", "email", "photo"]
+    })
+    return res.json({ property });
+  } catch (error) {
+    res.status(500).json({ error })
+  }
 }
 
 function filterProperties(filters) {
