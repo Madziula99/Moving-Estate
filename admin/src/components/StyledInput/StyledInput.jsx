@@ -1,14 +1,15 @@
 import React from "react";
-import styles from "./Input.module.css";
+import { Input } from "@mui/material";
+import styles from "./StyledInput.module.css";
 
-class Input extends React.Component {
+class StyledInput extends React.Component {
   render() {
     const { label, name, type, data } = this.props;
 
     return <div className={styles.input_container}>
       <div className={styles.input_wrapper}>
         <span>{label}</span>
-        <input
+        <Input
           type={type}
           onChange={data.handleChange}
           onBlur={data.handleBlur}
@@ -22,4 +23,4 @@ class Input extends React.Component {
   }
 }
 
-export { Input };
+export { StyledInput };

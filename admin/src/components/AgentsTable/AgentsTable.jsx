@@ -14,7 +14,7 @@ const smallCellWidth = 150;
 const AvatarCell = props => <Avatar
   alt="Agent"
   src={props.value}
-  sx={{ width: 150, height: photoHeight }}
+  sx={{ width: smallCellWidth, height: photoHeight }}
   variant="square" />;
 
 const columns = [
@@ -35,7 +35,7 @@ class AgentsTable extends React.Component {
     if (isCreating) return <CreateAgent />
 
     return <div className={styles.table}>
-      <MenuButton text="Create agent" enableMode={() => this.setState({ isCreating: true })} href="/admin/agents/new" />
+      <MenuButton text="Create agent" handleClick={() => this.setState({ isCreating: true })} href="/admin/agents/new" />
       <DataGrid
         rowHeight={rowHeight}
         autoHeight

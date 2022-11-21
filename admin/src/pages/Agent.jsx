@@ -7,26 +7,24 @@ import styles from "./Agent.module.css";
 
 class Agent extends React.Component {
   state = {
-    // agentData: {}, - it is commented because we can't get data from api yet, so we use the fake one now
-    agentData: { name: "Kelly Lo", email: "lo@gmail.com", location: "Spain", id: 1, photo: "https://picsum.photos/id/500/300" },
+    agentData: {},
     isLoading: true,
     isEditing: false
   };
 
   async getAgent() {
-    // this.setState({ isLoading: true });
+    const agentId = this.props.match.params.id;
 
-    // const agentId = this.props.match.params.id;
+    this.setState({ isLoading: true });
 
-    // await fetch(`/api/agents/${agentId}`)
-    //   .then(r => r.json())
-    //   .then(agentData => {
-    //     this.setState({
-    //       agentData: agentData,
-    //       isLoading: false
-    //     })
-    //   });
-    this.setState({ isLoading: false });
+    await fetch(`/api/agents/${agentId}`)
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          agentData: data.agent,
+          isLoading: false
+        })
+      });
   }
 
   componentDidMount() {
@@ -37,12 +35,12 @@ class Agent extends React.Component {
     const { isLoading, agentData, isEditing } = this.state;
     const agentId = this.props.match.params.id;
 
-    if (isEditing) return <EditAgent />
-
     if (isLoading) return <Spinner />;
 
+    if (isEditing) return <EditAgent />
+
     return <div className={styles.agent_form_wrapper}>
-      <MenuButton text="Edit agent" enableMode={() => this.setState({ isEditing: true })} href={`/admin/agents/${agentId}/edit`} />
+      <MenuButton text="Edit agent" handleClick={() => this.setState({ isEditing: true })} href={`/admin/agents/${agentId}/edit`} />
       <div className={styles.agent_form}>
         <img src={agentData.photo} alt="Agent" />
         <p>Name: {agentData.name}</p>
