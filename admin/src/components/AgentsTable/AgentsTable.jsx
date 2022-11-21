@@ -31,6 +31,7 @@ class AgentsTable extends React.Component {
 
   render() {
     const { isCreating } = this.state;
+    const { agents } = this.props;
 
     if (isCreating) return <CreateAgent />
 
@@ -39,7 +40,7 @@ class AgentsTable extends React.Component {
       <DataGrid
         rowHeight={rowHeight}
         autoHeight
-        rows={this.props.agents || []}
+        rows={agents || []}
         columns={columns}
         pageSize={onPageRows}
         rowsPerPageOptions={[onPageRows]}

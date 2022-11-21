@@ -1,5 +1,4 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { Formik } from "formik";
 import { StyledInput } from "../StyledInput/StyledInput.jsx";
 import { Menu } from "../Menu/Menu.jsx";
@@ -45,4 +44,4 @@ class AgentForm extends React.Component {
   }
 }
 
-export default withRouter(AgentForm);
+export { AgentForm };

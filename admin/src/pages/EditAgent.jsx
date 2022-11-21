@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
-import AgentForm from "../components/AgentForm/AgentForm.jsx";
+import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 
 class EditAgent extends React.Component {
   state = {
