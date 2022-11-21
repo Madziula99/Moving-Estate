@@ -1,40 +1,45 @@
 const { Router } = require("express");
 const { Agent } = require("../models");
 
-function index(req, res) {
-  Agent.findAll().then(agents => res.status(200).json({ agents }));
+async function index(req, res) {
+  await Agent.findAll().then(agents => res.status(200).json({ agents }));
 }
 
-function read(req, res) {
+async function read(req, res) {
   const { id } = req.params;
 
-  Agent.findOne({
-    attributes: ["name", "location", "email", "photo"],
+  await Agent.findOne({
     where: { id: id }
   }).then(agent => {
-    if (agent === null) res.status(404).json({ message: `Agent with id = ${id} doesn't exist` })
+    if (!agent) res.status(404).json({ error: `Agent with id = ${id} doesn't exist` })
     else res.status(200).json({ agent })
   })
 }
 
-function create(req, res) {
+async function create(req, res) {
   const { name, location, email, photo } = req.body;
 
-  Agent.create({ name, location, email, photo })
-    .then(() => res.status(200).json({ message: "Agent created" }))
-    .catch(error => res.status(418).json({ message: "Agent can't be created", error: error }));
+  await Agent.create({ name, location, email, photo })
+    .then(agent => res.status(200).json({ agent }))
+    .catch(error => res.status(403).json({ error }));
 }
 
-function update(req, res) {
+async function update(req, res) {
   const { id } = req.params;
   const { name, location, email, photo } = req.body;
 
-  Agent.update(
-    { name, location, email, photo },
-    { where: { id: id }}
-  )
-  .then(() => res.status(200).json({ message: "Agent updated" }))
-  .catch(error => res.status(418).json({ message: "Agent not updated", error: error }));
+  let agent = await Agent.findByPk(id);
+
+  if (!agent) return res.status(404).json({ error: `Agent with id = ${id} doesn't exist` });
+
+  try {
+      agent.update(
+      { name, location, email, photo }
+    )
+    return res.json({ agent });
+  } catch(error) {
+    res.status(403).json({ error });
+  }
 }
 
 module.exports = Router()
