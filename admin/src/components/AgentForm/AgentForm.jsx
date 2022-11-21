@@ -3,9 +3,9 @@ import { withRouter } from "react-router-dom";
 import { Formik } from "formik";
 import { Input } from "../Input/Input.jsx";
 import { Menu } from "../Menu/Menu.jsx";
-import styles from "./Form.module.css";
+import styles from "./AgentForm.module.css";
 
-class Form extends React.Component {
+class AgentForm extends React.Component {
   async getAgent() {
     const agentId = this.props.match.params.id;
 
@@ -31,11 +31,12 @@ class Form extends React.Component {
   }
 
   render() {
-    const formMode = this.props.match.url.split("/").at(-1);
-    const isEditMode = formMode === "edit";
+    const { enableMode, mode, onSubmitted } = this.props;
+
     const baseUrl = "/admin/agents";
-    let initialValues;
     let redirect;
+    const isEditMode = mode === "edit";
+    let initialValues;
 
     if (isEditMode) {
       const currentAgentId = this.props.match.url.split("/").at(-2);
@@ -67,8 +68,9 @@ class Form extends React.Component {
       }}
       onSubmit={(values, actions) => {
         // isEditMode ? this.updateAgent(values) : this.createAgent(values); - it is commented because we can't push data to api yet
-
         actions.setSubmitting(false);
+
+        onSubmitted();
       }}
     >
       {props => (
@@ -84,4 +86,4 @@ class Form extends React.Component {
   }
 }
 
-export default withRouter(Form);
+export default withRouter(AgentForm);

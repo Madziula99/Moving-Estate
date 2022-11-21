@@ -6,7 +6,8 @@ import { Index } from "./pages/Index.jsx";
 import { Properties } from "./pages/Properties.jsx";
 import { Agents } from "./pages/Agents.jsx";
 import Agent from "./pages/Agent.jsx";
-import Form from "./components/Form/Form.jsx";
+import { CreateAgent } from "./pages/CreateAgent.jsx";
+import EditAgent from "./pages/EditAgent.jsx";
 import "./index.css";
 
 async function main() {
@@ -24,10 +25,10 @@ async function main() {
             <Messages />
           </Route>
           <Route path="/agents/:id/edit">
-            <Form />
+            <EditAgent />
           </Route>
           <Route path="/agents/new">
-            <Form />
+            <CreateAgent />
           </Route>
           <Route path="/agents/:id">
             <Agent />

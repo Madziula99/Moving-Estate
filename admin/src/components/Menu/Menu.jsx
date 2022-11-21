@@ -7,7 +7,7 @@ class Menu extends React.Component {
     const { href } = this.props;
 
     return <div className={styles.buttons_wrapper}>
-      <MenuButton type="submit" href={href} text="Save" />
+      <MenuButton type="submit" text="Save" />
       <MenuButton href={href} text="Cancel" />
     </div>
   }
