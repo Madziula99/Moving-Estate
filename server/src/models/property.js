@@ -5,7 +5,8 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Property extends Model {
     static associate(models) {
-      Property.belongsTo(models.Agent, { foreignKey: "agentId" })
+      Property.belongsTo(models.Agent, { as: "agent", foreignKey: "agentId" }),
+      Property.hasMany(models.PropertyImage, { as: "images", foreignKey: "propertyId" })
     }
   }
 
