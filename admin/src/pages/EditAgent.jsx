@@ -4,29 +4,48 @@ import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 
 class EditAgent extends React.Component {
   state = {
-    isSubmitted: false,
-    isCancelled: false,
+    redirect: null,
+    isSubmitting: false,
+    agentId: this.props.match.params.id,
     agentData: {}
   };
 
   async getAgent() {
-    const agentId = this.props.match.params.id;
+    const { agentId } = this.state;
 
-    await fetch(`/api/agents/${agentId}`).then(r => r.json()).then(data => {
-      this.setState({
-        agentData: data.agent,
-      })
-    });
+    await fetch(`/api/agents/${agentId}`).then(r => {
+      if (r.status === 404) {
+        throw new Error();
+      } else {
+        return r.json().then(data => {
+          this.setState({
+            agentData: data.agent,
+          })
+        });
+      }
+    }).catch(() => this.setState({ redirect: "/agents" }));
   }
 
   async updateAgent(values) {
-    const agentId = this.props.match.params.id;
+    const { agentId } = this.state;
+
+    this.setState({ isSubmitting: true });
 
     await fetch(`/api/agents/${agentId}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
-    }).then(r => r.json());
+    }).then(r => {
+      this.returnToAgentPage();
+
+      return r.json();
+    });
+  }
+
+  returnToAgentPage() {
+    const { agentId } = this.state;
+
+    this.setState({ redirect: `/agents/${agentId}` });
   }
 
   componentDidMount() {
@@ -34,17 +53,16 @@ class EditAgent extends React.Component {
   }
 
   render() {
-    const { isSubmitted, isCancelled, agentData } = this.state;
-    const agentId = this.props.match.params.id;
+    const { redirect, agentData, isSubmitting } = this.state;
 
-    if (isSubmitted || isCancelled) return <Redirect to={`/agents/${agentId}`} />
+    if (redirect) return <Redirect to={redirect} />
 
     if (agentData.name) {
       return <AgentForm
         values={agentData}
-        handleSubmit={() => this.setState({ isSubmitted: true })}
-        handleCancel={() => this.setState({ isCancelled: true })}
-        handleCreateOrUpdate={newValues => this.updateAgent(newValues)}
+        handleSubmit={newValues => this.updateAgent(newValues)}
+        handleCancel={() => this.returnToAgentPage()}
+        state={isSubmitting ? "submitting" : "ready"}
       />
     }
   }

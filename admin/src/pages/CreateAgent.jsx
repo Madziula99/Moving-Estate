@@ -4,28 +4,38 @@ import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 
 class CreateAgent extends React.Component {
   state = {
-    isSubmitted: false,
-    isCancelled: false
+    redirect: null,
+    isSubmitting: false
   };
 
   async createAgent(values) {
+    this.setState({ isSubmitting: true });
+
     await fetch("/api/agents", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
-    }).then(r => r.json());
+    }).then(r =>  r.json()).then(({ agent }) => {
+      this.setState({
+        redirect: `/agents/${agent.id}`
+      });
+    });
+  }
+
+  returnToAgents() {
+    this.setState({ redirect: "/agents" });
   }
 
   render() {
-    const { isSubmitted, isCancelled } = this.state;
+    const { redirect, isSubmitting } = this.state;
 
-    if (isSubmitted || isCancelled) return <Redirect to="/agents" />
+    if (redirect) return <Redirect to={redirect} />
 
     return <AgentForm
       values={{ name: "", email: "", location: "", photo: "" }}
-      handleSubmit={() => this.setState({ isSubmitted: true })}
-      handleCancel={() => this.setState({ isCancelled: true })}
-      handleCreateOrUpdate={newValues => this.createAgent(newValues)}
+      handleSubmit={newValues => this.createAgent(newValues)}
+      handleCancel={() => this.returnToAgents()}
+      state={isSubmitting ? "submitting" : "ready"}
     />
   }
 }

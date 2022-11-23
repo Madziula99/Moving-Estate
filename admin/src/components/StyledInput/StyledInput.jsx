@@ -4,7 +4,7 @@ import styles from "./StyledInput.module.css";
 
 class StyledInput extends React.Component {
   render() {
-    const { label, name, type, data } = this.props;
+    const { label, name, type, data, isDisabled } = this.props;
 
     return <div className={styles.input_container}>
       <div className={styles.input_wrapper}>
@@ -16,6 +16,7 @@ class StyledInput extends React.Component {
           value={data.values[name]}
           name={name}
           className={styles.input}
+          disabled={isDisabled}
         />
       </div>
       {data.errors[name] && <span className={styles.input_error}>{data.errors[name]}</span>}

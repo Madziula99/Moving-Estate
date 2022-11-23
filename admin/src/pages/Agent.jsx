@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import EditAgent from "./EditAgent.jsx";
@@ -8,23 +8,31 @@ import styles from "./Agent.module.css";
 class Agent extends React.Component {
   state = {
     agentData: {},
+    agentId: this.props.match.params.id,
     isLoading: true,
-    isEditing: false
+    isEditing: false,
+    redirect: null
   };
 
   async getAgent() {
-    const agentId = this.props.match.params.id;
+    const { agentId } = this.state;
 
     this.setState({ isLoading: true });
 
     await fetch(`/api/agents/${agentId}`)
-      .then(r => r.json())
-      .then(data => {
-        this.setState({
-          agentData: data.agent,
-          isLoading: false
-        })
-      });
+      .then(r => {
+        if (r.status === 404) {
+          throw new Error();
+        } else {
+          r.json().then(data => {
+            this.setState({
+              agentData: data.agent,
+              isLoading: false
+            })
+          });
+        }
+      })
+      .catch(() => this.setState({ redirect: "/agents", isLoading: false }));
   }
 
   componentDidMount() {
@@ -32,12 +40,13 @@ class Agent extends React.Component {
   }
 
   render() {
-    const { isLoading, agentData, isEditing } = this.state;
-    const agentId = this.props.match.params.id;
+    const { isLoading, agentData, agentId, isEditing, redirect } = this.state;
 
     if (isLoading) return <Spinner />;
 
     if (isEditing) return <EditAgent />
+
+    if (redirect) return <Redirect to={redirect} />
 
     return <div className={styles.agent_form_wrapper}>
       <MenuButton text="Edit agent" handleClick={() => this.setState({ isEditing: true })} href={`/admin/agents/${agentId}/edit`} />

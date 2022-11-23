@@ -6,7 +6,8 @@ import styles from "./AgentForm.module.css";
 
 class AgentForm extends React.Component {
   render() {
-    const { values, handleSubmit, handleCancel, handleCreateOrUpdate } = this.props;
+    const { values, handleSubmit, handleCancel, state } = this.props;
+    const isDisabled = state === "submitting";
 
     return <Formik
       initialValues={values}
@@ -27,17 +28,16 @@ class AgentForm extends React.Component {
       }}
       onSubmit={(values, actions) => {
         actions.setSubmitting(false);
-        handleCreateOrUpdate(values);
-        handleSubmit();
+        handleSubmit(values);
       }}
     >
       {props => (
         <form onSubmit={props.handleSubmit} className={styles.form}>
-          <Menu onCancelClick={handleCancel} />
-          <StyledInput label="Name: " type="text" name="name" data={props} />
-          <StyledInput label="Email: " type="email" name="email" data={props} />
-          <StyledInput label="Location: " type="text" name="location" data={props} />
-          <StyledInput label="Photo: " type="text" name="photo" data={props} />
+          <Menu onCancelClick={handleCancel} isDisabled={isDisabled} />
+          <StyledInput isDisabled={isDisabled} label="Name: " type="text" name="name" data={props} />
+          <StyledInput isDisabled={isDisabled} label="Email: " type="email" name="email" data={props} />
+          <StyledInput isDisabled={isDisabled} label="Location: " type="text" name="location" data={props} />
+          <StyledInput isDisabled={isDisabled} label="Photo: " type="text" name="photo" data={props} />
         </form>
       )}
     </Formik>
