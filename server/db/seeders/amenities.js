@@ -5,7 +5,7 @@ module.exports = {
   async up (queryInterface, Sequelize) {
     const createdAt = new Date();
     const updatedAt = new Date();
-    
+
     await queryInterface.bulkInsert('Amenities', [
       { title: "Water Cooler", createdAt, updatedAt },
       { title: "Washing Machine", createdAt, updatedAt },

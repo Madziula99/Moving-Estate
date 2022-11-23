@@ -7,7 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Property.belongsTo(models.Agent, { as: "agent", foreignKey: "agentId" }),
       Property.hasMany(models.PropertyImage, { as: "images", foreignKey: "propertyId" }),
-      Property.belongsToMany(models.Amenity, { through: models.PropertyAmenity, foreignKey: "propertyId" })
+      Property.belongsToMany(models.Amenity, { through: models.PropertyAmenity, foreignKey: "propertyId" }),
+      Property.belongsToMany(models.Icon, { through: models.Feature, foreignKey: "propertyId" })
     }
   }
 

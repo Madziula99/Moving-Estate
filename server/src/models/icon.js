@@ -3,20 +3,19 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Amenity extends Model {
+  class Icon extends Model {
     static associate(models) {
-      Amenity.belongsToMany(models.Property, { through: models.PropertyAmenity, foreignKey: "amenityId" })
+      Icon.belongsToMany(models.Property, { through: models.Feature, foreignKey: "iconId" })
     }
   }
-
-  Amenity.init({
-    title: {
+  Icon.init({
+    icon: {
       type: DataTypes.STRING,
       allowNull: false
     },
   }, {
     sequelize,
-    modelName: 'Amenity',
+    modelName: 'Icon',
   });
-  return Amenity;
+  return Icon;
 };

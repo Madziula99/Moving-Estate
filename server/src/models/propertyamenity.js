@@ -1,7 +1,7 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class PropertyAmenity extends Model {
 
@@ -10,6 +10,7 @@ module.exports = (sequelize, DataTypes) => {
       PropertyAmenity.belongsTo(models.Property, { foreignKey: "propertyId" })
     }
   }
+
   PropertyAmenity.init({
     propertyId: {
       type: DataTypes.STRING,
