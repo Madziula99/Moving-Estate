@@ -7,8 +7,8 @@ module.exports = {
     const updatedAt = new Date();
 
     await queryInterface.bulkInsert('Icons', [
-      { icon: "pow", createdAt, updatedAt },
       { icon: "pool", createdAt, updatedAt },
+      { icon: "paw", createdAt, updatedAt },
       { icon: "fence", createdAt, updatedAt },
     ], {});
   },
