@@ -24,7 +24,7 @@ module.exports = {
           as: "amenityId"
         },
       },
-      isAvailable: {
+      available: {
         allowNull: false,
         type: Sequelize.BOOLEAN
       },

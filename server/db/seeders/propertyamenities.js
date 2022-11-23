@@ -7,9 +7,9 @@ module.exports = {
     const updatedAt = new Date();
 
     await queryInterface.bulkInsert('PropertyAmenities', [
-      { propertyId: "A001", amenityId: 1, isAvailable: true, createdAt, updatedAt },
-      { propertyId: "A001", amenityId: 2, isAvailable: true, createdAt, updatedAt },
-      { propertyId: "A001", amenityId: 3, isAvailable: false, createdAt, updatedAt }
+      { propertyId: "A001", amenityId: 1, available: true, createdAt, updatedAt },
+      { propertyId: "A001", amenityId: 2, available: true, createdAt, updatedAt },
+      { propertyId: "A001", amenityId: 3, available: false, createdAt, updatedAt }
     ], {});
   },
 

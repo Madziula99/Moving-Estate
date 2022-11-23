@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    isAvailable: {
+    available: {
       type: DataTypes.BOOLEAN,
       allowNull: false
     }
