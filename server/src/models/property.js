@@ -8,7 +8,9 @@ module.exports = (sequelize, DataTypes) => {
       Property.belongsTo(models.Agent, { as: "agent", foreignKey: "agentId" }),
       Property.hasMany(models.PropertyImage, { as: "images", foreignKey: "propertyId" }),
       Property.belongsToMany(models.Amenity, { as: "amenities", through: models.PropertyAmenity, foreignKey: "propertyId" }),
-      Property.belongsToMany(models.Icon, { as: "features", through: models.Feature, foreignKey: "propertyId" })
+      Property.belongsToMany(models.Icon, { as: "features", through: models.Feature, foreignKey: "propertyId" }),
+      Property.hasMany(models.FloorPlan, { as: "floor_plans", foreignKey: "propertyId" }),
+      Property.hasMany(models.Message, { as: "messages", foreignKey: "propertyId" })
     }
   }
 
