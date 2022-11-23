@@ -7,7 +7,7 @@ module.exports = {
     await queryInterface.addConstraint('Messages', {
       fields: ['propertyId'],
       type: 'foreign key',
-      name: 'cpropertyId',
+      name: 'propertyId',
       references: {
         table: 'Properties',
         field: 'id'
