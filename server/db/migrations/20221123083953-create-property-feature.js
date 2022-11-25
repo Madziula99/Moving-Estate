@@ -3,7 +3,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Features', {
+    await queryInterface.createTable('PropertyFeatures', {
       propertyId: {
         allowNull: false,
         type: Sequelize.STRING,
@@ -14,14 +14,14 @@ module.exports = {
           as: "propertyId"
         },
       },
-      iconId: {
+      featureId: {
         allowNull: false,
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
-          model: "Icons",
+          model: "Features",
           key: "id",
-          as: "iconId"
+          as: "featureId"
         },
       },
       title: {
@@ -43,6 +43,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Features');
+    await queryInterface.dropTable('PropertyFeatures');
   }
 };

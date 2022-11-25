@@ -4,24 +4,14 @@ const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
   class Feature extends Model {
-
     static associate(models) {
-      Feature.belongsTo(models.Icon, { foreignKey: "iconId" }),
-      Feature.belongsTo(models.Property, { foreignKey: "propertyId" })
+      Feature.belongsToMany(models.Property, { through: models.PropertyFeature, foreignKey: "featureId" })
     }
   }
   Feature.init({
-    iconId: {
-      allowNull: false,
-      type: DataTypes.INTEGER
-    },
-    propertyId: {
-      allowNull: false,
-      type: DataTypes.STRING
-    },
-    title: {
-      allowNull: false,
-      type: DataTypes.STRING
+    feature: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
   }, {
     sequelize,

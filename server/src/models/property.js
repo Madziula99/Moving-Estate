@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
       Property.belongsTo(models.Agent, { as: "agent", foreignKey: "agentId" }),
       Property.hasMany(models.PropertyImage, { as: "images", foreignKey: "propertyId" }),
       Property.belongsToMany(models.Amenity, { as: "amenities", through: models.PropertyAmenity, foreignKey: "propertyId" }),
-      Property.belongsToMany(models.Icon, { as: "features", through: models.Feature, foreignKey: "propertyId" }),
+      Property.belongsToMany(models.Feature, { as: "features", through: models.PropertyFeature, foreignKey: "propertyId" }),
       Property.hasMany(models.FloorPlan, { as: "floor_plans", foreignKey: "propertyId" }),
       Property.hasMany(models.Message, { as: "messages", foreignKey: "propertyId" })
     }
@@ -78,7 +78,7 @@ module.exports = (sequelize, DataTypes) => {
         features: this.features.map(feature => {
           return {
             icon: feature.icon,
-            title: feature.Feature.title
+            title: feature.PropertyFeature.title
           }
         }),
         floor_plans: this.floor_plans.map(floor_plan => {
