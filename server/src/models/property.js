@@ -56,6 +56,32 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
 
+    static async createProperty(values, Amenity) {
+      const { title, location, description, type, mode, price, area, bedrooms, bathrooms, agentId, amenities, images, features, floor_plans} = values;
+
+      const lastId = await Property.findOne({ attributes: ["id"], where: { type: type }, order: [["id", "DESC"]] }).then(property => property.id);
+      const id = lastId.charAt(0) + (Number(lastId.slice(1)) + 1).toString().padStart(3, "0");
+
+      const a = await Amenity.findAll({ where: { title: { [Op.in]: amenities } } }); //array of instances of Amenity
+
+      await Property.create(
+        {
+          id, title, location, description, type, mode, price, area, bedrooms, bathrooms, agentId,
+          images: images.map(image => { return { link: image } }),
+          // amenities: a, //tried to create Amenities
+          // features: f,
+          floor_plans: floor_plans.map(image => { return { name: image.name, url: image.url } })
+        },
+        { include: { all: true } }
+      );
+
+      const property = await Property.findByPk(id, { include: { all: true } })
+
+      property.amenities = a;
+
+      return await property.detailView(Amenity);
+    }
+
     async detailView(Amenity) {
       const amenities = await Amenity.findAll().then(amenities => amenities.map(amenity => amenity.title));
 

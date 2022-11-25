@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Message, Property, Agent, PropertyImage, Amenity } = require("../models");
+const { Message, Property, Agent, PropertyImage, Amenity, Feature, FloorPlan } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
@@ -57,28 +57,11 @@ async function retrieve(req, res) {
 }
 
 async function create(req, res) {
-  //email in req.body? or in req.query
-  const { title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans } = req.body;
+  //email from req.user
   const agentId = 1;
 
-  const lastId = await Property.findOne({ attributes: ["id"], where: { type: type }, order: [["id", "DESC"]] }).then(property => property.id);
-  const id = lastId.charAt(0) + (Number(lastId.slice(1)) + 1).toString().padStart(3, "0");
-
   try {
-    const property = await Property.create(
-      { id, title, location, description, type, mode, price, area, bedrooms, bathrooms, agentId,
-        images: images.map(image => { return { link: image } }),
-        amenities: amenities.map(amenity => {
-          return { title: amenity.title, PropertyAmenity: { available: amenity.available } }
-        }),
-        features: features.map(feature => {
-          return { icon: feature.icon, Feature: { title: feature.title } }
-        }),
-        floor_plans: floor_plans.map(image => { return { name: image.name, url: image.url } })
-      },
-      { include: { all: true } }
-    )
-
+    const property = await Property.createProperty({...req.body, agentId}, Amenity);
     return res.status(200).json({ property });
   } catch (error) {
     return res.status(403).json({ error });
