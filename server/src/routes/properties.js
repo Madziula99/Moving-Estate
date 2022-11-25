@@ -1,126 +1,62 @@
 const { Router } = require("express");
-const properties = require("../data.json");
-const { Message, Agent } = require("../models");
+const { Message, Property, Agent, PropertyImage } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
 
-  const property = properties.find(property => property.id === id);
+  const property = await Property.findByPk(id, { include: { all: true } });
 
   if (!property) return res.status(404).json({ error: `Property with id ${id} not found` });
 
-  try {
-    property.agent = await Agent.findByPk(property.agentId, {
-      attributes: ["name", "location", "email", "photo"]
-    })
-    return res.json({ property });
-  } catch (error) {
-    res.status(500).json({ error })
-  }
-}
-
-function filterProperties(filters) {
-  const filterKeys = Object.keys(filters);
-
-  const filteredProperties = properties.filter(item => filterKeys.every(key => {
-    const filterValue = filters[key];
-
-    if (key === "email") return item.agent.email === filterValue;
-
-    if (!item.hasOwnProperty(key)) return false;
-
-    if (key === "type") return item["type"] === filterValue;
-    if (key === "mode") return item["mode"] === filterValue;
-    if (key === "bathrooms") return item["bathrooms"] === Number(filterValue);
-    if (key === "bedrooms") return item["bedrooms"] === Number(filterValue);
-    if (key === "location") return item["location"][1] === filterValue;
-    if (key === "minArea") return item["area"] >= Number(filterValue);
-    if (key === "maxArea") return item["area"] <= Number(filterValue);
-    if (key === "minPrice") return item["price"] >= Number(filterValue);
-    if (key === "maxPrice") return item["price"] <= Number(filterValue);
-    if (key === "minYearBuilt") return item["year"] >= Number(filterValue);
-
-    return true;
-  }));
-
-  return filteredProperties;
-}
-
-function optionsObject() {
-  const extract = (key) => [
-    ...new Set(properties.map((property => property[key])))
-  ];
-
-  const options = {
-    type: extract("type").sort() || [],
-    mode: extract("mode").sort() || [],
-    bedrooms: extract("bedrooms").sort((a, b) => { return a - b }) || [],
-    bathrooms: extract("bathrooms").sort((a, b) => { return a - b }) || [],
-    location: [...new Set(properties.map((property => property["location"][1])))].sort() || []
-  };
-
-  return options;
+  return res.status(200).json(property.detailView());
 }
 
 async function index(req, res) {
-  const options = optionsObject();
   const { page, ...filters } = req.query;
 
-  const filteredProperties = filterProperties(filters).map(property => {
-    return {
-      id: property.id,
-      title: property.title,
-      location: property.location,
-      image: property.images[0],
-      description: property.description,
-      type: property.type,
-      mode: property.mode,
-      price: property.price,
-      area: property.area,
-      bedrooms: property.bedrooms,
-      bathrooms: property.bathrooms
-    }
-  });
+  const properties = await Property.filter(filters, Agent, PropertyImage);
 
   if (filters.email) {
-    res.json({
-      properties: filteredProperties || [],
-      agentName: properties.find(property => property.agent.email === filters.email).agent.name || ""
-    });
-  } else {
-    const pageSize = 8;
-    let propertiesPages = [];
+    if (properties.length === 0) return res.status(404).json({ message: `Agent: ${filters.email} has no properties` });
+    const agentName = properties[0].agent.name;
 
-    for (let i = 0; i < filteredProperties.length; i += pageSize) {
-      propertiesPages.push(filteredProperties.slice(i, i + pageSize));
-    }
-
-    res.json({
-      properties: propertiesPages[Number(page) - 1] || [],
-      options: options,
-      pages: propertiesPages.length
+    return res.json({
+      properties: properties.map(property => property.summaryView()),
+      agentName: agentName
     });
   }
+
+  const filteredProperties = properties.map(property => property.summaryView());
+  const options = await Property.getOptions();
+
+  const pageSize = 8;
+  let propertiesPages = [];
+
+  for (let i = 0; i < filteredProperties.length; i += pageSize) {
+    propertiesPages.push(filteredProperties.slice(i, i + pageSize));
+  }
+
+  return res.json({
+    properties: propertiesPages[Number(page) - 1] || propertiesPages[0] || [],
+    options: options,
+    pages: propertiesPages.length
+  });
 }
 
 async function retrieve(req, res) {
   const { id } = req.params;
   const { email } = req.query;
 
-  const agentProperties = filterProperties({ email: email }).map(property => property.id);
-  const hasAccess = agentProperties.includes(id);
+  const agent = await Agent.findOne({ where: { email: email }, include: { model: Property, where: { id: id }} });
 
-  if (hasAccess) {
-    const messages = await Message.findAll({ where: { property_id: id } });
+  if (!agent) return res.status(401).json({ message: "No access" });
 
-    if (messages === null) res.json({ messages: [] });
-    else res.json(messages);
-  } else {
-    res.status(401).json({ message: "Not Authorized" });
-  }
+  const messages = await Message.findAll({ where: { propertyId: id } });
+
+  return res.json(messages);
 }
 
 module.exports = Router()
-  .get("/", index)
   .get("/messages/:id", retrieve)
+  .get("/", index)
   .get("/:id", read)
