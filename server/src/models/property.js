@@ -97,8 +97,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     summaryView() {
-      console.log(this.images[0]);
-      const image = this.images[0] ? this.images[0].link : ""
+      const image = this.images ? this.images[0].link : "";
       return {
         id: this.id,
         title: this.title,
