@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Message, Property, Agent, PropertyImage } = require("../models");
+const { Message, Property, Agent, PropertyImage, Amenity } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
@@ -8,7 +8,7 @@ async function read(req, res) {
 
   if (!property) return res.status(404).json({ error: `Property with id ${id} not found` });
 
-  return res.status(200).json(property.detailView());
+  return res.status(200).json(await property.detailView(Amenity));
 }
 
 async function index(req, res) {

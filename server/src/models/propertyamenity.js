@@ -19,10 +19,6 @@ module.exports = (sequelize, DataTypes) => {
     amenityId: {
       type: DataTypes.INTEGER,
       allowNull: false
-    },
-    available: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false
     }
   }, {
     sequelize,

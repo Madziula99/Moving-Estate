@@ -56,7 +56,9 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
 
-    detailView() {
+    async detailView(Amenity) {
+      const amenities = await Amenity.findAll().then(amenities => amenities.map(amenity => amenity.title));
+
       return {
         id: this.id,
         title: this.title,
@@ -69,12 +71,14 @@ module.exports = (sequelize, DataTypes) => {
         area: this.area,
         bedrooms: this.bedrooms,
         bathrooms: this.bathrooms,
-        amenities: this.amenities.map(amenity => {
+        amenities: amenities.map(amenity => {
+          const available = this.amenities.some(a => a.title === amenity);
           return {
-            title: amenity.title,
-            available: amenity.PropertyAmenity.available
+            title: amenity,
+            available: available
           }
-        }),
+        }
+        ),
         features: this.features.map(feature => {
           return {
             icon: feature.icon,
