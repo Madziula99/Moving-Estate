@@ -82,6 +82,13 @@ module.exports = (sequelize, DataTypes) => {
       return await property.detailView(Amenity);
     }
 
+    updateProperty(values) {
+      const { title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans } = values;
+
+      return this.update({ title, location, description, type, mode, price, area, bedrooms, bathrooms });
+
+    }
+
     async detailView(Amenity) {
       const amenities = await Amenity.findAll().then(amenities => amenities.map(amenity => amenity.title));
 

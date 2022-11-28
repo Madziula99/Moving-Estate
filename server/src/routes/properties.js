@@ -68,25 +68,25 @@ async function create(req, res) {
   }
 }
 
-// async function update(req, res) {
-//   const { id } = req.params;
-//   const { title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans } = req.body;
+async function update(req, res) {
+  const { id } = req.params;
+  const { title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans } = req.body;
 
-//   let property = await Property.findByPk(id);
+  let property = await Property.findByPk(id);
 
-//   if (!property) return res.status(404).json({ error: `Property with id = ${id} doesn't exist` });
+  if (!property) return res.status(404).json({ error: `Property with id = ${id} doesn't exist` });
 
-//   try {
-//     property.update({ title, location, description, type, mode, price, area, bedrooms, bathrooms });
-//     return res.json({ property });
-//   } catch (error) {
-//     res.status(403).json({ error });
-//   }
-// }
+  try {
+    property.updateProperty({ title, location, description, type, mode, price, area, bedrooms, bathrooms });
+    return res.json({ property });
+  } catch (error) {
+    res.status(403).json({ error });
+  }
+}
 
 module.exports = Router()
   .get("/messages/:id", retrieve)
   .get("/", index)
   .get("/:id", read)
   .post("/", create)
-  // .put("/:id", update)
+  .put("/:id", update)
