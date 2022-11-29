@@ -14,3 +14,7 @@
 ## Docker usage
 * Run `docker build -t server .`
 * Run `docker run -it -p 80:80 server`. -it is an optional param for joining into interactive console after running the container
+
+## Database usage
+* Run `yarn sequelize db:migrate`
+* Run `yarn sequelize db:seed:all`
