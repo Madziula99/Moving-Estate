@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Message, Property, Agent, PropertyImage, Amenity, Feature, FloorPlan } = require("../models");
+const { Message, Property, Agent, PropertyImage, Amenity, Feature, FloorPlan, PropertyFeature } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
@@ -61,7 +61,7 @@ async function create(req, res) {
   const agentId = 1;
 
   try {
-    const property = await Property.createProperty({...req.body, agentId}, Amenity);
+    const property = await Property.createProperty({...req.body, agentId}, Amenity, Feature);
     return res.status(200).json({ property });
   } catch (error) {
     return res.status(403).json({ error });
@@ -77,8 +77,9 @@ async function update(req, res) {
   if (!property) return res.status(404).json({ error: `Property with id = ${id} doesn't exist` });
 
   try {
-    property.updateProperty({ title, location, description, type, mode, price, area, bedrooms, bathrooms });
-    return res.json({ property });
+    await property.updateProperty({ title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans }, { Amenity, PropertyImage, Feature, FloorPlan, PropertyFeature });
+    const p = await Property.findByPk(id, { include: { all: true } })
+    return res.json(await p.detailView(Amenity));
   } catch (error) {
     res.status(403).json({ error });
   }

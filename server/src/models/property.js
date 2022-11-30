@@ -56,37 +56,86 @@ module.exports = (sequelize, DataTypes) => {
       })
     }
 
-    static async createProperty(values, Amenity) {
+    static async createProperty(values, Amenity, Feature) {
       const { title, location, description, type, mode, price, area, bedrooms, bathrooms, agentId, amenities, images, features, floor_plans} = values;
 
       const lastId = await Property.findOne({ attributes: ["id"], where: { type: type }, order: [["id", "DESC"]] }).then(property => property.id);
       const id = lastId.charAt(0) + (Number(lastId.slice(1)) + 1).toString().padStart(3, "0");
 
-      const a = await Amenity.findAll({ where: { title: { [Op.in]: amenities } } }); //array of instances of Amenity
-
-      await Property.create(
+      const p = await Property.create(
         {
           id, title, location, description, type, mode, price, area, bedrooms, bathrooms, agentId,
           images: images.map(image => { return { link: image } }),
-          // amenities: a, //tried to create Amenities
-          // features: f,
           floor_plans: floor_plans.map(image => { return { name: image.name, url: image.url } })
         },
         { include: { all: true } }
       );
 
-      const property = await Property.findByPk(id, { include: { all: true } })
+      features.map(async item => {
+        const f = await Feature.findOne({ where: { feature: item.feature } })
+        await p.addFeature(f, { through: { title: item.title }})
+      });
 
-      property.amenities = a;
+      const a = await Amenity.findAll({ where: { title: { [Op.in]: amenities } } });
+      await p.setAmenities(a);
+
+      const property = await Property.findByPk(id, { include: { all: true } })
 
       return await property.detailView(Amenity);
     }
 
-    updateProperty(values) {
+    async updateProperty(values, models) {
       const { title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans } = values;
+      const { Amenity, PropertyImage, Feature, FloorPlan } = models;
+      const propertyId = this.id;
 
-      return this.update({ title, location, description, type, mode, price, area, bedrooms, bathrooms });
+      await this.update({ title, location, description, type, mode, price, area, bedrooms, bathrooms });
 
+      const newAmenities = await Amenity.findAll({ where: { title: { [Op.in]: amenities } } });
+      await this.setAmenities(newAmenities);
+
+      await this.getFeatures().then(existingFeatures => existingFeatures.map(async feature => {
+        if(!features.some(f => f.feature === feature.feature)) return await this.removeFeature(feature);
+      }))
+
+      await Promise.all(features.map(async item => {
+        const newFeature = await Feature.findOne({ where: { feature: item.feature } });
+        const newTitle = item.title;
+        await this.addFeature(newFeature, { through: { title: newTitle } });
+      }));
+
+      await this.getImages().then(existingImages => existingImages.map(async image => {
+        if (!images.includes(image.link)) return await image.destroy();
+      }))
+
+      await Promise.all(images.map(async image => {
+        const [newImage, created] = await PropertyImage.findOrCreate({
+          where: { link: image },
+          defaults: { propertyId: propertyId, link: image }
+        });
+        if (created) await this.addImage(newImage);
+      }));
+
+      await this.getFloor_plans().then(existingPlans => existingPlans.map(async plan => {
+        if (!floor_plans.find(floor_plan => floor_plan.name === plan.name && floor_plan.url === plan.url)) {
+          return await plan.destroy();
+        }
+      }))
+
+      await Promise.all(floor_plans.map(async plan => {
+        const [newPlan, created] = await FloorPlan.findOrCreate({
+          where: {
+            [Op.and]: {
+              name: plan.name,
+              url: plan.url
+            }
+          },
+          defaults: { propertyId: propertyId, name: plan.name, url: plan.url }
+        });
+        if (created) await this.addFloor_plan(newPlan);
+      }));
+
+      return await Property.findByPk(this.id, { include: { all: true } })
     }
 
     async detailView(Amenity) {
@@ -114,7 +163,7 @@ module.exports = (sequelize, DataTypes) => {
         ),
         features: this.features.map(feature => {
           return {
-            icon: feature.icon,
+            feature: feature.feature,
             title: feature.PropertyFeature.title
           }
         }),
