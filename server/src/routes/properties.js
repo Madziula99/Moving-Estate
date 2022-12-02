@@ -1,5 +1,9 @@
 const { Router } = require("express");
-const { Message, Property, Agent, PropertyImage, Amenity, Feature, FloorPlan, PropertyFeature } = require("../models");
+const amenities = require("./amenities.js");
+const floor_plans = require("./floor_plans.js");
+const images = require("./images.js");
+const features = require("./features.js");
+const { Message, Property, Agent, PropertyImage, Amenity } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
@@ -15,6 +19,8 @@ async function index(req, res) {
   const { page, ...filters } = req.query;
 
   const properties = await Property.filter(filters, Agent, PropertyImage);
+
+  console.log(properties)
 
   if (filters.email) {
     if (properties.length === 0) return res.status(404).json({ message: `Agent: ${filters.email} has no properties` });
@@ -43,25 +49,12 @@ async function index(req, res) {
   });
 }
 
-async function retrieve(req, res) {
-  const { id } = req.params;
-  const { email } = req.query;
-
-  const agent = await Agent.findOne({ where: { email: email }, include: { model: Property, where: { id: id }} });
-
-  if (!agent) return res.status(401).json({ message: "No access" });
-
-  const messages = await Message.findAll({ where: { propertyId: id } });
-
-  return res.json(messages);
-}
-
 async function create(req, res) {
-  //email from req.user
-  const agentId = 1;
+  const email = req.user.emails[0].value;
+  const agentId = await Agent.findOne({ where: { email } }).then(agent => agent.id);
 
   try {
-    const property = await Property.createProperty({...req.body, agentId}, Amenity, Feature);
+    const property = await Property.createProperty({...req.body, agentId}, Amenity);
     return res.status(200).json({ property });
   } catch (error) {
     return res.status(403).json({ error });
@@ -70,19 +63,38 @@ async function create(req, res) {
 
 async function update(req, res) {
   const { id } = req.params;
-  const { title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans } = req.body;
+  const { title, location, description, type, mode, price, area, bedrooms, bathrooms} = req.body;
 
-  let property = await Property.findByPk(id);
+  let property = await Property.findByPk(id, { include: { all: true } });
 
   if (!property) return res.status(404).json({ error: `Property with id = ${id} doesn't exist` });
 
   try {
-    await property.updateProperty({ title, location, description, type, mode, price, area, bedrooms, bathrooms, images, features, amenities, floor_plans }, { Amenity, PropertyImage, Feature, FloorPlan, PropertyFeature });
-    const p = await Property.findByPk(id, { include: { all: true } })
-    return res.json(await p.detailView(Amenity));
+    await property.updateProperty({ title, location, description, type, mode, price, area, bedrooms, bathrooms});
+    return res.json(await property.detailView(Amenity));
   } catch (error) {
     res.status(403).json({ error });
   }
+}
+
+async function destroy(req, res) {
+  const { id } = req.params;
+  const property = await Property.findByPk(id);
+
+  res.json(await property.destroy());
+}
+
+async function retrieve(req, res) {
+  const { id } = req.params;
+  const { email } = req.query;
+
+  const agent = await Agent.findOne({ where: { email: email }, include: { model: Property, where: { id: id } } });
+
+  if (!agent) return res.status(401).json({ message: "No access" });
+
+  const messages = await Message.findAll({ where: { propertyId: id } });
+
+  return res.json(messages);
 }
 
 module.exports = Router()
@@ -91,3 +103,8 @@ module.exports = Router()
   .get("/:id", read)
   .post("/", create)
   .put("/:id", update)
+  .delete("/:id", destroy)
+  .use("/:id/images", images)
+  .use("/:id/floor_plans", floor_plans)
+  .use("/:id/amenities", amenities)
+  .use("/:id/features", features)
