@@ -6,7 +6,6 @@ import EditProperty from "./EditProperty.jsx";
 import Messages from "./Messages.jsx";
 import styles from "./Property.module.css";
 
-const managerEmail = "jsmastery2022@gmail.com";
 class Property extends React.Component {
   state = {
     // property: {},
@@ -60,7 +59,7 @@ class Property extends React.Component {
         }
       })
 
-    if (email === managerEmail) {
+    if (email) {
       await fetch(`/api/properties/${propertyId}`)
         .then(r => {
           if (r.status === 404) {
