@@ -7,9 +7,9 @@ module.exports = {
     const updatedAt = new Date();
 
     await queryInterface.bulkInsert('Features', [
-      { feature: "pool", createdAt, updatedAt },
-      { feature: "paw", createdAt, updatedAt },
-      { feature: "fence", createdAt, updatedAt },
+      { icon: "pool", createdAt, updatedAt },
+      { icon: "paw", createdAt, updatedAt },
+      { icon: "fence", createdAt, updatedAt },
     ], {});
   },
 

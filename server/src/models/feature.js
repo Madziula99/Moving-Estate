@@ -9,13 +9,12 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Feature.init({
-    feature: {
+    icon: {
       type: DataTypes.STRING,
       allowNull: false
     },
   }, {
     sequelize,
-    paranoid: true,
     modelName: 'Feature',
   });
   return Feature;
