@@ -50,7 +50,7 @@ async function index(req, res) {
 }
 
 async function create(req, res) {
-  const email = req.user.emails[0].value;
+  const email = "jsmastery2022@gmail.com";
   const agentId = await Agent.findOne({ where: { email } }).then(agent => agent.id);
 
   try {
