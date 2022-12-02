@@ -1,23 +1,16 @@
-.input_container {
+.dropdown_container {
   max-width: 400px;
   margin: 0 auto;
   padding: 10px 0;
-}
-
-.input_wrapper {
   display: flex;
   justify-content: space-between;
 }
 
-.input {
+.dropdown {
   width: 300px;
+  height: 38px;
 }
 
-.input_error {
+.dropdown_error {
   color: red;
-}
-
-.label {
-  color: #df434a;
-  font-weight: 700;
 }

@@ -1,6 +1,8 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
+import { CreateProperty } from "../../pages/CreateProperty.jsx";
+import { MenuButton } from "../MenuButton/MenuButton.jsx";
 import styles from "./PropertyTable.module.css";
 
 const onPageRows = 6;
@@ -30,8 +32,17 @@ const columns = [
 ];
 
 class PropertyTable extends React.Component {
+  state = {
+    isCreating: false
+  };
+
   render() {
+    const { isCreating } = this.state;
+
+    if (isCreating) return <CreateProperty />
+
     return <div className={styles.table}>
+      <MenuButton text="Create property" handleClick={() => this.setState({ isCreating: true })} href="/admin/properties/new" />
       <DataGrid
         rowHeight={rowHeight}
         autoHeight
@@ -39,7 +50,7 @@ class PropertyTable extends React.Component {
         columns={columns}
         pageSize={onPageRows}
         rowsPerPageOptions={[onPageRows]}
-        onRowClick = {e => window.location = `/admin/messages/${e.id}`}
+        onRowClick = {e => window.location = `/admin/properties/${e.id}`}
       />
     </div>
   }

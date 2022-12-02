@@ -8,6 +8,9 @@ import { Agents } from "./pages/Agents.jsx";
 import Agent from "./pages/Agent.jsx";
 import { CreateAgent } from "./pages/CreateAgent.jsx";
 import EditAgent from "./pages/EditAgent.jsx";
+import { CreateProperty } from "./pages/CreateProperty.jsx";
+import EditProperty from "./pages/EditProperty.jsx";
+import Property from "./pages/Property.jsx";
 import "./index.css";
 
 async function main() {
@@ -18,6 +21,15 @@ async function main() {
     <React.StrictMode>
       <BrowserRouter basename="/admin">
         <Switch>
+          <Route path="/properties/new">
+            <CreateProperty />
+          </Route>
+          <Route path="/properties/:id/edit">
+            <EditProperty />
+          </Route>
+          <Route path="/properties/:id">
+            <Property />
+          </Route>
           <Route path="/properties">
             <Properties />
           </Route>

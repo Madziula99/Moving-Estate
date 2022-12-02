@@ -1,0 +1,64 @@
+.form {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+.row,
+.row_img,
+.row_floor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.row {
+  max-width: 400px;
+}
+
+.row_img {
+  max-width: 800px;
+}
+
+.row_floor_plan {
+  margin-left: 10px;
+}
+
+.field,
+.field_img,
+.field_feature {
+  height: 32px;
+  margin: 10px 0;
+  padding-left: 10px;
+}
+
+.field {
+  width: 300px;
+}
+
+.field_img {
+  width: 800px;
+}
+
+.field_feature{
+  margin-left: 10px;
+}
+
+.dropdown_error {
+  color: red;
+}
+
+.textarea{
+  width: 300px;
+  max-height:200px
+}
+
+.image {
+  width: 140px;
+}
+
+label {
+  color: #df434a;
+  font-weight: 700;
+  padding-right: 10px;
+}
