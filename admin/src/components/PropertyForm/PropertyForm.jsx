@@ -90,7 +90,7 @@ class PropertyForm extends React.Component {
     >
       {props => (
         <form onSubmit={props.handleSubmit} className={styles.form}>
-          <Menu onCancelClick={handleCancel} isDisabled={isDisabled} btn1_submit={"Save"} btn2={"Cancel"} />
+          <Menu onCancelClick={handleCancel} isDisabled={isDisabled} />
             <StyledInput isDisabled={isDisabled} label="Title: " type="text" name="title" data={props} />
               <div className={styles.row}>
                 <label htmlFor={"description"}> Description: </label>
