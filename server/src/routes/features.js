@@ -9,7 +9,7 @@ async function create(req, res) {
     const property = await Property.findByPk(id, { include: { all: true } });
     const newFeature = await Feature.findOne({ where: { icon: icon } });
 
-    if (await property.hasFeature(newFeature)) throw "Feature icon already used";
+    if (await property.hasFeature(newFeature)) return res.status(403).json({ error: "Feature icon already used" });
 
     await property.addFeature(newFeature, { through: { title: title } });
 
