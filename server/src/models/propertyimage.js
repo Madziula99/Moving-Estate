@@ -1,27 +1,25 @@
 'use strict';
+
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Agent extends Model {
+  class PropertyImage extends Model {
     static associate(models) {
-      Agent.hasMany(models.Property, { foreignKey: "agentId" })
+      PropertyImage.belongsTo(models.Property, { foreignKey: "propertyId" })
     }
   }
-
-  Agent.init({
-    name: {
+  PropertyImage.init({
+    link: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    location: DataTypes.STRING,
-    email:{
+    propertyId: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    photo: DataTypes.STRING
+    }
   }, {
     sequelize,
-    modelName: 'Agent',
+    modelName: 'PropertyImage',
   });
-  return Agent;
+  return PropertyImage;
 };
