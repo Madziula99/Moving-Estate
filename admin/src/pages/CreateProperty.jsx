@@ -48,7 +48,7 @@ class CreateProperty extends React.Component {
           } else {
             r.json().then(data => {
                 this.setState({
-                //property: data.property,
+                property: data.property,
                 isLoading: false,
                 isLoggedIn: true
               })
@@ -58,18 +58,15 @@ class CreateProperty extends React.Component {
         .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
 
-    // await fetch("/api/properties", {
-    //   method: "POST",
-    //   headers: { "content-type": "application/json" },
-    //   body: JSON.stringify(values)
-    // }).then(r =>  r.json()).then(({ property }) => {
-    //   this.setState({
-    //     redirect: `/properties/${property.id}`
-    //   });
-    // });
-    // this.setState({
-    //   redirect: "/properties/A031"
-    // });
+    await fetch("/api/properties", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(values)
+    }).then(r =>  r.json()).then(({ property }) => {
+      this.setState({
+        redirect: `/properties/${property.id}`
+      });
+    });
   }
 
   returnToProperties() {

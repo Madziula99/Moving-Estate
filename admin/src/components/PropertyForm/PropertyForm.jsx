@@ -93,7 +93,7 @@ class PropertyForm extends React.Component {
             <StyledInput isDisabled={isDisabled} label="Title: " type="text" name="title" data={props} />
               <div className={styles.row}>
                 <label htmlFor={"description"}> Description: </label>
-                <Field as="textarea" className={styles.textarea} isDisabled={isDisabled} type="text" name="description" data={props} />
+                <Field as="textarea" className={styles.textarea} disabled={isDisabled} type="text" name="description" data={props} />
               </div>
               <StyledInput isDisabled={isDisabled} label="Location city: " type="text" name="locationCity" data={props} />
               <StyledInput isDisabled={isDisabled} label="Location state: " type="text" name="locationState" data={props} />

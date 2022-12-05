@@ -7,37 +7,10 @@ class EditProperty extends React.Component {
   state = {
     redirect: null,
     isSubmitting: false,
-    // propertyId: "",
     isLoading: true,
     isLoggedIn: false,
     propertyId: this.props.match.params.id,
-    property: {
-      title: "Dream Apartment for Young Family",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum sodales est tellus, vitae facilisis est bibendum ut.",
-      locationCity: "Pasadena",
-      locationState: "California",
-      type: "apartment",
-      mode: "sale",
-      price: 100500,
-      area: 1320,
-      bedrooms: 2,
-      bathrooms: 2,
-      images: [
-        "https://preview.redd.it/s9edy9i5mbp41.jpg?auto=webp&s=232205a320f206393fbd55fe283564a6ccd95253",
-        "http://apartmentsalesmelbourne.com.au/wp-content/uploads/2017/08/1311_60-Siddley-St_036.jpg",
-        "https://www.souciehorner.com/wp-content/uploads/2017/04/Kitchen3-1536.jpg",
-        "http://montrosesquareapartments.com/blog/wp-content/uploads/2019/10/apartment-tour-checklist.jpeg"
-      ],
-      features: [
-        { "feature": "pool", "title": "Large pool outside" },
-        { "feature": "paw", "title": "Pets are allowed" }
-      ],
-      floor_plans: [
-        { "name": "Ground Floor", "url": "https://picsum.photos/id/125/1000/600" },
-        { "name": "First Floor", "url": "https://picsum.photos/id/126/1000/600" }
-      ],
-      amenities: [ "Air Conditioning", "Alarm Clock" ]
-    },
+    property: {}
   };
 
   async getProperty() {
@@ -63,7 +36,7 @@ class EditProperty extends React.Component {
           } else {
             r.json().then(data => {
               this.setState({
-                //property: data.property,
+                property: data.property,
                 isLoading: false,
                 isLoggedIn: true
               })
