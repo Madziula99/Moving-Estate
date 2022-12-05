@@ -1,8 +1,7 @@
 import React from "react";
-import { Formik, /*FieldArray,*/ Field } from "formik";
+import { Formik, Field } from "formik";
 import { StyledInput } from "../StyledInput/StyledInput.jsx";
 import { Dropdown } from "../Dropdown/Dropdown.jsx";
-//import { PropertyAmenities } from "../PropertyAmenities/PropertyAmenities.jsx";
 import { Menu } from "../Menu/Menu.jsx";
 import styles from "./PropertyForm.module.css";
 
