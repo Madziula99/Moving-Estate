@@ -10,6 +10,7 @@ import { CreateAgent } from "./pages/CreateAgent.jsx";
 import EditAgent from "./pages/EditAgent.jsx";
 import Property from "./pages/Property.jsx";
 import "./index.css";
+import Images from "./pages/Images.jsx";
 
 async function main() {
   const config = await fetch("/api/config").then(res => res.json());
@@ -19,6 +20,28 @@ async function main() {
     <React.StrictMode>
       <BrowserRouter basename="/admin">
         <Switch>
+          <Route path="/properties/images">
+            <Images
+              images={[
+                {
+                  "imageId": 1,
+                  "link": "https://preview.redd.it/s9edy9i5mbp41.jpg?auto=webp&s=232205a320f206393fbd55fe283564a6ccd95253"
+                },
+                {
+                  "imageId": 2,
+                  "link": "http://apartmentsalesmelbourne.com.au/wp-content/uploads/2017/08/1311_60-Siddley-St_036.jpg"
+                },
+                {
+                  "imageId": 3,
+                  "link": "https://www.souciehorner.com/wp-content/uploads/2017/04/Kitchen3-1536.jpg"
+                },
+                {
+                  "imageId": 4,
+                  "link": "http://montrosesquareapartments.com/blog/wp-content/uploads/2019/10/apartment-tour-checklist.jpeg"
+                }
+              ]}
+            />
+          </Route>
           <Route path="/properties/new">
             <Properties />
           </Route>
