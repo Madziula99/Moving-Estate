@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import styles from "./EditProperty.module.css";
 
 class EditProperty extends React.Component {
   state = {
@@ -46,12 +47,11 @@ class EditProperty extends React.Component {
             throw new Error();
           } else {
             r.json().then(data => {
-              const { title, location, description, type, mode, price, area, bedrooms, bathrooms } = data;
-              const property = { title, description, type, mode, price, area, bedrooms, bathrooms };
+              const { id, title, location, description, type, mode, price, area, bedrooms, bathrooms } = data;
+              const property = { id, title, description, type, mode, price, area, bedrooms, bathrooms };
               property.locationCity = location[0];
               property.locationState = location[1];
 
-              console.log("property", property)
               this.setState({
                 property: property,
                 isLoading: false,
@@ -62,8 +62,6 @@ class EditProperty extends React.Component {
         })
         .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
-
-
   }
 
   async updateProperty(values) {
@@ -95,12 +93,18 @@ class EditProperty extends React.Component {
 
     if (!isLoggedIn) return <Redirect to="/" />
 
-    return <PropertyForm
-        values={property}
-        handleSubmit={newValues => this.updateProperty(newValues)}
-        handleCancel={() => this.returnToPropertyPage()}
-        state={isSubmitting ? "submitting" : "ready"}
-      />
+    if (Object.keys(property).length) {
+      return <>
+        <div className={styles.center}>
+          <h2>Edit property: {property.id}</h2>
+        </div>
+        <PropertyForm
+          values={property}
+          handleSubmit={newValues => this.updateProperty(newValues)}
+          handleCancel={() => this.returnToPropertyPage()}
+          state={isSubmitting ? "submitting" : "ready"} />
+      </>
+    }
   }
 }
 
