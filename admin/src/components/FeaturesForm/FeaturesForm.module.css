@@ -1,0 +1,46 @@
+.row,
+.row_img,
+.row_floor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.row {
+  max-width: 500px;
+}
+
+.form {
+  max-width: 500px;
+}
+
+.features_wrapper {
+  margin: 0 auto;
+  max-width: 500px;
+  width: inherit;
+}
+
+.row {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #1976d2;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.value_text {
+  margin: 0;
+}
+
+.row_btns_wrapper {
+  display: flex;
+  gap: 5px;
+}
+
+.row_btn {
+  height: 30px;
+}
