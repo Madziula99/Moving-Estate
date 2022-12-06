@@ -27,46 +27,52 @@ class CreateProperty extends React.Component {
     }
   };
 
-  async createProperty(values) {
-    this.setState({ isSubmitting: true, isLoading: true });
-
-    const email = await fetch("/api/auth/current_user")
+  async checkEmail() {
+    this.setState({
+      isLoading: true
+    })
+    return await fetch("/api/auth/current_user")
       .then(r => {
         if (r.status === 401) {
           this.setState({ isLoading: false });
           return null;
         } else {
-          return r.json().then(({ user }) => user.emails[0].value);
+          this.setState({
+            isLoggedIn: true,
+            isLoading: false
+          })
+          return r.json().then(({ user }) => user.emails[0].value );
         }
       })
+  }
+
+  async createProperty(values) {
+    this.setState({ isSubmitting: true, isLoading: true });
+
+    const email = await this.checkEmail();
+    console.log("email", email)
 
     if (email) {
-      await fetch(`/api/properties`)
-        .then(r => {
+      await fetch(`/api/properties`, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(values)
+      }).then(r => {
           if (r.status === 404) {
             throw new Error();
           } else {
             r.json().then(data => {
-                this.setState({
-                property: data.property,
+              console.log("data", data)
+              this.setState({
                 isLoading: false,
-                isLoggedIn: true
+                redirect: `/properties/${data.property.id}`
               })
             });
           }
         })
-        .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
-
-    await fetch("/api/properties", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(values)
-    }).then(r =>  r.json()).then(({ property }) => {
-      this.setState({
-        redirect: `/properties/${property.id}`
-      });
-    });
+    console.log('try submit')
   }
 
   returnToProperties() {
@@ -74,7 +80,7 @@ class CreateProperty extends React.Component {
   }
 
   componentDidMount() {
-    this.createProperty();
+    this.checkEmail();
   }
 
   render() {

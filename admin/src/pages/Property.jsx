@@ -39,9 +39,8 @@ class Property extends React.Component {
             throw new Error();
           } else {
             r.json().then(data => {
-              console.log("meow")
               this.setState({
-                property: data.property,
+                property: data,
                 isLoading: false,
                 isLoggedIn: true
               })

@@ -11,7 +11,7 @@ const rowHeight = 135;
 const widthInTable = 95;
 
 const columns = [
-  { field: "image", headerName: "Image", width: 150,
+  { field: "images", headerName: "Image", width: 150,
     renderCell: (params) => {
       return <Avatar
         alt="first image"

@@ -1,4 +1,5 @@
 .buttons_wrapper {
   display: flex;
   gap: 20px;
+  justify-content: center;
 }

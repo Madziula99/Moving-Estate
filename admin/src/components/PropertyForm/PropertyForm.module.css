@@ -57,6 +57,10 @@
   width: 140px;
 }
 
+.btn_to {
+  margin: 2% auto;
+}
+
 label {
   color: #df434a;
   font-weight: 700;
