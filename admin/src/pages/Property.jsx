@@ -70,11 +70,14 @@ class Property extends React.Component {
 
     return <div className={styles.property_form_wrapper}>
       <div>
-        <h2>Property page: {propertyId}</h2>
+        <div className={styles.row}>
+          <h2>Property page: {propertyId}</h2>
+          <MenuButton text="..." handleClick={() => this.setState({ isEditing: true })} href={`/admin/properties/${propertyId}/edit`} />
+        </div>
         <p><span className={styles.title}>Title: </span> {property.title}</p>
         <p><span className={styles.title}>Description: </span> {property.description}</p>
-        <p><span className={styles.title}>Location city: </span>{property.location[0]}</p> {/*{property.locationCity}*/}
-        <p><span className={styles.title}>Location state: </span>{property.location[1]}</p> {/*{property.locationState}*/}
+        <p><span className={styles.title}>Location city: </span>{property.location[0]}</p>
+        <p><span className={styles.title}>Location state: </span>{property.location[1]}</p>
         <p><span className={styles.title}>Type: </span>{property.type}</p>
         <p><span className={styles.title}>Mode: </span> {property.mode}</p>
         <p><span className={styles.title}>Price: </span>{property.price}</p>
@@ -82,7 +85,7 @@ class Property extends React.Component {
         <p><span className={styles.title}>Bedrooms: </span>{property.bedrooms}</p>
         <p><span className={styles.title}>Bathrooms: </span> {property.bathrooms}</p>
       </div>
-      <MenuButton text="..." handleClick={() => this.setState({ isEditing: true })} href={`/admin/properties/${propertyId}/edit`} />
+
     </div>
   }
 }

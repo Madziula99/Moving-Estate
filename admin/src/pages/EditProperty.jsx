@@ -13,20 +13,31 @@ class EditProperty extends React.Component {
     property: {}
   };
 
-  async getProperty() {
-    const { propertyId } = this.state;
-
-    this.setState({ isLoading: true });
-
-    const email = await fetch("/api/auth/current_user")
+  async checkEmail() {
+    this.setState({
+      isLoading: true
+    })
+    return await fetch("/api/auth/current_user")
       .then(r => {
         if (r.status === 401) {
           this.setState({ isLoading: false });
           return null;
         } else {
-          return r.json().then(({ user }) => user.emails[0].value);
+          this.setState({
+            isLoggedIn: true,
+            isLoading: false
+          })
+          return r.json().then(({ user }) => user.emails[0].value );
         }
       })
+  }
+
+  async getProperty() {
+    const { propertyId } = this.state;
+
+    this.setState({ isLoading: true });
+
+    const email = await this.checkEmail();
 
     if (email) {
       await fetch(`/api/properties/${propertyId}`)
@@ -35,8 +46,14 @@ class EditProperty extends React.Component {
             throw new Error();
           } else {
             r.json().then(data => {
+              const { title, location, description, type, mode, price, area, bedrooms, bathrooms } = data;
+              const property = { title, description, type, mode, price, area, bedrooms, bathrooms };
+              property.locationCity = location[0];
+              property.locationState = location[1];
+
+              console.log("property", property)
               this.setState({
-                property: data.property,
+                property: property,
                 isLoading: false,
                 isLoggedIn: true
               })
@@ -46,17 +63,7 @@ class EditProperty extends React.Component {
         .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
 
-    await fetch(`/api/properties/${propertyId}`).then(r => {
-      if (r.status === 404) {
-        throw new Error();
-      } else {
-        return r.json().then(data => {
-          this.setState({
-            property: data.property,
-          })
-        });
-      }
-    }).catch(() => this.setState({ redirect: "/properties" }));
+
   }
 
   async updateProperty(values) {
@@ -69,16 +76,10 @@ class EditProperty extends React.Component {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
     }).then(r => {
-      this.returnToPropertyPage();
+      this.setState({ redirect: `/properties/${propertyId}` });
 
       return r.json();
     });
-  }
-
-  returnToPropertyPage() {
-    const { propertyId } = this.state;
-
-    this.setState({ redirect: `/properties/${propertyId}` });
   }
 
   componentDidMount() {

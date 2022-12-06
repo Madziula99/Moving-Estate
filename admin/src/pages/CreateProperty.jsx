@@ -50,7 +50,6 @@ class CreateProperty extends React.Component {
     this.setState({ isSubmitting: true, isLoading: true });
 
     const email = await this.checkEmail();
-    console.log("email", email)
 
     if (email) {
       await fetch(`/api/properties`, {
@@ -62,7 +61,6 @@ class CreateProperty extends React.Component {
             throw new Error();
           } else {
             r.json().then(data => {
-              console.log("data", data)
               this.setState({
                 isLoading: false,
                 redirect: `/properties/${data.property.id}`
@@ -72,7 +70,6 @@ class CreateProperty extends React.Component {
         })
       .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
-    console.log('try submit')
   }
 
   returnToProperties() {
