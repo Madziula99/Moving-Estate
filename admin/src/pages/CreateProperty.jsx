@@ -65,12 +65,15 @@ class CreateProperty extends React.Component {
 
   componentDidMount() {
     this.isLoggedIn();
+    this.setState({
+      isLoading: false
+    })
   }
 
   render() {
     const { redirect, isSubmitting, property, isLoading } = this.state;
 
-    // if (isLoading) return <Spinner />
+    if (isLoading) return <Spinner />
 
     if (redirect) return <Redirect to={redirect} />
 
