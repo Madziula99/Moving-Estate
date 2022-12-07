@@ -1,7 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { ImageForm } from "../ImageForm/ImageForm.jsx";
-// import styles from "./EditImageForm.module.css";
 
 class CreateImageForm extends React.Component {
   async createImage(imageLink) {
@@ -21,9 +20,7 @@ class CreateImageForm extends React.Component {
     // const { propertyId } = this.props.match;
     const propertyId = "A001";
 
-    return <div>
-      <ImageForm propertyId={propertyId} link="" handleSubmit={link => this.createImage(link)} />
-    </div>
+    return <ImageForm propertyId={propertyId} link="" handleSubmit={link => this.createImage(link)} />
   }
 }
 

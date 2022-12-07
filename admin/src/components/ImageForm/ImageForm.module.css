@@ -1,19 +1,36 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .form {
   width: 500px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 2px solid #1976d2;
+  border: 3px solid #1976d2;
   border-radius: 5px;
-  margin: 10px 0;
   padding: 10px;
-  word-wrap: break-word;
+  background-color: #fff;
 }
 
 .input {
-  width: 400px;
+  width: 350px;
 }
 
 .row_btn {
   height: 30px;
+}
+
+.nav_link {
+  text-decoration: none;
 }

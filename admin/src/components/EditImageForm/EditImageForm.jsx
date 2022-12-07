@@ -25,9 +25,7 @@ class EditImageForm extends React.Component {
 
     const { link } = this.props.location.aboutProps;
 
-    return <div>
-      <ImageForm propertyId={propertyId} link={link} handleSubmit={link => this.updateImage(link)} />
-    </div>
+    return <ImageForm propertyId={propertyId} link={link} handleSubmit={link => this.updateImage(link)} />
   }
 }
 
