@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import styles from "./EditProperty.module.css";
+import { Title } from "../components/Title/Title.jsx";
 
 class EditProperty extends React.Component {
   state = {
@@ -94,9 +94,7 @@ class EditProperty extends React.Component {
 
     if (property) {
       return <>
-        <div className={styles.center}>
-          <h2>Edit property: {property.id}</h2>
-        </div>
+        <Title>Edit property: {property.id}</Title>
         <PropertyForm
           values={property}
           handleSubmit={newValues => this.updateProperty(newValues)}

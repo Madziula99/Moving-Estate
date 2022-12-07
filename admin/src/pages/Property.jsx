@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import { Title } from "../components/Title/Title.jsx";
 import styles from "./Property.module.css";
 
 class Property extends React.Component {
@@ -75,20 +76,15 @@ class Property extends React.Component {
     if (!isLoggedIn) return <Redirect to="/" />
 
     return <div className={styles.property_form_wrapper}>
-      <div>
-        <div className={styles.row}>
-          <h2>Property page: {propertyId}</h2>
-          <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
-          <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
-          <MenuButton text="To properties" href={`/admin/properties`} />
-        </div>
-        {Object.keys(property).map(el => <dl key={el}>
-            <dt>{`${el.toUpperCase()}:`}</dt>
-            <dd>{property[el]}</dd>
-          </dl>)
-        }
-      </div>
-
+      <Title>Property page: {propertyId}</Title>
+      <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
+      <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
+      <MenuButton text="To properties" href={`/admin/properties`} />
+      {Object.keys(property).map(el => <dl key={el}>
+          <dt>{`${el.toUpperCase()}:`}</dt>
+          <dd>{property[el]}</dd>
+        </dl>)
+      }
     </div>
   }
 }
