@@ -4,6 +4,7 @@ import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { Title } from "../components/Title/Title.jsx";
 import EditProperty from "../components/EditProperty/EditProperty.jsx";
+import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 class Property extends React.Component {
   state = {
     property: {},
@@ -87,6 +88,7 @@ class Property extends React.Component {
           <dd>{property[el]}</dd>
         </dl>)
       }
+      <PropertyTabs propertyId={propertyId} />
     </div>
   }
 }
