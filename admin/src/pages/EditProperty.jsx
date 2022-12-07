@@ -9,59 +9,54 @@ class EditProperty extends React.Component {
     redirect: null,
     isSubmitting: false,
     isLoading: true,
-    isLoggedIn: false,
     propertyId: this.props.match.params.id,
-    property: {}
+    property: null
   };
 
-  async checkEmail() {
+  isLoggedIn() {
     this.setState({
       isLoading: true
     })
-    return await fetch("/api/auth/current_user")
-      .then(r => {
-        if (r.status === 401) {
-          this.setState({ isLoading: false });
-          return null;
-        } else {
-          this.setState({
-            isLoggedIn: true,
-            isLoading: false
-          })
-          return r.json().then(({ user }) => user.emails[0].value );
-        }
-      })
+    fetch("/api/auth/current_user")
+    .then(r => {
+      if (r.status === 401) {
+        this.setState({
+          isLoading: false,
+          redirect: "/"
+        });
+        return null;
+      }
+    })
   }
 
   async getProperty() {
     const { propertyId } = this.state;
 
-    this.setState({ isLoading: true });
-
-    const email = await this.checkEmail();
-
-    if (email) {
-      await fetch(`/api/properties/${propertyId}`)
-        .then(r => {
-          if (r.status === 404) {
-            throw new Error();
-          } else {
-            r.json().then(data => {
-              const { id, title, location, description, type, mode, price, area, bedrooms, bathrooms } = data;
-              const property = { id, title, description, type, mode, price, area, bedrooms, bathrooms };
-              property.locationCity = location[0];
-              property.locationState = location[1];
-
-              this.setState({
-                property: property,
-                isLoading: false,
-                isLoggedIn: true
-              })
-            });
-          }
+    await fetch(`/api/properties/${propertyId}`)
+      .then(res => {
+        if (res.status === 404) throw new Error()
+        return res.json()
+      })
+      .then(body => {
+        const property = {
+          id: body.id,
+          title: body.title,
+          description: body.description,
+          locationCity: body.location[0],
+          locationState: body.location[1],
+          type: body.type,
+          mode: body.mode,
+          price: body.price,
+          area: body.area,
+          bedrooms: body.bedrooms,
+          bathrooms: body.bathrooms
+        };
+        this.setState({
+          property: property,
+          isLoading: false
         })
-        .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
-    }
+      })
+      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
   async updateProperty(values) {
@@ -73,27 +68,31 @@ class EditProperty extends React.Component {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
-    }).then(r => {
+    })
+    .then(res => {
       this.setState({ redirect: `/properties/${propertyId}` });
-
-      return r.json();
-    });
+      return res.json();
+    })
+    .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
   }
 
   componentDidMount() {
+    this.isLoggedIn();
     this.getProperty();
   }
 
+  returnToPropertyPage() {
+    this.setState({ redirect: `/properties/${this.state.propertyId}` });
+  }
+
   render() {
-    const { redirect, property, isSubmitting, isLoading, isLoggedIn } = this.state;
+    const { redirect, property, isSubmitting, isLoading } = this.state;
 
     if (isLoading) return <Spinner />
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (!isLoggedIn) return <Redirect to="/" />
-
-    if (Object.keys(property).length) {
+    if (property) {
       return <>
         <div className={styles.center}>
           <h2>Edit property: {property.id}</h2>

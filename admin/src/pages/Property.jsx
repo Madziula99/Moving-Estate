@@ -2,8 +2,6 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import EditProperty from "./EditProperty.jsx";
-import Messages from "./Messages.jsx";
 import styles from "./Property.module.css";
 
 class Property extends React.Component {
@@ -11,58 +9,66 @@ class Property extends React.Component {
     property: {},
     propertyId: this.props.match.params.id,
     isLoading: true,
-    isEditing: false,
     isLoggedIn: false,
-    isMessagesPage: false,
     redirect: null
   };
 
-  async getProperty() {
+  isLoggedIn() {
+    this.setState({
+      isLoading: true
+    })
+    fetch("/api/auth/current_user")
+    .then(r => {
+      if (r.status === 401) {
+        this.setState({
+          isLoading: false,
+          redirect: "/"
+        });
+        return null;
+      }
+    })
+  }
+
+  getProperty() {
     const { propertyId } = this.state;
 
     this.setState({ isLoading: true });
 
-    const email = await fetch("/api/auth/current_user")
-      .then(r => {
-        if (r.status === 401) {
-          this.setState({ isLoading: false });
-          return null;
-        } else {
-          return r.json().then(({ user }) => user.emails[0].value);
-        }
+    fetch(`/api/properties/${propertyId}`)
+    .then(res => {
+      if (res.status === 404) throw new Error();
+      return res.json()
+    })
+    .then(body => {
+      this.setState({
+        property: {
+          title: body.title,
+          description: body.description,
+          locationCity: body.location[0],
+          locationState: body.location[1],
+          type: body.type,
+          mode: body.mode,
+          price: body.price,
+          area: body.area,
+          bedrooms: body.bedrooms,
+          bathrooms: body.bathrooms
+        },
+        isLoading: false,
+        isLoggedIn: true
       })
-
-    if (email) {
-      await fetch(`/api/properties/${propertyId}`)
-        .then(r => {
-          if (r.status === 404) {
-            throw new Error();
-          } else {
-            r.json().then(data => {
-              this.setState({
-                property: data,
-                isLoading: false,
-                isLoggedIn: true
-              })
-            });
-          }
-        })
-        .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
-    }
+    })
+    .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
   componentDidMount() {
+    this.isLoggedIn();
     this.getProperty();
   }
 
   render() {
-    const { isLoading, property, propertyId, isEditing, isMessagesPage, redirect, isLoggedIn } = this.state;
+    const { isLoading, property, propertyId, redirect, isLoggedIn } = this.state;
 
     if (isLoading) return <Spinner />;
-
-    if (isEditing) return <EditProperty />
-
-    if (isMessagesPage) return <Messages />
 
     if (redirect) return <Redirect to={redirect} />
 
@@ -72,18 +78,15 @@ class Property extends React.Component {
       <div>
         <div className={styles.row}>
           <h2>Property page: {propertyId}</h2>
-          <MenuButton text="..." handleClick={() => this.setState({ isEditing: true })} href={`/admin/properties/${propertyId}/edit`} />
+          <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
+          <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
+          <MenuButton text="To properties" href={`/admin/properties`} />
         </div>
-        <p><span className={styles.title}>Title: </span> {property.title}</p>
-        <p><span className={styles.title}>Description: </span> {property.description}</p>
-        <p><span className={styles.title}>Location city: </span>{property.location[0]}</p>
-        <p><span className={styles.title}>Location state: </span>{property.location[1]}</p>
-        <p><span className={styles.title}>Type: </span>{property.type}</p>
-        <p><span className={styles.title}>Mode: </span> {property.mode}</p>
-        <p><span className={styles.title}>Price: </span>{property.price}</p>
-        <p><span className={styles.title}>Area: </span>{property.area}</p>
-        <p><span className={styles.title}>Bedrooms: </span>{property.bedrooms}</p>
-        <p><span className={styles.title}>Bathrooms: </span> {property.bathrooms}</p>
+        {Object.keys(property).map(el => <dl key={el}>
+            <dt>{`${el.toUpperCase()}:`}</dt>
+            <dd>{property[el]}</dd>
+          </dl>)
+        }
       </div>
 
     </div>
