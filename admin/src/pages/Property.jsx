@@ -1,10 +1,9 @@
 import React from "react";
-import { Redirect, withRouter } from "react-router-dom";
+import { Redirect, withRouter, Switch, Route } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { Title } from "../components/Title/Title.jsx";
-import styles from "./Property.module.css";
-
+import EditProperty from "../components/EditProperty/EditProperty.jsx";
 class Property extends React.Component {
   state = {
     property: {},
@@ -75,7 +74,10 @@ class Property extends React.Component {
 
     if (!isLoggedIn) return <Redirect to="/" />
 
-    return <div className={styles.property_form_wrapper}>
+    return <div style={{margin:"0 auto", width:"1000px"}}>
+      <Switch>
+        <Route path="/properties/:id/edit" component={EditProperty}></Route>
+      </Switch>
       <Title>Property page: {propertyId}</Title>
       <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />

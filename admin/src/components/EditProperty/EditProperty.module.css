@@ -1,0 +1,22 @@
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.wrapper {
+  border: 3px solid #1976d2;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  z-index: 10;
+}
