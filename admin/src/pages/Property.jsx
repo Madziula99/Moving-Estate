@@ -68,6 +68,15 @@ class Property extends React.Component {
     .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
+  delete = () => {
+    console.log("Delete this property?", this.state.propertyId)
+  }
+
+  deleteProperty = () => {
+    window.confirm("Are you sure that you want delete this property?");
+    this.delete()
+  }
+
   componentDidMount() {
     this.isLoggedIn();
     this.getProperty();
@@ -94,6 +103,7 @@ class Property extends React.Component {
       <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
       <MenuButton text="To properties" href={`/admin/properties`} />
+      <MenuButton text="X" handleClick = {this.deleteProperty} />
       {Object.keys(property).map(el => <dl key={el}>
           <dt>{`${el.toUpperCase()}:`}</dt>
           <dd>{property[el]}</dd>
