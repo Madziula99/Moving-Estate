@@ -1,8 +1,8 @@
 import React from "react";
 import { Checkbox, FormControlLabel } from "@mui/material";
-import styles from "./AmenitiesWrapper.module.css";
+import styles from "./AmenitiesPageContent.module.css";
 
-class AmenitiesWrapper extends React.Component {
+class AmenitiesPageContent extends React.Component {
   render() {
     const { amenities, isChecked } = this.props;
 
@@ -18,4 +18,4 @@ class AmenitiesWrapper extends React.Component {
   }
 }
 
-export { AmenitiesWrapper };
+export { AmenitiesPageContent };

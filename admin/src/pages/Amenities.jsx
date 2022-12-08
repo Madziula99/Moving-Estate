@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { AmenitiesWrapper } from "../components/AmenitiesWrapper/AmenitiesWrapper.jsx";
+import { AmenitiesPageContent } from "../components/AmenitiesPageContent/AmenitiesPageContent.jsx";
 
 class Amenities extends React.Component {
   constructor(props) {
@@ -32,7 +32,7 @@ class Amenities extends React.Component {
     const { propertyId } = this.state;
     const { updateValues } = this.props;
 
-    if (amenityTitle.includes("/")) amenityTitle = amenityTitle.replace(/\//g, "%2F")
+    if (amenityTitle.includes("/")) amenityTitle = amenityTitle.replace(/\//g, "%2F");
     if (amenityTitle.includes("&")) amenityTitle = amenityTitle.replace(/&/g, "%26");
 
     amenityTitle = amenityTitle.replace(/ /g, "%20");
@@ -61,7 +61,7 @@ class Amenities extends React.Component {
   render() {
     const { amenities } = this.props;
 
-    return <AmenitiesWrapper amenities={amenities} isChecked={this.isChecked} />
+    return <AmenitiesPageContent amenities={amenities} isChecked={this.isChecked} />
   }
 }
 
