@@ -5,12 +5,16 @@ import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { Title } from "../components/Title/Title.jsx";
 import EditProperty from "../components/EditProperty/EditProperty.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
+<<<<<<< HEAD
 import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
 import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
 import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 
+=======
+import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
+>>>>>>> 0b4aeb9 (Add wrapperPage)
 class Property extends React.Component {
   state = {
     property: {},
