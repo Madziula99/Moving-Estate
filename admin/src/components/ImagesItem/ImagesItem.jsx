@@ -9,7 +9,7 @@ class ImagesItem extends React.Component {
   };
 
   async deleteImage(imageId) {
-    if (window.confirm("Are you sure that you want to remove this image?")) {
+    if (window.confirm("Are you sure you want to delete this image?")) {
 
       const { propertyId } = this.state;
       const { updateValues } = this.props;

@@ -4,10 +4,16 @@ import { Button, Input } from "@mui/material";
 import styles from "./ImageForm.module.css";
 
 class ImageForm extends React.Component {
-  state = {
-    currentLink: this.props.link,
-    isDisabled: true
-  };
+  constructor(props) {
+    super(props);
+
+    this.onSave = this.onSave.bind(this);
+
+    this.state = {
+      currentLink: this.props.link,
+      isDisabled: true
+    };
+  }
 
   handleChange(currentLink) {
     const { link } = this.props;
@@ -36,7 +42,7 @@ class ImageForm extends React.Component {
       <form className={styles.form}>
         <Input defaultValue={link} onChange={e => this.handleChange(e.target.value)} autoFocus className={styles.input} />
         <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}>
-          <Button variant="contained" onClick={() => this.onSave()} disabled={isDisabled} className={styles.row_btn}>Save</Button>
+          <Button variant="contained" onClick={this.onSave} disabled={isDisabled} className={styles.row_btn}>Save</Button>
         </NavLink>
         <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}><Button variant="contained" className={styles.row_btn}>x</Button></NavLink>
       </form>

@@ -21,7 +21,7 @@ class Property extends React.Component {
       isLoggedIn: false,
       redirect: null,
       amenities: [],
-      images: []
+      images: [],
     };
   }
 
