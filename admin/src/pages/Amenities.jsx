@@ -1,17 +1,23 @@
 import React from "react";
-import { Checkbox, FormControlLabel } from "@mui/material";
+import { withRouter } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import styles from "./Amenities.module.css";
+import { AmenitiesWrapper } from "../components/AmenitiesWrapper/AmenitiesWrapper.jsx";
 
 class Amenities extends React.Component {
-  state = {
-    propertyId: this.props.match.params.id,
-    isLoading: false
-  };
+  constructor(props) {
+    super(props);
+
+    this.isChecked = this.isChecked.bind(this);
+
+    this.state = {
+      propertyId: this.props.match.params.id,
+      isLoading: false
+    };
+  }
 
   async createAmenity(amenityTitle) {
     const { propertyId } = this.state;
-    const { updateProps } = this.props;
+    const { updateValues } = this.props;
 
     this.setState({ isLoading: true });
 
@@ -24,7 +30,7 @@ class Amenities extends React.Component {
         isLoading: false
       });
 
-      updateProps();
+      updateValues();
 
       return r.json();
     });
@@ -32,7 +38,7 @@ class Amenities extends React.Component {
 
   async deleteAmenity(amenityTitle) {
     const { propertyId } = this.state;
-    const { updateProps } = this.props;
+    const { updateValues } = this.props;
 
     this.setState({ isLoading: true });
 
@@ -49,7 +55,7 @@ class Amenities extends React.Component {
         isLoading: false
       });
 
-      updateProps();
+      updateValues();
 
       return r.json();
     });
@@ -72,16 +78,8 @@ class Amenities extends React.Component {
 
     if (isLoading) return <Spinner />;
 
-    return <div className={styles.amenities_wrapper}>
-      {amenities.map(item => {
-        return <FormControlLabel
-          key={item.title}
-          control={<Checkbox defaultChecked={item.available} onChange={() => this.isChecked(item)} size="small" />}
-          label={item.title}
-        />
-      })}
-    </div>
+    return <AmenitiesWrapper amenities={amenities} isChecked={this.isChecked} />
   }
 }
 
-export { Amenities };
+export default withRouter(Amenities);
