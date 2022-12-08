@@ -1,6 +1,7 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
+import { MenuButton } from "../MenuButton/MenuButton.jsx";
 import styles from "./PropertyTable.module.css";
 
 const onPageRows = 6;
@@ -9,7 +10,7 @@ const rowHeight = 135;
 const widthInTable = 95;
 
 const columns = [
-  { field: "image", headerName: "Image", width: 150,
+  { field: "images", headerName: "Image", width: 150,
     renderCell: (params) => {
       return <Avatar
         alt="first image"
@@ -32,6 +33,7 @@ const columns = [
 class PropertyTable extends React.Component {
   render() {
     return <div className={styles.table}>
+      <MenuButton text="Create property" href="/admin/properties/new" />
       <DataGrid
         rowHeight={rowHeight}
         autoHeight
@@ -39,7 +41,7 @@ class PropertyTable extends React.Component {
         columns={columns}
         pageSize={onPageRows}
         rowsPerPageOptions={[onPageRows]}
-        onRowClick = {e => window.location = `/admin/messages/${e.id}`}
+        onRowClick = {e => window.location = `/admin/properties/${e.id}`}
       />
     </div>
   }

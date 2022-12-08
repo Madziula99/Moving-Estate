@@ -1,8 +1,9 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Switch, Route } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
+import { CreateProperty } from "../components/CreateProperty/CreateProperty.jsx";
 
 class Properties extends React.Component {
   state = {
@@ -49,6 +50,9 @@ class Properties extends React.Component {
     if (isLoading) return <Spinner />;
 
     if (isLoggedIn) return <>
+      <Switch>
+        <Route path="/properties/new" component={CreateProperty}></Route>
+      </Switch>
       <SignOut headerMessage={`${agentName}, welcome!`} />
       <PropertyTable adminProperties={filteredProperties} />
     </>

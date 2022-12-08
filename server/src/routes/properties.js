@@ -20,8 +20,6 @@ async function index(req, res) {
 
   const properties = await Property.filter(filters, Agent, PropertyImage);
 
-  console.log(properties)
-
   if (filters.email) {
     if (properties.length === 0) return res.status(404).json({ message: `Agent: ${filters.email} has no properties` });
     const agentName = properties[0].agent.name;

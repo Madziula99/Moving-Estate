@@ -1,5 +1,5 @@
-.buttons_wrapper {
+.center {
   display: flex;
-  gap: 20px;
   justify-content: center;
+  color: #df434a;
 }

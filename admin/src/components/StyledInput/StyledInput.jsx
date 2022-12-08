@@ -8,7 +8,7 @@ class StyledInput extends React.Component {
 
     return <div className={styles.input_container}>
       <div className={styles.input_wrapper}>
-        <span>{label}</span>
+        <span className={styles.label}>{label}</span>
         <Input
           type={type}
           onChange={data.handleChange}
