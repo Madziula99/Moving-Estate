@@ -9,6 +9,7 @@ import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
 import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
+import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 
 class Property extends React.Component {
   state = {
@@ -81,7 +82,14 @@ class Property extends React.Component {
 
     if (!isLoggedIn) return <Redirect to="/" />
 
-    return <div style={{margin:"0 auto", width:"1000px"}}>
+    return <PageWrapper>
+      <Switch>
+        <Route path="/properties/:id/edit" component={EditProperty}></Route>
+        <Route path="/properties/:id/amenities">
+          <Amenities amenities={amenities} updateValues={this.updateValues} />
+        </Route>
+        <Route path="/properties/:id/images"><Images /></Route>
+      </Switch>
       <Title>Property page: {propertyId}</Title>
       <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
@@ -100,7 +108,7 @@ class Property extends React.Component {
         <Route path="/properties/:id/floor_plans"><FloorPlans /></Route>
         <Route path="/properties/:id/features"><Features /></Route>
       </Switch>
-    </div>
+    </PageWrapper>
   }
 }
 
