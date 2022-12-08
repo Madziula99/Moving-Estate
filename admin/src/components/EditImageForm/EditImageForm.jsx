@@ -3,25 +3,30 @@ import { Redirect, withRouter } from "react-router-dom";
 import { ImageForm } from "../ImageForm/ImageForm.jsx";
 
 class EditImageForm extends React.Component {
-  async updateImage(imageLink) {
-    // const { propertyId, imageId } = this.props.match.params;
-    const propertyId = "A001";
-    const { imageId } = this.props.match.params;
+  state = {
+    propertyId: this.props.match.params.propertyId,
+    imageId: this.props.match.params.imageId,
+  };
 
-    console.log("update", imageLink, imageId)
+  async updateImage(imageLink) {
+    const { propertyId, imageId } = this.state;
+    const { updateValues } = this.props.location.aboutProps;
 
     await fetch(`/api/properties/${propertyId}/images/${imageId}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ link: imageLink })
-    }).then(r =>  r.json());
+    }).then(r => {
+      updateValues();
+
+      return r.json();
+    });
   }
 
   render() {
-    // const { propertyId, imageId } = this.props.match.params;
-    const propertyId = "A001";
+    const { propertyId } = this.state;
 
-    if (this.props.location.aboutProps === undefined) return <Redirect to="/properties/images" />;
+    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/images`} />;
 
     const { link } = this.props.location.aboutProps;
 

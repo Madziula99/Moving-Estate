@@ -6,6 +6,7 @@ import { Title } from "../components/Title/Title.jsx";
 import EditProperty from "../components/EditProperty/EditProperty.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 import Amenities from "./Amenities.jsx";
+import Images from "./Images.jsx";
 
 class Property extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Property extends React.Component {
       isLoggedIn: false,
       redirect: null,
       amenities: [],
+      images: []
     };
   }
 
@@ -61,9 +63,10 @@ class Property extends React.Component {
           price: body.price,
           area: body.area,
           bedrooms: body.bedrooms,
-          bathrooms: body.bathrooms
+          bathrooms: body.bathrooms,
         },
         amenities: body.amenities,
+        images: body.images,
         isLoading: false,
         isLoggedIn: true
       })
@@ -81,7 +84,7 @@ class Property extends React.Component {
   }
 
   render() {
-    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities } = this.state;
+    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities, images } = this.state;
 
     if (isLoading) return <Spinner />;
 
@@ -105,6 +108,9 @@ class Property extends React.Component {
         <Route path="/properties/:id/edit" component={EditProperty}></Route>
         <Route path="/properties/:id/amenities">
           <Amenities amenities={amenities} updateValues={this.updateValues} />
+        </Route>
+        <Route path="/properties/:id/images">
+          <Images images={images} updateValues={this.updateValues} />
         </Route>
       </Switch>
     </div>

@@ -1,0 +1,8 @@
+.nav_link_wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.nav_link {
+  text-decoration: none;
+}

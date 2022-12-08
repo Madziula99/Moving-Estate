@@ -29,16 +29,16 @@ class ImageForm extends React.Component {
   }
 
   render() {
-    const { link } = this.props;
+    const { link, propertyId } = this.props;
     const { isDisabled } = this.state;
 
     return <div className={styles.overlay}>
       <form className={styles.form}>
-        <Input defaultValue={link} onChange={e => this.handleChange(e.target.value)} className={styles.input} />
-        <NavLink to="/properties/images" className={styles.nav_link}>
+        <Input defaultValue={link} onChange={e => this.handleChange(e.target.value)} autoFocus className={styles.input} />
+        <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}>
           <Button variant="contained" onClick={() => this.onSave()} disabled={isDisabled} className={styles.row_btn}>Save</Button>
         </NavLink>
-        <NavLink to="/properties/images" className={styles.nav_link}><Button variant="contained" className={styles.row_btn}>x</Button></NavLink>
+        <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}><Button variant="contained" className={styles.row_btn}>x</Button></NavLink>
       </form>
     </div>
   }
