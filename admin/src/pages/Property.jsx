@@ -68,13 +68,26 @@ class Property extends React.Component {
     .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
-  delete = () => {
-    console.log("Delete this property?", this.state.propertyId)
-  }
-
   deleteProperty = () => {
-    window.confirm("Are you sure that you want delete this property?");
-    this.delete()
+    const { propertyId } = this.state;
+
+    let confirm = window.confirm("Are you sure that you want delete this property?");
+
+    if (confirm) {
+      this.setState({
+        isLoading: true,
+      })
+      fetch(`/api/properties/${propertyId}`, {
+        method: "DELETE"
+      })
+      .then(res => {
+        if (res.status === 403) throw new Error();
+        this.setState({
+          isLoading: false,
+          redirect: "/properties",
+        })
+      })
+    }
   }
 
   componentDidMount() {

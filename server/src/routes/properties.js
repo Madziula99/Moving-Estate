@@ -77,9 +77,13 @@ async function update(req, res) {
 
 async function destroy(req, res) {
   const { id } = req.params;
-  const property = await Property.findByPk(id);
 
-  res.json(await property.destroy());
+  try {
+    const property = await Property.findByPk(id);
+    res.json(await property.destroy())
+  } catch (error) {
+    res.status(403).json({ error });
+  }
 }
 
 async function retrieve(req, res) {
