@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { AmenitiesWrapper } from "../components/AmenitiesWrapper/AmenitiesWrapper.jsx";
 
 class Amenities extends React.Component {
@@ -11,7 +10,6 @@ class Amenities extends React.Component {
 
     this.state = {
       propertyId: this.props.match.params.id,
-      isLoading: false
     };
   }
 
@@ -19,17 +17,11 @@ class Amenities extends React.Component {
     const { propertyId } = this.state;
     const { updateValues } = this.props;
 
-    this.setState({ isLoading: true });
-
     await fetch(`/api/properties/${propertyId}/amenities`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title: amenityTitle })
     }).then(r => {
-      this.setState({
-        isLoading: false
-      });
-
       updateValues();
 
       return r.json();
@@ -40,8 +32,6 @@ class Amenities extends React.Component {
     const { propertyId } = this.state;
     const { updateValues } = this.props;
 
-    this.setState({ isLoading: true });
-
     if (amenityTitle.includes("/")) amenityTitle = amenityTitle.replace(/\//g, "%2F")
     if (amenityTitle.includes("&")) amenityTitle = amenityTitle.replace(/&/g, "%26");
 
@@ -51,10 +41,6 @@ class Amenities extends React.Component {
       method: "DELETE",
       headers: { "content-type": "application/json" }
     }).then(r => {
-      this.setState({
-        isLoading: false
-      });
-
       updateValues();
 
       return r.json();
@@ -73,10 +59,7 @@ class Amenities extends React.Component {
   }
 
   render() {
-    const { isLoading } = this.state;
     const { amenities } = this.props;
-
-    if (isLoading) return <Spinner />;
 
     return <AmenitiesWrapper amenities={amenities} isChecked={this.isChecked} />
   }

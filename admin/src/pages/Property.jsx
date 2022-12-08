@@ -8,14 +8,20 @@ import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 import Amenities from "./Amenities.jsx";
 
 class Property extends React.Component {
-  state = {
-    property: {},
-    propertyId: this.props.match.params.id,
-    isLoading: true,
-    isLoggedIn: false,
-    redirect: null,
-    amenities: [],
-  };
+  constructor(props) {
+    super(props);
+
+    this.updateValues = this.updateValues.bind(this);
+
+    this.state = {
+      property: {},
+      propertyId: this.props.match.params.id,
+      isLoading: true,
+      isLoggedIn: false,
+      redirect: null,
+      amenities: [],
+    };
+  }
 
   isLoggedIn() {
     this.setState({
@@ -98,7 +104,7 @@ class Property extends React.Component {
       <Switch>
         <Route path="/properties/:id/edit" component={EditProperty}></Route>
         <Route path="/properties/:id/amenities">
-          <Amenities amenities={amenities} updateValues={() => this.updateValues()} />
+          <Amenities amenities={amenities} updateValues={this.updateValues} />
         </Route>
       </Switch>
     </div>
