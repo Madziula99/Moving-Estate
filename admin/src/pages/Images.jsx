@@ -69,7 +69,7 @@ class Images extends React.Component {
 
     return <>
       <ImagesList images={images} deleteImage={this.deleteImage} updateValues={this.updateValues} />
-      <NavLinkWrapper propertyId={propertyId} text="Add Image" updateValues={this.updateValues} />
+      <NavLinkWrapper propertyId={propertyId} text="Add Image" type="images" updateValues={this.updateValues} />
 
       <Switch>
         <Route exact path="/properties/:id/images/new" component={CreateImageForm}></Route>
