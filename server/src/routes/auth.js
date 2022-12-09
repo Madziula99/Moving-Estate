@@ -13,16 +13,16 @@ function isLoggedIn(req, res, next) {
 }
 
 function isManager(req, res, next) {
-  console.log(req.user, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
   if (req.user && req.user.emails[0].value === MANAGER) {
     next();
   } else if (req.user) {
-    console.log(req.user.emails[0].value, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     res.status(200).json({
       manager: false,
       user: req.user
     });
-  } else res.sendStatus(401);
+  } else {
+    res.sendStatus(401);
+  };
 }
 
 passport.use(new GoogleStrategy({
@@ -56,7 +56,7 @@ module.exports = Router()
   .get("/login/google/callback",
     passport.authenticate("google", {
       failureRedirect: "/api/auth/login/error",
-      successRedirect: `${admin_url}/admin/properties`
+      successRedirect: `${admin_url}/admin`
     })
   )
   .get("/login/error", (_, res) => res.json({ error: "An error has occurred" }))
@@ -74,7 +74,6 @@ module.exports = Router()
     res.redirect(`${admin_url}/admin`);
   })
   .get("/manager", isManager, (req, res) => {
-    console.log(req.user.emails[0].value, "?????????????????????????????");
     res.status(200).json({
       manager: true,
       user: req.user

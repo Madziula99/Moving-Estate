@@ -12,14 +12,15 @@ class Manager extends React.Component {
   isManager() {
     this.setState({
       isLoading: true
-    })
+    });
+
     fetch("/api/auth/manager")
-    .then(res => res.json() )
-    .then(body => {
-      if (body.manager) this.setState({ isLoading: false });
-      else this.setState({ isLoading: false, redirect: "/admin" });
-    })
-    .catch(error => error)
+      .then(res => res.json())
+      .then(body => {
+        if (body.manager) this.setState({ isLoading: false });
+        else this.setState({ isLoading: false, redirect: "/" });
+      })
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
   }
 
   componentDidMount() {

@@ -4,51 +4,51 @@ import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { AgentsTable } from "../components/AgentsTable/AgentsTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 
-const managerEmail = "jsmastery2022@gmail.com";
-
 class Agents extends React.Component {
   state = {
     agents: [],
-    isLoggedIn: false,
     isLoading: true,
+    redirect: null
   };
 
-  async getAgents() {
+  isManager() {
+    this.setState({
+      isLoading: true
+    });
+
+    fetch("/api/auth/manager")
+      .then(res => res.json())
+      .then(body => {
+        if (body.manager) this.setState({ isLoading: false });
+        else this.setState({ isLoading: false, redirect: "/" });
+      })
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
+  }
+
+  getAgents() {
     this.setState({ isLoading: true });
 
-    const email = await fetch("/api/auth/current_user")
-      .then(r => {
-        if (r.status === 401) {
-          this.setState({ isLoading: false });
-          return null;
-        } else {
-          return r.json().then(({ user }) => user.emails[0].value);
-        }
-      })
-
-    if (email === managerEmail) {
-      await fetch("/api/agents")
-        .then(r => r.json())
-        .then(data => {
-          this.setState({
-            agents: data.agents,
-            isLoading: false,
-            isLoggedIn: true
-          })
-        });
-    }
+    fetch("/api/agents")
+      .then(r => r.json())
+      .then(data => {
+        this.setState({
+          agents: data.agents,
+          isLoading: false,
+        })
+      });
   }
 
   componentDidMount() {
+    this.isManager();
     this.getAgents();
   }
 
   render() {
-    const { agents, isLoggedIn, isLoading } = this.state;
+    const { agents, isLoading, redirect } = this.state;
 
     if (isLoading) return <Spinner />;
 
-    if (!isLoggedIn) return <Redirect to="/" />
+    if (redirect) return <Redirect to={redirect} />
 
     return <>
       <SignOut headerMessage={"Manager Panel"} />

@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { SignIn } from "../components/SignIn/SignIn.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Index extends React.Component {
   constructor(props) {
@@ -9,26 +10,31 @@ class Index extends React.Component {
     this.checkAuth = this.checkAuth.bind(this);
 
     this.state = {
-      redirect: null
+      redirect: null,
+      isLoading: true
     };
   }
 
   checkAuth() {
+    this.setState({ isLoading: true });
+
     fetch("/api/auth/manager")
-    .then(res => res.json() )
-    .then(body => {
-      if (body.manager) this.setState({ redirect: "/admin/manager"});
-      else this.setState({ redirect: "/admin/properties" });
-    })
-    .catch(error => error);
-  }
+      .then(res => res.json())
+      .then(body => {
+        if (body.manager) this.setState({ redirect: "/manager", isLoading: false });
+        else this.setState({ redirect: "/properties", isLoading: false });
+      })
+      .catch(() => this.setState({ isLoading: false }));
+    }
 
   componentDidMount() {
     this.checkAuth();
   }
 
   render() {
-    const { redirect } = this.state;
+    const { redirect, isLoading } = this.state;
+
+    if (isLoading) return <Spinner />;
 
     if (redirect) return <Redirect to={redirect} />
 
