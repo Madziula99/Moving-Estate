@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import CreateImageForm from "./CreateImageForm.jsx";
 import EditImageForm from "./EditImageForm.jsx";
 import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx";
@@ -16,6 +16,7 @@ class Images extends React.Component {
     this.state = {
       propertyId: this.props.match.params.id,
       isLoading: true,
+      redirect: null,
       images: []
     };
   }
@@ -63,9 +64,11 @@ class Images extends React.Component {
   }
 
   render() {
-    const { propertyId, images, isLoading } = this.state;
+    const { propertyId, images, isLoading, redirect } = this.state;
 
     if (isLoading) return <Spinner />;
+
+    if (redirect) return <Redirect to={redirect} />
 
     return <>
       <ImagesList images={images} deleteImage={this.deleteImage} updateValues={this.updateValues} />
