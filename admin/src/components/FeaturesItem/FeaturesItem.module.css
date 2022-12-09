@@ -1,0 +1,34 @@
+.wrapper {
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #1976d2;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px auto;
+}
+
+.feature_component {
+  display: flex;
+  align-items: center;
+  height: 70px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  font-size: 16px;
+  color: #74777C;
+}
+
+.feature_component svg {
+  margin: 0 15px;
+}
+
+
+.buttons_wrapper {
+  display: flex;
+  gap: 5px;
+}
+
+.nav_link {
+  text-decoration: none;
+}

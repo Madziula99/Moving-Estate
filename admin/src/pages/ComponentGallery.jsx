@@ -1,6 +1,5 @@
 import React from "react";
 import { withRouter, Redirect } from "react-router-dom";
-import { FeaturesForm } from "../components/FeaturesForm/FeaturesForm.jsx";
 
 const features = [
   {icon: "paw", description: "Pets are allowed"},
@@ -16,7 +15,6 @@ class ComponentGallery extends React.Component {
 
   render() {
     return <>
-      <FeaturesForm values={{features: features}} />
       {/* <FormsWrapper forms={[{ features: features }, { floorplans: floorplans }]} /> */}
       {/* <FloorplansForm values={{floorplans: floorplans}} /> */}
     </>

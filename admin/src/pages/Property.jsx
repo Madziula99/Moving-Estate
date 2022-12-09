@@ -22,6 +22,7 @@ class Property extends React.Component {
       isLoggedIn: false,
       redirect: null,
       amenities: [],
+      features: []
     };
   }
 
@@ -66,6 +67,7 @@ class Property extends React.Component {
           bathrooms: body.bathrooms,
         },
         amenities: body.amenities,
+        features: body.features,
         isLoading: false,
         isLoggedIn: true
       })
@@ -83,7 +85,7 @@ class Property extends React.Component {
   }
 
   render() {
-    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities } = this.state;
+    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities, features } = this.state;
 
     if (isLoading) return <Spinner />;
 
@@ -110,6 +112,9 @@ class Property extends React.Component {
         </Route>
         <Route path="/properties/:id/images"><Images /></Route>
         <Route path="/properties/:id/floor_plans"><FloorPlans /></Route>
+        <Route path="/properties/:id/features">
+          <Features features={features} updateValues={() => this.updateValues()} />
+        </Route>
       </Switch>
     </div>
   }
