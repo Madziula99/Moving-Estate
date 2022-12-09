@@ -3,7 +3,7 @@ import { Redirect, Switch, Route } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
-import { CreateProperty } from "../components/CreateProperty/CreateProperty.jsx";
+import { CreateProperty } from "./CreateProperty.jsx";
 
 class Properties extends React.Component {
   state = {

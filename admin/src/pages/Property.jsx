@@ -3,7 +3,7 @@ import { Redirect, withRouter, Switch, Route } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { Title } from "../components/Title/Title.jsx";
-import EditProperty from "../components/EditProperty/EditProperty.jsx";
+import EditProperty from "./EditProperty.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 <<<<<<< HEAD
 import Amenities from "./Amenities.jsx";

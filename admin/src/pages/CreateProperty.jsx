@@ -1,9 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { PropertyForm } from "../PropertyForm/PropertyForm.jsx";
-import { Spinner } from "../Spinner/Spinner.jsx";
-import { Title } from "../Title/Title.jsx";
-import styles from "./CreateProperty.module.css";
+import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
+import { Title } from "../components/Title/Title.jsx";
+import { OverlayForm } from "../components/OverlayForm/OverlayForm.jsx";
 
 class CreateProperty extends React.Component {
   state = {
@@ -79,17 +79,15 @@ class CreateProperty extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />
 
-    return <div className={styles.overlay}>
-      <div className={styles.wrapper}>
-        <Title>Create a new property: </Title>
-        <PropertyForm
-          values={property}
-          handleSubmit={newValues => this.createProperty(newValues)}
-          handleCancel={() => this.returnToProperties()}
-          state={isSubmitting ? "submitting" : "ready"}
-            />
-      </div>
-    </div>
+    return <OverlayForm>
+      <Title>Create a new property: </Title>
+      <PropertyForm
+        values={property}
+        handleSubmit={newValues => this.createProperty(newValues)}
+        handleCancel={() => this.returnToProperties()}
+        state={isSubmitting ? "submitting" : "ready"}
+          />
+    </OverlayForm>
   }
 }
 

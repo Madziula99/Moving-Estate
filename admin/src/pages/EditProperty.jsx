@@ -1,9 +1,9 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
-import { PropertyForm } from "../PropertyForm/PropertyForm.jsx";
-import { Spinner } from "../Spinner/Spinner.jsx";
-import { Title } from "../Title/Title.jsx";
-import styles from "./EditProperty.module.css";
+import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
+import { Title } from "../components/Title/Title.jsx";
+import { OverlayForm } from "../components/OverlayForm/OverlayForm.jsx";
 
 class EditProperty extends React.Component {
   state = {
@@ -94,16 +94,14 @@ class EditProperty extends React.Component {
     if (redirect) return <Redirect to={redirect} />
 
     if (property) {
-      return <div className={styles.overlay}>
-        <div className={styles.wrapper}>
-          <Title>Edit property: {property.id}</Title>
-          <PropertyForm
-            values={property}
-            handleSubmit={newValues => this.updateProperty(newValues)}
-            handleCancel={() => this.returnToPropertyPage()}
-            state={isSubmitting ? "submitting" : "ready"} />
-        </div>
-      </div>
+      return <OverlayForm>
+        <Title>Edit property: {property.id}</Title>
+        <PropertyForm
+          values={property}
+          handleSubmit={newValues => this.updateProperty(newValues)}
+          handleCancel={() => this.returnToPropertyPage()}
+          state={isSubmitting ? "submitting" : "ready"} />
+      </OverlayForm>
     }
   }
 }
