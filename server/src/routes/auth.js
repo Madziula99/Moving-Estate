@@ -13,7 +13,16 @@ function isLoggedIn(req, res, next) {
 }
 
 function isManager(req, res, next) {
-  req.user.emails[0].value === MANAGER ? next() : res.sendStatus(401);
+  console.log(req.user, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+  if (req.user && req.user.emails[0].value === MANAGER) {
+    next();
+  } else if (req.user) {
+    console.log(req.user.emails[0].value, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    res.status(200).json({
+      manager: false,
+      user: req.user
+    });
+  } else res.sendStatus(401);
 }
 
 passport.use(new GoogleStrategy({
@@ -64,10 +73,10 @@ module.exports = Router()
     req.session.destroy();
     res.redirect(`${admin_url}/admin`);
   })
-  .get("/manager", isLoggedIn, isManager, (req, res) => {
-    console.log("manager is there")
-    res.json({
-      message: "Manager logged in",
+  .get("/manager", isManager, (req, res) => {
+    console.log(req.user.emails[0].value, "?????????????????????????????");
+    res.status(200).json({
+      manager: true,
       user: req.user
     });
   })

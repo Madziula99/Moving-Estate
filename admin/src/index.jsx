@@ -9,6 +9,7 @@ import Agent from "./pages/Agent.jsx";
 import { CreateAgent } from "./pages/CreateAgent.jsx";
 import EditAgent from "./pages/EditAgent.jsx";
 import Property from "./pages/Property.jsx";
+import { Manager } from "./pages/Manager.jsx";
 import "./index.css";
 
 async function main() {
@@ -42,6 +43,9 @@ async function main() {
           </Route>
           <Route path="/agents">
             <Agents />
+          </Route>
+          <Route path="/manager">
+            <Manager />
           </Route>
           <Route>
             <Index google_client_id={config.google_client_id} />

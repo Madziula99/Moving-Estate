@@ -9,21 +9,18 @@ class Index extends React.Component {
     this.checkAuth = this.checkAuth.bind(this);
 
     this.state = {
-      isLoggedIn: false
+      redirect: null
     };
   }
 
   checkAuth() {
-    const baseURL = "/api/auth/current_user";
-
-    fetch(baseURL).then(async res => {
-      if (res.status === 401) {
-        this.setState({ isLoggedIn: false });
-      } else {
-        this.setState({ isLoggedIn: true });
-        // if email===managerEmail {...abut redirect}
-      }
-    });
+    fetch("/api/auth/manager")
+    .then(res => res.json() )
+    .then(body => {
+      if (body.manager) this.setState({ redirect: "/admin/manager"});
+      else this.setState({ redirect: "/admin/properties" });
+    })
+    .catch(error => error);
   }
 
   componentDidMount() {
@@ -31,7 +28,10 @@ class Index extends React.Component {
   }
 
   render() {
-    if (this.state.isLoggedIn) return <Redirect to="/properties" />
+    const { redirect } = this.state;
+
+    if (redirect) return <Redirect to={redirect} />
+
     return <SignIn google_client_id={this.props.google_client_id} />
   }
 }
