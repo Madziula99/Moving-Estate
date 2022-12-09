@@ -45,7 +45,7 @@ class PropertyForm extends React.Component {
   }
 
   submitProperty(values, actions) {
-    const { handleSubmit } = this.props;
+    const { onSubmit } = this.props;
 
     actions.setSubmitting(false);
 
@@ -61,11 +61,11 @@ class PropertyForm extends React.Component {
       bathrooms: values.bathrooms
     }
 
-    handleSubmit(property);
+    onSubmit(property);
   }
 
   render() {
-    const { values, handleCancel, state } = this.props;
+    const { values, onCancel, state } = this.props;
     const isDisabled = state === "submitting";
 
     return <Formik
@@ -94,7 +94,7 @@ class PropertyForm extends React.Component {
         <StyledInput isDisabled={isDisabled} label="Area: " type="number" name="area" data={props} />
         <StyledInput isDisabled={isDisabled} label="Bedrooms: " type="number" name="bedrooms" data={props} />
         <StyledInput isDisabled={isDisabled} label="Bathrooms: " type="number" name="bathrooms" data={props} />
-        <Menu onCancelClick={handleCancel} isDisabled={!(props.dirty && props.isValid)} />
+        <Menu onCancelClick={onCancel} isDisabled={!(props.dirty && props.isValid)} />
       </form>
       )}
     </Formik>

@@ -98,8 +98,8 @@ class EditProperty extends React.Component {
         <Title>Edit property: {property.id}</Title>
         <PropertyForm
           values={property}
-          handleSubmit={newValues => this.updateProperty(newValues)}
-          handleCancel={() => this.returnToPropertyPage()}
+          onSubmit={newValues => this.updateProperty(newValues)}
+          onCancel={() => this.returnToPropertyPage()}
           state={isSubmitting ? "submitting" : "ready"} />
       </OverlayForm>
     }

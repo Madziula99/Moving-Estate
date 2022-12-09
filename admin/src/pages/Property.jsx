@@ -120,12 +120,12 @@ class Property extends React.Component {
       <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
       <MenuButton text="To properties" href={`/admin/properties`} />
-      <MenuButton text="X" handleClick = {this.deleteProperty} />
+      <MenuButton text="X" handleClick={this.deleteProperty} />
       {Object.keys(property).map(el => <dl key={el}>
           <dt>{`${el.toUpperCase()}:`}</dt>
           <dd>{property[el]}</dd>
         </dl>)
-      }
+        }
       <PropertyTabs propertyId={propertyId} />
 
       <Switch>

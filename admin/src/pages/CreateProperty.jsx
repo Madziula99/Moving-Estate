@@ -83,8 +83,8 @@ class CreateProperty extends React.Component {
       <Title>Create a new property: </Title>
       <PropertyForm
         values={property}
-        handleSubmit={newValues => this.createProperty(newValues)}
-        handleCancel={() => this.returnToProperties()}
+        onSubmit={newValues => this.createProperty(newValues)}
+        onCancel={() => this.returnToProperties()}
         state={isSubmitting ? "submitting" : "ready"}
           />
     </OverlayForm>
