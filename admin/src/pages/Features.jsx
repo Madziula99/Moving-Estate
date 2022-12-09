@@ -7,12 +7,11 @@ import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx"
 
 class Features extends React.Component {
   render() {
-    console.log("props", this.props)
     const { features, updateValues } = this.props;
     const propertyId = this.props.match.params.id;
 
     return <>
-      {features.map(feature => <FeaturesItem feature={feature} key={feature.name} updateValues={updateValues} />)}
+      {features.map(feature => <FeaturesItem feature={feature} key={feature.title} updateValues={updateValues} />)}
       <NavLinkWrapper propertyId={propertyId} type="features" text="Add Feature" updateValues={updateValues} />
 
       <Switch>

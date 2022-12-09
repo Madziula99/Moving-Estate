@@ -7,14 +7,13 @@ class CreateFeatureForm extends React.Component {
     propertyId: this.props.match.params.id,
   };
 
-  createFeature(featureLink) {
+  createFeature(feature, title) {
     const { propertyId } = this.state;
     const { updateValues } = this.props.location.aboutProps;
-
     fetch(`/api/properties/${propertyId}/features`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ link: featureLink })
+      body: JSON.stringify({ icon: feature, title: title })
     }).then(r => {
       updateValues();
 
@@ -25,7 +24,7 @@ class CreateFeatureForm extends React.Component {
   render() {
     const { propertyId } = this.state;
 
-    return <FeatureForm propertyId={propertyId} link="" handleSubmit={link => this.createFeature(link)} />
+    return <FeatureForm propertyId={propertyId} handleSubmit={(feature, title) => this.createFeature(feature, title)} />
   }
 }
 
