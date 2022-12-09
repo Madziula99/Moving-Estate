@@ -1,17 +1,17 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { ImageForm } from "../ImageForm/ImageForm.jsx";
+import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
 
 class CreateImageForm extends React.Component {
   state = {
     propertyId: this.props.match.params.id,
   };
 
-  async createImage(imageLink) {
+  createImage(imageLink) {
     const { propertyId } = this.state;
     const { updateValues } = this.props.location.aboutProps;
 
-    await fetch(`/api/properties/${propertyId}/images`, {
+    fetch(`/api/properties/${propertyId}/images`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ link: imageLink })

@@ -59,7 +59,7 @@ module.exports = (sequelize, DataTypes) => {
     static async createProperty(values, Amenity) {
       const { title, location, description, type, mode, price, area, bedrooms, bathrooms, agentId} = values;
 
-      const lastId = await Property.findOne({ attributes: ["id"], where: { type: type }, order: [["id", "DESC"]] }).then(property => property.id);
+      const lastId = await Property.findOne({ attributes: ["id"], where: { type: type }, order: [["id", "DESC"]], paranoid: false }).then(property => property.id);
       const id = lastId.charAt(0) + (Number(lastId.slice(1)) + 1).toString().padStart(3, "0");
 
       await Property.create(
