@@ -6,9 +6,14 @@ const config = require("config");
 const AUTH = config.get("auth");
 const admin_url = config.get("admin_url");
 const port = config.get("port");
+const MANAGER = config.get("manager_email");
 
 function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
+}
+
+function isManager(req, res, next) {
+  req.user.emails[0].value === MANAGER ? next() : res.sendStatus(401);
 }
 
 passport.use(new GoogleStrategy({
@@ -58,4 +63,11 @@ module.exports = Router()
     });
     req.session.destroy();
     res.redirect(`${admin_url}/admin`);
+  })
+  .get("/manager", isLoggedIn, isManager, (req, res) => {
+    console.log("manager is there")
+    res.json({
+      message: "Manager logged in",
+      user: req.user
+    });
   })

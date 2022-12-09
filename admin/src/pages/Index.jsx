@@ -21,6 +21,7 @@ class Index extends React.Component {
         this.setState({ isLoggedIn: false });
       } else {
         this.setState({ isLoggedIn: true });
+        // if email===managerEmail {...abut redirect}
       }
     });
   }
