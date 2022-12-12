@@ -38,7 +38,7 @@ class CreateProperty extends React.Component {
     })
   }
 
-  createProperty(values) {
+  createProperty = (values) => {
     this.setState({ isSubmitting: true, isLoading: true });
 
     fetch(`/api/properties`, {
@@ -59,7 +59,7 @@ class CreateProperty extends React.Component {
     .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
-  returnToProperties() {
+  returnToProperties = () => {
     this.setState({ redirect: "/properties" });
   }
 
@@ -79,8 +79,8 @@ class CreateProperty extends React.Component {
 
     return <PropertyForm
       values={property}
-      onSubmit={newValues => this.createProperty(newValues)}
-      onCancel={() => this.returnToProperties()}
+      onSubmit={this.createProperty}
+      onCancel={this.returnToProperties}
       state={isSubmitting ? "submitting" : "ready"}
       title="Create a new property:"
     />

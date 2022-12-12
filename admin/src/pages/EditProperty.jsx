@@ -58,7 +58,7 @@ class EditProperty extends React.Component {
       .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
-  async updateProperty(values) {
+  updateProperty = async (values) => {
     const { propertyId } = this.state;
 
     this.setState({ isSubmitting: true });
@@ -80,7 +80,7 @@ class EditProperty extends React.Component {
     this.getProperty();
   }
 
-  returnToPropertyPage() {
+  returnToPropertyPage = () => {
     this.setState({ redirect: `/properties/${this.state.propertyId}` });
   }
 
@@ -94,8 +94,8 @@ class EditProperty extends React.Component {
     if (property) {
       return <PropertyForm
         values={property}
-        onSubmit={newValues => this.updateProperty(newValues)}
-        onCancel={() => this.returnToPropertyPage()}
+        onSubmit={this.updateProperty}
+        onCancel={this.returnToPropertyPage}
         state={isSubmitting ? "submitting" : "ready"}
         title={`Edit property: ${property.id}`}
       />
