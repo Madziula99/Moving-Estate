@@ -2,8 +2,6 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { Title } from "../components/Title/Title.jsx";
-import { OverlayForm } from "../components/OverlayForm/OverlayForm.jsx";
 
 class EditProperty extends React.Component {
   state = {
@@ -94,14 +92,13 @@ class EditProperty extends React.Component {
     if (redirect) return <Redirect to={redirect} />
 
     if (property) {
-      return <OverlayForm>
-        <Title>Edit property: {property.id}</Title>
-        <PropertyForm
-          values={property}
-          onSubmit={newValues => this.updateProperty(newValues)}
-          onCancel={() => this.returnToPropertyPage()}
-          state={isSubmitting ? "submitting" : "ready"} />
-      </OverlayForm>
+      return <PropertyForm
+        values={property}
+        onSubmit={newValues => this.updateProperty(newValues)}
+        onCancel={() => this.returnToPropertyPage()}
+        state={isSubmitting ? "submitting" : "ready"}
+        title={`Edit property: ${property.id}`}
+      />
     }
   }
 }
