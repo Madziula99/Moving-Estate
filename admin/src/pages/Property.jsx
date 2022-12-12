@@ -5,17 +5,18 @@ import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { Title } from "../components/Title/Title.jsx";
 import EditProperty from "./EditProperty.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
-<<<<<<< HEAD
+import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
+<<<<<<< HEAD
 import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
 import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
-
 =======
-import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
->>>>>>> 0b4aeb9 (Add wrapperPage)
+>>>>>>> 2dd6470 (Rebase with Amenities and Images)
+
 class Property extends React.Component {
+<<<<<<< HEAD
   state = {
     property: {},
     propertyId: this.props.match.params.id,
@@ -23,6 +24,23 @@ class Property extends React.Component {
     isLoggedIn: false,
     redirect: null,
   };
+=======
+
+  constructor(props) {
+    super(props);
+
+    this.updateValues = this.updateValues.bind(this);
+
+    this.state = {
+      property: {},
+      propertyId: this.props.match.params.id,
+      isLoading: true,
+      isLoggedIn: false,
+      redirect: null,
+      amenities: [],
+    };
+  }
+>>>>>>> 2dd6470 (Rebase with Amenities and Images)
 
   isLoggedIn() {
     this.setState({
@@ -120,12 +138,12 @@ class Property extends React.Component {
       <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
       <MenuButton text="To properties" href={`/admin/properties`} />
-      <MenuButton text="X" handleClick={this.deleteProperty} />
+      <MenuButton text="X" handleClick = {this.deleteProperty} />
       {Object.keys(property).map(el => <dl key={el}>
           <dt>{`${el.toUpperCase()}:`}</dt>
           <dd>{property[el]}</dd>
         </dl>)
-        }
+      }
       <PropertyTabs propertyId={propertyId} />
 
       <Switch>
