@@ -18,12 +18,12 @@ class Amenities extends React.Component {
     };
   }
 
-  async createAmenity(amenityTitle) {
+  createAmenity(amenityTitle) {
     const { propertyId } = this.state;
 
     this.setState({ isLoading: true });
 
-    await fetch(`/api/properties/${propertyId}/amenities`, {
+    fetch(`/api/properties/${propertyId}/amenities`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title: amenityTitle })
