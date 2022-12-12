@@ -17,7 +17,9 @@ class Features extends React.Component {
       propertyId: this.props.match.params.id,
       isLoading: true,
       redirect: null,
-      features: []
+      features: [],
+      maxFeaturesCount: 3,
+      specifiedFeatures: []
     };
   }
 
@@ -32,6 +34,8 @@ class Features extends React.Component {
         return res.json();
       })
       .then(data => {
+        this.setSpecifiedFeatures(data.features);
+
         this.setState({
           features: data.features,
           isLoading: false,
@@ -63,8 +67,15 @@ class Features extends React.Component {
     this.getFeatures();
   }
 
+  setSpecifiedFeatures(features) {
+    const specifiedFeatures = features.map(feature => feature.feature);
+
+    this.setState({ specifiedFeatures: specifiedFeatures });
+  }
+
   render() {
-    const { propertyId, features, isLoading, redirect } = this.state;
+    const { propertyId, features, isLoading, redirect, maxFeaturesCount, specifiedFeatures } = this.state;
+    const canAddFeatures = features.length < maxFeaturesCount;
 
     if (isLoading) return <Spinner />;
 
@@ -72,7 +83,7 @@ class Features extends React.Component {
 
     return <>
       <FeaturesList features={features} deleteFeature={this.deleteFeature} updateValues={this.updateValues} />
-      <NavLinkWrapper propertyId={propertyId} type="features" text="Add Feature" updateValues={this.updateValues} />
+      {canAddFeatures && <NavLinkWrapper propertyId={propertyId} type="features" text="Add Feature" specifiedFeatures={specifiedFeatures} updateValues={this.updateValues} />}
 
       <Switch>
         <Route exact path="/properties/:id/features/new" component={CreateFeatureForm}></Route>

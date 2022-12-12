@@ -52,8 +52,9 @@ class FeatureForm extends React.Component {
   }
 
   showDropdown() {
-    const { mode } = this.props;
+    const { mode, specifiedFeatures } = this.props;
     const { currentFeature } = this.state;
+    const allFeatures = ["paw", "pool", "fence"];
 
     if (mode === "create") {
       return <FormControl sx={{ m: 1, minWidth: 120 }}>
@@ -63,9 +64,11 @@ class FeatureForm extends React.Component {
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
         >
-          <MenuItem value="paw">Paw</MenuItem>
-          <MenuItem value="pool">Pool</MenuItem>
-          <MenuItem value="fence">Fence</MenuItem>
+          {allFeatures.map(feature => {
+            const disabled = specifiedFeatures.includes(feature);
+
+            return <MenuItem key={feature} disabled={disabled} value={feature}>{feature.toUpperCase()}</MenuItem>
+          })}
         </Select>
         <FormHelperText>Select feature</FormHelperText>
       </FormControl>

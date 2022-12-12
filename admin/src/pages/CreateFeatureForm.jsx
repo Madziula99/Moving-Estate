@@ -24,8 +24,9 @@ class CreateFeatureForm extends React.Component {
 
   render() {
     const { propertyId } = this.state;
+    const { specifiedFeatures } = this.props.location.aboutProps;
 
-    return <FeatureForm propertyId={propertyId} mode="create" handleSubmit={(feature, title) => this.createFeature(feature, title)} />
+    return <FeatureForm propertyId={propertyId} mode="create" specifiedFeatures={specifiedFeatures} handleSubmit={(feature, title) => this.createFeature(feature, title)} />
   }
 }
 
