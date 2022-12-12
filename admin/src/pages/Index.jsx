@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { SignIn } from "../components/SignIn/SignIn.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Index extends React.Component {
   constructor(props) {
@@ -9,28 +10,34 @@ class Index extends React.Component {
     this.checkAuth = this.checkAuth.bind(this);
 
     this.state = {
-      isLoggedIn: false
+      redirect: null,
+      isLoading: true
     };
   }
 
   checkAuth() {
-    const baseURL = "/api/auth/current_user";
+    this.setState({ isLoading: true });
 
-    fetch(baseURL).then(async res => {
-      if (res.status === 401) {
-        this.setState({ isLoggedIn: false });
-      } else {
-        this.setState({ isLoggedIn: true });
-      }
-    });
-  }
+    fetch("/api/auth/manager")
+      .then(res => res.json())
+      .then(body => {
+        if (body.manager) this.setState({ redirect: "/manager", isLoading: false });
+        else this.setState({ redirect: "/properties", isLoading: false });
+      })
+      .catch(() => this.setState({ isLoading: false }));
+    }
 
   componentDidMount() {
     this.checkAuth();
   }
 
   render() {
-    if (this.state.isLoggedIn) return <Redirect to="/properties" />
+    const { redirect, isLoading } = this.state;
+
+    if (isLoading) return <Spinner />;
+
+    if (redirect) return <Redirect to={redirect} />
+
     return <SignIn google_client_id={this.props.google_client_id} />
   }
 }

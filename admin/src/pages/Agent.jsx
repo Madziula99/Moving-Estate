@@ -2,7 +2,6 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import EditAgent from "./EditAgent.jsx";
 import styles from "./Agent.module.css";
 
 class Agent extends React.Component {
@@ -10,46 +9,59 @@ class Agent extends React.Component {
     agentData: {},
     agentId: this.props.match.params.id,
     isLoading: true,
-    isEditing: false,
     redirect: null
   };
 
-  async getAgent() {
+  isManager() {
+    this.setState({
+      isLoading: true
+    });
+
+    fetch("/api/auth/manager")
+      .then(res => res.json())
+      .then(body => {
+        if (body.manager) this.setState({ isLoading: false });
+        else this.setState({ isLoading: false, redirect: "/" });
+      })
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
+  }
+
+  getAgent() {
     const { agentId } = this.state;
 
     this.setState({ isLoading: true });
 
-    await fetch(`/api/agents/${agentId}`)
+    fetch(`/api/agents/${agentId}`)
       .then(r => {
         if (r.status === 404) {
           throw new Error();
         } else {
-          r.json().then(data => {
-            this.setState({
-              agentData: data.agent,
-              isLoading: false
-            })
-          });
+          return r.json();
         }
+      })
+      .then(data => {
+        this.setState({
+          agentData: data.agent,
+          isLoading: false
+        })
       })
       .catch(() => this.setState({ redirect: "/agents", isLoading: false }));
   }
 
   componentDidMount() {
+    this.isManager();
     this.getAgent();
   }
 
   render() {
-    const { isLoading, agentData, agentId, isEditing, redirect } = this.state;
+    const { isLoading, agentData, agentId, redirect } = this.state;
 
     if (isLoading) return <Spinner />;
-
-    if (isEditing) return <EditAgent />
 
     if (redirect) return <Redirect to={redirect} />
 
     return <div className={styles.agent_form_wrapper}>
-      <MenuButton text="Edit agent" handleClick={() => this.setState({ isEditing: true })} href={`/admin/agents/${agentId}/edit`} />
+      <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
       <div className={styles.agent_form}>
         <img src={agentData.photo} alt="Agent" />
         <p>Name: {agentData.name}</p>

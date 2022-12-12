@@ -1,12 +1,28 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class CreateAgent extends React.Component {
   state = {
     redirect: null,
-    isSubmitting: false
+    isSubmitting: false,
+    isLoading: true,
   };
+
+  isManager() {
+    this.setState({
+      isLoading: true
+    });
+
+    fetch("/api/auth/manager")
+      .then(res => res.json())
+      .then(body => {
+        if (body.manager) this.setState({ isLoading: false });
+        else this.setState({ isLoading: false, redirect: "/" });
+      })
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
+  }
 
   async createAgent(values) {
     this.setState({ isSubmitting: true });
@@ -26,8 +42,14 @@ class CreateAgent extends React.Component {
     this.setState({ redirect: "/agents" });
   }
 
+  componentDidMount() {
+    this.isManager();
+  }
+
   render() {
-    const { redirect, isSubmitting } = this.state;
+    const { redirect, isSubmitting, isLoading } = this.state;
+
+    if (isLoading) return <Spinner />;
 
     if (redirect) return <Redirect to={redirect} />
 

@@ -2,7 +2,6 @@ import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
 import { MenuButton } from "../MenuButton/MenuButton.jsx";
-import { CreateAgent } from "../../pages/CreateAgent.jsx";
 import styles from "./AgentsTable.module.css";
 
 const onPageRows = 6;
@@ -25,18 +24,11 @@ const columns = [
 ];
 
 class AgentsTable extends React.Component {
-  state = {
-    isCreating: false
-  };
-
   render() {
-    const { isCreating } = this.state;
     const { agents } = this.props;
 
-    if (isCreating) return <CreateAgent />
-
     return <div className={styles.table}>
-      <MenuButton text="Create agent" handleClick={() => this.setState({ isCreating: true })} href="/admin/agents/new" />
+      <MenuButton text="Create agent" href="/admin/agents/new" />
       <DataGrid
         rowHeight={rowHeight}
         autoHeight

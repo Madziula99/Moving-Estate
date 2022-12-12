@@ -1,15 +1,13 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { AgentsTable } from "../components/AgentsTable/AgentsTable.jsx";
-import { SignOut } from "../components/SignOut/SignOut.jsx";
 
-class Agents extends React.Component {
+class Manager extends React.Component {
   state = {
-    agents: [],
-    isLoading: true,
-    redirect: null
-  };
+    redirect: null,
+    isLoading: true
+  }
 
   isManager() {
     this.setState({
@@ -25,36 +23,22 @@ class Agents extends React.Component {
       .catch(() => this.setState({ isLoading: false, redirect: "/" }));
   }
 
-  getAgents() {
-    this.setState({ isLoading: true });
-
-    fetch("/api/agents")
-      .then(r => r.json())
-      .then(data => {
-        this.setState({
-          agents: data.agents,
-          isLoading: false,
-        })
-      });
-  }
-
   componentDidMount() {
     this.isManager();
-    this.getAgents();
   }
 
   render() {
-    const { agents, isLoading, redirect } = this.state;
+    const { isLoading, redirect } = this.state;
 
     if (isLoading) return <Spinner />;
 
     if (redirect) return <Redirect to={redirect} />
 
     return <>
-      <SignOut headerMessage={"Manager Panel"} />
-      <AgentsTable agents={agents} />
+      <MenuButton text="To agents" href={`/admin/agents`} />
+      <MenuButton text="To properties" href={`/admin/properties`} />
     </>
   }
 }
 
-export { Agents };
+export { Manager }
