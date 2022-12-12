@@ -10,6 +10,7 @@ class CreateFeatureForm extends React.Component {
   createFeature(feature, title) {
     const { propertyId } = this.state;
     const { updateValues } = this.props.location.aboutProps;
+    console.log("create", feature, title)
     fetch(`/api/properties/${propertyId}/features`, {
       method: "POST",
       headers: { "content-type": "application/json" },

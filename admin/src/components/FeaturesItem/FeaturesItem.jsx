@@ -43,7 +43,7 @@ class FeaturesItem extends React.Component {
       <div className={styles.feature_component}>{this.icon()}</div>
       <p>{feature.title}</p>
       <div className={styles.buttons_wrapper}>
-        <NavLink to={{ pathname: `/properties/${propertyId}/features/${feature.feature}/edit`, aboutProps: { link: feature.link, updateValues: updateValues } }} className={styles.nav_link}>
+        <NavLink to={{ pathname: `/properties/${propertyId}/features/${feature.feature}/edit`, aboutProps: { title: feature.title, icon: feature.feature, updateValues: updateValues } }} className={styles.nav_link}>
           <Button variant="contained">...</Button>
         </NavLink>
         <Button variant="contained" onClick={() => this.deleteFeature(feature.feature)}>x</Button>

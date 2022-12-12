@@ -13,23 +13,30 @@ class FeatureForm extends React.Component {
 
     this.state = {
       isDisabled: true,
-      currentFeature: this.props.feature || "",
+      currentFeature: this.props.icon || "",
       currentTitle: this.props.title || ""
     };
   }
 
   handleInputChange(value) {
     const { currentTitle } = this.props;
-      if (currentTitle === value || value === "") {
-        this.setState({ isDisabled: true });
-      } else {
-        this.setState({ isDisabled: false });
-      }
+    if (currentTitle === value || value === "") {
+      this.setState({ isDisabled: true });
+    } else {
+      this.setState({ isDisabled: false });
+    }
 
     this.setState({ currentTitle: value });
   }
 
   handleDropdownChange(event) {
+    const { currentFeature } = this.props;
+    if (currentFeature === event.target.value || event.target.value === "") {
+      this.setState({ isDisabled: true });
+    } else {
+      this.setState({ isDisabled: false });
+    }
+
     this.setState({currentFeature: event.target.value})
   };
 
@@ -38,12 +45,11 @@ class FeatureForm extends React.Component {
     const { currentFeature, currentTitle } = this.state;
 
     if (currentFeature !== feature || currentTitle !== title) {
-      console.log(currentFeature, currentTitle);
       handleSubmit(currentFeature, currentTitle)};
   }
 
   render() {
-    const { link, propertyId } = this.props;
+    const { title, propertyId } = this.props;
     const { isDisabled, currentFeature } = this.state;
 
     return <div className={styles.overlay}>
@@ -59,9 +65,10 @@ class FeatureForm extends React.Component {
           <MenuItem value="pool">Pool</MenuItem>
           <MenuItem value="fence">Fence</MenuItem>
         </Select>
-        <FormHelperText>Without label</FormHelperText>
+        <FormHelperText>Select feature</FormHelperText>
+
       </FormControl>
-        <Input defaultValue={link} onChange={e => this.handleInputChange(e.target.value)} autoFocus className={styles.input} />
+        <Input defaultValue={title} onChange={e => this.handleInputChange(e.target.value)} autoFocus className={styles.input} />
         <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}>
           <Button variant="contained" onClick={this.onSave} disabled={isDisabled} className={styles.row_btn}>Save</Button>
         </NavLink>
