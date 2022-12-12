@@ -8,6 +8,7 @@ import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
 import FloorPlans from "./FloorPlans.jsx";
+import Features from "./Features.jsx";
 
 class Property extends React.Component {
   constructor(props) {
