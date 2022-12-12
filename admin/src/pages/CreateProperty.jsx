@@ -86,7 +86,7 @@ class CreateProperty extends React.Component {
         onSubmit={newValues => this.createProperty(newValues)}
         onCancel={() => this.returnToProperties()}
         state={isSubmitting ? "submitting" : "ready"}
-          />
+      />
     </OverlayForm>
   }
 }

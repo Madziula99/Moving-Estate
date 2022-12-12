@@ -3,20 +3,16 @@ import { Redirect, withRouter, Switch, Route } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { Title } from "../components/Title/Title.jsx";
-import EditProperty from "./EditProperty.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
+import EditProperty from "./EditProperty.jsx";
 import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
-<<<<<<< HEAD
 import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
 import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
-=======
->>>>>>> 2dd6470 (Rebase with Amenities and Images)
 
 class Property extends React.Component {
-<<<<<<< HEAD
   state = {
     property: {},
     propertyId: this.props.match.params.id,
@@ -24,23 +20,6 @@ class Property extends React.Component {
     isLoggedIn: false,
     redirect: null,
   };
-=======
-
-  constructor(props) {
-    super(props);
-
-    this.updateValues = this.updateValues.bind(this);
-
-    this.state = {
-      property: {},
-      propertyId: this.props.match.params.id,
-      isLoading: true,
-      isLoggedIn: false,
-      redirect: null,
-      amenities: [],
-    };
-  }
->>>>>>> 2dd6470 (Rebase with Amenities and Images)
 
   isLoggedIn() {
     this.setState({
@@ -127,13 +106,6 @@ class Property extends React.Component {
     if (!isLoggedIn) return <Redirect to="/" />
 
     return <PageWrapper>
-      <Switch>
-        <Route path="/properties/:id/edit" component={EditProperty}></Route>
-        <Route path="/properties/:id/amenities">
-          <Amenities amenities={amenities} updateValues={this.updateValues} />
-        </Route>
-        <Route path="/properties/:id/images"><Images /></Route>
-      </Switch>
       <Title>Property page: {propertyId}</Title>
       <MenuButton text="..." href={`/admin/properties/${propertyId}/edit`} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
