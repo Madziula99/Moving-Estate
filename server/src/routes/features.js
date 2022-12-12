@@ -12,7 +12,7 @@ async function create(req, res) {
     await property.addFeature(newFeature, { through: { title: title } });
 
     const updatedProperty = await Property.findByPk(id, { include: { all: true } });
-    
+
     res.json(await updatedProperty.detailView(Amenity));
   } catch (error) {
     res.status(403).json({ error });

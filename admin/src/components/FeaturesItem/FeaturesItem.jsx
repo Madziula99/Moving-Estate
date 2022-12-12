@@ -20,25 +20,10 @@ class FeaturesItem extends React.Component {
     }
   }
 
-  async deleteFeature(featureId) {
-    if (window.confirm("Are you sure that you want to remove this feature?")) {
-
-      const { propertyId } = this.state;
-      const { updateValues } = this.props;
-
-      await fetch(`/api/properties/${propertyId}/features/${featureId}`, {
-        method: "DELETE",
-        headers: { "content-type": "application/json" }
-      }).then(r => {
-        updateValues();
-        return r.json();
-      });
-    }
-  }
-
   render() {
-    const { feature, updateValues } = this.props;
+    const { feature, updateValues, deleteFeature } = this.props;
     const { propertyId } = this.state;
+
     return <div className={styles.wrapper}>
       <div className={styles.feature_component}>{this.icon()}</div>
       <p>{feature.title}</p>
@@ -46,7 +31,7 @@ class FeaturesItem extends React.Component {
         <NavLink to={{ pathname: `/properties/${propertyId}/features/${feature.feature}/edit`, aboutProps: { title: feature.title, icon: feature.feature, updateValues: updateValues } }} className={styles.nav_link}>
           <Button variant="contained">...</Button>
         </NavLink>
-        <Button variant="contained" onClick={() => this.deleteFeature(feature.feature)}>x</Button>
+        <Button variant="contained" onClick={() => deleteFeature(feature.feature)}>x</Button>
       </div>
     </div>
   }

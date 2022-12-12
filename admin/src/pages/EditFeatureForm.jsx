@@ -10,15 +10,16 @@ class EditFeatureForm extends React.Component {
   };
 
   updateFeature(icon, title) {
-    console.log("update", icon, title)
     const { propertyId } = this.state;
     const { updateValues } = this.props.location.aboutProps;
+
     fetch(`/api/properties/${propertyId}/features/${icon}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title: title })
     }).then(r => {
       updateValues();
+
       return r.json();
     });
   }
