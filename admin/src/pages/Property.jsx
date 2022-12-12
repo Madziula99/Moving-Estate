@@ -7,6 +7,7 @@ import EditProperty from "../components/EditProperty/EditProperty.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
+import FloorPlans from "./FloorPlans.jsx";
 
 class Property extends React.Component {
   constructor(props) {
@@ -20,6 +21,7 @@ class Property extends React.Component {
       isLoading: true,
       isLoggedIn: false,
       redirect: null,
+      floorPlans: [],
       amenities: [],
     };
   }
@@ -64,6 +66,7 @@ class Property extends React.Component {
           bedrooms: body.bedrooms,
           bathrooms: body.bathrooms,
         },
+        floorPlans: body.floor_plans,
         amenities: body.amenities,
         isLoading: false,
         isLoggedIn: true
@@ -82,7 +85,7 @@ class Property extends React.Component {
   }
 
   render() {
-    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities } = this.state;
+    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities, floorPlans } = this.state;
 
     if (isLoading) return <Spinner />;
 
@@ -108,6 +111,7 @@ class Property extends React.Component {
           <Amenities amenities={amenities} updateValues={this.updateValues} />
         </Route>
         <Route path="/properties/:id/images"><Images /></Route>
+        <Route path="/properties/:id/floor_plans"><FloorPlans /></Route>
       </Switch>
     </div>
   }
