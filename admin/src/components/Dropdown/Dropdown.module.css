@@ -1,9 +1,10 @@
 .dropdown_container {
-  max-width: 400px;
+  max-width: 450px;
   margin: 0 auto;
-  padding: 10px 0;
+  padding: 5px 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 15px;
 }
 
 .dropdown {
@@ -11,6 +12,7 @@
   height: 38px;
 }
 
-.dropdown_error {
-  color: red;
+.label {
+  color: #df434a;
+  font-weight: 700;
 }

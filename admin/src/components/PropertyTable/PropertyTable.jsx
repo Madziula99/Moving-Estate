@@ -4,7 +4,7 @@ import Avatar from "@mui/material/Avatar";
 import { MenuButton } from "../MenuButton/MenuButton.jsx";
 import styles from "./PropertyTable.module.css";
 
-const onPageRows = 6;
+const onPageRows = 4;
 const photoHeight = 130;
 const rowHeight = 135;
 const widthInTable = 95;

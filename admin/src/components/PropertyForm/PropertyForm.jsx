@@ -81,19 +81,15 @@ class PropertyForm extends React.Component {
           <form onSubmit={props.handleSubmit} className={styles.form}>
             <StyledInput isDisabled={isDisabled} label="Title: " type="text" name="title" data={props} />
             <div className={styles.row}>
-              <label htmlFor={"description"}> Description: </label>
+              <label className={styles.label} htmlFor={"description"}> Description: </label>
               <Field as="textarea" className={styles.textarea} disabled={isDisabled} type="text" name="description" data={props} />
             </div>
             <StyledInput isDisabled={isDisabled} label="Location city: " type="text" name="locationCity" data={props} />
             <StyledInput isDisabled={isDisabled} label="Location state: " type="text" name="locationState" data={props} />
             <Dropdown isDisabled={isDisabled} label="Type" name="type" types={["apartment", "house"]} />
-            <div className={styles.row}>
-              {props.errors["type"] && <span className={styles.dropdown_error}>{props.errors["type"]}</span>}
-            </div>
+            {props.errors["type"] && <span className={styles.dropdown_error}>{props.errors["type"]}</span>}
             <Dropdown isDisabled={isDisabled} label="Mode" name="mode" types={["rent", "sale"]} />
-            <div className={styles.row}>
-              {props.errors["mode"] && <span className={styles.dropdown_error}>{props.errors["mode"]}</span>}
-            </div>
+            {props.errors["mode"] && <span className={styles.dropdown_error}>{props.errors["mode"]}</span>}
             <StyledInput isDisabled={isDisabled} label="Price: " type="number" name="price" data={props} />
             <StyledInput isDisabled={isDisabled} label="Area: " type="number" name="area" data={props} />
             <StyledInput isDisabled={isDisabled} label="Bedrooms: " type="number" name="bedrooms" data={props} />
