@@ -28,10 +28,10 @@ class ImageForm extends React.Component {
   }
 
   onSave() {
-    const { link, handleSubmit } = this.props;
+    const { handleSubmit } = this.props;
     const { currentLink } = this.state;
 
-    if (currentLink !== link) handleSubmit(currentLink);
+    handleSubmit(currentLink);
   }
 
   render() {
