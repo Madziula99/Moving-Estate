@@ -21,7 +21,6 @@ class Property extends React.Component {
       isLoading: true,
       isLoggedIn: false,
       redirect: null,
-      floorPlans: [],
       amenities: [],
     };
   }
@@ -66,7 +65,6 @@ class Property extends React.Component {
           bedrooms: body.bedrooms,
           bathrooms: body.bathrooms,
         },
-        floorPlans: body.floor_plans,
         amenities: body.amenities,
         isLoading: false,
         isLoggedIn: true
@@ -85,7 +83,7 @@ class Property extends React.Component {
   }
 
   render() {
-    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities, floorPlans } = this.state;
+    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities } = this.state;
 
     if (isLoading) return <Spinner />;
 

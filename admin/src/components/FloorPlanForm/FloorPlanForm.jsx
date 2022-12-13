@@ -18,9 +18,9 @@ class FloorPlanForm extends React.Component {
 
   handleInputChange(value) {
     const { name } = this.props;
-    const { currentName } = this.state;
+    const { currentImage } = this.state;
 
-    if (value === name || value === "" || currentName === "") {
+    if (value === name || value === "" || currentImage === "") {
       this.setState({ isDisabled: true });
     } else {
       this.setState({ isDisabled: false });
@@ -31,9 +31,9 @@ class FloorPlanForm extends React.Component {
 
   handleImageInputChange(value) {
     const { image } = this.props;
-    const { currentImage } = this.state;
+    const { currentName } = this.state;
 
-    if (value === image || value === "" || currentImage === "") {
+    if (value === image || value === "" || currentName === "") {
       this.setState({ isDisabled: true });
     } else {
       this.setState({ isDisabled: false });
@@ -43,12 +43,10 @@ class FloorPlanForm extends React.Component {
   }
 
   onSave() {
-    const { image, name, handleSubmit } = this.props;
+    const { handleSubmit } = this.props;
     const { currentImage, currentName } = this.state;
     
-    if (currentImage !== image || currentName !== name) {
-      handleSubmit(currentImage, currentName)
-    };
+    handleSubmit(currentImage, currentName);
   } 
 
   render() {
