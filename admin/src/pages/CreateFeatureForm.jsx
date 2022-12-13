@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
 
 class CreateFeatureForm extends React.Component {
@@ -24,9 +24,11 @@ class CreateFeatureForm extends React.Component {
 
   render() {
     const { propertyId } = this.state;
+
+    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/features`} />;
     const { specifiedFeatures } = this.props.location.aboutProps;
 
-    return <FeatureForm propertyId={propertyId} mode="create" specifiedFeatures={specifiedFeatures} handleSubmit={(feature, title) => this.createFeature(feature, title)} />
+    return <FeatureForm propertyId={propertyId} mode="create" icon="" title="" specifiedFeatures={specifiedFeatures} handleSubmit={(feature, title) => this.createFeature(feature, title)} />
   }
 }
 

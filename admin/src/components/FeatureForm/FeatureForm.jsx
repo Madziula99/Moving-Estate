@@ -5,62 +5,44 @@ import Select from "@mui/material/Select";
 import styles from "./FeatureForm.module.css";
 
 class FeatureForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onSave = this.onSave.bind(this);
-    this.handleDropdownChange = this.handleDropdownChange.bind(this);
-
-    this.state = {
-      isDisabled: true,
-      currentIcon: this.props.icon || "",
-      currentTitle: this.props.title || ""
-    };
-  }
-
-  handleInputChange(value) {
-    const { title } = this.props;
-    const { currentIcon } = this.state;
-
-    if (value === title || value === "" || currentIcon === "") {
-      this.setState({ isDisabled: true });
-    } else {
-      this.setState({ isDisabled: false });
-    }
-
-    this.setState({ currentTitle: value });
-  }
-
-  handleDropdownChange(value) {
-    const { icon } = this.props;
-    const { currentTitle } = this.state;
-
-    if (value === icon || value === "" || currentTitle === "") {
-      this.setState({ isDisabled: true });
-    } else {
-      this.setState({ isDisabled: false });
-    }
-
-    this.setState({ currentIcon: value });
+  state = {
+    isDisabled: true,
+    icon: this.props.icon || "",
+    title: this.props.title || ""
   };
 
-  onSave() {
-    const { handleSubmit } = this.props;
-    const { currentIcon, currentTitle } = this.state;
+  handleChange(name, value) {
+    this.setState({ [name]: value, isDisabled: true });
+  }
 
-    handleSubmit(currentIcon, currentTitle);
+  componentDidUpdate(prevProps, _) {
+    const { icon, title } = this.state;
+    if (
+      this.state.isDisabled === false ||
+      (icon === prevProps.icon && title === prevProps.title) ||
+      title === "" ||
+      icon === ""
+    ) return;
+    this.setState({ isDisabled: false });
+  }
+
+  onSave = () => {
+    const { handleSubmit } = this.props;
+    const { icon, title } = this.state;
+
+    handleSubmit(icon, title);
   }
 
   showDropdown() {
     const { mode, specifiedFeatures } = this.props;
-    const { currentIcon } = this.state;
+    const { icon } = this.state;
     const allFeatures = ["paw", "pool", "fence"];
 
     if (mode === "create") {
       return <FormControl sx={{ m: 1, minWidth: 120 }}>
         <Select
-          value={currentIcon}
-          onChange={e => this.handleDropdownChange(e.target.value)}
+          value={icon}
+          onChange={e => this.handleChange("icon", e.target.value)}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
         >
@@ -82,7 +64,7 @@ class FeatureForm extends React.Component {
     return <div className={styles.overlay}>
       <form className={styles.form}>
         {this.showDropdown()}
-        <Input defaultValue={title} onChange={e => this.handleInputChange(e.target.value)} autoFocus className={styles.input} />
+        <Input defaultValue={title} onChange={e => this.handleChange("title", e.target.value)} autoFocus className={styles.input} />
         <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}>
           <Button variant="contained" onClick={this.onSave} disabled={isDisabled} className={styles.row_btn}>Save</Button>
         </NavLink>
