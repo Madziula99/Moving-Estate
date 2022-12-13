@@ -11,15 +11,15 @@ class EditFloorPlanForm extends React.Component {
 
   updateFloorPlan(image, name) {
     const { propertyId } = this.state;
-    const { floorPlanId, updateValues } = this.props.location.aboutProps;
+    const { floorPlanId } = this.props.match.params;
+
     fetch(`/api/properties/${propertyId}/floor_plans/${floorPlanId}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ url: image, name: name })
-    }).then(r => {
-      updateValues();
-      return r.json();
-    });
+    })
+      .then(r => r.json())
+      .catch(() => <Redirect to={`/properties/${propertyId}`} />);
   }
 
   render() {

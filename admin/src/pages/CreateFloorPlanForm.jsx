@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Redirect } from "react-router-dom";
 import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
 
 class CreateFloorPlanForm extends React.Component {
@@ -9,23 +9,20 @@ class CreateFloorPlanForm extends React.Component {
 
   createFloorPlan(image, name) {
     const { propertyId } = this.state;
-    const { updateValues } = this.props.location.aboutProps;
 
     fetch(`/api/properties/${propertyId}/floor_plans`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ url: image, name: name })
-    }).then(r => {
-      updateValues();
-
-      return r.json();
-    });
+    })
+      .then(r => r.json())
+      .catch(() => <Redirect to={`/properties/${propertyId}`} />);
   }
 
   render() {
     const { propertyId } = this.state;
 
-    return <FloorPlanForm propertyId={propertyId} mode="create" handleSubmit={(image, name) => this.createFloorPlan(image, name)} />
+    return <FloorPlanForm propertyId={propertyId} handleSubmit={(image, name) => this.createFloorPlan(image, name)} />
   }
 }
 

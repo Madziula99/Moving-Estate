@@ -9,13 +9,13 @@ class FloorPlansItem extends React.Component {
   };
 
   render() {
-    const { floorPlan, updateValues, deleteFloorPlan } = this.props;
+    const { floorPlan, deleteFloorPlan } = this.props;
     const { propertyId } = this.state;
     return <div className={styles.wrapper}>
       <img src={floorPlan.url} className={styles.image} alt="" />
       <p>{floorPlan.name}</p>
       <div className={styles.buttons_wrapper}>
-        <NavLink to={{ pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`, aboutProps: { name: floorPlan.name, image: floorPlan.url, floorPlanId: floorPlan.floorPlanId, updateValues: updateValues } }} className={styles.nav_link}>
+        <NavLink to={{ pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`, aboutProps: { name: floorPlan.name, image: floorPlan.url } }} className={styles.nav_link}>
           <Button variant="contained">...</Button>
         </NavLink>
         <Button variant="contained" onClick={() => deleteFloorPlan(floorPlan.floorPlanId)}>x</Button>

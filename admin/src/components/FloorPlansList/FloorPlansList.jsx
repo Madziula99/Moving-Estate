@@ -3,9 +3,9 @@ import FloorPlansItem from "../FloorPlansItem/FloorPlansItem.jsx";
 
 class FloorPlansList extends React.Component {
   render() {
-    const { floorPlans, updateValues, deleteFloorPlan } = this.props;
+    const { floorPlans, deleteFloorPlan } = this.props;
 
-    return floorPlans.map(floorPlan => <FloorPlansItem floorPlan={floorPlan} deleteFloorPlan={deleteFloorPlan} updateValues={updateValues} key={floorPlan.name} />);
+    return floorPlans.map(floorPlan => <FloorPlansItem floorPlan={floorPlan} deleteFloorPlan={deleteFloorPlan} key={floorPlan.floorPlanId} />);
   }
 }
 
