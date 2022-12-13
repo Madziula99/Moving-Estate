@@ -8,7 +8,6 @@ class Amenities extends React.Component {
     super(props);
 
     this.isChecked = this.isChecked.bind(this);
-    this.updateValues = this.updateValues.bind(this);
 
     this.state = {
       propertyId: this.props.match.params.id,
@@ -32,8 +31,6 @@ class Amenities extends React.Component {
         isLoading: false
       });
 
-      this.updateValues();
-
       return r.json();
     });
   }
@@ -56,8 +53,6 @@ class Amenities extends React.Component {
         isLoading: false
       });
 
-      this.updateValues();
-
       return r.json();
     });
   }
@@ -73,30 +68,36 @@ class Amenities extends React.Component {
     }
   }
 
-  getAmenities() {
-    const { propertyId } = this.state;
-
+  async getAmenities() {
     this.setState({ isLoading: true });
 
-    fetch(`/api/properties/${propertyId}`)
-      .then(res => {
-        if (res.status === 404) throw new Error();
-        return res.json();
-      })
-      .then(data => {
-        this.setState({
-          amenities: data.amenities,
-          isLoading: false,
-        })
-      })
+    const amenities = await this.fetchAmenities();
+
+    this.setState({
+      amenities: amenities,
+      isLoading: false,
+    });
+  }
+
+  async fetchAmenities() {
+    const { propertyId } = this.state;
+
+    return await fetch(`/api/properties/${propertyId}`)
+      .then(res => res.json())
+      .then(data => data.amenities)
       .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
-  componentDidMount() {
-    this.getAmenities();
+  async componentDidUpdate() {
+    const { amenities } = this.state;
+    const updated = await this.fetchAmenities();
+
+    if (JSON.stringify(amenities) === JSON.stringify(updated)) return;
+
+    this.setState({ amenities: updated });
   }
 
-  updateValues() {
+  componentDidMount() {
     this.getAmenities();
   }
 
@@ -105,7 +106,7 @@ class Amenities extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (isLoading) return <Spinner />;
+    if (isLoading) return <Spinner />
 
     return <AmenitiesPageContent amenities={amenities} isChecked={this.isChecked} />
   }
