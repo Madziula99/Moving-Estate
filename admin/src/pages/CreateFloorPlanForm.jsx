@@ -4,17 +4,17 @@ import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
 
 class CreateFloorPlanForm extends React.Component {
   state = {
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.id
   };
 
-  createFeature(feature, title) {
+  createFloorPlan(image, name) {
     const { propertyId } = this.state;
     const { updateValues } = this.props.location.aboutProps;
-    console.log("create", feature, title)
-    fetch(`/api/properties/${propertyId}/features`, {
+
+    fetch(`/api/properties/${propertyId}/floor_plans`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ icon: feature, title: title })
+      body: JSON.stringify({ url: image, name: name })
     }).then(r => {
       updateValues();
 
@@ -25,7 +25,7 @@ class CreateFloorPlanForm extends React.Component {
   render() {
     const { propertyId } = this.state;
 
-    return <FloorPlanForm propertyId={propertyId} handleSubmit={(feature, title) => this.createFeature(feature, title)} />
+    return <FloorPlanForm propertyId={propertyId} mode="create" handleSubmit={(image, name) => this.createFloorPlan(image, name)} />
   }
 }
 

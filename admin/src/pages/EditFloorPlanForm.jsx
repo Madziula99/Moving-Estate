@@ -10,13 +10,12 @@ class EditFloorPlanForm extends React.Component {
   };
 
   updateFloorPlan(image, name) {
-    console.log("update", image, name)
     const { propertyId } = this.state;
-    const { updateValues } = this.props.location.aboutProps;
-    fetch(`/api/properties/${propertyId}/floor_plans/${icon}`, {
+    const { floorPlanId, updateValues } = this.props.location.aboutProps;
+    fetch(`/api/properties/${propertyId}/floor_plans/${floorPlanId}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title: title })
+      body: JSON.stringify({ url: image, name: name })
     }).then(r => {
       updateValues();
       return r.json();
@@ -26,11 +25,11 @@ class EditFloorPlanForm extends React.Component {
   render() {
     const { propertyId } = this.state;
 
-    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/features`} />;
+    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/floor_plans`} />;
 
-    const { image, title } = this.props.location.aboutProps;
+    const { image, name } = this.props.location.aboutProps;
 
-    return <FloorPlanForm propertyId={propertyId} icon={icon} title={title} handleSubmit={(icon, title) => this.updateFeature(icon, title)} />
+    return <FloorPlanForm propertyId={propertyId} image={image} name={name} handleSubmit={(image, name) => this.updateFloorPlan(image, name)} />
   }
 }
 

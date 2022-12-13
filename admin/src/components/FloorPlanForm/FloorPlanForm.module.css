@@ -12,7 +12,7 @@
 }
 
 .form {
-  width: 500px;
+  width: 600px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -23,7 +23,8 @@
 }
 
 .input {
-  width: 350px;
+  width: 450px;
+  margin: 10px;
 }
 
 .row_btn {

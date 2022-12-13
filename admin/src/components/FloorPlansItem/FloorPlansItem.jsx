@@ -8,7 +8,7 @@ class FloorPlansItem extends React.Component {
     propertyId: this.props.match.params.id,
   };
 
-  async deleteFeature(floorPlanId) {
+  async deleteFloorPlan(floorPlanId) {
     if (window.confirm("Are you sure that you want to remove this floor plan?")) {
 
       const { propertyId } = this.state;
@@ -31,7 +31,7 @@ class FloorPlansItem extends React.Component {
       <img src={floorPlan.url} className={styles.image} alt="" />
       <p>{floorPlan.name}</p>
       <div className={styles.buttons_wrapper}>
-        <NavLink to={{ pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`, aboutProps: { name: floorPlan.name, image: floorPlan.url, updateValues: updateValues } }} className={styles.nav_link}>
+        <NavLink to={{ pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`, aboutProps: { name: floorPlan.name, image: floorPlan.url, floorPlanId: floorPlan.floorPlanId, updateValues: updateValues } }} className={styles.nav_link}>
           <Button variant="contained">...</Button>
         </NavLink>
         <Button variant="contained" onClick={() => this.deleteFloorPlan(floorPlan.floorPlanId)}>x</Button>

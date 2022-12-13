@@ -66,14 +66,13 @@ class FloorPlans extends React.Component {
 
   render() {
     const { propertyId, floorPlans, isLoading, redirect } = this.state;
-    console.log(floorPlans)
     if (isLoading) return <Spinner />;
 
     if (redirect) return <Redirect to={redirect} />
 
     return <>
       <FloorPlansList floorPlans={floorPlans} deleteFloorPlan={this.deleteFloorPlan} updateValues={this.updateValues} />
-      <NavLinkWrapper propertyId={propertyId} type="floorPlans" text="Add Floor plan" updateValues={this.updateValues} />
+      <NavLinkWrapper propertyId={propertyId} type="floor_plans" text="Add Floor plan" updateValues={this.updateValues} />
 
       <Switch>
         <Route exact path="/properties/:id/floor_plans/new" component={CreateFloorPlanForm}></Route>
