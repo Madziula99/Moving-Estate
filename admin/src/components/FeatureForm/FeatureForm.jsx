@@ -13,16 +13,16 @@ class FeatureForm extends React.Component {
 
     this.state = {
       isDisabled: true,
-      currentFeature: this.props.icon || "",
+      currentIcon: this.props.icon || "",
       currentTitle: this.props.title || ""
     };
   }
 
   handleInputChange(value) {
     const { title } = this.props;
-    const { currentFeature } = this.state;
+    const { currentIcon } = this.state;
 
-    if (value === title || value === "" || currentFeature === "") {
+    if (value === title || value === "" || currentIcon === "") {
       this.setState({ isDisabled: true });
     } else {
       this.setState({ isDisabled: false });
@@ -32,34 +32,34 @@ class FeatureForm extends React.Component {
   }
 
   handleDropdownChange(value) {
-    const { feature } = this.props;
+    const { icon } = this.props;
     const { currentTitle } = this.state;
 
-    if (value === feature || value === "" || currentTitle === "") {
+    if (value === icon || value === "" || currentTitle === "") {
       this.setState({ isDisabled: true });
     } else {
       this.setState({ isDisabled: false });
     }
 
-    this.setState({ currentFeature: value })
+    this.setState({ currentIcon: value });
   };
 
   onSave() {
-    const { feature, title, handleSubmit } = this.props;
-    const { currentFeature, currentTitle } = this.state;
+    const { handleSubmit } = this.props;
+    const { currentIcon, currentTitle } = this.state;
 
-    if (currentFeature !== feature || currentTitle !== title) handleSubmit(currentFeature, currentTitle);
+    handleSubmit(currentIcon, currentTitle);
   }
 
   showDropdown() {
     const { mode, specifiedFeatures } = this.props;
-    const { currentFeature } = this.state;
+    const { currentIcon } = this.state;
     const allFeatures = ["paw", "pool", "fence"];
 
     if (mode === "create") {
       return <FormControl sx={{ m: 1, minWidth: 120 }}>
         <Select
-          value={currentFeature}
+          value={currentIcon}
           onChange={e => this.handleDropdownChange(e.target.value)}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
