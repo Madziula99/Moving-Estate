@@ -35,7 +35,7 @@ class Properties extends React.Component {
           isLoggedIn: true
         })
       })
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .catch(() => this.setState({ redirect: "/", isLoading: false }));
     }
 
   componentDidMount() {
@@ -43,9 +43,11 @@ class Properties extends React.Component {
   }
 
   render() {
-    const { filteredProperties, isLoggedIn, isLoading, agentName } = this.state;
+    const { filteredProperties, isLoggedIn, isLoading, agentName, redirect } = this.state;
 
-    if (isLoading) return <Spinner />;
+    if (isLoading) return <Spinner />
+
+    if (redirect) return <Redirect to={redirect} />
 
     if (isLoggedIn) return <>
       <Switch>
@@ -54,8 +56,6 @@ class Properties extends React.Component {
       <SignOut headerMessage={`${agentName}, welcome!`} />
       <PropertyTable adminProperties={filteredProperties} />
     </>
-
-    return <Redirect to="/" />
   }
 }
 

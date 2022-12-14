@@ -37,7 +37,7 @@ class PropertyTable extends React.Component {
       <DataGrid
         rowHeight={rowHeight}
         autoHeight
-        rows={this.props.adminProperties || []}
+        rows={this.props.adminProperties}
         columns={columns}
         pageSize={onPageRows}
         rowsPerPageOptions={[onPageRows]}
