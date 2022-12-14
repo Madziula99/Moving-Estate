@@ -40,7 +40,7 @@ class FeatureForm extends React.Component {
 
     return <div className={styles.overlay}>
       <form className={styles.form}>
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <FormControl sx={{ m: 2, minWidth: 120 }}>
           <Select
             value={icon}
             onChange={e => this.handleChange("icon", e.target.value)}
@@ -59,11 +59,30 @@ class FeatureForm extends React.Component {
           </Select>
           <FormHelperText>Select feature</FormHelperText>
         </FormControl>
-        <Input defaultValue={title} onChange={e => this.handleChange("title", e.target.value)} className={styles.input} />
-        <NavLink onClick={event => isDisabled && event.preventDefault()} to={`/properties/${propertyId}/features`} className={styles.nav_link}>
-          <Button variant="contained" onClick={this.onSave} disabled={isDisabled}>Save</Button>
+        <Input
+          defaultValue={title}
+          onChange={e => this.handleChange("title", e.target.value)}
+          className={styles.input}
+        />
+        <NavLink
+          onClick={event => isDisabled && event.preventDefault()}
+          to={`/properties/${propertyId}/features`}
+          className={styles.nav_link}
+        >
+          <Button
+            sx={{m: 1, p: 1}}
+            variant="contained"
+            onClick={this.onSave}
+            disabled={isDisabled}
+          >
+            Save
+          </Button>
         </NavLink>
-        <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}><Button variant="contained" className={styles.row_btn}>Cancel</Button></NavLink>
+        <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}>
+          <Button sx={{ m: 1, p: 1 }} variant="contained">
+            Cancel
+          </Button>
+        </NavLink>
       </form>
     </div>
   }

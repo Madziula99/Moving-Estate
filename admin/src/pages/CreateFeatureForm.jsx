@@ -1,14 +1,18 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class CreateFeatureForm extends React.Component {
   state = {
     features: [],
     propertyId: this.props.match.params.id,
+    redirect: null,
+    isLoading: true
   };
 
   createFeature(feature, title) {
+    this.setState({ isLoading: true})
     const { propertyId } = this.state;
 
     fetch(`/api/properties/${propertyId}/features`, {
@@ -16,7 +20,7 @@ class CreateFeatureForm extends React.Component {
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ icon: feature, title: title })
     })
-      .then(r => r.json())
+      .then(() => this.setState({ isLoading: false }))
       .catch(() => this.setState({ redirect: `/properties/${propertyId}/features`, isLoading: false }));
   }
 
@@ -24,7 +28,7 @@ class CreateFeatureForm extends React.Component {
     const { propertyId } = this.state;
     return await fetch(`/api/properties/${propertyId}`)
       .then(res => res.json())
-      .then(data => this.setState({ features: data.features }))
+      .then(data => this.setState({ features: data.features, isLoading: false }))
       .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
@@ -33,7 +37,11 @@ class CreateFeatureForm extends React.Component {
   }
 
   render() {
-    const { propertyId, features } = this.state;
+    const { propertyId, features, isLoading, redirect } = this.state;
+
+    if (isLoading) return <Spinner />
+
+    if (redirect) return <Redirect to={redirect} />
 
     return <FeatureForm
       features={features}

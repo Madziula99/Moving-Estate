@@ -53,15 +53,14 @@ class Features extends React.Component {
     this.getFeatures();
   }
 
-  async componentDidUpdate() {
+  async componentDidUpdate(_, prevState) {
     const { features } = this.state;
     const newFeatures = await this.fetchFeatures();
 
     if (JSON.stringify(features) === JSON.stringify(newFeatures)) return;
-    console.log("Get values again", newFeatures, newFeatures.length === 3);
     this.setState({
       features: newFeatures,
-      disableAdd: newFeatures.length === 3
+      disableAdd: newFeatures.length === 3,
     });
   }
 
@@ -74,7 +73,12 @@ class Features extends React.Component {
 
     return <>
       <FeaturesList features={features} deleteFeature={this.deleteFeature}/>
-      <NavLinkWrapper propertyId={propertyId} disabled={disableAdd} type="features" text="Add Feature" />
+      <NavLinkWrapper
+        propertyId={propertyId}
+        disabled={disableAdd}
+        type="features"
+        text="Add Feature"
+      />
 
       <Switch>
         <Route exact path="/properties/:id/features/new" component={CreateFeatureForm}></Route>

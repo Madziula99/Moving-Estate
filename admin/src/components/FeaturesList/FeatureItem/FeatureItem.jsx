@@ -28,14 +28,21 @@ class FeaturesItem extends React.Component {
       {this.icon()}
       <p>{feature.title}</p>
       <NavLink
-        to={{ pathname: `/properties/${propertyId}/features/${feature.feature}/edit`, aboutProps: { feature: feature } }}
+        to={{
+          pathname: `/properties/${propertyId}/features/${feature.feature}/edit`,
+          aboutProps: { feature: feature }
+        }}
         className={styles.nav_link}
       >
-        <Button variant="contained">
-          ...
-        </Button>
+        <Button sx={{ m: 1, p: 1 }} variant="contained">...</Button>
       </NavLink>
-      <Button variant="contained" onClick={() => deleteFeature(feature.feature)}>x</Button>
+      <Button
+        sx={{ m: 1, p: 1 }}
+        variant="contained"
+        onClick={() => deleteFeature(feature.feature)}
+      >
+        X
+      </Button>
     </div>
   }
 }
