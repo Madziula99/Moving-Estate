@@ -17,21 +17,14 @@ class FloorPlans extends React.Component {
   deleteFloorPlan = floorPlanId => {
     if (window.confirm("Are you sure you want to delete this floor plan?")) {
       const { propertyId } = this.state;
-      this.setState({isLoading: true})
+
       fetch(`/api/properties/${propertyId}/floor_plans/${floorPlanId}`, {
         method: "DELETE",
         headers: { "content-type": "application/json" }
       })
-        .then(r => {
-          this.setState({isLoading: false})
-          return r.json()
-        })
-        .catch(() => this.setState({ redirect: `/properties/${propertyId}/floor_plans`, isLoading: false }));
+        .then(() => this.setState({ isLoading: false }))
+        .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
     }
-  }
-
-  componentDidMount() {
-    this.getFloorPlans();
   }
 
   async getFloorPlans() {
@@ -51,7 +44,7 @@ class FloorPlans extends React.Component {
     return await fetch(`/api/properties/${propertyId}`)
       .then(res => res.json())
       .then(data => data.floor_plans)
-      .catch(() => this.setState({ redirect: `/properties/${propertyId}/floor_plans`, isLoading: false }));
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
   }
 
   async componentDidUpdate() {
@@ -60,18 +53,25 @@ class FloorPlans extends React.Component {
 
     if (JSON.stringify(floorPlans) === JSON.stringify(updated)) return;
 
+    this.getFloorPlans();
+
     this.setState({ floorPlans: updated });
+  }
+
+  componentDidMount() {
+    this.getFloorPlans();
   }
 
   render() {
     const { propertyId, floorPlans, isLoading, redirect } = this.state;
-    if (isLoading) return <Spinner />;
+
+    if (isLoading) return <Spinner />
 
     if (redirect) return <Redirect to={redirect} />
 
     return <>
       <FloorPlansList floorPlans={floorPlans} deleteFloorPlan={this.deleteFloorPlan} />
-      <NavLinkWrapper propertyId={propertyId} type="floor_plans" text="Add Floor plan" />
+      <NavLinkWrapper propertyId={propertyId} type="floor_plans" text="Add floor plan" />
 
       <Switch>
         <Route exact path="/properties/:id/floor_plans/new" component={CreateFloorPlanForm}></Route>

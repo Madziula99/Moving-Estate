@@ -5,21 +5,19 @@ import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
 class EditFloorPlanForm extends React.Component {
   state = {
     propertyId: this.props.match.params.propertyId,
-    image: this.props.image,
+    url: this.props.url,
     name: this.props.name
   };
 
-  updateFloorPlan(image, name) {
+  updateFloorPlan = (url, name) => {
     const { propertyId } = this.state;
     const { floorPlanId } = this.props.match.params;
 
     fetch(`/api/properties/${propertyId}/floor_plans/${floorPlanId}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ url: image, name: name })
-    })
-      .then(r => r.json())
-      .catch(() => <Redirect to={`/properties/${propertyId}/floor_plans`} />);
+      body: JSON.stringify({ url: url, name: name })
+    }).catch(() => <Redirect to={`/properties/${propertyId}`} />);
   }
 
   render() {
@@ -27,9 +25,9 @@ class EditFloorPlanForm extends React.Component {
 
     if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/floor_plans`} />;
 
-    const { image, name } = this.props.location.aboutProps;
+    const { url, name } = this.props.location.aboutProps;
 
-    return <FloorPlanForm propertyId={propertyId} image={image} name={name} handleSubmit={(image, name) => this.updateFloorPlan(image, name)} />
+    return <FloorPlanForm propertyId={propertyId} url={url} name={name} handleSubmit={this.updateFloorPlan} />
   }
 }
 

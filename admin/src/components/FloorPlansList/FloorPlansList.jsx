@@ -1,5 +1,5 @@
 import React from "react";
-import FloorPlansItem from "../FloorPlansItem/FloorPlansItem.jsx";
+import FloorPlansItem from "./FloorPlansItem/FloorPlansItem.jsx";
 
 class FloorPlansList extends React.Component {
   render() {

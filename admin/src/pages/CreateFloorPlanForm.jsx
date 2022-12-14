@@ -7,22 +7,20 @@ class CreateFloorPlanForm extends React.Component {
     propertyId: this.props.match.params.id
   };
 
-  createFloorPlan(image, name) {
+  createFloorPlan = (url, name) => {
     const { propertyId } = this.state;
 
     fetch(`/api/properties/${propertyId}/floor_plans`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ url: image, name: name })
-    })
-      .then(r => r.json())
-      .catch(() => <Redirect to={`/properties/${propertyId}/floor_plans`} />);
+      body: JSON.stringify({ url: url, name: name })
+    }).catch(() => <Redirect to={`/properties/${propertyId}`} />);
   }
 
   render() {
     const { propertyId } = this.state;
 
-    return <FloorPlanForm propertyId={propertyId} handleSubmit={(image, name) => this.createFloorPlan(image, name)} />
+    return <FloorPlanForm propertyId={propertyId} handleSubmit={this.createFloorPlan} />
   }
 }
 
