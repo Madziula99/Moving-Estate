@@ -49,13 +49,14 @@ class FloorPlans extends React.Component {
 
   async componentDidUpdate() {
     const { floorPlans } = this.state;
+
+    if (this.state.isLoading) return;
+
     const updated = await this.fetchFloorPlans();
 
     if (JSON.stringify(floorPlans) === JSON.stringify(updated)) return;
 
     this.getFloorPlans();
-
-    this.setState({ floorPlans: updated });
   }
 
   componentDidMount() {

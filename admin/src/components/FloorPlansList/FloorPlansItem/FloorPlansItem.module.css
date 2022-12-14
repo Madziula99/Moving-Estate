@@ -1,7 +1,8 @@
 .wrapper {
   width: 450px;
-  display: flex;
-  justify-content: space-between;
+  height: 150px;
+  display: grid;
+  grid-template-columns: max-content auto repeat(2, max-content);
   align-items: center;
   border: 2px solid #1976d2;
   border-radius: 5px;
@@ -11,11 +12,7 @@
 
 .image {
   width: 150px;
-}
-
-.buttons_wrapper {
-  display: flex;
-  gap: 5px;
+  margin-right: 10px;
 }
 
 .nav_link {

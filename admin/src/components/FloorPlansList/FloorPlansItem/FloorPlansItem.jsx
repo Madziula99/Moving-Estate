@@ -15,12 +15,18 @@ class FloorPlansItem extends React.Component {
     return <div className={styles.wrapper}>
       <img src={floorPlan.url} className={styles.image} alt="" />
       <p>{floorPlan.name}</p>
-      <div className={styles.buttons_wrapper}>
-        <NavLink to={{ pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`, aboutProps: { name: floorPlan.name, url: floorPlan.url } }} className={styles.nav_link}>
-          <Button variant="contained">...</Button>
-        </NavLink>
-        <Button variant="contained" onClick={() => deleteFloorPlan(floorPlan.floorPlanId)}>x</Button>
-      </div>
+      <NavLink
+        to={{ pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`, aboutProps: { name: floorPlan.name, url: floorPlan.url } }}
+        className={styles.nav_link}
+      >
+        <Button sx={{ m:1 }} variant="contained">...</Button>
+      </NavLink>
+      <Button
+        variant="contained"
+        onClick={() => deleteFloorPlan(floorPlan.floorPlanId)}
+      >
+       X
+      </Button>
     </div>
   }
 }
