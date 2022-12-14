@@ -13,32 +13,30 @@ class Properties extends React.Component {
     isLoading: true,
   };
 
+  async isLoggedIn() {
+    return await fetch("/api/auth/current_user")
+      .then(r => r.json())
+      .then(({ user }) => user.emails[0].value)
+      .catch(() => this.setState({ redirect: "/", isLoading: false }));
+  }
+
   async getAgentsProperties() {
     this.setState({ isLoading: true });
 
-    const email = await fetch("/api/auth/current_user")
-      .then(r => {
-        if (r.status === 401) {
-          this.setState({ isLoading: false });
-          return null;
-        } else {
-          return r.json().then(({ user }) => user.emails[0].value);
-        }
-      })
+    const email = await this.isLoggedIn();
 
-    if (email) {
-      await fetch(`/api/properties?email=${email}`)
-        .then(r => r.json())
-        .then(({ properties, agentName }) => {
-          this.setState({
-            filteredProperties: properties,
-            agentName: agentName,
-            isLoading: false,
-            isLoggedIn: true
-          })
-        });
+    fetch(`/api/properties?email=${email}`)
+      .then(r => r.json())
+      .then(({ properties, agentName }) => {
+        this.setState({
+          filteredProperties: properties,
+          agentName: agentName,
+          isLoading: false,
+          isLoggedIn: true
+        })
+      })
+      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
-  }
 
   componentDidMount() {
     this.getAgentsProperties();
