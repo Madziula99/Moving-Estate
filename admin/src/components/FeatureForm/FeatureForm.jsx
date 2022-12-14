@@ -8,7 +8,8 @@ class FeatureForm extends React.Component {
   state = {
     isDisabled: true,
     icon: this.props.icon || "",
-    title: this.props.title || ""
+    title: this.props.title || "",
+    allFeatures: ["paw", "pool", "fence"]
   };
 
   handleChange(name, value) {
@@ -33,42 +34,36 @@ class FeatureForm extends React.Component {
     handleSubmit(icon, title);
   }
 
-  showDropdown() {
-    const { mode, specifiedFeatures } = this.props;
-    const { icon } = this.state;
-    const allFeatures = ["paw", "pool", "fence"];
-
-    if (mode === "create") {
-      return <FormControl sx={{ m: 1, minWidth: 120 }}>
-        <Select
-          value={icon}
-          onChange={e => this.handleChange("icon", e.target.value)}
-          displayEmpty
-          inputProps={{ "aria-label": "Without label" }}
-        >
-          {allFeatures.map(feature => {
-            const disabled = specifiedFeatures.includes(feature);
-
-            return <MenuItem key={feature} disabled={disabled} value={feature}>{feature.toUpperCase()}</MenuItem>
-          })}
-        </Select>
-        <FormHelperText>Select feature</FormHelperText>
-      </FormControl>
-    }
-  }
-
   render() {
-    const { title, propertyId } = this.props;
-    const { isDisabled } = this.state;
+    const { propertyId, features, editMode } = this.props;
+    const { icon, title, allFeatures, isDisabled } = this.state;
 
     return <div className={styles.overlay}>
       <form className={styles.form}>
-        {this.showDropdown()}
-        <Input defaultValue={title} onChange={e => this.handleChange("title", e.target.value)} autoFocus className={styles.input} />
-        <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}>
-          <Button variant="contained" onClick={this.onSave} disabled={isDisabled} className={styles.row_btn}>Save</Button>
+        <FormControl sx={{ m: 1, minWidth: 120 }}>
+          <Select
+            value={icon}
+            onChange={e => this.handleChange("icon", e.target.value)}
+            displayEmpty
+            inputProps={{ "aria-label": "Without label" }}
+          >
+            {allFeatures.map(option => {
+              return <MenuItem
+                key={option}
+                disabled={features.some(feature => feature.feature === option) || editMode}
+                value={option}
+              >
+                {option.toUpperCase()}
+              </MenuItem>
+            })}
+          </Select>
+          <FormHelperText>Select feature</FormHelperText>
+        </FormControl>
+        <Input defaultValue={title} onChange={e => this.handleChange("title", e.target.value)} className={styles.input} />
+        <NavLink onClick={event => isDisabled && event.preventDefault()} to={`/properties/${propertyId}/features`} className={styles.nav_link}>
+          <Button variant="contained" onClick={this.onSave} disabled={isDisabled}>Save</Button>
         </NavLink>
-        <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}><Button variant="contained" className={styles.row_btn}>x</Button></NavLink>
+        <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}><Button variant="contained" className={styles.row_btn}>Cancel</Button></NavLink>
       </form>
     </div>
   }

@@ -1,11 +1,17 @@
 import React from "react";
-import FeaturesItem from "../FeaturesItem/FeaturesItem.jsx";
+import FeatureItem from "./FeatureItem/FeatureItem.jsx";
 
 class FeaturesList extends React.Component {
   render() {
-    const { features, updateValues, deleteFeature } = this.props;
+    const { features, deleteFeature } = this.props;
 
-    return features.map(feature => <FeaturesItem feature={feature} deleteFeature={deleteFeature} updateValues={updateValues} key={feature.feature} />);
+    return features.map(feature => {
+      return <FeatureItem
+        feature={feature}
+        deleteFeature={deleteFeature}
+        key={feature.feature}
+      />
+    });
   }
 }
 

@@ -5,11 +5,11 @@ import styles from "./NavLinkWrapper.module.css";
 
 class NavLinkWrapper extends React.Component {
   render() {
-    const { propertyId, text, updateValues, type, specifiedFeatures } = this.props;
+    const { propertyId, text, type, disabled } = this.props;
 
     return <div className={styles.nav_link_wrapper}>
-      <NavLink to={{ pathname: `/properties/${propertyId}/${type}/new`, aboutProps: { updateValues: updateValues, specifiedFeatures: specifiedFeatures } }} className={styles.nav_link}>
-        <Button variant="contained">{text}</Button>
+      <NavLink onClick={event => disabled && event.preventDefault()} to={`/properties/${propertyId}/${type}/new`} className={styles.nav_link}>
+        <Button disabled={disabled} variant="contained">{text}</Button>
       </NavLink>
     </div>
   }
