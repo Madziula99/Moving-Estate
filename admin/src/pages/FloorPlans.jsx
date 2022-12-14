@@ -48,9 +48,9 @@ class FloorPlans extends React.Component {
   }
 
   async componentDidUpdate() {
-    const { floorPlans } = this.state;
+    const { floorPlans, isLoading } = this.state;
 
-    if (this.state.isLoading) return;
+    if (isLoading) return;
 
     const updated = await this.fetchFloorPlans();
 
