@@ -108,9 +108,9 @@ class Property extends React.Component {
     return <PageWrapper>
       <Title>Property page: {propertyId}</Title>
       <MenuButton text="Edit property" href={`/admin/properties/${propertyId}/edit`} />
+      <MenuButton text="Delete property" handleClick = {this.deleteProperty} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
       <MenuButton text="To properties" href={`/admin/properties`} />
-      <MenuButton text="Delete" handleClick = {this.deleteProperty} />
       {Object.keys(property).map(el => <dl key={el}>
           <dt>{`${el.toUpperCase()}:`}</dt>
           <dd>{property[el]}</dd>
