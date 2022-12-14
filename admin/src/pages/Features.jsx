@@ -27,9 +27,8 @@ class Features extends React.Component {
     })
   }
 
-  deleteFeature = (feature) => {
+  deleteFeature = feature => {
     if (window.confirm("Are you sure you want to delete this feature?")) {
-      this.setState({ isLoading: true });
       const { propertyId } = this.state;
 
       fetch(`/api/properties/${propertyId}/features/${feature}`, {
@@ -37,27 +36,31 @@ class Features extends React.Component {
         headers: { "content-type": "application/json" }
       })
         .then(() => this.setState({ isLoading: false }))
-        .catch(() => this.setState({ redirect: "/properties", isLoading: false }));;
+        .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));;
     }
   }
 
   async fetchFeatures() {
     const { propertyId } = this.state;
+
     return await fetch(`/api/properties/${propertyId}`)
-    .then(res => res.json())
-    .then(data => data.features)
-    .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .then(res => res.json())
+      .then(data => data.features)
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
   }
 
   componentDidMount() {
     this.getFeatures();
   }
 
-  async componentDidUpdate(_, prevState) {
+  async componentDidUpdate() {
     const { features } = this.state;
     const newFeatures = await this.fetchFeatures();
 
     if (JSON.stringify(features) === JSON.stringify(newFeatures)) return;
+
+    this.getFeatures();
+
     this.setState({
       features: newFeatures,
       disableAdd: newFeatures.length === 3,

@@ -8,7 +8,6 @@ import { Agents } from "./pages/Agents.jsx";
 import Agent from "./pages/Agent.jsx";
 import { CreateAgent } from "./pages/CreateAgent.jsx";
 import EditAgent from "./pages/EditAgent.jsx";
-import ComponentGallery from "./pages/ComponentGallery.jsx";
 import Property from "./pages/Property.jsx";
 import { Manager } from "./pages/Manager.jsx";
 import "./index.css";
@@ -44,9 +43,6 @@ async function main() {
           </Route>
           <Route path="/agents">
             <Agents />
-          </Route>
-          <Route path="/gallery">
-            <ComponentGallery />
           </Route>
           <Route path="/manager">
             <Manager />

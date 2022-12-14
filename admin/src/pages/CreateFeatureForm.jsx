@@ -8,28 +8,25 @@ class CreateFeatureForm extends React.Component {
     features: [],
     propertyId: this.props.match.params.id,
     redirect: null,
-    isLoading: true
   };
 
-  createFeature(feature, title) {
-    this.setState({ isLoading: true})
+  createFeature = (feature, title) => {
     const { propertyId } = this.state;
 
     fetch(`/api/properties/${propertyId}/features`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ icon: feature, title: title })
-    })
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ redirect: `/properties/${propertyId}/features`, isLoading: false }));
+    }).catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
   }
 
   async getFeatures() {
     const { propertyId } = this.state;
+
     return await fetch(`/api/properties/${propertyId}`)
       .then(res => res.json())
-      .then(data => this.setState({ features: data.features, isLoading: false }))
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .then(data => this.setState({ features: data.features }))
+      .catch(() => this.setState({ redirect: "/properties" }));
   }
 
   componentDidMount() {
@@ -37,9 +34,7 @@ class CreateFeatureForm extends React.Component {
   }
 
   render() {
-    const { propertyId, features, isLoading, redirect } = this.state;
-
-    if (isLoading) return <Spinner />
+    const { propertyId, features, redirect } = this.state;
 
     if (redirect) return <Redirect to={redirect} />
 
@@ -48,7 +43,7 @@ class CreateFeatureForm extends React.Component {
       propertyId={propertyId}
       icon=""
       title=""
-      handleSubmit={(feature, title) => this.createFeature(feature, title)}
+      handleSubmit={this.createFeature}
     />
   }
 }

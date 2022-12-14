@@ -16,14 +16,16 @@ class FeatureForm extends React.Component {
     this.setState({ [name]: value, isDisabled: true });
   }
 
-  componentDidUpdate(prevProps, _) {
-    const { icon, title } = this.state;
+  componentDidUpdate(prevProps) {
+    const { icon, title, isDisabled } = this.state;
+
     if (
-      this.state.isDisabled === false ||
+      isDisabled === false ||
       (icon === prevProps.icon && title === prevProps.title) ||
       title === "" ||
       icon === ""
     ) return;
+
     this.setState({ isDisabled: false });
   }
 

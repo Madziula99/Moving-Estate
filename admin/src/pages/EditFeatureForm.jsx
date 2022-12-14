@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class EditFeatureForm extends React.Component {
   state = {
@@ -10,29 +9,25 @@ class EditFeatureForm extends React.Component {
     icon: this.props.icon,
     title: this.props.title,
     redirect: null,
-    isLoading: true
   };
 
   updateFeature = (icon, title) => {
-    this.setState({ isLoading: true })
     const { propertyId } = this.state;
 
     fetch(`/api/properties/${propertyId}/features/${icon}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ title: title })
-    })
-      .then(() => this.setState({ isLoading: false }))
-      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+    }).catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
   }
 
   async getFeatures() {
-    this.setState({ isLoading: true })
     const { propertyId } = this.state;
+
     return await fetch(`/api/properties/${propertyId}`)
       .then(res => res.json())
-      .then(data => this.setState({ features: data.features, isLoading: false }))
-      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+      .then(data => this.setState({ features: data.features }))
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
   }
 
   componentDidMount() {
@@ -40,11 +35,9 @@ class EditFeatureForm extends React.Component {
   }
 
   render() {
-    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/features`} />;
+    const { propertyId, features, redirect } = this.state;
 
-    const { propertyId, features, isLoading, redirect } = this.state;
-
-    if (isLoading) return <Spinner />
+    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/features`} />
 
     if (redirect) return <Redirect to={redirect} />
 
