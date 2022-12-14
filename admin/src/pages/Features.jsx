@@ -55,6 +55,9 @@ class Features extends React.Component {
 
   async componentDidUpdate() {
     const { features } = this.state;
+
+    if (this.state.isLoading) return;
+
     const newFeatures = await this.fetchFeatures();
 
     if (JSON.stringify(features) === JSON.stringify(newFeatures)) return;
@@ -62,7 +65,6 @@ class Features extends React.Component {
     this.getFeatures();
 
     this.setState({
-      features: newFeatures,
       disableAdd: newFeatures.length === 3,
     });
   }
