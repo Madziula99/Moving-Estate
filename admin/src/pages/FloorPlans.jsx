@@ -51,7 +51,7 @@ class FloorPlans extends React.Component {
     return await fetch(`/api/properties/${propertyId}`)
       .then(res => res.json())
       .then(data => data.floor_plans)
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}/floor_plans`, isLoading: false }));
   }
 
   async componentDidUpdate() {
