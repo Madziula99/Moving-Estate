@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class CreateFeatureForm extends React.Component {
   state = {
@@ -26,7 +25,7 @@ class CreateFeatureForm extends React.Component {
     return await fetch(`/api/properties/${propertyId}`)
       .then(res => res.json())
       .then(data => this.setState({ features: data.features }))
-      .catch(() => this.setState({ redirect: "/properties" }));
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
   }
 
   componentDidMount() {
