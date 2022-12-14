@@ -54,9 +54,9 @@ class Features extends React.Component {
   }
 
   async componentDidUpdate() {
-    const { features } = this.state;
+    const { features, isLoading } = this.state;
 
-    if (this.state.isLoading) return;
+    if (isLoading) return;
 
     const newFeatures = await this.fetchFeatures();
 
