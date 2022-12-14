@@ -26,7 +26,7 @@ class FloorPlans extends React.Component {
           this.setState({isLoading: false})
           return r.json()
         })
-        .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+        .catch(() => this.setState({ redirect: `/properties/${propertyId}/floor_plans`, isLoading: false }));
     }
   }
 

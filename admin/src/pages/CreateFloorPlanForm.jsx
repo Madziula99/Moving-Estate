@@ -16,7 +16,7 @@ class CreateFloorPlanForm extends React.Component {
       body: JSON.stringify({ url: image, name: name })
     })
       .then(r => r.json())
-      .catch(() => <Redirect to={`/properties/${propertyId}`} />);
+      .catch(() => <Redirect to={`/properties/${propertyId}/floor_plans`} />);
   }
 
   render() {
