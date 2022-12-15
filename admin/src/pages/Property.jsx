@@ -7,6 +7,7 @@ import EditProperty from "../components/EditProperty/EditProperty.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
+import FloorPlans from "./FloorPlans.jsx";
 
 class Property extends React.Component {
   constructor(props) {
@@ -108,6 +109,7 @@ class Property extends React.Component {
           <Amenities amenities={amenities} updateValues={this.updateValues} />
         </Route>
         <Route path="/properties/:id/images"><Images /></Route>
+        <Route path="/properties/:id/floor_plans"><FloorPlans /></Route>
       </Switch>
     </div>
   }
