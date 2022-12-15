@@ -24,4 +24,3 @@ class PropertyTabs extends React.Component {
 }
 
 export { PropertyTabs };
-

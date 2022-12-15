@@ -9,33 +9,21 @@ class EditProperty extends React.Component {
     isSubmitting: false,
     isLoading: true,
     propertyId: this.props.match.params.id,
-    property: null
+    property: {}
   };
 
   isLoggedIn() {
-    this.setState({
-      isLoading: true
-    })
+    this.setState({ isLoading: true })
+
     fetch("/api/auth/current_user")
-    .then(r => {
-      if (r.status === 401) {
-        this.setState({
-          isLoading: false,
-          redirect: "/"
-        });
-        return null;
-      }
-    })
+    .catch(() => this.setState({ isLoading: false, redirect: "/" }));
   }
 
   async getProperty() {
     const { propertyId } = this.state;
 
     await fetch(`/api/properties/${propertyId}`)
-      .then(res => {
-        if (res.status === 404) throw new Error()
-        return res.json()
-      })
+      .then(res =>  res.json())
       .then(body => {
         const property = {
           id: body.id,
@@ -68,10 +56,7 @@ class EditProperty extends React.Component {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
     })
-    .then(res => {
-      this.setState({ redirect: `/properties/${propertyId}` });
-      return res.json();
-    })
+    .then(() => this.setState({ redirect: `/properties/${propertyId}` }))
     .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
   }
 
@@ -91,15 +76,13 @@ class EditProperty extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (property) {
-      return <PropertyForm
-        values={property}
-        onSubmit={this.updateProperty}
-        onCancel={this.returnToPropertyPage}
-        state={isSubmitting ? "submitting" : "ready"}
-        title={`Edit property: ${property.id}`}
-      />
-    }
+    return <PropertyForm
+      values={property}
+      onSubmit={this.updateProperty}
+      onCancel={this.returnToPropertyPage}
+      state={isSubmitting ? "submitting" : "ready"}
+      title={`Edit property: ${property.id}`}
+    />
   }
 }
 

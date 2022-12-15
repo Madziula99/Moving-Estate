@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, withRouter, Switch, Route } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { Title } from "../components/Title/Title.jsx";
+import { SignOut } from "../components/SignOut/SignOut.jsx";
 import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
 import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 import EditProperty from "./EditProperty.jsx";
@@ -16,7 +16,6 @@ class Property extends React.Component {
     property: {},
     propertyId: this.props.match.params.id,
     isLoading: true,
-    isLoggedIn: false,
     redirect: null,
   };
 
@@ -26,46 +25,39 @@ class Property extends React.Component {
     });
 
     fetch("/api/auth/current_user")
-    .then(r => {
-      if (r.status === 401) {
-        this.setState({
-          isLoading: false,
-          redirect: "/"
-        });
-        return null;
-      }
-    })
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }))
   }
 
-  getProperty() {
+  async fetchProperty() {
     const { propertyId } = this.state;
 
-    this.setState({ isLoading: true });
-
-    fetch(`/api/properties/${propertyId}`)
-    .then(res => {
-      if (res.status === 404) throw new Error();
-      return res.json()
-    })
-    .then(body => {
-      this.setState({
-        property: {
+    return await fetch(`/api/properties/${propertyId}`)
+      .then(res => res.json())
+      .then(body => {
+        return {
           title: body.title,
           description: body.description,
-          locationCity: body.location[0],
-          locationState: body.location[1],
+          location: body.location[0] + ", " + body.location[1],
           type: body.type,
           mode: body.mode,
           price: body.price,
           area: body.area,
           bedrooms: body.bedrooms,
           bathrooms: body.bathrooms,
-        },
-        isLoading: false,
-        isLoggedIn: true
+        }
       })
-    })
-    .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+  }
+
+  async getProperty() {
+    this.setState({ isLoading: true });
+
+    const property = await this.fetchProperty();
+
+    this.setState({
+      property: property,
+      isLoading: false
+    });
   }
 
   deleteProperty = () => {
@@ -77,16 +69,9 @@ class Property extends React.Component {
       this.setState({
         isLoading: true,
       })
-      fetch(`/api/properties/${propertyId}`, {
-        method: "DELETE"
-      })
-      .then(res => {
-        if (res.status === 403) throw new Error();
-        this.setState({
-          isLoading: false,
-          redirect: "/properties",
-        })
-      })
+
+      fetch(`/api/properties/${propertyId}`, { method: "DELETE" })
+        .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
   }
 
@@ -95,17 +80,27 @@ class Property extends React.Component {
     this.getProperty();
   }
 
+  async componentDidUpdate() {
+    const { property, isLoading } = this.state;
+
+    if (isLoading) return;
+
+    const updated = await this.fetchProperty();
+
+    if (JSON.stringify(property) === JSON.stringify(updated)) return;
+
+    this.getProperty();
+  }
+
   render() {
-    const { isLoading, property, propertyId, redirect, isLoggedIn } = this.state;
+    const { isLoading, property, propertyId, redirect } = this.state;
 
     if (isLoading) return <Spinner />;
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (!isLoggedIn) return <Redirect to="/" />
-
     return <PageWrapper>
-      <Title>Property page: {propertyId}</Title>
+      <SignOut headerMessage={`Property page: ${propertyId}`} />
       <MenuButton text="Edit property" href={`/admin/properties/${propertyId}/edit`} />
       <MenuButton text="Delete property" handleClick = {this.deleteProperty} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
