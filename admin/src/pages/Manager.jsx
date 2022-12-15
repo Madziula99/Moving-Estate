@@ -37,7 +37,7 @@ class Manager extends React.Component {
     if (redirect) return <Redirect to={redirect} />
 
     return <PageWrapper>
-      <SignOut headerMessage={`Welcome!`} />
+      <SignOut headerMessage="Welcome!" />
       <MenuButton text="To agents" href={`/admin/agents`} />
       <MenuButton text="To properties" href={`/admin/properties`} />
     </PageWrapper>
