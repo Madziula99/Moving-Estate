@@ -63,10 +63,6 @@ class Features extends React.Component {
     if (JSON.stringify(features) === JSON.stringify(newFeatures)) return;
 
     this.getFeatures();
-
-    this.setState({
-      disableAdd: newFeatures.length === 3,
-    });
   }
 
   render() {
