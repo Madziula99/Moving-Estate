@@ -10,7 +10,6 @@ import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
 import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
-import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 
 class Property extends React.Component {
   state = {
