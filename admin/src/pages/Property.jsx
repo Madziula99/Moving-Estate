@@ -11,25 +11,19 @@ import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
 
 class Property extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.updateValues = this.updateValues.bind(this);
-
-    this.state = {
-      property: {},
-      propertyId: this.props.match.params.id,
-      isLoading: true,
-      isLoggedIn: false,
-      redirect: null,
-      amenities: [],
-    };
-  }
+  state = {
+    property: {},
+    propertyId: this.props.match.params.id,
+    isLoading: true,
+    isLoggedIn: false,
+    redirect: null,
+  };
 
   isLoggedIn() {
     this.setState({
       isLoading: true
-    })
+    });
+
     fetch("/api/auth/current_user")
     .then(r => {
       if (r.status === 401) {
@@ -66,7 +60,6 @@ class Property extends React.Component {
           bedrooms: body.bedrooms,
           bathrooms: body.bathrooms,
         },
-        amenities: body.amenities,
         isLoading: false,
         isLoggedIn: true
       })
@@ -79,12 +72,8 @@ class Property extends React.Component {
     this.getProperty();
   }
 
-  updateValues() {
-    this.getProperty();
-  }
-
   render() {
-    const { isLoading, property, propertyId, redirect, isLoggedIn, amenities } = this.state;
+    const { isLoading, property, propertyId, redirect, isLoggedIn } = this.state;
 
     if (isLoading) return <Spinner />;
 
@@ -106,9 +95,7 @@ class Property extends React.Component {
 
       <Switch>
         <Route path="/properties/:id/edit" component={EditProperty}></Route>
-        <Route path="/properties/:id/amenities">
-          <Amenities amenities={amenities} updateValues={this.updateValues} />
-        </Route>
+        <Route path="/properties/:id/amenities"><Amenities /></Route>
         <Route path="/properties/:id/images"><Images /></Route>
         <Route path="/properties/:id/floor_plans"><FloorPlans /></Route>
         <Route path="/properties/:id/features"><Features /></Route>

@@ -10,7 +10,7 @@ class AmenitiesPageContent extends React.Component {
       {amenities && amenities.map(item => {
         return <FormControlLabel
           key={item.title}
-          control={<Checkbox defaultChecked={item.available} onChange={() => isChecked(item)} size="small" />}
+          control={<Checkbox checked={item.available} onChange={() => isChecked(item)} size="small" />}
           label={item.title}
         />
       })}
