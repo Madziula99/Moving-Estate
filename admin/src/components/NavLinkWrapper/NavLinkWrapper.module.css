@@ -1,7 +1,7 @@
 .nav_link_wrapper {
   display: flex;
   justify-content: center;
-  margin: 10px 0;
+  margin: 15px 0 30px;
 }
 
 .nav_link {
