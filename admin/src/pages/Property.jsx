@@ -20,12 +20,10 @@ class Property extends React.Component {
   };
 
   isLoggedIn() {
-    this.setState({
-      isLoading: true
-    });
+    this.setState({ isLoading: true });
 
     fetch("/api/auth/current_user")
-      .catch(() => this.setState({ isLoading: false, redirect: "/" }))
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
   }
 
   async fetchProperty() {
@@ -63,14 +61,13 @@ class Property extends React.Component {
   deleteProperty = () => {
     const { propertyId } = this.state;
 
-    let confirm = window.confirm("Are you sure that you want delete this property?");
+    let confirm = window.confirm("Are you sure you want to delete this property?");
 
     if (confirm) {
-      this.setState({
-        isLoading: true,
-      })
+      this.setState({ isLoading: true });
 
       fetch(`/api/properties/${propertyId}`, { method: "DELETE" })
+        .then(() => this.setState({ redirect: "/properties", isLoading: false }))
         .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
     }
   }
@@ -97,12 +94,12 @@ class Property extends React.Component {
 
     if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
     return <PageWrapper>
       <SignOut headerMessage={`Property page: ${propertyId}`} />
       <MenuButton text="Edit property" href={`/admin/properties/${propertyId}/edit`} />
-      <MenuButton text="Delete property" handleClick = {this.deleteProperty} />
+      <MenuButton text="Delete property" handleClick={this.deleteProperty} />
       <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
       <MenuButton text="To properties" href={`/admin/properties`} />
       {Object.keys(property).map(el => <dl key={el}>

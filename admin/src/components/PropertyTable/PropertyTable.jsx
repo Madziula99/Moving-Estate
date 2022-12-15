@@ -11,7 +11,7 @@ const widthInTable = 95;
 
 const columns = [
   { field: "images", headerName: "Image", width: 150,
-    renderCell: (params) => {
+    renderCell: params => {
       return <Avatar
         alt="first image"
         src={params.value}

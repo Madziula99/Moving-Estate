@@ -13,10 +13,10 @@ class EditProperty extends React.Component {
   };
 
   isLoggedIn() {
-    this.setState({ isLoading: true })
+    this.setState({ isLoading: true });
 
     fetch("/api/auth/current_user")
-    .catch(() => this.setState({ isLoading: false, redirect: "/" }));
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
   }
 
   async getProperty() {
@@ -38,15 +38,16 @@ class EditProperty extends React.Component {
           bedrooms: body.bedrooms,
           bathrooms: body.bathrooms
         };
+
         this.setState({
           property: property,
           isLoading: false
-        })
+        });
       })
       .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
-  updateProperty = async (values) => {
+  updateProperty = async values => {
     const { propertyId } = this.state;
 
     this.setState({ isSubmitting: true });
@@ -56,8 +57,8 @@ class EditProperty extends React.Component {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
     })
-    .then(() => this.setState({ redirect: `/properties/${propertyId}` }))
-    .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+      .then(() => this.setState({ redirect: `/properties/${propertyId}` }))
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
   }
 
   componentDidMount() {

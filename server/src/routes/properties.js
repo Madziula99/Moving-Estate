@@ -21,7 +21,7 @@ async function index(req, res) {
   const properties = await Property.filter(filters, Agent, PropertyImage);
 
   if (filters.email) {
-    const agent = await Agent.findOne({ where: { email: filters.email } })
+    const agent = await Agent.findOne({ where: { email: filters.email } });
 
     if (!agent) return res.status(404).json({ message: `Agent with email: ${filters.email} does not exist` });
 

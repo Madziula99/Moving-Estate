@@ -32,7 +32,7 @@ passport.use(new GoogleStrategy({
   callbackURL: `http://localhost:${port}/api/auth/login/google/callback`,
   },
   async function verify(accessToken, refreshToken, profile, done) {
-    const agent = await Agent.findOne({ where: { email: profile.emails[0].value } })
+    const agent = await Agent.findOne({ where: { email: profile.emails[0].value } });
     if (agent) return done(null, profile);
     return done(null);
   }

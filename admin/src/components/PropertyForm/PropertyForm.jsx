@@ -71,10 +71,10 @@ class PropertyForm extends React.Component {
 
     return <div className={styles.overlay}>
       <div className={styles.wrapper}>
-        <Title>{ title }</Title>
+        <Title>{title}</Title>
         <Formik
-          initialValues = { values }
-          validate = {values => this.validateForm(values)}
+          initialValues={values}
+          validate={values => this.validateForm(values)}
           onSubmit={(values, actions) => this.submitProperty(values, actions)}
         >
         {props => (

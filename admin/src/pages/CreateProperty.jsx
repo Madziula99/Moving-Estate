@@ -23,22 +23,21 @@ class CreateProperty extends React.Component {
   };
 
   isLoggedIn() {
-    this.setState({
-      isLoading: true
-    })
+    this.setState({ isLoading: true });
+
     fetch("/api/auth/current_user")
-    .then(res => {
-      if (res.status === 401) {
-        this.setState({
-          isLoading: false,
-          redirect: "/"
-        });
-        return null;
-      }
-    })
+      .then(res => {
+        if (res.status === 401) {
+          this.setState({
+            isLoading: false,
+            redirect: "/"
+          });
+          return null;
+        }
+      })
   }
 
-  createProperty = (values) => {
+  createProperty = values => {
     this.setState({ isSubmitting: true, isLoading: true });
 
     fetch(`/api/properties`, {
@@ -46,17 +45,17 @@ class CreateProperty extends React.Component {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
     })
-    .then(res => {
-      if (res.status === 404) throw new Error();
-      return res.json();
-    })
-    .then(body => {
-      this.setState({
-        isLoading: false,
-        redirect: `/properties/${body.property.id}`
-      });
-    })
-    .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .then(res => {
+        if (res.status === 404) throw new Error();
+        return res.json();
+      })
+      .then(body => {
+        this.setState({
+          isLoading: false,
+          redirect: `/properties/${body.property.id}`
+        });
+      })
+      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
   returnToProperties = () => {
@@ -67,7 +66,7 @@ class CreateProperty extends React.Component {
     this.isLoggedIn();
     this.setState({
       isLoading: false
-    })
+    });
   }
 
   render() {

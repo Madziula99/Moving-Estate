@@ -33,10 +33,10 @@ class Properties extends React.Component {
           agentName: agentName,
           isLoading: false,
           isLoggedIn: true
-        })
+        });
       })
       .catch(() => this.setState({ redirect: "/", isLoading: false }));
-    }
+  }
 
   componentDidMount() {
     this.getAgentsProperties();

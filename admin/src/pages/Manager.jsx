@@ -12,9 +12,7 @@ class Manager extends React.Component {
   }
 
   isManager() {
-    this.setState({
-      isLoading: true
-    });
+    this.setState({ isLoading: true });
 
     fetch("/api/auth/manager")
       .then(res => res.json())
@@ -34,12 +32,12 @@ class Manager extends React.Component {
 
     if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
     return <PageWrapper>
       <SignOut headerMessage="Welcome!" />
-      <MenuButton text="To agents" href={`/admin/agents`} />
-      <MenuButton text="To properties" href={`/admin/properties`} />
+      <MenuButton text="To agents" href="/admin/agents" />
+      <MenuButton text="To properties" href="/admin/properties" />
     </PageWrapper>
   }
 }
