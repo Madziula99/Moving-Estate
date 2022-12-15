@@ -9,13 +9,16 @@ class ImagesItem extends React.Component {
   };
 
   render() {
-    const { image, updateValues, deleteImage } = this.props;
+    const { image, deleteImage } = this.props;
     const { propertyId } = this.state;
 
     return <div className={styles.wrapper}>
       <img src={image.link} className={styles.image} alt="" />
       <div className={styles.buttons_wrapper}>
-        <NavLink to={{ pathname: `/properties/${propertyId}/images/${image.imageId}/edit`, aboutProps: { link: image.link, updateValues: updateValues } }} className={styles.nav_link}>
+        <NavLink
+          to={{ pathname: `/properties/${propertyId}/images/${image.imageId}/edit`, aboutProps: { link: image.link } }}
+          className={styles.nav_link}
+        >
           <Button variant="contained">...</Button>
         </NavLink>
         <Button variant="contained" onClick={() => deleteImage(image.imageId)}>x</Button>

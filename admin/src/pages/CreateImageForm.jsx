@@ -1,5 +1,5 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
 
 class CreateImageForm extends React.Component {
@@ -7,25 +7,20 @@ class CreateImageForm extends React.Component {
     propertyId: this.props.match.params.id,
   };
 
-  createImage(imageLink) {
+  createImage = imageLink => {
     const { propertyId } = this.state;
-    const { updateValues } = this.props.location.aboutProps;
 
     fetch(`/api/properties/${propertyId}/images`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ link: imageLink })
-    }).then(r => {
-      updateValues();
-
-      return r.json();
-    });
+    }).catch(() => <Redirect to={`/properties/${propertyId}`} />);
   }
 
   render() {
     const { propertyId } = this.state;
 
-    return <ImageForm propertyId={propertyId} link="" handleSubmit={link => this.createImage(link)} />
+    return <ImageForm propertyId={propertyId} link="" handleSubmit={this.createImage} />;
   }
 }
 

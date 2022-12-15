@@ -7,59 +7,59 @@ import { ImagesList } from "../components/ImagesList/ImagesList.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Images extends React.Component {
-  constructor(props) {
-    super(props);
+  state = {
+    propertyId: this.props.match.params.id,
+    isLoading: true,
+    redirect: null,
+    images: []
+  };
 
-    this.deleteImage = this.deleteImage.bind(this);
-    this.updateValues = this.updateValues.bind(this);
-
-    this.state = {
-      propertyId: this.props.match.params.id,
-      isLoading: true,
-      redirect: null,
-      images: []
-    };
-  }
-
-  getImages() {
-    const { propertyId } = this.state;
-
-    this.setState({ isLoading: true });
-
-    fetch(`/api/properties/${propertyId}`)
-      .then(res => {
-        if (res.status === 404) throw new Error();
-        return res.json();
-      })
-      .then(data => {
-        this.setState({
-          images: data.images,
-          isLoading: false,
-        })
-      })
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
-  }
-
-  deleteImage(imageId) {
+  deleteImage = imageId => {
     if (window.confirm("Are you sure you want to delete this image?")) {
       const { propertyId } = this.state;
 
       fetch(`/api/properties/${propertyId}/images/${imageId}`, {
         method: "DELETE",
         headers: { "content-type": "application/json" }
-      }).then(r => {
-        this.updateValues();
-
-        return r.json();
-      });
+      })
+        .then(() => this.setState({ isLoading: false }))
+        .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
     }
   }
 
-  componentDidMount() {
+  async getImages() {
+    this.setState({ isLoading: true });
+
+    const images = await this.fetchImages();
+
+    this.setState({
+      images: images,
+      isLoading: false,
+    });
+  }
+
+  async fetchImages() {
+    const { propertyId } = this.state;
+
+    return await fetch(`/api/properties/${propertyId}`)
+      .then(res => res.json())
+      .then(data => data.images)
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+  }
+
+  async componentDidUpdate() {
+    const { images, isLoading } = this.state;
+
+    if (isLoading) return;
+
+    const updated = await this.fetchImages();
+
+    if (JSON.stringify(images) === JSON.stringify(updated)) return;
+
     this.getImages();
   }
 
-  updateValues() {
+  componentDidMount() {
     this.getImages();
   }
 
@@ -68,11 +68,11 @@ class Images extends React.Component {
 
     if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
     return <>
-      <ImagesList images={images} deleteImage={this.deleteImage} updateValues={this.updateValues} />
-      <NavLinkWrapper propertyId={propertyId} text="Add Image" type="images" updateValues={this.updateValues} />
+      <ImagesList images={images} deleteImage={this.deleteImage} />
+      <NavLinkWrapper propertyId={propertyId} text="Add Image" type="images" />
 
       <Switch>
         <Route exact path="/properties/:id/images/new" component={CreateImageForm}></Route>
