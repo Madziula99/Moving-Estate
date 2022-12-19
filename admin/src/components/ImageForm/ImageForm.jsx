@@ -4,16 +4,10 @@ import { Button, Input } from "@mui/material";
 import styles from "./ImageForm.module.css";
 
 class ImageForm extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.onSave = this.onSave.bind(this);
-
-    this.state = {
-      currentLink: this.props.link,
-      isDisabled: true
-    };
-  }
+  state = {
+    currentLink: this.props.link,
+    isDisabled: true
+  };
 
   handleChange(currentLink) {
     const { link } = this.props;
@@ -27,7 +21,7 @@ class ImageForm extends React.Component {
     this.setState({ currentLink: currentLink });
   }
 
-  onSave() {
+  onSave = () => {
     const { handleSubmit } = this.props;
     const { currentLink } = this.state;
 
@@ -40,11 +34,29 @@ class ImageForm extends React.Component {
 
     return <div className={styles.overlay}>
       <form className={styles.form}>
-        <Input defaultValue={link} onChange={e => this.handleChange(e.target.value)} autoFocus className={styles.input} />
-        <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}>
-          <Button variant="contained" onClick={this.onSave} disabled={isDisabled} className={styles.row_btn}>Save</Button>
+        <Input
+          defaultValue={link}
+          onChange={e => this.handleChange(e.target.value)}
+          autoFocus
+          className={styles.input}
+        />
+        <NavLink
+          onClick={e => isDisabled && e.preventDefault()}
+          to={`/properties/${propertyId}/images`}
+          className={styles.nav_link}
+        >
+          <Button
+            variant="contained"
+            onClick={this.onSave}
+            disabled={isDisabled}
+            className={styles.row_btn}
+          >
+            Save
+          </Button>
         </NavLink>
-        <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}><Button variant="contained" className={styles.row_btn}>x</Button></NavLink>
+        <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}>
+          <Button variant="contained" className={styles.row_btn}>x</Button>
+        </NavLink>
       </form>
     </div>
   }

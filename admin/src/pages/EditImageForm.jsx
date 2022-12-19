@@ -8,19 +8,14 @@ class EditImageForm extends React.Component {
     imageId: this.props.match.params.imageId,
   };
 
-  updateImage(imageLink) {
+  updateImage = imageLink => {
     const { propertyId, imageId } = this.state;
-    const { updateValues } = this.props.location.aboutProps;
 
     fetch(`/api/properties/${propertyId}/images/${imageId}`, {
       method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({ link: imageLink })
-    }).then(r => {
-      updateValues();
-
-      return r.json();
-    });
+    }).catch(() => <Redirect to={`/properties/${propertyId}`} />);
   }
 
   render() {
@@ -30,7 +25,7 @@ class EditImageForm extends React.Component {
 
     const { link } = this.props.location.aboutProps;
 
-    return <ImageForm propertyId={propertyId} link={link} handleSubmit={link => this.updateImage(link)} />
+    return <ImageForm propertyId={propertyId} link={link} handleSubmit={this.updateImage} />;
   }
 }
 

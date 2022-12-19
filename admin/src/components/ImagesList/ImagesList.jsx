@@ -1,11 +1,11 @@
 import React from "react";
-import ImagesItem from "../ImagesItem/ImagesItem.jsx";
+import ImagesItem from "./ImagesItem/ImagesItem.jsx";
 
 class ImagesList extends React.Component {
   render() {
-    const { images, updateValues, deleteImage } = this.props;
+    const { images, deleteImage } = this.props;
 
-    return images.map(image => <ImagesItem image={image} key={image.link} updateValues={updateValues} deleteImage={deleteImage} />);
+    return images.map(image => <ImagesItem image={image} key={image.link} deleteImage={deleteImage} />);
   }
 }
 
