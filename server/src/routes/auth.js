@@ -7,6 +7,7 @@ const AUTH = config.get("auth");
 const admin_url = config.get("admin_url");
 const port = config.get("port");
 const MANAGER = config.get("manager_email");
+const { Agent } = require("../models");
 
 function isLoggedIn(req, res, next) {
   req.user ? next() : res.sendStatus(401);
@@ -30,8 +31,10 @@ passport.use(new GoogleStrategy({
   clientSecret: AUTH.GOOGLE_CLIENT_SECRET,
   callbackURL: `http://localhost:${port}/api/auth/login/google/callback`,
   },
-  function verify(accessToken, refreshToken, profile, done) {
-    return done(null, profile);
+  async function verify(accessToken, refreshToken, profile, done) {
+    const agent = await Agent.findOne({ where: { email: profile.emails[0].value } });
+    if (agent) return done(null, profile);
+    return done(null);
   }
 ));
 

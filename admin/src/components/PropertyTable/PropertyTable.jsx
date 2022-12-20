@@ -4,14 +4,14 @@ import Avatar from "@mui/material/Avatar";
 import { MenuButton } from "../MenuButton/MenuButton.jsx";
 import styles from "./PropertyTable.module.css";
 
-const onPageRows = 6;
+const onPageRows = 4;
 const photoHeight = 130;
 const rowHeight = 135;
 const widthInTable = 95;
 
 const columns = [
   { field: "images", headerName: "Image", width: 150,
-    renderCell: (params) => {
+    renderCell: params => {
       return <Avatar
         alt="first image"
         src={params.value}

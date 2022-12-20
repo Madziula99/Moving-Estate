@@ -21,12 +21,13 @@ async function index(req, res) {
   const properties = await Property.filter(filters, Agent, PropertyImage);
 
   if (filters.email) {
-    if (properties.length === 0) return res.status(404).json({ message: `Agent: ${filters.email} has no properties` });
-    const agentName = properties[0].agent.name;
+    const agent = await Agent.findOne({ where: { email: filters.email } });
+
+    if (!agent) return res.status(404).json({ message: `Agent with email: ${filters.email} does not exist` });
 
     return res.json({
       properties: properties.map(property => property.summaryView()),
-      agentName: agentName
+      agentName: agent.name
     });
   }
 
@@ -77,9 +78,13 @@ async function update(req, res) {
 
 async function destroy(req, res) {
   const { id } = req.params;
-  const property = await Property.findByPk(id);
 
-  res.json(await property.destroy());
+  try {
+    const property = await Property.findByPk(id);
+    res.json(await property.destroy())
+  } catch (error) {
+    res.status(403).json({ error });
+  }
 }
 
 async function retrieve(req, res) {

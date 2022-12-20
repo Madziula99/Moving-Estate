@@ -1,9 +1,7 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
-import { PropertyForm } from "../PropertyForm/PropertyForm.jsx";
-import { Spinner } from "../Spinner/Spinner.jsx";
-import { Title } from "../Title/Title.jsx";
-import styles from "./EditProperty.module.css";
+import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
+import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class EditProperty extends React.Component {
   state = {
@@ -11,33 +9,21 @@ class EditProperty extends React.Component {
     isSubmitting: false,
     isLoading: true,
     propertyId: this.props.match.params.id,
-    property: null
+    property: {}
   };
 
   isLoggedIn() {
-    this.setState({
-      isLoading: true
-    })
+    this.setState({ isLoading: true });
+
     fetch("/api/auth/current_user")
-    .then(r => {
-      if (r.status === 401) {
-        this.setState({
-          isLoading: false,
-          redirect: "/"
-        });
-        return null;
-      }
-    })
+      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
   }
 
   async getProperty() {
     const { propertyId } = this.state;
 
     await fetch(`/api/properties/${propertyId}`)
-      .then(res => {
-        if (res.status === 404) throw new Error()
-        return res.json()
-      })
+      .then(res =>  res.json())
       .then(body => {
         const property = {
           id: body.id,
@@ -52,15 +38,16 @@ class EditProperty extends React.Component {
           bedrooms: body.bedrooms,
           bathrooms: body.bathrooms
         };
+
         this.setState({
           property: property,
           isLoading: false
-        })
+        });
       })
       .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
-  async updateProperty(values) {
+  updateProperty = async values => {
     const { propertyId } = this.state;
 
     this.setState({ isSubmitting: true });
@@ -70,11 +57,8 @@ class EditProperty extends React.Component {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(values)
     })
-    .then(res => {
-      this.setState({ redirect: `/properties/${propertyId}` });
-      return res.json();
-    })
-    .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+      .then(() => this.setState({ redirect: `/properties/${propertyId}` }))
+      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
   }
 
   componentDidMount() {
@@ -82,7 +66,7 @@ class EditProperty extends React.Component {
     this.getProperty();
   }
 
-  returnToPropertyPage() {
+  returnToPropertyPage = () => {
     this.setState({ redirect: `/properties/${this.state.propertyId}` });
   }
 
@@ -93,18 +77,13 @@ class EditProperty extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (property) {
-      return <div className={styles.overlay}>
-        <div className={styles.wrapper}>
-          <Title>Edit property: {property.id}</Title>
-          <PropertyForm
-            values={property}
-            handleSubmit={newValues => this.updateProperty(newValues)}
-            handleCancel={() => this.returnToPropertyPage()}
-            state={isSubmitting ? "submitting" : "ready"} />
-        </div>
-      </div>
-    }
+    return <PropertyForm
+      values={property}
+      onSubmit={this.updateProperty}
+      onCancel={this.returnToPropertyPage}
+      state={isSubmitting ? "submitting" : "ready"}
+      title={`Edit property: ${property.id}`}
+    />
   }
 }
 
