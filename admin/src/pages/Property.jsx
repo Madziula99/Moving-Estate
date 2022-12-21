@@ -10,8 +10,9 @@ import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";
 import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
+import BasePage from "./BasePage.jsx";
 
-class Property extends React.Component {
+class Property extends BasePage {
   state = {
     property: {},
     propertyId: this.props.match.params.id,
@@ -58,19 +59,12 @@ class Property extends React.Component {
     });
   }
 
-  deleteProperty = () => {
-    const { propertyId } = this.state;
-
-    let confirm = window.confirm("Are you sure you want to delete this property?");
-
-    if (confirm) {
-      this.setState({ isLoading: true });
-
-      fetch(`/api/properties/${propertyId}`, { method: "DELETE" })
-        .then(() => this.setState({ redirect: "/properties", isLoading: false }))
-        .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
-    }
-  }
+  deleteProperty = () => this.deleteAction({
+    message: "Are you sure you want to delete this property?",
+    url: `/api/properties/${this.state.propertyId}`,
+    successRedirect: '/properties',
+    failureRedirect: '/properties'
+  })
 
   componentDidMount() {
     this.isLoggedIn();
