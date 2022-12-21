@@ -5,8 +5,9 @@ import EditFloorPlanForm from "./EditFloorPlanForm.jsx";
 import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { FloorPlansList } from "../components/FloorPlansList/FloorPlansList.jsx";
+import BasePage from "./BasePage.jsx";
 
-class FloorPlans extends React.Component {
+class FloorPlans extends BasePage {
   state = {
     propertyId: this.props.match.params.id,
     isLoading: true,
@@ -14,18 +15,11 @@ class FloorPlans extends React.Component {
     floorPlans: []
   };
 
-  deleteFloorPlan = floorPlanId => {
-    if (window.confirm("Are you sure you want to delete this floor plan?")) {
-      const { propertyId } = this.state;
-
-      fetch(`/api/properties/${propertyId}/floor_plans/${floorPlanId}`, {
-        method: "DELETE",
-        headers: { "content-type": "application/json" }
-      })
-        .then(() => this.setState({ isLoading: false }))
-        .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
-    }
-  }
+  deleteFloorPlan = floorPlanId => this.deleteAction({
+    message: "Are you sure you want to delete this floor plan?",
+    url: `/api/properties/${this.state.propertyId}/floor_plans/${floorPlanId}`,
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   async getFloorPlans() {
     this.setState({ isLoading: true });

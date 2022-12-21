@@ -5,8 +5,9 @@ import EditFeatureForm from "./EditFeatureForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { FeaturesList } from "../components/FeaturesList/FeaturesList.jsx";
 import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx";
+import BasePage from "./BasePage.jsx";
 
-class Features extends React.Component {
+class Features extends BasePage {
   state = {
     propertyId: this.props.match.params.id,
     isLoading: true,
@@ -27,18 +28,11 @@ class Features extends React.Component {
     })
   }
 
-  deleteFeature = feature => {
-    if (window.confirm("Are you sure you want to delete this feature?")) {
-      const { propertyId } = this.state;
-
-      fetch(`/api/properties/${propertyId}/features/${feature}`, {
-        method: "DELETE",
-        headers: { "content-type": "application/json" }
-      })
-        .then(() => this.setState({ isLoading: false }))
-        .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));;
-    }
-  }
+  deleteFeature = feature => this.deleteAction({
+    message: "Are you sure you want to delete this feature?",
+    url: `/api/properties/${this.state.propertyId}/features/${feature}`,
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   async fetchFeatures() {
     const { propertyId } = this.state;
