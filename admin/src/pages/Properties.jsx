@@ -4,6 +4,7 @@ import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 import { CreateProperty } from "./CreateProperty.jsx";
+import Context from "../Context/Context.js";
 
 class Properties extends React.Component {
   state = {
@@ -14,15 +15,17 @@ class Properties extends React.Component {
   };
 
   async isLoggedIn() {
-    return await fetch("/api/auth/current_user")
-      .then(r => r.json())
-      .then(({ user }) => user.emails[0].value)
-      .catch(() => this.setState({ redirect: "/", isLoading: false }));
+    console.log("Properties")
+    this.setState({ isLoading: true });
+
+    const email = await Context.isLoggedIn();
+
+    if (email === undefined) return this.setState({ isLoading: false, redirect: "/" });
+
+    return email;
   }
 
   async getAgentsProperties() {
-    this.setState({ isLoading: true });
-
     const email = await this.isLoggedIn();
 
     fetch(`/api/properties?email=${email}`)
@@ -53,6 +56,7 @@ class Properties extends React.Component {
       <Switch>
         <Route path="/properties/new" component={CreateProperty}></Route>
       </Switch>
+
       <SignOut headerMessage={`${agentName}, welcome!`} />
       <PropertyTable adminProperties={filteredProperties} />
     </>

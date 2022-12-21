@@ -48,13 +48,6 @@ class CreateProperty extends BasePage {
     this.setState({ redirect: "/properties" });
   }
 
-  componentDidMount() {
-    this.isLoggedIn();
-    this.setState({
-      isLoading: false
-    });
-  }
-
   render() {
     const { redirect, property, isLoading } = this.state;
 
