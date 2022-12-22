@@ -9,10 +9,6 @@ const port = config.get("port");
 const MANAGER = config.get("manager_email");
 const { Agent } = require("../models");
 
-function isLoggedIn(req, res, next) {
-  req.user ? next() : res.sendStatus(401);
-}
-
 function isManager(req, res, next) {
   if (req.user && req.user.emails[0].value === MANAGER) {
     next();
@@ -63,9 +59,9 @@ module.exports = Router()
     })
   )
   .get("/login/error", (_, res) => res.json({ error: "An error has occurred" }))
-  .get("/current_user", isLoggedIn, (req, res) => {
-    res.json({
-      message: "User logged in",
+  .get("/current_user", isManager, (req, res) => {
+    res.status(200).json({
+      manager: true,
       user: req.user
     });
   })
@@ -75,10 +71,4 @@ module.exports = Router()
     });
     req.session.destroy();
     res.redirect(`${admin_url}/admin`);
-  })
-  .get("/manager", isManager, (req, res) => {
-    res.status(200).json({
-      manager: true,
-      user: req.user
-    });
   })

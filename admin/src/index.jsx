@@ -11,66 +11,69 @@ import EditAgent from "./pages/EditAgent.jsx";
 import Property from "./pages/Property.jsx";
 import { Manager } from "./pages/Manager.jsx";
 import Context from "./Context/Context.js";
+import { SignIn } from "./pages/SignIn.jsx";
 import "./index.css";
 
+class App extends React.Component {
+  render() {
+    const { currentUser } = this.props;
+
+    const Page = (!currentUser)
+      ? <SignIn />
+      : <Switch>
+        <Route path="/properties/new">
+          <Properties />
+        </Route>
+        <Route path="/properties/:id">
+          <Property />
+        </Route>
+        <Route path="/properties">
+          <Properties />
+        </Route>
+        <Route path="/messages/:id">
+          <Messages />
+        </Route>
+        <Route path="/agents/:id/edit">
+          <EditAgent />
+        </Route>
+        <Route path="/agents/new">
+          <CreateAgent />
+        </Route>
+        <Route path="/agents/:id">
+          <Agent />
+        </Route>
+        <Route path="/agents">
+          <Agents />
+        </Route>
+        <Route path="/manager">
+          <Manager />
+        </Route>
+        <Route>
+          <Index path="/index" />
+        </Route>
+      </Switch>;
+
+    Context.currentUser = this.props.currentUser;
+
+    return (
+      <React.StrictMode>
+        <BrowserRouter basename="/admin">
+          {Page}
+        </BrowserRouter>
+      </React.StrictMode>
+    )
+  };
+}
+
 async function main() {
-  const config = await fetch("/api/config").then(res => res.json());
   const root = ReactDOM.createRoot(document.getElementById("root"));
 
-  async function isLoggedIn() {
-    // this.setState({ isLoading: true });
+  const currentUser = await fetch("/api/auth/current_user")
+    .then(res => res.json())
+    .then(data => { return { email: data.user.emails[0].value, isManager: data.manager } })
+    .catch(() => console.log("User is not logged in"));
 
-    return fetch("/api/auth/current_user")
-      .then(res => res.json())
-      .then(({ user }) => user.emails[0].value)
-      .catch(() => {
-        console.log("CATCH");
-        // this.setState({ isLoading: false, redirect: "/" });
-      });
-  };
-
-  Context.isLoggedIn = () => isLoggedIn();
-
-  root.render(
-    <React.StrictMode>
-      <Context.Provider value={Context.isLoggedIn}>
-        <BrowserRouter basename="/admin">
-          <Switch>
-            <Route path="/properties/new">
-              <Properties />
-            </Route>
-            <Route path="/properties/:id">
-              <Property />
-            </Route>
-            <Route path="/properties">
-              <Properties />
-            </Route>
-            <Route path="/messages/:id">
-              <Messages />
-            </Route>
-            <Route path="/agents/:id/edit">
-              <EditAgent />
-            </Route>
-            <Route path="/agents/new">
-              <CreateAgent />
-            </Route>
-            <Route path="/agents/:id">
-              <Agent />
-            </Route>
-            <Route path="/agents">
-              <Agents />
-            </Route>
-            <Route path="/manager">
-              <Manager />
-            </Route>
-            <Route>
-              <Index google_client_id={config.google_client_id} />
-            </Route>
-          </Switch>
-        </BrowserRouter>
-      </Context.Provider>
-    </React.StrictMode>
-  );
+  root.render(<App currentUser={currentUser} />);
 }
 
 main();

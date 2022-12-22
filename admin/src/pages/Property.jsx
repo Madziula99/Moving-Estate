@@ -11,7 +11,6 @@ import Images from "./Images.jsx";
 import FloorPlans from "./FloorPlans.jsx";
 import Features from "./Features.jsx";
 import BasePage from "./BasePage.jsx";
-import Context from "../Context/Context.js";
 
 class Property extends BasePage {
   state = {
@@ -20,17 +19,6 @@ class Property extends BasePage {
     isLoading: true,
     redirect: null,
   };
-
-  // isLoggedIn = async () => await Context.isLoggedIn();
-
-  async isLoggedIn() {
-    console.log("Property")
-    this.setState({ isLoading: true });
-
-    const email = await Context.isLoggedIn();
-
-    if (email === undefined) this.setState({ isLoading: false, redirect: "/" });
-  }
 
   async fetchProperty() {
     const { propertyId } = this.state;
@@ -72,7 +60,6 @@ class Property extends BasePage {
   })
 
   componentDidMount() {
-    this.isLoggedIn();
     this.getProperty();
   }
 
