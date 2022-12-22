@@ -1,22 +1,19 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
+import BasePage from "./BasePage.jsx";
 
-class EditImageForm extends React.Component {
+class EditImageForm extends BasePage {
   state = {
     propertyId: this.props.match.params.propertyId,
     imageId: this.props.match.params.imageId,
   };
 
-  updateImage = imageLink => {
-    const { propertyId, imageId } = this.state;
-
-    fetch(`/api/properties/${propertyId}/images/${imageId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ link: imageLink })
-    }).catch(() => <Redirect to={`/properties/${propertyId}`} />);
-  }
+  updateImage = imageLink => this.updateAction({
+    url: `/api/properties/${this.state.propertyId}/images/${this.state.imageId}`,
+    values: { link: imageLink },
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   render() {
     const { propertyId } = this.state;

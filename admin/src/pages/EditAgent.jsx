@@ -2,11 +2,11 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import BasePage from "./BasePage.jsx";
 
-class EditAgent extends React.Component {
+class EditAgent extends BasePage {
   state = {
     redirect: null,
-    isSubmitting: false,
     agentId: this.props.match.params.id,
     agentData: {},
     isLoading: true,
@@ -42,21 +42,12 @@ class EditAgent extends React.Component {
     }).catch(() => this.setState({ redirect: "/agents" }));
   }
 
-  async updateAgent(values) {
-    const { agentId } = this.state;
-
-    this.setState({ isSubmitting: true });
-
-    await fetch(`/api/agents/${agentId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(values)
-    }).then(r => {
-      this.returnToAgentPage();
-
-      return r.json();
-    });
-  }
+  updateAgent = agent => this.updateAction({
+    url: `/api/agents/${this.state.agentId}`,
+    values: agent,
+    successRedirect: `/agents/${this.state.agentId}`,
+    failureRedirect: `/agents/${this.state.agentId}`
+  })
 
   returnToAgentPage() {
     const { agentId } = this.state;
@@ -70,7 +61,7 @@ class EditAgent extends React.Component {
   }
 
   render() {
-    const { redirect, agentData, isSubmitting, isLoading } = this.state;
+    const { redirect, agentData, isLoading } = this.state;
 
     if (isLoading) return <Spinner />;
 
@@ -81,7 +72,6 @@ class EditAgent extends React.Component {
         values={agentData}
         handleSubmit={newValues => this.updateAgent(newValues)}
         handleCancel={() => this.returnToAgentPage()}
-        state={isSubmitting ? "submitting" : "ready"}
       />
     }
   }

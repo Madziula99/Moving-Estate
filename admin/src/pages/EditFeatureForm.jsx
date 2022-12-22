@@ -1,8 +1,9 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
+import BasePage from "./BasePage.jsx";
 
-class EditFeatureForm extends React.Component {
+class EditFeatureForm extends BasePage {
   state = {
     propertyId: this.props.match.params.propertyId,
     features: [],
@@ -11,15 +12,11 @@ class EditFeatureForm extends React.Component {
     redirect: null,
   };
 
-  updateFeature = (icon, title) => {
-    const { propertyId } = this.state;
-
-    fetch(`/api/properties/${propertyId}/features/${icon}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title: title })
-    }).catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
-  }
+  updateFeature = (icon, title) => this.updateAction({
+    url: `/api/properties/${this.state.propertyId}/features/${icon}`,
+    values: { title: title },
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   async getFeatures() {
     const { propertyId } = this.state;

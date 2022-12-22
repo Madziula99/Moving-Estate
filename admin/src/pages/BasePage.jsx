@@ -27,4 +27,15 @@ export default class BasePage extends React.Component {
       .catch(() => { if (redirect) this.setState({ redirect: redirect }) })
       .finally(() => this.setState({ isLoading: false }));
   }
+
+  updateAction({ url, values, successRedirect, failureRedirect }) {
+    fetch(url, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(values),
+    })
+      .then(() => { if (successRedirect) this.setState({ redirect: successRedirect }) })
+      .catch(() => { if (failureRedirect) this.setState({ redirect: failureRedirect }) })
+      .finally(() => this.setState({ isLoading: false }));
+  }
 }

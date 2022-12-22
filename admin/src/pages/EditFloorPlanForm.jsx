@@ -1,24 +1,21 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
+import BasePage from "./BasePage.jsx";
 
-class EditFloorPlanForm extends React.Component {
+class EditFloorPlanForm extends BasePage {
   state = {
     propertyId: this.props.match.params.propertyId,
     url: this.props.url,
-    name: this.props.name
+    name: this.props.name,
+    floorPlanId: this.props.match.params.floorPlanId,
   };
 
-  updateFloorPlan = (url, name) => {
-    const { propertyId } = this.state;
-    const { floorPlanId } = this.props.match.params;
-
-    fetch(`/api/properties/${propertyId}/floor_plans/${floorPlanId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ url: url, name: name })
-    }).catch(() => <Redirect to={`/properties/${propertyId}`} />);
-  }
+  updateFloorPlan = (url, name) => this.updateAction({
+    url: `/api/properties/${this.state.propertyId}/floor_plans/${this.state.floorPlanId}`,
+    values: { url: url, name: name },
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   render() {
     const { propertyId } = this.state;

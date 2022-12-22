@@ -2,11 +2,11 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import BasePage from "./BasePage.jsx";
 
-class EditProperty extends React.Component {
+class EditProperty extends BasePage {
   state = {
     redirect: null,
-    isSubmitting: false,
     isLoading: true,
     propertyId: this.props.match.params.id,
     property: {}
@@ -47,19 +47,12 @@ class EditProperty extends React.Component {
       .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
   }
 
-  updateProperty = async values => {
-    const { propertyId } = this.state;
-
-    this.setState({ isSubmitting: true });
-
-    await fetch(`/api/properties/${propertyId}`, {
-      method: "PUT",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(values)
-    })
-      .then(() => this.setState({ redirect: `/properties/${propertyId}` }))
-      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
-  }
+  updateProperty = property => this.updateAction({
+    url: `/api/properties/${this.state.propertyId}`,
+    values: property,
+    successRedirect: `/properties/${this.state.propertyId}`,
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   componentDidMount() {
     this.isLoggedIn();
@@ -71,7 +64,7 @@ class EditProperty extends React.Component {
   }
 
   render() {
-    const { redirect, property, isSubmitting, isLoading } = this.state;
+    const { redirect, property, isLoading } = this.state;
 
     if (isLoading) return <Spinner />
 
@@ -81,7 +74,6 @@ class EditProperty extends React.Component {
       values={property}
       onSubmit={this.updateProperty}
       onCancel={this.returnToPropertyPage}
-      state={isSubmitting ? "submitting" : "ready"}
       title={`Edit property: ${property.id}`}
     />
   }
