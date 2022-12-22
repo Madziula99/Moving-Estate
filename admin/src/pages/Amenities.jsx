@@ -36,7 +36,7 @@ class Amenities extends BasePage {
     });
   }
 
-  deleteAmenity = amenityTitle =>this.deleteAction({
+  deleteAmenity = amenityTitle => this.deleteAction({
     url: `/api/properties/${this.state.propertyId}/amenities/${amenityTitle}`,
     failureRedirect: `/properties/${this.state.propertyId}`
   })
