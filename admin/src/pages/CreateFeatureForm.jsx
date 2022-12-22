@@ -1,23 +1,20 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
+import BasePage from "./BasePage.jsx";
 
-class CreateFeatureForm extends React.Component {
+class CreateFeatureForm extends BasePage {
   state = {
     features: [],
     propertyId: this.props.match.params.id,
     redirect: null,
   };
 
-  createFeature = (feature, title) => {
-    const { propertyId } = this.state;
-
-    fetch(`/api/properties/${propertyId}/features`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ icon: feature, title: title })
-    }).catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
-  }
+  createFeature = (feature, title) => this.createAction({
+    url: `/api/properties/${this.state.propertyId}/features`,
+    values: { icon: feature, title: title },
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   async getFeatures() {
     const { propertyId } = this.state;

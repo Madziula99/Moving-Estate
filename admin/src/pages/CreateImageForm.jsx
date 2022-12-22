@@ -1,21 +1,18 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
+import BasePage from "./BasePage.jsx";
 
-class CreateImageForm extends React.Component {
+class CreateImageForm extends BasePage {
   state = {
     propertyId: this.props.match.params.id,
   };
 
-  createImage = imageLink => {
-    const { propertyId } = this.state;
-
-    fetch(`/api/properties/${propertyId}/images`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ link: imageLink })
-    }).catch(() => <Redirect to={`/properties/${propertyId}`} />);
-  }
+  createImage = imageLink => this.createAction({
+    url: `/api/properties/${this.state.propertyId}/images`,
+    values: { link: imageLink },
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   render() {
     const { propertyId } = this.state;

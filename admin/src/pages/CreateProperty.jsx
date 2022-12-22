@@ -2,8 +2,9 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import BasePage from "./BasePage.jsx";
 
-class CreateProperty extends React.Component {
+class CreateProperty extends BasePage {
   state = {
     redirect: null,
     isSubmitting: false,
@@ -37,26 +38,12 @@ class CreateProperty extends React.Component {
       })
   }
 
-  createProperty = values => {
-    this.setState({ isSubmitting: true, isLoading: true });
-
-    fetch(`/api/properties`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(values)
-    })
-      .then(res => {
-        if (res.status === 404) throw new Error();
-        return res.json();
-      })
-      .then(body => {
-        this.setState({
-          isLoading: false,
-          redirect: `/properties/${body.property.id}`
-        });
-      })
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
-  }
+  createProperty = property => this.createAction({
+    url: "/api/properties",
+    values: property,
+    successRedirect: true,
+    failureRedirect: "/properties"
+  })
 
   returnToProperties = () => {
     this.setState({ redirect: "/properties" });

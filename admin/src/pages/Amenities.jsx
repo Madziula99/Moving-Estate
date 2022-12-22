@@ -18,23 +18,11 @@ class Amenities extends BasePage {
     };
   }
 
-  createAmenity(amenityTitle) {
-    const { propertyId } = this.state;
-
-    this.setState({ isLoading: true });
-
-    fetch(`/api/properties/${propertyId}/amenities`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title: amenityTitle })
-    }).then(r => {
-      this.setState({
-        isLoading: false
-      });
-
-      return r.json();
-    });
-  }
+  createAmenity = title => this.createAction({
+    url: `/api/properties/${this.state.propertyId}/amenities`,
+    values: { title: title },
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   deleteAmenity = amenityTitle => this.deleteAction({
     url: `/api/properties/${this.state.propertyId}/amenities/${amenityTitle}`,
