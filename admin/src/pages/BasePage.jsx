@@ -14,7 +14,7 @@ export default class BasePage extends React.Component {
     }
   }
 
-  createAction({ url, values, successRedirect, failureRedirect }) {
+  createAction({ url, values, successObject, redirect }) {
     this.setState({ isLoading: true });
 
     fetch(url, {
@@ -23,8 +23,8 @@ export default class BasePage extends React.Component {
       body: JSON.stringify(values)
     })
       .then(res => res.json())
-      .then(({ property }) => { if (successRedirect) this.setState({ redirect: `/properties/${property.id}` })})
-      .catch(() => { if (failureRedirect) this.setState({ redirect: failureRedirect }) })
+      .then(body => { if (successObject) this.setState({ redirect: `${redirect}/${body[successObject].id}` }) })
+      .catch(() => { if (redirect) this.setState({ redirect: redirect }) })
       .finally(() => this.setState({ isLoading: false }));
   }
 }

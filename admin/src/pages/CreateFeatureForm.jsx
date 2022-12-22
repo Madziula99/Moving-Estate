@@ -13,7 +13,7 @@ class CreateFeatureForm extends BasePage {
   createFeature = (feature, title) => this.createAction({
     url: `/api/properties/${this.state.propertyId}/features`,
     values: { icon: feature, title: title },
-    failureRedirect: `/properties/${this.state.propertyId}`
+    redirect: `/properties/${this.state.propertyId}`
   })
 
   async getFeatures() {

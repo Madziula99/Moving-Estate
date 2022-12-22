@@ -21,7 +21,7 @@ class Amenities extends BasePage {
   createAmenity = title => this.createAction({
     url: `/api/properties/${this.state.propertyId}/amenities`,
     values: { title: title },
-    failureRedirect: `/properties/${this.state.propertyId}`
+    redirect: `/properties/${this.state.propertyId}`
   })
 
   deleteAmenity = amenityTitle => this.deleteAction({

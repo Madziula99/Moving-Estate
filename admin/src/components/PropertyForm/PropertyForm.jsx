@@ -48,8 +48,6 @@ class PropertyForm extends React.Component {
   submitProperty(values, actions) {
     const { onSubmit } = this.props;
 
-    actions.setSubmitting(false);
-
     const property = {
       title: values.title,
       location: values.locationCity + ", " + values.locationState,
@@ -66,8 +64,7 @@ class PropertyForm extends React.Component {
   }
 
   render() {
-    const { values, onCancel, state, title } = this.props;
-    const isDisabled = state === "submitting";
+    const { values, onCancel, title } = this.props;
 
     return <div className={styles.overlay}>
       <div className={styles.wrapper}>
@@ -79,21 +76,21 @@ class PropertyForm extends React.Component {
         >
         {props => (
           <form onSubmit={props.handleSubmit} className={styles.form}>
-            <StyledInput isDisabled={isDisabled} label="Title: " type="text" name="title" data={props} />
+            <StyledInput isDisabled={props.isSubmitting} label="Title: " type="text" name="title" data={props} />
             <div className={styles.row}>
               <label className={styles.label} htmlFor={"description"}> Description: </label>
-              <Field as="textarea" className={styles.textarea} disabled={isDisabled} type="text" name="description" data={props} />
+              <Field as="textarea" className={styles.textarea} disabled={props.isSubmitting} type="text" name="description" data={props} />
             </div>
-            <StyledInput isDisabled={isDisabled} label="Location city: " type="text" name="locationCity" data={props} />
-            <StyledInput isDisabled={isDisabled} label="Location state: " type="text" name="locationState" data={props} />
-            <Dropdown isDisabled={isDisabled} label="Type" name="type" types={["apartment", "house"]} />
+            <StyledInput isDisabled={props.isSubmitting} label="Location city: " type="text" name="locationCity" data={props} />
+            <StyledInput isDisabled={props.isSubmitting} label="Location state: " type="text" name="locationState" data={props} />
+            <Dropdown isDisabled={props.isSubmitting} label="Type" name="type" types={["apartment", "house"]} />
             {props.errors["type"] && <span className={styles.dropdown_error}>{props.errors["type"]}</span>}
-            <Dropdown isDisabled={isDisabled} label="Mode" name="mode" types={["rent", "sale"]} />
+            <Dropdown isDisabled={props.isSubmitting} label="Mode" name="mode" types={["rent", "sale"]} />
             {props.errors["mode"] && <span className={styles.dropdown_error}>{props.errors["mode"]}</span>}
-            <StyledInput isDisabled={isDisabled} label="Price: " type="number" name="price" data={props} />
-            <StyledInput isDisabled={isDisabled} label="Area: " type="number" name="area" data={props} />
-            <StyledInput isDisabled={isDisabled} label="Bedrooms: " type="number" name="bedrooms" data={props} />
-            <StyledInput isDisabled={isDisabled} label="Bathrooms: " type="number" name="bathrooms" data={props} />
+            <StyledInput isDisabled={props.isSubmitting} label="Price: " type="number" name="price" data={props} />
+            <StyledInput isDisabled={props.isSubmitting} label="Area: " type="number" name="area" data={props} />
+            <StyledInput isDisabled={props.isSubmitting} label="Bedrooms: " type="number" name="bedrooms" data={props} />
+            <StyledInput isDisabled={props.isSubmitting} label="Bathrooms: " type="number" name="bathrooms" data={props} />
             <Menu onCancelClick={onCancel} isDisabled={!(props.dirty && props.isValid)} />
           </form>
           )}

@@ -7,7 +7,6 @@ import BasePage from "./BasePage.jsx";
 class CreateProperty extends BasePage {
   state = {
     redirect: null,
-    isSubmitting: false,
     isLoading: true,
     property: {
       title: "",
@@ -41,8 +40,8 @@ class CreateProperty extends BasePage {
   createProperty = property => this.createAction({
     url: "/api/properties",
     values: property,
-    successRedirect: true,
-    failureRedirect: "/properties"
+    successObject: "property",
+    redirect: "/properties"
   })
 
   returnToProperties = () => {
@@ -57,7 +56,7 @@ class CreateProperty extends BasePage {
   }
 
   render() {
-    const { redirect, isSubmitting, property, isLoading } = this.state;
+    const { redirect, property, isLoading } = this.state;
 
     if (isLoading) return <Spinner />
 
@@ -67,7 +66,6 @@ class CreateProperty extends BasePage {
       values={property}
       onSubmit={this.createProperty}
       onCancel={this.returnToProperties}
-      state={isSubmitting ? "submitting" : "ready"}
       title="Create a new property:"
     />
   }
