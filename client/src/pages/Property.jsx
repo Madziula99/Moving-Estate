@@ -29,7 +29,7 @@ class Property extends Component {
 
   render() {
     const { property } = this.state;
-    console.log(property)
+
     if (property === undefined) return <div className={styles.property_page}><Spinner /></div>
 
     return <Page title={property.title}>
