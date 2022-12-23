@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Input, MenuItem, FormHelperText, FormControl } from "@mui/material";
+import { Modal } from "../Modal/Modal.jsx";
 import Select from "@mui/material/Select";
 import styles from "./FeatureForm.module.css";
 
@@ -40,7 +41,7 @@ class FeatureForm extends React.Component {
     const { propertyId, features, editMode } = this.props;
     const { icon, title, allFeatures, isDisabled } = this.state;
 
-    return <div className={styles.overlay}>
+    return <Modal>
       <form className={styles.form}>
         <FormControl sx={{ m: 2, minWidth: 120 }}>
           <Select
@@ -86,7 +87,7 @@ class FeatureForm extends React.Component {
           </Button>
         </NavLink>
       </form>
-    </div>
+    </Modal>
   }
 }
 
