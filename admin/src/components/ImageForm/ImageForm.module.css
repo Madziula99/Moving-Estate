@@ -1,29 +1,14 @@
-.overlay {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 .form {
-  width: 500px;
+  width: 600px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 3px solid #1976d2;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #fff;
+  padding-bottom: 30px;
 }
 
 .input {
-  width: 350px;
+  width: 450px;
+  margin: 10px;
 }
 
 .row_btn {
@@ -32,4 +17,5 @@
 
 .nav_link {
   text-decoration: none;
+  margin: 5px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Input } from "@mui/material";
+import { Modal } from "../Modal/Modal.jsx";
 import styles from "./ImageForm.module.css";
 
 class ImageForm extends React.Component {
@@ -32,8 +33,9 @@ class ImageForm extends React.Component {
     const { link, propertyId } = this.props;
     const { isDisabled } = this.state;
 
-    return <div className={styles.overlay}>
+    return <Modal>
       <form className={styles.form}>
+        <label>Image: </label>
         <Input
           defaultValue={link}
           onChange={e => this.handleChange(e.target.value)}
@@ -58,7 +60,7 @@ class ImageForm extends React.Component {
           <Button variant="contained" className={styles.row_btn}>x</Button>
         </NavLink>
       </form>
-    </div>
+    </Modal>
   }
 }
 
