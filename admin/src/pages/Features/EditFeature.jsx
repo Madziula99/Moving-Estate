@@ -4,17 +4,19 @@ import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
 import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
-class CreateFeatureForm extends BasePage {
+class EditFeature extends BasePage {
   state = {
+    propertyId: this.props.match.params.propertyId,
     features: [],
-    propertyId: this.props.match.params.id,
+    icon: this.props.icon,
+    title: this.props.title,
     redirect: null,
   };
 
-  createFeature = (feature, title) => this.createAction({
-    url: `/api/properties/${this.state.propertyId}/features`,
-    values: { icon: feature, title: title },
-    redirect: `/properties/${this.state.propertyId}`
+  updateFeature = (icon, title) => this.updateAction({
+    url: `/api/properties/${this.state.propertyId}/features/${icon}`,
+    values: { title: title },
+    failureRedirect: `/properties/${this.state.propertyId}`
   })
 
   async getFeatures() {
@@ -33,18 +35,23 @@ class CreateFeatureForm extends BasePage {
   render() {
     const { propertyId, features, redirect } = this.state;
 
+    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/features`} />
+
     if (redirect) return <Redirect to={redirect} />
 
-    return <Modal title="Create a new feature:">
+    const { feature, title } = this.props.location.aboutProps.feature;
+
+    return <Modal title="Edit feature:">
       <FeatureForm
+        editMode
         features={features}
         propertyId={propertyId}
-        icon=""
-        title=""
-        handleSubmit={this.createFeature}
+        icon={feature}
+        title={title}
+        handleSubmit={this.updateFeature}
       />
     </Modal>
   }
 }
 
-export default withRouter(CreateFeatureForm);
+export default withRouter(EditFeature);

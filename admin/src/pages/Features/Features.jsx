@@ -1,10 +1,10 @@
 import React from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import CreateFeatureForm from "./CreateFeatureForm.jsx";
-import EditFeatureForm from "./EditFeatureForm.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { FeaturesList } from "../components/FeaturesList/FeaturesList.jsx";
-import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx";
+import CreateFeature from "./CreateFeature.jsx";
+import EditFeature from "./EditFeature.jsx";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import { FeaturesList } from "../../components/FeaturesList/FeaturesList.jsx";
+import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.jsx";
 import BasePage from "./BasePage.jsx";
 
 class Features extends BasePage {
@@ -76,8 +76,8 @@ class Features extends BasePage {
       />
 
       <Switch>
-        <Route exact path="/properties/:id/features/new" component={CreateFeatureForm}></Route>
-        <Route path="/properties/:propertyId/features/:icon/edit" component={EditFeatureForm}></Route>
+        <Route exact path="/properties/:id/features/new" component={CreateFeature}></Route>
+        <Route path="/properties/:propertyId/features/:icon/edit" component={EditFeature}></Route>
       </Switch>
     </>
   }

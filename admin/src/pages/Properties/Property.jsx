@@ -1,10 +1,10 @@
 import React from "react";
 import { Redirect, withRouter, Switch, Route } from "react-router-dom";
-import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { SignOut } from "../components/SignOut/SignOut.jsx";
-import { PropertyTabs } from "../components/PropertyTabs/PropertyTabs.jsx";
-import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
+import { MenuButton } from "../../components/MenuButton/MenuButton.jsx";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import { SignOut } from "../../components/SignOut/SignOut.jsx";
+import { PropertyTabs } from "../../components/PropertyTabs/PropertyTabs.jsx";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 import EditProperty from "./EditProperty.jsx";
 import Amenities from "./Amenities.jsx";
 import Images from "./Images.jsx";

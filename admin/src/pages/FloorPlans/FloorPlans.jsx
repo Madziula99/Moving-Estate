@@ -1,10 +1,10 @@
 import React from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import CreateFloorPlanForm from "./CreateFloorPlanForm.jsx";
-import EditFloorPlanForm from "./EditFloorPlanForm.jsx";
-import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { FloorPlansList } from "../components/FloorPlansList/FloorPlansList.jsx";
+import CreateFloorPlan from "./CreateFloorPlan.jsx";
+import EditFloorPlan from "./EditFloorPlan.jsx";
+import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.jsx";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import { FloorPlansList } from "../../components/FloorPlansList/FloorPlansList.jsx";
 import BasePage from "./BasePage.jsx";
 
 class FloorPlans extends BasePage {
@@ -69,8 +69,8 @@ class FloorPlans extends BasePage {
       <NavLinkWrapper propertyId={propertyId} type="floor_plans" text="Add floor plan" />
 
       <Switch>
-        <Route exact path="/properties/:id/floor_plans/new" component={CreateFloorPlanForm}></Route>
-        <Route path="/properties/:propertyId/floor_plans/:floorPlanId/edit" component={EditFloorPlanForm}></Route>
+        <Route exact path="/properties/:id/floor_plans/new" component={CreateFloorPlan}></Route>
+        <Route path="/properties/:propertyId/floor_plans/:floorPlanId/edit" component={EditFloorPlan}></Route>
       </Switch>
     </>
   }

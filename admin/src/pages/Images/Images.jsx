@@ -1,10 +1,10 @@
 import React from "react";
 import { Redirect, Route, Switch, withRouter } from "react-router-dom";
-import CreateImageForm from "./CreateImageForm.jsx";
-import EditImageForm from "./EditImageForm.jsx";
-import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx";
-import { ImagesList } from "../components/ImagesList/ImagesList.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
+import CreateImage from "./CreateImage.jsx";
+import EditImage from "./EditImage.jsx";
+import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.jsx";
+import { ImagesList } from "../../components/ImagesList/ImagesList.jsx";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import BasePage from "./BasePage.jsx";
 
 class Images extends BasePage {
@@ -69,8 +69,8 @@ class Images extends BasePage {
       <NavLinkWrapper propertyId={propertyId} text="Add Image" type="images" />
 
       <Switch>
-        <Route exact path="/properties/:id/images/new" component={CreateImageForm}></Route>
-        <Route path="/properties/:propertyId/images/:imageId/edit" component={EditImageForm}></Route>
+        <Route exact path="/properties/:id/images/new" component={CreateImage}></Route>
+        <Route path="/properties/:propertyId/images/:imageId/edit" component={EditImage}></Route>
       </Switch>
     </>
   }

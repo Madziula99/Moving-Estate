@@ -4,7 +4,7 @@ import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
 import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
-class EditImageForm extends BasePage {
+class EditImage extends BasePage {
   state = {
     propertyId: this.props.match.params.propertyId,
     imageId: this.props.match.params.imageId,
@@ -29,4 +29,4 @@ class EditImageForm extends BasePage {
   }
 }
 
-export default withRouter(EditImageForm);
+export default withRouter(EditImage);
