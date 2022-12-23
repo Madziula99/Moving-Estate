@@ -17,11 +17,11 @@ class FloorPlans extends React.Component {
       currentPlan: plan,
       focused: this.props.plans.indexOf(plan),
     });
-  } 
+  }
 
   computeClassName(i) {
     return i === this.state.focused ? classes.plan_btn_focus : classes.plan_btn_not_focus
-  }  
+  }
 
   render() {
     return (
@@ -35,8 +35,8 @@ class FloorPlans extends React.Component {
               </button>
             )
           })}
-          <img className={classes.floor_img} src={this.state.currentPlan.url} alt={this.state.currentPlan.name} />       
-        </div>        
+          <img className={classes.floor_img} src={this.state.currentPlan.url} alt={this.state.currentPlan.name} />
+        </div>
       </section>
     );
   }

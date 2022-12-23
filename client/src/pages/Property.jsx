@@ -17,11 +17,8 @@ class Property extends Component {
   };
 
   async fetchProperty(propertyId) {
-    const { property } = await fetch(`/api/properties/${propertyId}`).then(r => r.json());
-
-    this.setState({
-      property: property,
-    });
+    await fetch(`/api/properties/${propertyId}`).then(r => r.json())
+      .then(data => this.setState({ property: data }));
   }
 
   componentDidMount() {
@@ -32,7 +29,7 @@ class Property extends Component {
 
   render() {
     const { property } = this.state;
-
+    console.log(property)
     if (property === undefined) return <div className={styles.property_page}><Spinner /></div>
 
     return <Page title={property.title}>
@@ -52,7 +49,7 @@ class Property extends Component {
         price={property.price}
       />
       <Description>{property.description}</Description>
-      {property.floor_plans && <FloorPlans plans={property.floor_plans} />}
+      {property.floor_plans[0] && <FloorPlans plans={property.floor_plans || []} />}
       <Amenities items={property.amenities} />
       <Features items={property.features} />
       <AgentInfo {...property.agent} propertyId={property.id} />

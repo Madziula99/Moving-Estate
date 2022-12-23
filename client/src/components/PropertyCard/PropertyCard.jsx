@@ -31,7 +31,7 @@ class PropertyCard extends React.Component {
           mode={this.props.mode}
           price={this.props.price}
         />
-        <img className={styles.property_card_image} src={this.props.image} alt="Accommodation" />
+        <img className={styles.property_card_image} src={this.props.images} alt="Accommodation" />
         <div className={this.addWrapperClassName()}>
           <h3 className={styles.property_card_name}>{this.props.title}</h3>
           <span className={styles.property_card_location}>{this.props.location.join(", ")}</span>
