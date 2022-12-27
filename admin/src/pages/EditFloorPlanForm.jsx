@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
+import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
 class EditFloorPlanForm extends BasePage {
@@ -24,7 +25,9 @@ class EditFloorPlanForm extends BasePage {
 
     const { url, name } = this.props.location.aboutProps;
 
-    return <FloorPlanForm propertyId={propertyId} url={url} name={name} handleSubmit={this.updateFloorPlan} />
+    return <Modal title="Edit floor plan:">
+      <FloorPlanForm propertyId={propertyId} url={url} name={name} handleSubmit={this.updateFloorPlan} />
+    </Modal>
   }
 }
 

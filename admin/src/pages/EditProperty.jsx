@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
 class EditProperty extends BasePage {
@@ -62,12 +63,13 @@ class EditProperty extends BasePage {
 
     if (redirect) return <Redirect to={redirect} />
 
-    return <PropertyForm
-      values={property}
-      onSubmit={this.updateProperty}
-      onCancel={this.returnToPropertyPage}
-      title={`Edit property: ${property.id}`}
-    />
+    return <Modal title={`Edit property: ${property.id}`}>
+      <PropertyForm
+        values={property}
+        onSubmit={this.updateProperty}
+        onCancel={this.returnToPropertyPage}
+      />
+    </Modal>
   }
 }
 

@@ -8,7 +8,7 @@ import { Context } from "../Context/Context.js";
 class CreateAgent extends BasePage {
   state = {
     redirect: null,
-    isLoading: true,
+    isLoading: false,
   };
 
   isManager() {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
+import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
 class EditFeatureForm extends BasePage {
@@ -40,14 +41,16 @@ class EditFeatureForm extends BasePage {
 
     const { feature, title } = this.props.location.aboutProps.feature;
 
-    return <FeatureForm
-      editMode
-      features={features}
-      propertyId={propertyId}
-      icon={feature}
-      title={title}
-      handleSubmit={this.updateFeature}
-    />
+    return <Modal title="Edit feature:">
+      <FeatureForm
+        editMode
+        features={features}
+        propertyId={propertyId}
+        icon={feature}
+        title={title}
+        handleSubmit={this.updateFeature}
+      />
+    </Modal>
   }
 }
 

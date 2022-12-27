@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
+import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
 class CreateImageForm extends BasePage {
@@ -17,7 +18,9 @@ class CreateImageForm extends BasePage {
   render() {
     const { propertyId } = this.state;
 
-    return <ImageForm propertyId={propertyId} link="" handleSubmit={this.createImage} />;
+    return <Modal title="Create a new image:">
+      <ImageForm propertyId={propertyId} link="" handleSubmit={this.createImage} />
+    </Modal>
   }
 }
 

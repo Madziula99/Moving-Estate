@@ -38,34 +38,32 @@ class FloorPlanForm extends React.Component {
     const { url, name, propertyId } = this.props;
     const { isDisabled } = this.state;
 
-    return <div className={styles.overlay}>
-      <form className={styles.form}>
-        <label>Url:</label>
-        <Input
-          defaultValue={url}
-          onChange={e => this.handleChange("url", e.target.value)}
-          className={styles.input}
-        />
-        <label>Name:</label>
-        <Input
-          defaultValue={name}
-          onChange={e => this.handleChange("name", e.target.value)}
-          className={styles.input}
-        />
-        <NavLink
-          onClick={e => isDisabled && e.preventDefault()}
-          to={`/properties/${propertyId}/floor_plans`}
-          className={styles.nav_link}
-        >
-          <Button variant="contained" onClick={this.onSave} disabled={isDisabled}>
-            Save
-          </Button>
-        </NavLink>
-        <NavLink to={`/properties/${propertyId}/floor_plans`} className={styles.nav_link}>
-          <Button variant="contained">x</Button>
-        </NavLink>
-      </form>
-    </div>
+    return <form className={styles.form}>
+      <label>Url:</label>
+      <Input
+        defaultValue={url}
+        onChange={e => this.handleChange("url", e.target.value)}
+        className={styles.input}
+      />
+      <label>Name:</label>
+      <Input
+        defaultValue={name}
+        onChange={e => this.handleChange("name", e.target.value)}
+        className={styles.input}
+      />
+      <NavLink
+        onClick={e => isDisabled && e.preventDefault()}
+        to={`/properties/${propertyId}/floor_plans`}
+        className={styles.nav_link}
+      >
+        <Button variant="contained" onClick={this.onSave} disabled={isDisabled}>
+          Save
+        </Button>
+      </NavLink>
+      <NavLink to={`/properties/${propertyId}/floor_plans`} className={styles.nav_link}>
+        <Button variant="contained">x</Button>
+      </NavLink>
+    </form>
   }
 }
 

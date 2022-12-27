@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
+import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
 class CreateFeatureForm extends BasePage {
@@ -34,13 +35,15 @@ class CreateFeatureForm extends BasePage {
 
     if (redirect) return <Redirect to={redirect} />
 
-    return <FeatureForm
-      features={features}
-      propertyId={propertyId}
-      icon=""
-      title=""
-      handleSubmit={this.createFeature}
-    />
+    return <Modal title="Create a new feature:">
+      <FeatureForm
+        features={features}
+        propertyId={propertyId}
+        icon=""
+        title=""
+        handleSubmit={this.createFeature}
+      />
+    </Modal>
   }
 }
 
