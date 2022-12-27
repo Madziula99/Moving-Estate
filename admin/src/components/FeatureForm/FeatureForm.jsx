@@ -40,54 +40,52 @@ class FeatureForm extends React.Component {
     const { propertyId, features, editMode } = this.props;
     const { icon, title, allFeatures, isDisabled } = this.state;
 
-    return <>
-      <form className={styles.form}>
-        <label>Icon: </label>
-        <FormControl sx={{ m: 2, minWidth: 120 }}>
-          <Select
-            value={icon}
-            onChange={e => this.handleChange("icon", e.target.value)}
-            displayEmpty
-            inputProps={{ "aria-label": "Without label" }}
-          >
-            {allFeatures.map(option => {
-              return <MenuItem
-                key={option}
-                disabled={features.some(feature => feature.feature === option) || editMode}
-                value={option}
-              >
-                {option.toUpperCase()}
-              </MenuItem>
-            })}
-          </Select>
-        </FormControl>
-        <label>Title: </label>
-        <Input
-          defaultValue={title}
-          onChange={e => this.handleChange("title", e.target.value)}
-          className={styles.input}
-        />
-        <NavLink
-          onClick={event => isDisabled && event.preventDefault()}
-          to={`/properties/${propertyId}/features`}
-          className={styles.nav_link}
+    return <form className={styles.form}>
+      <label>Icon: </label>
+      <FormControl sx={{ m: 2, minWidth: 120 }}>
+        <Select
+          value={icon}
+          onChange={e => this.handleChange("icon", e.target.value)}
+          displayEmpty
+          inputProps={{ "aria-label": "Without label" }}
         >
-          <Button
-            sx={{m: 1, p: 1}}
-            variant="contained"
-            onClick={this.onSave}
-            disabled={isDisabled}
-          >
-            Save
-          </Button>
-        </NavLink>
-        <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}>
-          <Button sx={{ m: 1, p: 1 }} variant="contained">
-            Cancel
-          </Button>
-        </NavLink>
-      </form>
-    </>
+          {allFeatures.map(option => {
+            return <MenuItem
+              key={option}
+              disabled={features.some(feature => feature.feature === option) || editMode}
+              value={option}
+            >
+              {option.toUpperCase()}
+            </MenuItem>
+          })}
+        </Select>
+      </FormControl>
+      <label>Title: </label>
+      <Input
+        defaultValue={title}
+        onChange={e => this.handleChange("title", e.target.value)}
+        className={styles.input}
+      />
+      <NavLink
+        onClick={event => isDisabled && event.preventDefault()}
+        to={`/properties/${propertyId}/features`}
+        className={styles.nav_link}
+      >
+        <Button
+          sx={{m: 1, p: 1}}
+          variant="contained"
+          onClick={this.onSave}
+          disabled={isDisabled}
+        >
+          Save
+        </Button>
+      </NavLink>
+      <NavLink to={`/properties/${propertyId}/features`} className={styles.nav_link}>
+        <Button sx={{ m: 1, p: 1 }} variant="contained">
+          Cancel
+        </Button>
+      </NavLink>
+    </form>
   }
 }
 
