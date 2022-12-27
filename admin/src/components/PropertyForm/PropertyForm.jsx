@@ -65,34 +65,32 @@ class PropertyForm extends React.Component {
   render() {
     const { values, onCancel } = this.props;
 
-    return <>
-        <Formik
-          initialValues={values}
-          validate={values => this.validateForm(values)}
-          onSubmit={(values, actions) => this.submitProperty(values, actions)}
-        >
-        {props => (
-          <form onSubmit={props.handleSubmit} className={styles.form}>
-            <StyledInput isDisabled={props.isSubmitting} label="Title: " type="text" name="title" data={props} />
-            <div className={styles.row}>
-              <label className={styles.label} htmlFor={"description"}> Description: </label>
-              <Field as="textarea" className={styles.textarea} disabled={props.isSubmitting} type="text" name="description" data={props} />
-            </div>
-            <StyledInput isDisabled={props.isSubmitting} label="Location city: " type="text" name="locationCity" data={props} />
-            <StyledInput isDisabled={props.isSubmitting} label="Location state: " type="text" name="locationState" data={props} />
-            <Dropdown isDisabled={props.isSubmitting} label="Type" name="type" types={["apartment", "house"]} />
-            {props.errors["type"] && <span className={styles.dropdown_error}>{props.errors["type"]}</span>}
-            <Dropdown isDisabled={props.isSubmitting} label="Mode" name="mode" types={["rent", "sale"]} />
-            {props.errors["mode"] && <span className={styles.dropdown_error}>{props.errors["mode"]}</span>}
-            <StyledInput isDisabled={props.isSubmitting} label="Price: " type="number" name="price" data={props} />
-            <StyledInput isDisabled={props.isSubmitting} label="Area: " type="number" name="area" data={props} />
-            <StyledInput isDisabled={props.isSubmitting} label="Bedrooms: " type="number" name="bedrooms" data={props} />
-            <StyledInput isDisabled={props.isSubmitting} label="Bathrooms: " type="number" name="bathrooms" data={props} />
-            <Menu onCancelClick={onCancel} isDisabled={!(props.dirty && props.isValid)} />
-          </form>
-          )}
-        </Formik>
-      </>
+    return <Formik
+      initialValues={values}
+      validate={values => this.validateForm(values)}
+      onSubmit={(values, actions) => this.submitProperty(values, actions)}
+    >
+      {props => (
+        <form onSubmit={props.handleSubmit} className={styles.form}>
+          <StyledInput isDisabled={props.isSubmitting} label="Title: " type="text" name="title" data={props} />
+          <div className={styles.row}>
+            <label className={styles.label} htmlFor={"description"}> Description: </label>
+            <Field as="textarea" className={styles.textarea} disabled={props.isSubmitting} type="text" name="description" data={props} />
+          </div>
+          <StyledInput isDisabled={props.isSubmitting} label="Location city: " type="text" name="locationCity" data={props} />
+          <StyledInput isDisabled={props.isSubmitting} label="Location state: " type="text" name="locationState" data={props} />
+          <Dropdown isDisabled={props.isSubmitting} label="Type" name="type" types={["apartment", "house"]} />
+          {props.errors["type"] && <span className={styles.dropdown_error}>{props.errors["type"]}</span>}
+          <Dropdown isDisabled={props.isSubmitting} label="Mode" name="mode" types={["rent", "sale"]} />
+          {props.errors["mode"] && <span className={styles.dropdown_error}>{props.errors["mode"]}</span>}
+          <StyledInput isDisabled={props.isSubmitting} label="Price: " type="number" name="price" data={props} />
+          <StyledInput isDisabled={props.isSubmitting} label="Area: " type="number" name="area" data={props} />
+          <StyledInput isDisabled={props.isSubmitting} label="Bedrooms: " type="number" name="bedrooms" data={props} />
+          <StyledInput isDisabled={props.isSubmitting} label="Bathrooms: " type="number" name="bathrooms" data={props} />
+          <Menu onCancelClick={onCancel} isDisabled={!(props.dirty && props.isValid)} />
+        </form>
+      )}
+    </Formik>
   }
 }
 
