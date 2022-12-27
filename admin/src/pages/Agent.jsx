@@ -2,7 +2,7 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import Context from "../Context/Context.js";
+import { Context } from "../Context/Context.js";
 import styles from "./Agent.module.css";
 
 class Agent extends React.Component {
@@ -46,7 +46,7 @@ class Agent extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (Context.currentUser.isManager) return <div className={styles.agent_form_wrapper}>
+    if (this.context.isManager) return <div className={styles.agent_form_wrapper}>
       <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
       <div className={styles.agent_form}>
         <img src={agentData.photo} alt="Agent" />
@@ -59,5 +59,7 @@ class Agent extends React.Component {
     return <Redirect to="/" />;
   }
 }
+
+Agent.contextType = Context;
 
 export default withRouter(Agent);

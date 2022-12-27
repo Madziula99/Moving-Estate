@@ -3,7 +3,7 @@ import { withRouter, Redirect } from "react-router-dom";
 import { PropertyMessages } from "../components/PropertyMessages/PropertyMessages.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import Context from "../Context/Context.js";
+import { Context } from "../Context/Context.js";
 
 class Messages extends React.Component {
   state = {
@@ -17,7 +17,7 @@ class Messages extends React.Component {
 
     this.setState({ isLoading: true });
 
-    const email = Context.currentUser.email;
+    const email = this.context.email;
 
     fetch(`/api/properties/messages/${id}?email=${email}`)
       .then(res => {
@@ -51,5 +51,7 @@ class Messages extends React.Component {
     return <Redirect to="/properties" />
   }
 }
+
+Messages.contextType = Context;
 
 export default withRouter(Messages);

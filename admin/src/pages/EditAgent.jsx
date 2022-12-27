@@ -3,7 +3,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import BasePage from "./BasePage.jsx";
-import Context from "../Context/Context.js";
+import { Context } from "../Context/Context.js";
 
 class EditAgent extends BasePage {
   state = {
@@ -47,7 +47,7 @@ class EditAgent extends BasePage {
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (agentData.name && Context.currentUser.isManager) {
+    if (agentData.name && this.context.isManager) {
       return <AgentForm
         values={agentData}
         handleSubmit={newValues => this.updateAgent(newValues)}
@@ -58,5 +58,7 @@ class EditAgent extends BasePage {
     return <Redirect to="/agents" />;
   }
 }
+
+EditAgent.contextType = Context;
 
 export default withRouter(EditAgent);

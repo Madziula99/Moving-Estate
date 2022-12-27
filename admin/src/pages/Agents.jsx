@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { AgentsTable } from "../components/AgentsTable/AgentsTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
-import Context from "../Context/Context.js";
+import { Context } from "../Context/Context.js";
 
 class Agents extends React.Component {
   state = {
@@ -33,7 +33,7 @@ class Agents extends React.Component {
 
     if (isLoading) return <Spinner />;
 
-    if (Context.currentUser.isManager) return <>
+    if (this.context.isManager) return <>
       <SignOut headerMessage={"Manager Panel"} />
       <AgentsTable agents={agents} />
     </>
@@ -41,5 +41,7 @@ class Agents extends React.Component {
     return <Redirect to="/" />;
   }
 }
+
+Agents.contextType = Context;
 
 export { Agents };
