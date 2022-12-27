@@ -32,34 +32,32 @@ class ImageForm extends React.Component {
     const { link, propertyId } = this.props;
     const { isDisabled } = this.state;
 
-    return <>
-      <form className={styles.form}>
-        <label>Link: </label>
-        <Input
-          defaultValue={link}
-          onChange={e => this.handleChange(e.target.value)}
-          autoFocus
-          className={styles.input}
-        />
-        <NavLink
-          onClick={e => isDisabled && e.preventDefault()}
-          to={`/properties/${propertyId}/images`}
-          className={styles.nav_link}
+    return <form className={styles.form}>
+      <label>Link: </label>
+      <Input
+        defaultValue={link}
+        onChange={e => this.handleChange(e.target.value)}
+        autoFocus
+        className={styles.input}
+      />
+      <NavLink
+        onClick={e => isDisabled && e.preventDefault()}
+        to={`/properties/${propertyId}/images`}
+        className={styles.nav_link}
+      >
+        <Button
+          variant="contained"
+          onClick={this.onSave}
+          disabled={isDisabled}
+          className={styles.row_btn}
         >
-          <Button
-            variant="contained"
-            onClick={this.onSave}
-            disabled={isDisabled}
-            className={styles.row_btn}
-          >
-            Save
-          </Button>
-        </NavLink>
-        <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}>
-          <Button variant="contained" className={styles.row_btn}>x</Button>
-        </NavLink>
-      </form>
-    </>
+          Save
+        </Button>
+      </NavLink>
+      <NavLink to={`/properties/${propertyId}/images`} className={styles.nav_link}>
+        <Button variant="contained" className={styles.row_btn}>x</Button>
+      </NavLink>
+    </form>
   }
 }
 
