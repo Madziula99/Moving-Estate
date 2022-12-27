@@ -35,7 +35,7 @@ class ImageForm extends React.Component {
 
     return <Modal>
       <form className={styles.form}>
-        <label>Image: </label>
+        <label>Link: </label>
         <Input
           defaultValue={link}
           onChange={e => this.handleChange(e.target.value)}
