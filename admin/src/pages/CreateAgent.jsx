@@ -2,11 +2,11 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import BasePage from "./BasePage.jsx";
 
-class CreateAgent extends React.Component {
+class CreateAgent extends BasePage {
   state = {
     redirect: null,
-    isSubmitting: false,
     isLoading: true,
   };
 
@@ -24,21 +24,14 @@ class CreateAgent extends React.Component {
       .catch(() => this.setState({ isLoading: false, redirect: "/" }));
   }
 
-  async createAgent(values) {
-    this.setState({ isSubmitting: true });
+  createAgent = agent => this.createAction({
+    url: "/api/agents",
+    values: agent,
+    successObject: "agent",
+    redirect: "/agents"
+  })
 
-    await fetch("/api/agents", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(values)
-    }).then(r =>  r.json()).then(({ agent }) => {
-      this.setState({
-        redirect: `/agents/${agent.id}`
-      });
-    });
-  }
-
-  returnToAgents() {
+  returnToAgents = () => {
     this.setState({ redirect: "/agents" });
   }
 
@@ -47,7 +40,7 @@ class CreateAgent extends React.Component {
   }
 
   render() {
-    const { redirect, isSubmitting, isLoading } = this.state;
+    const { redirect, isLoading } = this.state;
 
     if (isLoading) return <Spinner />;
 
@@ -55,9 +48,8 @@ class CreateAgent extends React.Component {
 
     return <AgentForm
       values={{ name: "", email: "", location: "", photo: "" }}
-      handleSubmit={newValues => this.createAgent(newValues)}
-      handleCancel={() => this.returnToAgents()}
-      state={isSubmitting ? "submitting" : "ready"}
+      handleSubmit={this.createAgent}
+      handleCancel={this.returnToAgents}
     />
   }
 }

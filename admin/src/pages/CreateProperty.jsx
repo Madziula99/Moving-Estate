@@ -2,11 +2,11 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import BasePage from "./BasePage.jsx";
 
-class CreateProperty extends React.Component {
+class CreateProperty extends BasePage {
   state = {
     redirect: null,
-    isSubmitting: false,
     isLoading: true,
     property: {
       title: "",
@@ -37,26 +37,12 @@ class CreateProperty extends React.Component {
       })
   }
 
-  createProperty = values => {
-    this.setState({ isSubmitting: true, isLoading: true });
-
-    fetch(`/api/properties`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify(values)
-    })
-      .then(res => {
-        if (res.status === 404) throw new Error();
-        return res.json();
-      })
-      .then(body => {
-        this.setState({
-          isLoading: false,
-          redirect: `/properties/${body.property.id}`
-        });
-      })
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
-  }
+  createProperty = property => this.createAction({
+    url: "/api/properties",
+    values: property,
+    successObject: "property",
+    redirect: "/properties"
+  })
 
   returnToProperties = () => {
     this.setState({ redirect: "/properties" });
@@ -70,7 +56,7 @@ class CreateProperty extends React.Component {
   }
 
   render() {
-    const { redirect, isSubmitting, property, isLoading } = this.state;
+    const { redirect, property, isLoading } = this.state;
 
     if (isLoading) return <Spinner />
 
@@ -80,7 +66,6 @@ class CreateProperty extends React.Component {
       values={property}
       onSubmit={this.createProperty}
       onCancel={this.returnToProperties}
-      state={isSubmitting ? "submitting" : "ready"}
       title="Create a new property:"
     />
   }

@@ -5,8 +5,9 @@ import EditImageForm from "./EditImageForm.jsx";
 import { NavLinkWrapper } from "../components/NavLinkWrapper/NavLinkWrapper.jsx";
 import { ImagesList } from "../components/ImagesList/ImagesList.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import BasePage from "./BasePage.jsx";
 
-class Images extends React.Component {
+class Images extends BasePage {
   state = {
     propertyId: this.props.match.params.id,
     isLoading: true,
@@ -14,18 +15,11 @@ class Images extends React.Component {
     images: []
   };
 
-  deleteImage = imageId => {
-    if (window.confirm("Are you sure you want to delete this image?")) {
-      const { propertyId } = this.state;
-
-      fetch(`/api/properties/${propertyId}/images/${imageId}`, {
-        method: "DELETE",
-        headers: { "content-type": "application/json" }
-      })
-        .then(() => this.setState({ isLoading: false }))
-        .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
-    }
-  }
+  deleteImage = imageId => this.deleteAction({
+    message: "Are you sure you want to delete this image?",
+    url: `/api/properties/${this.state.propertyId}/images/${imageId}`,
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   async getImages() {
     this.setState({ isLoading: true });

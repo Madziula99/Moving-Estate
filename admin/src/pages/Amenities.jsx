@@ -2,8 +2,9 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { AmenitiesPageContent } from "../components/AmenitiesPageContent/AmenitiesPageContent.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import BasePage from "./BasePage.jsx";
 
-class Amenities extends React.Component {
+class Amenities extends BasePage {
   constructor(props) {
     super(props);
 
@@ -17,52 +18,29 @@ class Amenities extends React.Component {
     };
   }
 
-  createAmenity(amenityTitle) {
-    const { propertyId } = this.state;
+  createAmenity = title => this.createAction({
+    url: `/api/properties/${this.state.propertyId}/amenities`,
+    values: { title: title },
+    redirect: `/properties/${this.state.propertyId}`
+  })
 
-    this.setState({ isLoading: true });
-
-    fetch(`/api/properties/${propertyId}/amenities`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({ title: amenityTitle })
-    }).then(r => {
-      this.setState({
-        isLoading: false
-      });
-
-      return r.json();
-    });
-  }
-
-  deleteAmenity(amenityTitle) {
-    const { propertyId } = this.state;
-
-    this.setState({ isLoading: true });
-
-    if (amenityTitle.includes("/")) amenityTitle = amenityTitle.replace(/\//g, "%2F");
-    if (amenityTitle.includes("&")) amenityTitle = amenityTitle.replace(/&/g, "%26");
-
-    amenityTitle = amenityTitle.replace(/ /g, "%20");
-
-    fetch(`/api/properties/${propertyId}/amenities/${amenityTitle}`, {
-      method: "DELETE",
-      headers: { "content-type": "application/json" }
-    }).then(r => {
-      this.setState({
-        isLoading: false
-      });
-
-      return r.json();
-    });
-  }
+  deleteAmenity = amenityTitle => this.deleteAction({
+    url: `/api/properties/${this.state.propertyId}/amenities/${amenityTitle}`,
+    failureRedirect: `/properties/${this.state.propertyId}`
+  })
 
   isChecked(item) {
     const { amenities } = this.state;
     const isChecked = amenities.find(amenity => amenity.title === item.title).available;
 
     if (isChecked) {
-      this.deleteAmenity(item.title);
+      let amenityTitle = item.title;
+
+      if (amenityTitle.includes("/")) amenityTitle = amenityTitle.replace(/\//g, "%2F");
+      if (amenityTitle.includes("&")) amenityTitle = amenityTitle.replace(/&/g, "%26");
+      amenityTitle = amenityTitle.replace(/ /g, "%20");
+
+      this.deleteAmenity(amenityTitle);
     } else {
       this.createAmenity(item.title);
     }
