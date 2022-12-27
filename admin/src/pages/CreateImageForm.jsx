@@ -19,7 +19,7 @@ class CreateImageForm extends BasePage {
     const { propertyId } = this.state;
 
     return <Modal title="Create a new image:">
-      <ImageForm propertyId={propertyId} link="" handleSubmit={this.createImage} />;
+      <ImageForm propertyId={propertyId} link="" handleSubmit={this.createImage} />
     </Modal>
   }
 }

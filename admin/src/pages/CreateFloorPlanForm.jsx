@@ -19,7 +19,7 @@ class CreateFloorPlanForm extends BasePage {
     const { propertyId } = this.state;
 
     return <Modal title="Create a new floor plan:">
-      <FloorPlanForm propertyId={propertyId} handleSubmit={this.createFloorPlan} />;
+      <FloorPlanForm propertyId={propertyId} handleSubmit={this.createFloorPlan} />
     </Modal>
   }
 }

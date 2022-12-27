@@ -26,7 +26,7 @@ class EditFloorPlanForm extends BasePage {
     const { url, name } = this.props.location.aboutProps;
 
     return <Modal title="Edit floor plan:">
-      <FloorPlanForm propertyId={propertyId} url={url} name={name} handleSubmit={this.updateFloorPlan} />;
+      <FloorPlanForm propertyId={propertyId} url={url} name={name} handleSubmit={this.updateFloorPlan} />
     </Modal>
   }
 }
