@@ -7,7 +7,7 @@ import BasePage from "./BasePage.jsx";
 class CreateProperty extends BasePage {
   state = {
     redirect: null,
-    isLoading: true,
+    isLoading: false,
     property: {
       title: "",
       description: "",
