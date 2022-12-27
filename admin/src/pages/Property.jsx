@@ -20,13 +20,6 @@ class Property extends BasePage {
     redirect: null,
   };
 
-  isLoggedIn() {
-    this.setState({ isLoading: true });
-
-    fetch("/api/auth/current_user")
-      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
-  }
-
   async fetchProperty() {
     const { propertyId } = this.state;
 
@@ -67,7 +60,6 @@ class Property extends BasePage {
   })
 
   componentDidMount() {
-    this.isLoggedIn();
     this.getProperty();
   }
 

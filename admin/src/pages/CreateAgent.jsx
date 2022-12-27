@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import BasePage from "./BasePage.jsx";
+import Context from "../Context/Context.js";
 
 class CreateAgent extends BasePage {
   state = {
@@ -35,10 +36,6 @@ class CreateAgent extends BasePage {
     this.setState({ redirect: "/agents" });
   }
 
-  componentDidMount() {
-    this.isManager();
-  }
-
   render() {
     const { redirect, isLoading } = this.state;
 
@@ -46,11 +43,13 @@ class CreateAgent extends BasePage {
 
     if (redirect) return <Redirect to={redirect} />
 
-    return <AgentForm
+    if (Context.currentUser.isManager) return <AgentForm
       values={{ name: "", email: "", location: "", photo: "" }}
       handleSubmit={this.createAgent}
       handleCancel={this.returnToAgents}
     />
+
+    return <Redirect to="/" />;
   }
 }
 

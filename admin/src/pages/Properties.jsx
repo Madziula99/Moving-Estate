@@ -4,26 +4,17 @@ import { Spinner } from "../components/Spinner/Spinner.jsx";
 import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 import { CreateProperty } from "./CreateProperty.jsx";
+import Context from "../Context/Context.js";
 
 class Properties extends React.Component {
   state = {
     filteredProperties: [],
     agentName: "",
-    isLoggedIn: false,
     isLoading: true,
   };
 
-  async isLoggedIn() {
-    return await fetch("/api/auth/current_user")
-      .then(r => r.json())
-      .then(({ user }) => user.emails[0].value)
-      .catch(() => this.setState({ redirect: "/", isLoading: false }));
-  }
-
   async getAgentsProperties() {
-    this.setState({ isLoading: true });
-
-    const email = await this.isLoggedIn();
+    const email = Context.currentUser.email;
 
     fetch(`/api/properties?email=${email}`)
       .then(r => r.json())
@@ -32,7 +23,6 @@ class Properties extends React.Component {
           filteredProperties: properties,
           agentName: agentName,
           isLoading: false,
-          isLoggedIn: true
         });
       })
       .catch(() => this.setState({ redirect: "/", isLoading: false }));
@@ -43,16 +33,17 @@ class Properties extends React.Component {
   }
 
   render() {
-    const { filteredProperties, isLoggedIn, isLoading, agentName, redirect } = this.state;
+    const { filteredProperties, isLoading, agentName, redirect } = this.state;
 
     if (isLoading) return <Spinner />
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (isLoggedIn) return <>
+    return <>
       <Switch>
         <Route path="/properties/new" component={CreateProperty}></Route>
       </Switch>
+
       <SignOut headerMessage={`${agentName}, welcome!`} />
       <PropertyTable adminProperties={filteredProperties} />
     </>

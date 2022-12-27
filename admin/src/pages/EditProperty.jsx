@@ -12,13 +12,6 @@ class EditProperty extends BasePage {
     property: {}
   };
 
-  isLoggedIn() {
-    this.setState({ isLoading: true });
-
-    fetch("/api/auth/current_user")
-      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
-  }
-
   async getProperty() {
     const { propertyId } = this.state;
 
@@ -55,7 +48,6 @@ class EditProperty extends BasePage {
   })
 
   componentDidMount() {
-    this.isLoggedIn();
     this.getProperty();
   }
 

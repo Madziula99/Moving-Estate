@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
 import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
+import Context from "../Context/Context.js";
 import styles from "./Agent.module.css";
 
 class Agent extends React.Component {
@@ -11,20 +12,6 @@ class Agent extends React.Component {
     isLoading: true,
     redirect: null
   };
-
-  isManager() {
-    this.setState({
-      isLoading: true
-    });
-
-    fetch("/api/auth/manager")
-      .then(res => res.json())
-      .then(body => {
-        if (body.manager) this.setState({ isLoading: false });
-        else this.setState({ isLoading: false, redirect: "/" });
-      })
-      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
-  }
 
   getAgent() {
     const { agentId } = this.state;
@@ -49,7 +36,6 @@ class Agent extends React.Component {
   }
 
   componentDidMount() {
-    this.isManager();
     this.getAgent();
   }
 
@@ -60,7 +46,7 @@ class Agent extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />
 
-    return <div className={styles.agent_form_wrapper}>
+    if (Context.currentUser.isManager) return <div className={styles.agent_form_wrapper}>
       <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
       <div className={styles.agent_form}>
         <img src={agentData.photo} alt="Agent" />
@@ -69,6 +55,8 @@ class Agent extends React.Component {
         <p>Location: {agentData.location}</p>
       </div>
     </div>
+
+    return <Redirect to="/" />;
   }
 }
 

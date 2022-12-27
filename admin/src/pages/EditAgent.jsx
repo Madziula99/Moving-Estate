@@ -3,43 +3,24 @@ import { Redirect, withRouter } from "react-router-dom";
 import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 import BasePage from "./BasePage.jsx";
+import Context from "../Context/Context.js";
 
 class EditAgent extends BasePage {
   state = {
     redirect: null,
     agentId: this.props.match.params.id,
     agentData: {},
-    isLoading: true,
+    isLoading: true
   };
 
-  isManager() {
-    this.setState({
-      isLoading: true
-    });
-
-    fetch("/api/auth/manager")
-      .then(res => res.json())
-      .then(body => {
-        if (body.manager) this.setState({ isLoading: false });
-        else this.setState({ isLoading: false, redirect: "/" });
-      })
-      .catch(() => this.setState({ isLoading: false, redirect: "/" }));
-  }
-
-  async getAgent() {
+  getAgent() {
     const { agentId } = this.state;
 
-    await fetch(`/api/agents/${agentId}`).then(r => {
-      if (r.status === 404) {
-        throw new Error();
-      } else {
-        return r.json().then(data => {
-          this.setState({
-            agentData: data.agent,
-          })
-        });
-      }
-    }).catch(() => this.setState({ redirect: "/agents" }));
+    fetch(`/api/agents/${agentId}`)
+      .then(r => r.json())
+      .then(data => this.setState({ agentData: data.agent }))
+      .catch(() => this.setState({ redirect: "/agents" }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   updateAgent = agent => this.updateAction({
@@ -56,7 +37,6 @@ class EditAgent extends BasePage {
   }
 
   componentDidMount() {
-    this.isManager();
     this.getAgent();
   }
 
@@ -67,13 +47,15 @@ class EditAgent extends BasePage {
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (agentData.name) {
+    if (agentData.name && Context.currentUser.isManager) {
       return <AgentForm
         values={agentData}
         handleSubmit={newValues => this.updateAgent(newValues)}
         handleCancel={() => this.returnToAgentPage()}
       />
     }
+
+    return <Redirect to="/agents" />;
   }
 }
 
