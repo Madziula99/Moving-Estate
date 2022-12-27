@@ -3,7 +3,6 @@ import { Formik, Field } from "formik";
 import { StyledInput } from "../StyledInput/StyledInput.jsx";
 import { Dropdown } from "../Dropdown/Dropdown.jsx";
 import { Menu } from "../Menu/Menu.jsx";
-import { Modal } from "../Modal/Modal.jsx";
 import styles from "./PropertyForm.module.css";
 
 class PropertyForm extends React.Component {
@@ -64,9 +63,9 @@ class PropertyForm extends React.Component {
   }
 
   render() {
-    const { values, onCancel, title } = this.props;
+    const { values, onCancel } = this.props;
 
-    return <Modal title={title}>
+    return <>
         <Formik
           initialValues={values}
           validate={values => this.validateForm(values)}
@@ -93,7 +92,7 @@ class PropertyForm extends React.Component {
           </form>
           )}
         </Formik>
-      </Modal>
+      </>
   }
 }
 

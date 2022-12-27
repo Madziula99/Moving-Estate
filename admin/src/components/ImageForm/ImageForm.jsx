@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Input } from "@mui/material";
-import { Modal } from "../Modal/Modal.jsx";
 import styles from "./ImageForm.module.css";
 
 class ImageForm extends React.Component {
@@ -33,7 +32,7 @@ class ImageForm extends React.Component {
     const { link, propertyId } = this.props;
     const { isDisabled } = this.state;
 
-    return <Modal>
+    return <>
       <form className={styles.form}>
         <label>Link: </label>
         <Input
@@ -60,7 +59,7 @@ class ImageForm extends React.Component {
           <Button variant="contained" className={styles.row_btn}>x</Button>
         </NavLink>
       </form>
-    </Modal>
+    </>
   }
 }
 

@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Input } from "@mui/material";
-import { Modal } from "../Modal/Modal.jsx";
 import styles from "./FloorPlanForm.module.css";
 
 class FloorPlanForm extends React.Component {
@@ -39,7 +38,7 @@ class FloorPlanForm extends React.Component {
     const { url, name, propertyId } = this.props;
     const { isDisabled } = this.state;
 
-    return <Modal>
+    return <>
       <form className={styles.form}>
         <label>Url:</label>
         <Input
@@ -66,7 +65,7 @@ class FloorPlanForm extends React.Component {
           <Button variant="contained">x</Button>
         </NavLink>
       </form>
-    </Modal>
+    </>
   }
 }
 

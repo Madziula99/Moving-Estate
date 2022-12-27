@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
+import { Modal } from "../components/Modal/Modal.jsx";
 import BasePage from "./BasePage.jsx";
 
 class CreateFloorPlanForm extends BasePage {
@@ -17,7 +18,9 @@ class CreateFloorPlanForm extends BasePage {
   render() {
     const { propertyId } = this.state;
 
-    return <FloorPlanForm propertyId={propertyId} handleSubmit={this.createFloorPlan} />
+    return <Modal>
+      <FloorPlanForm propertyId={propertyId} handleSubmit={this.createFloorPlan} />;
+    </Modal>
   }
 }
 
