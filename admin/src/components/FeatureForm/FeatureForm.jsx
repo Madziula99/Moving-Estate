@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Input, MenuItem, FormHelperText, FormControl } from "@mui/material";
-import { Modal } from "../Modal/Modal.jsx";
+import { Button, Input, MenuItem, FormControl } from "@mui/material";
 import Select from "@mui/material/Select";
 import styles from "./FeatureForm.module.css";
 
@@ -41,8 +40,9 @@ class FeatureForm extends React.Component {
     const { propertyId, features, editMode } = this.props;
     const { icon, title, allFeatures, isDisabled } = this.state;
 
-    return <Modal>
+    return <>
       <form className={styles.form}>
+        <label>Icon: </label>
         <FormControl sx={{ m: 2, minWidth: 120 }}>
           <Select
             value={icon}
@@ -60,8 +60,8 @@ class FeatureForm extends React.Component {
               </MenuItem>
             })}
           </Select>
-          <FormHelperText>Select feature</FormHelperText>
         </FormControl>
+        <label>Title: </label>
         <Input
           defaultValue={title}
           onChange={e => this.handleChange("title", e.target.value)}
@@ -87,7 +87,7 @@ class FeatureForm extends React.Component {
           </Button>
         </NavLink>
       </form>
-    </Modal>
+    </>
   }
 }
 

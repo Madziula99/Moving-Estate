@@ -1,9 +1,13 @@
 .form {
   width: 600px;
   display: grid;
-  grid-template-columns: max-content auto max-content max-content;
+  grid-template-columns: repeat(3, max-content) auto repeat(2, max-content);
   align-items: center;
   padding-bottom: 30px;
+}
+
+.input {
+  margin: 10px;
 }
 
 .nav_link {
