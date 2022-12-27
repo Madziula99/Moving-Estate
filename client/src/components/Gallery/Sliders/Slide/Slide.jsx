@@ -20,7 +20,7 @@ class Slide extends React.Component {
   render() {
     const { image, handleSlideClick } = this.props;
 
-    return <img className={this.className()} onClick={handleSlideClick} src={image.link} alt="" />
+    return <img className={this.className()} onClick={handleSlideClick} src={image.link} onError={({ currentTarget }) => currentTarget.src="image_not_available.png"} alt="" />
   }
 }
 

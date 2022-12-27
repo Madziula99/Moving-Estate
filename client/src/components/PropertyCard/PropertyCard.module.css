@@ -61,5 +61,6 @@
 .property_card_image {
   z-index: 0;
   margin-left: 6px;
-  max-height: 305px;
+  height: 220px;
+  object-fit: cover;
 }

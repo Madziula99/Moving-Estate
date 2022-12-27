@@ -35,7 +35,10 @@ class FloorPlans extends React.Component {
               </button>
             )
           })}
-          <img className={classes.floor_img} src={this.state.currentPlan.url} alt={this.state.currentPlan.name} />
+          <img className={classes.floor_img}
+            src={this.state.currentPlan.url}
+            onError={({ currentTarget }) => currentTarget.src="image_not_available.png"}
+            alt={this.state.currentPlan.name} />
         </div>
       </section>
     );
