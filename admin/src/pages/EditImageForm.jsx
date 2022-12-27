@@ -23,7 +23,7 @@ class EditImageForm extends BasePage {
 
     const { link } = this.props.location.aboutProps;
 
-    return <Modal>
+    return <Modal title="Edit image:">
       <ImageForm propertyId={propertyId} link={link} handleSubmit={this.updateImage} />;
     </Modal>
   }

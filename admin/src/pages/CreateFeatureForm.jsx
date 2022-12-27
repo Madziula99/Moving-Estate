@@ -35,7 +35,7 @@ class CreateFeatureForm extends BasePage {
 
     if (redirect) return <Redirect to={redirect} />
 
-    return <Modal>
+    return <Modal title="Create a new feature:">
       <FeatureForm
         features={features}
         propertyId={propertyId}

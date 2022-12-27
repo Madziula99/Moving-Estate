@@ -41,7 +41,7 @@ class EditFeatureForm extends BasePage {
 
     const { feature, title } = this.props.location.aboutProps.feature;
 
-    return <Modal>
+    return <Modal title="Edit feature:">
       <FeatureForm
         editMode
         features={features}
