@@ -23,6 +23,10 @@ class FloorPlans extends React.Component {
     return i === this.state.focused ? classes.plan_btn_focus : classes.plan_btn_not_focus
   }
 
+  showErrorImage = ({ target }) => {
+    target.src="image_not_available.png"
+  }
+
   render() {
     return (
       <section>
@@ -37,7 +41,7 @@ class FloorPlans extends React.Component {
           })}
           <img className={classes.floor_img}
             src={this.state.currentPlan.url}
-            onError={({ currentTarget }) => currentTarget.src="image_not_available.png"}
+            onError={this.showErrorImage}
             alt={this.state.currentPlan.name} />
         </div>
       </section>
