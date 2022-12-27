@@ -49,7 +49,7 @@ class Property extends Component {
         price={property.price}
       />
       <Description>{property.description}</Description>
-      {property.floor_plans[0] && <FloorPlans plans={property.floor_plans || []} />}
+      {property.floor_plans[0] && <FloorPlans plans={property.floor_plans} />}
       <Amenities items={property.amenities} />
       <Features items={property.features} />
       <AgentInfo {...property.agent} propertyId={property.id} />
