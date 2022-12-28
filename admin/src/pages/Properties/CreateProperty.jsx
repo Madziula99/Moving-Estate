@@ -1,9 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { PropertyForm } from "../components/PropertyForm/PropertyForm.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { Modal } from "../components/Modal/Modal.jsx";
-import BasePage from "./BasePage.jsx";
+import { PropertyForm } from "../../components/PropertyForm/PropertyForm.jsx";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import { Modal } from "../../components/Modal/Modal.jsx";
+import BasePage from "../BasePage.jsx";
 
 class CreateProperty extends BasePage {
   state = {

@@ -1,10 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
-import { Modal } from "../components/Modal/Modal.jsx";
-import BasePage from "./BasePage.jsx";
+import { ImageForm } from "../../components/ImageForm/ImageForm.jsx";
+import { Modal } from "../../components/Modal/Modal.jsx";
+import BasePage from "../BasePage.jsx";
 
-class CreateImageForm extends BasePage {
+class CreateImage extends BasePage {
   state = {
     propertyId: this.props.match.params.id,
   };
@@ -24,4 +24,4 @@ class CreateImageForm extends BasePage {
   }
 }
 
-export default withRouter(CreateImageForm);
+export default withRouter(CreateImage);

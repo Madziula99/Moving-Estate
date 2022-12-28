@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
-import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { Context } from "../Context/Context.js";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
+import { Context } from "../../Context/Context.js";
 import styles from "./Agent.module.css";
 
 class Agent extends React.Component {

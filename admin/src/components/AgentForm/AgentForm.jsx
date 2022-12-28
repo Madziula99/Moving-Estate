@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik } from "formik";
-import { StyledInput } from "../StyledInput/StyledInput.jsx";
+import { StyledInput } from "../../controls/StyledInput/StyledInput.jsx";
 import { Menu } from "../Menu/Menu.jsx";
 import styles from "./AgentForm.module.css";
 

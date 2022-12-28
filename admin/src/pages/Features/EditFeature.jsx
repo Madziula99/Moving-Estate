@@ -1,10 +1,10 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
-import { FeatureForm } from "../components/FeatureForm/FeatureForm.jsx";
-import { Modal } from "../components/Modal/Modal.jsx";
-import BasePage from "./BasePage.jsx";
+import { FeatureForm } from "../../components/FeatureForm/FeatureForm.jsx";
+import { Modal } from "../../components/Modal/Modal.jsx";
+import BasePage from "../BasePage.jsx";
 
-class EditFeatureForm extends BasePage {
+class EditFeature extends BasePage {
   state = {
     propertyId: this.props.match.params.propertyId,
     features: [],
@@ -54,4 +54,4 @@ class EditFeatureForm extends BasePage {
   }
 }
 
-export default withRouter(EditFeatureForm);
+export default withRouter(EditFeature);

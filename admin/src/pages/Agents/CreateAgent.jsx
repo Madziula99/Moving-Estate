@@ -1,9 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { AgentForm } from "../components/AgentForm/AgentForm.jsx";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import BasePage from "./BasePage.jsx";
-import { Context } from "../Context/Context.js";
+import { AgentForm } from "../../components/AgentForm/AgentForm.jsx";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import BasePage from "../BasePage.jsx";
+import { Context } from "../../Context/Context.js";
 
 class CreateAgent extends BasePage {
   state = {

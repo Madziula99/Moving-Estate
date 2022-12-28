@@ -1,10 +1,10 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
-import { Modal } from "../components/Modal/Modal.jsx";
-import BasePage from "./BasePage.jsx";
+import { FloorPlanForm } from "../../components/FloorPlanForm/FloorPlanForm.jsx";
+import { Modal } from "../../components/Modal/Modal.jsx";
+import BasePage from "../BasePage.jsx";
 
-class CreateFloorPlanForm extends BasePage {
+class CreateFloorPlan extends BasePage {
   state = {
     propertyId: this.props.match.params.id
   };
@@ -24,4 +24,4 @@ class CreateFloorPlanForm extends BasePage {
   }
 }
 
-export default withRouter(CreateFloorPlanForm);
+export default withRouter(CreateFloorPlan);

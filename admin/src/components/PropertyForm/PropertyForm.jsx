@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Field } from "formik";
-import { StyledInput } from "../StyledInput/StyledInput.jsx";
-import { Dropdown } from "../Dropdown/Dropdown.jsx";
+import { StyledInput } from "../../controls/StyledInput/StyledInput.jsx";
+import { Dropdown } from "../../controls/Dropdown/Dropdown.jsx";
 import { Menu } from "../Menu/Menu.jsx";
 import styles from "./PropertyForm.module.css";
 

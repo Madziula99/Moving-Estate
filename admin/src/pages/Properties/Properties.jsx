@@ -1,10 +1,10 @@
 import React from "react";
 import { Redirect, Switch, Route } from "react-router-dom";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { PropertyTable } from "../components/PropertyTable/PropertyTable.jsx";
-import { SignOut } from "../components/SignOut/SignOut.jsx";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import { PropertyTable } from "../../components/PropertyTable/PropertyTable.jsx";
+import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { CreateProperty } from "./CreateProperty.jsx";
-import { Context } from "../Context/Context.js";
+import { Context } from "../../Context/Context.js";
 
 class Properties extends React.Component {
   state = {
