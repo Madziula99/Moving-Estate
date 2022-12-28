@@ -31,7 +31,7 @@ class MainSlider extends React.Component {
     return <div className={styles.main_slider_wrapper}>
       {this.renderPrevArrow()}
       <div className={styles.main_slider} ref={mainSliderRef}>
-        {slides.map(slide => <Slide image={slide} key={slide.imageId} isMainSlide />)}
+        {slides.map(slide => <Slide image={slide.link} key={slide.imageId} isMainSlide />)}
       </div>
       {this.renderNextArrow()}
     </div>

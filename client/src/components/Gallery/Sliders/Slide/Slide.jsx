@@ -24,7 +24,7 @@ class Slide extends React.Component {
   render() {
     const { image, handleSlideClick } = this.props;
 
-    return <img className={this.className()} onClick={handleSlideClick} src={image.link} onError={this.showErrorImage} alt="" />
+    return <img className={this.className()} onClick={handleSlideClick} src={image} onError={this.showErrorImage} alt="" />
   }
 }
 
