@@ -23,6 +23,10 @@ class PropertyCard extends React.Component {
     return this.props.viewMode === "grid";
   }
 
+  showErrorImage = ({ target }) => {
+    target.src="image_not_available.png"
+  }
+
   render() {
     return (
       <div className={this.addCardClassName()}>
@@ -31,7 +35,9 @@ class PropertyCard extends React.Component {
           mode={this.props.mode}
           price={this.props.price}
         />
-        <img className={styles.property_card_image} src={this.props.image} alt="Accommodation" />
+        <img className={styles.property_card_image} src={this.props.images}
+          onError={this.showErrorImage}
+          alt="Accommodation" />
         <div className={this.addWrapperClassName()}>
           <h3 className={styles.property_card_name}>{this.props.title}</h3>
           <span className={styles.property_card_location}>{this.props.location.join(", ")}</span>

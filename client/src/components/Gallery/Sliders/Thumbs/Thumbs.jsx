@@ -10,7 +10,7 @@ class Thumbs extends React.Component {
       {slides.map((slide, i) => {
         const isFocused = currentImage === i;
 
-        return <Slide image={slide} key={slide} handleSlideClick={() => changeSlide(i)} isFocused={isFocused} />
+        return <Slide image={slide.link} key={slide.imageId} handleSlideClick={() => changeSlide(i)} isFocused={isFocused} />
       })}
   </div>
   }

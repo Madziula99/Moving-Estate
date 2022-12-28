@@ -8,7 +8,7 @@ class Features extends React.Component {
     return <>
       <Subtitle>Features</Subtitle>
       <div className={styles.features}>
-        {this.props.items.map( item => { return <Feature key={item.icon} icon={item.icon}>{item.title}</Feature> } )}
+        {this.props.items.map( item => { return <Feature key={item.feature} icon={item.feature}>{item.title}</Feature> } )}
       </div>
     </>
   }
