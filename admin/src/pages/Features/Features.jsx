@@ -5,7 +5,7 @@ import EditFeature from "./EditFeature.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { FeaturesList } from "../../components/FeaturesList/FeaturesList.jsx";
 import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.jsx";
-import BasePage from "./BasePage.jsx";
+import BasePage from "../BasePage.jsx";
 
 class Features extends BasePage {
   state = {

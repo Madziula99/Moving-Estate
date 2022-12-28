@@ -6,11 +6,11 @@ import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { PropertyTabs } from "../../components/PropertyTabs/PropertyTabs.jsx";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 import EditProperty from "./EditProperty.jsx";
-import Amenities from "./Amenities.jsx";
-import Images from "./Images.jsx";
-import FloorPlans from "./FloorPlans.jsx";
-import Features from "./Features.jsx";
-import BasePage from "./BasePage.jsx";
+import Amenities from "../Amenities.jsx";
+import Images from "../Images/Images.jsx";
+import FloorPlans from "../FloorPlans/FloorPlans.jsx";
+import Features from "../Features/Features.jsx";
+import BasePage from "../BasePage.jsx";
 
 class Property extends BasePage {
   state = {

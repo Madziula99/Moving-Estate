@@ -1,8 +1,8 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
-import { ImageForm } from "../components/ImageForm/ImageForm.jsx";
-import { Modal } from "../components/Modal/Modal.jsx";
-import BasePage from "./BasePage.jsx";
+import { ImageForm } from "../../components/ImageForm/ImageForm.jsx";
+import { Modal } from "../../components/Modal/Modal.jsx";
+import BasePage from "../BasePage.jsx";
 
 class CreateImage extends BasePage {
   state = {

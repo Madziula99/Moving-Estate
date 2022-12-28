@@ -5,7 +5,7 @@ import EditImage from "./EditImage.jsx";
 import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.jsx";
 import { ImagesList } from "../../components/ImagesList/ImagesList.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
-import BasePage from "./BasePage.jsx";
+import BasePage from "../BasePage.jsx";
 
 class Images extends BasePage {
   state = {

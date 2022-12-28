@@ -5,7 +5,7 @@ import EditFloorPlan from "./EditFloorPlan.jsx";
 import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { FloorPlansList } from "../../components/FloorPlansList/FloorPlansList.jsx";
-import BasePage from "./BasePage.jsx";
+import BasePage from "../BasePage.jsx";
 
 class FloorPlans extends BasePage {
   state = {

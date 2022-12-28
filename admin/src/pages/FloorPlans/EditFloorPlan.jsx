@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
-import { FloorPlanForm } from "../components/FloorPlanForm/FloorPlanForm.jsx";
-import { Modal } from "../components/Modal/Modal.jsx";
-import BasePage from "./BasePage.jsx";
+import { FloorPlanForm } from "../../components/FloorPlanForm/FloorPlanForm.jsx";
+import { Modal } from "../../components/Modal/Modal.jsx";
+import BasePage from "../BasePage.jsx";
 
 class EditFloorPlan extends BasePage {
   state = {

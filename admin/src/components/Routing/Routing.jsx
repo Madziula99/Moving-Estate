@@ -2,12 +2,12 @@ import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import Messages from "../../pages/Messages.jsx";
 import { Index } from "../../pages/Index.jsx";
-import { Properties } from "../../pages/Properties.jsx";
-import { Agents } from "../../pages/Agents.jsx";
-import Agent from "../../pages/Agent.jsx";
-import { CreateAgent } from "../../pages/CreateAgent.jsx";
-import EditAgent from "../../pages/EditAgent.jsx";
-import Property from "../../pages/Property.jsx";
+import { Properties } from "../../pages/Properties/Properties.jsx";
+import { Agents } from "../../pages/Agents/Agents.jsx";
+import Agent from "../../pages/Agents/Agent.jsx";
+import { CreateAgent } from "../../pages/Agents/CreateAgent.jsx";
+import EditAgent from "../../pages/Agents/EditAgent.jsx";
+import Property from "../../pages/Properties/Property.jsx";
 import { Manager } from "../../pages/Manager.jsx";
 import { SignIn } from "../../pages/SignIn.jsx";
 

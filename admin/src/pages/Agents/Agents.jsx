@@ -1,9 +1,9 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Spinner } from "../components/Spinner/Spinner.jsx";
-import { AgentsTable } from "../components/AgentsTable/AgentsTable.jsx";
-import { SignOut } from "../components/SignOut/SignOut.jsx";
-import { Context } from "../Context/Context.js";
+import { Spinner } from "../../components/Spinner/Spinner.jsx";
+import { AgentsTable } from "../../components/AgentsTable/AgentsTable.jsx";
+import { SignOut } from "../../components/SignOut/SignOut.jsx";
+import { Context } from "../../Context/Context.js";
 
 class Agents extends React.Component {
   state = {
