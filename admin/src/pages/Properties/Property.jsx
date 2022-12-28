@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, withRouter, Switch, Route } from "react-router-dom";
-import { MenuButton } from "../../components/MenuButton/MenuButton.jsx";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { PropertyTabs } from "../../components/PropertyTabs/PropertyTabs.jsx";

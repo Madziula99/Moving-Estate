@@ -1,7 +1,7 @@
 import React from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import Avatar from "@mui/material/Avatar";
-import { MenuButton } from "../MenuButton/MenuButton.jsx";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import styles from "./PropertyTable.module.css";
 
 const onPageRows = 4;

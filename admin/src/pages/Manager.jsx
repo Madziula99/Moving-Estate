@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { MenuButton } from "../components/MenuButton/MenuButton.jsx";
+import { MenuButton } from "../controls/MenuButton/MenuButton.jsx";
 import { SignOut } from "../components/SignOut/SignOut.jsx";
 import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 import { Context } from "../Context/Context.js";
