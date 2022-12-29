@@ -3,7 +3,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import { Context } from "../../Context/Context.js";
-import styles from "./Agent.module.css";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 
 class Agent extends React.Component {
   state = {
@@ -46,15 +46,17 @@ class Agent extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />
 
-    if (this.context.isManager) return <div className={styles.agent_form_wrapper}>
-      <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
-      <div className={styles.agent_form}>
-        <img src={agentData.photo} alt="Agent" />
-        <p>Name: {agentData.name}</p>
-        <p>Email: {agentData.email}</p>
-        <p>Location: {agentData.location}</p>
+    if (this.context.isManager) return <PageWrapper>
+        <div>
+        <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
+        <div>
+          <img src={agentData.photo} alt="Agent" />
+          <p>Name: {agentData.name}</p>
+          <p>Email: {agentData.email}</p>
+          <p>Location: {agentData.location}</p>
+        </div>
       </div>
-    </div>
+    </PageWrapper>
 
     return <Redirect to="/" />;
   }
