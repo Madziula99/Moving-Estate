@@ -47,7 +47,6 @@ class Agent extends React.Component {
     if (redirect) return <Redirect to={redirect} />
 
     if (this.context.isManager) return <PageWrapper>
-        <div>
         <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
         <div>
           <img src={agentData.photo} alt="Agent" />
@@ -55,7 +54,6 @@ class Agent extends React.Component {
           <p>Email: {agentData.email}</p>
           <p>Location: {agentData.location}</p>
         </div>
-      </div>
     </PageWrapper>
 
     return <Redirect to="/" />;
