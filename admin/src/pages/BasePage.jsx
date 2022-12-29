@@ -1,7 +1,7 @@
 import React from "react";
 
 export default class BasePage extends React.Component {
-  deleteAction({ message, url, successRedirect, failureRedirect }) {
+  deleteAction({ url, successRedirect, failureRedirect }) {
     this.setState({ isLoading: true });
 
     fetch(url, { method: "DELETE" })

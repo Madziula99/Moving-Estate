@@ -9,21 +9,34 @@ class ImagesItem extends React.Component {
   };
 
   render() {
-    const { image, deleteImage } = this.props;
+    const { image } = this.props;
     const { propertyId } = this.state;
 
-    return <div className={styles.wrapper}>
-      <img src={image.link} className={styles.image} alt="" />
-      <div className={styles.buttons_wrapper}>
-        <NavLink
-          to={{ pathname: `/properties/${propertyId}/images/${image.imageId}/edit`, aboutProps: { link: image.link } }}
-          className={styles.nav_link}
-        >
-          <Button variant="contained">...</Button>
-        </NavLink>
-        <Button variant="contained" onClick={() => deleteImage(image.imageId)}>x</Button>
+    return (
+      <div className={styles.wrapper}>
+        <img src={image.link} className={styles.image} alt="" />
+        <div className={styles.buttons_wrapper}>
+          <NavLink
+            to={{
+              pathname: `/properties/${propertyId}/images/${image.imageId}/edit`,
+              aboutProps: { link: image.link },
+            }}
+            className={styles.nav_link}
+          >
+            <Button variant="contained">...</Button>
+          </NavLink>
+          <NavLink
+            to={{
+              pathname: `/properties/${propertyId}/images/${image.imageId}/delete`,
+              aboutProps: { link: image.link },
+            }}
+            className={styles.nav_link}
+          >
+            <Button variant="contained">x</Button>
+          </NavLink>
+        </div>
       </div>
-    </div>
+    );
   }
 }
 

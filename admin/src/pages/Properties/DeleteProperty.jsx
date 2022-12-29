@@ -65,7 +65,7 @@ class DeleteProperty extends BasePage {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <Modal title={`Delete property: ${property.id}`}>
+      <Modal title={`Remove this property: ${property.id}?`}>
         <Button
           sx={{ m: 1, p: 1 }}
           variant="contained"
