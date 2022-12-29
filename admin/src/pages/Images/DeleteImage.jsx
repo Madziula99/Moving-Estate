@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 class DeleteImage extends BasePage {
   state = {
     redirect: null,
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
     imageId: this.props.match.params.imageId,
     isLoading: false,
   };
@@ -17,7 +17,7 @@ class DeleteImage extends BasePage {
     this.deleteAction({
       url: `/api/properties/${this.state.propertyId}/images/${this.state.imageId}`,
       successRedirect: `/properties/${this.state.propertyId}/images`,
-      failureRedirect: `/properties/${this.state.propertyId}`,
+      failureRedirect: `/properties/${this.state.propertyId}/images`,
     });
 
   returnToPropertyPage = () => {
