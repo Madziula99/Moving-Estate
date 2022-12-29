@@ -47,13 +47,13 @@ class Agent extends React.Component {
     if (redirect) return <Redirect to={redirect} />
 
     if (this.context.isManager) return <PageWrapper>
-        <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
-        <div>
-          <img src={agentData.photo} alt="Agent" />
-          <p>Name: {agentData.name}</p>
-          <p>Email: {agentData.email}</p>
-          <p>Location: {agentData.location}</p>
-        </div>
+      <MenuButton text="Edit agent" href={`/admin/agents/${agentId}/edit`} />
+      <div>
+        <img src={agentData.photo} alt="Agent" />
+        <p>Name: {agentData.name}</p>
+        <p>Email: {agentData.email}</p>
+        <p>Location: {agentData.location}</p>
+      </div>
     </PageWrapper>
 
     return <Redirect to="/" />;
