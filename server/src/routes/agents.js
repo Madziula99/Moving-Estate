@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Agent } = require("../models");
+const { Agent, Property } = require("../models");
 
 async function index(req, res) {
   let agents;
@@ -58,10 +58,24 @@ async function update(req, res) {
   }
 }
 
+function reassignProperties(oldAgentId, newAgentId) {
+  Property.update(
+    { agentId: newAgentId },
+    {
+      where: {
+        agentId: oldAgentId,
+      },
+    }
+  );
+}
+
 async function destroy(req, res) {
   const { id } = req.params;
+  const { newAgentId } = req.body;
 
   try {
+    reassignProperties(id, newAgentId);
+
     const agent = await Agent.findByPk(id);
 
     res.json(await agent.destroy());
