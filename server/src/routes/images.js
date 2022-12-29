@@ -16,6 +16,19 @@ async function create(req, res) {
   }
 }
 
+async function index(req, res) {
+  const { id } = req.params;
+
+  try {
+    const images = await PropertyImage.findAll({ where: { propertyId: id } });
+
+    if (!images) return res.status(404).json({ image: {} });
+    return res.json({ images });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+}
+
 async function update(req, res) {
   const { id, imageId } = req.params;
   const { link } = req.body;
@@ -48,6 +61,7 @@ async function destroy(req, res) {
 }
 
 module.exports = Router({ mergeParams: true })
+  .get("/", index)
   .post("/", create)
   .put("/:imageId", update)
-  .delete("/:imageId", destroy)
+  .delete("/:imageId", destroy);
