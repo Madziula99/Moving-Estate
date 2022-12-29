@@ -6,6 +6,7 @@ import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { PropertyTabs } from "../../components/PropertyTabs/PropertyTabs.jsx";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 import EditProperty from "./EditProperty.jsx";
+import { DeleteProperty } from "./DeleteProperty.jsx";
 import Amenities from "../Amenities.jsx";
 import Images from "../Images/Images.jsx";
 import FloorPlans from "../FloorPlans/FloorPlans.jsx";
@@ -24,8 +25,8 @@ class Property extends BasePage {
     const { propertyId } = this.state;
 
     return await fetch(`/api/properties/${propertyId}`)
-      .then(res => res.json())
-      .then(body => {
+      .then((res) => res.json())
+      .then((body) => {
         return {
           title: body.title,
           description: body.description,
@@ -36,9 +37,11 @@ class Property extends BasePage {
           area: body.area,
           bedrooms: body.bedrooms,
           bathrooms: body.bathrooms,
-        }
+        };
       })
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .catch(() =>
+        this.setState({ redirect: "/properties", isLoading: false })
+      );
   }
 
   async getProperty() {
@@ -48,16 +51,9 @@ class Property extends BasePage {
 
     this.setState({
       property: property,
-      isLoading: false
+      isLoading: false,
     });
   }
-
-  deleteProperty = () => this.deleteAction({
-    message: "Are you sure you want to delete this property?",
-    url: `/api/properties/${this.state.propertyId}`,
-    successRedirect: "/properties",
-    failureRedirect: "/properties"
-  })
 
   componentDidMount() {
     this.getProperty();
@@ -82,27 +78,48 @@ class Property extends BasePage {
 
     if (redirect) return <Redirect to={redirect} />;
 
-    return <PageWrapper>
-      <SignOut headerMessage={`Property page: ${propertyId}`} />
-      <MenuButton text="Edit property" href={`/admin/properties/${propertyId}/edit`} />
-      <MenuButton text="Delete property" handleClick={this.deleteProperty} />
-      <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
-      <MenuButton text="To properties" href={`/admin/properties`} />
-      {Object.keys(property).map(el => <dl key={el}>
-          <dt>{`${el.toUpperCase()}:`}</dt>
-          <dd>{property[el]}</dd>
-        </dl>)
-      }
-      <PropertyTabs propertyId={propertyId} />
+    return (
+      <PageWrapper>
+        <SignOut headerMessage={`Property page: ${propertyId}`} />
+        <MenuButton
+          text="Edit property"
+          href={`/admin/properties/${propertyId}/edit`}
+        />
+        <MenuButton
+          text="Delete property"
+          href={`/admin/properties/${propertyId}/delete`}
+        />
+        <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
+        <MenuButton text="To properties" href={`/admin/properties`} />
+        {Object.keys(property).map((el) => (
+          <dl key={el}>
+            <dt>{`${el.toUpperCase()}:`}</dt>
+            <dd>{property[el]}</dd>
+          </dl>
+        ))}
+        <PropertyTabs propertyId={propertyId} />
 
-      <Switch>
-        <Route path="/properties/:id/edit" component={EditProperty}></Route>
-        <Route path="/properties/:id/amenities"><Amenities /></Route>
-        <Route path="/properties/:id/images"><Images /></Route>
-        <Route path="/properties/:id/floor_plans"><FloorPlans /></Route>
-        <Route path="/properties/:id/features"><Features /></Route>
-      </Switch>
-    </PageWrapper>
+        <Switch>
+          <Route path="/properties/:id/edit" component={EditProperty}></Route>
+          <Route
+            path="/properties/:id/delete"
+            component={DeleteProperty}
+          ></Route>
+          <Route path="/properties/:id/amenities">
+            <Amenities />
+          </Route>
+          <Route path="/properties/:id/images">
+            <Images />
+          </Route>
+          <Route path="/properties/:id/floor_plans">
+            <FloorPlans />
+          </Route>
+          <Route path="/properties/:id/features">
+            <Features />
+          </Route>
+        </Switch>
+      </PageWrapper>
+    );
   }
 }
 
