@@ -19,7 +19,7 @@ async function read(req, res) {
 
   try {
     agent = await Agent.findByPk(id);
-    if(!agent) return res.status(404).json({ agent: {}});
+    if (!agent) return res.status(404).json({ agent: {} });
     return res.json({ agent });
   } catch (error) {
     res.status(500).json({ error });
@@ -45,14 +45,27 @@ async function update(req, res) {
 
   let agent = await Agent.findByPk(id);
 
-  if (!agent) return res.status(404).json({ error: `Agent with id = ${id} doesn't exist` });
+  if (!agent)
+    return res
+      .status(404)
+      .json({ error: `Agent with id = ${id} doesn't exist` });
 
   try {
-    agent.update(
-      { name, location, email, photo }
-    );
+    agent.update({ name, location, email, photo });
     return res.json({ agent });
-  } catch(error) {
+  } catch (error) {
+    res.status(403).json({ error });
+  }
+}
+
+async function destroy(req, res) {
+  const { id } = req.params;
+
+  try {
+    const agent = await Agent.findByPk(id);
+
+    res.json(await agent.destroy());
+  } catch (error) {
     res.status(403).json({ error });
   }
 }
@@ -62,3 +75,4 @@ module.exports = Router()
   .get("/:id", read)
   .post("/", create)
   .put("/:id", update)
+  .delete("/:id", destroy);
