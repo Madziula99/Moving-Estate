@@ -4,12 +4,15 @@ import styles from "./Menu.module.css";
 
 class Menu extends React.Component {
   render() {
-    const { onCancelClick, isDisabled } = this.props;
+    const { onCancelClick, isDisabled, firstBtnText, secondBtnText } =
+      this.props;
 
-    return <div className={styles.buttons_wrapper}>
-      <MenuButton isDisabled={isDisabled} type="submit" text="Save" />
-      <MenuButton handleClick={onCancelClick} text="Cancel" />
-    </div>
+    return (
+      <div className={styles.buttons_wrapper}>
+        <MenuButton isDisabled={isDisabled} type="submit" text={firstBtnText} />
+        <MenuButton handleClick={onCancelClick} text={secondBtnText} />
+      </div>
+    );
   }
 }
 
