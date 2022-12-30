@@ -3,7 +3,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Modal } from "../../components/Modal/Modal.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
-import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
+import { Menu } from "../../components/Menu/Menu.jsx";
 
 class DeleteAgent extends React.Component {
   state = {
@@ -111,14 +111,12 @@ class DeleteAgent extends React.Component {
             </FormHelperText>
           </FormControl>
         )}
-        <div>
-          <MenuButton
-            isDisabled={isDisabled}
-            text="Delete"
-            handleClick={this.deleteAgent}
-          />
-          <MenuButton text="Cancel" handleClick={this.returnToAgentPage} />
-        </div>
+        <Menu
+          onSubmitClick={this.deleteAgent}
+          onCancelClick={this.returnToAgentPage}
+          isDisabled={isDisabled}
+          submitText="Delete"
+        />
       </Modal>
     );
   }
