@@ -30,7 +30,6 @@ class FloorPlansItem extends React.Component {
         <NavLink
           to={{
             pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/delete`,
-            aboutProps: { name: floorPlan.name, url: floorPlan.url },
           }}
           className={styles.nav_link}
         >

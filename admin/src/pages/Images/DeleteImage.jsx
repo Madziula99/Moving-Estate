@@ -16,8 +16,7 @@ class DeleteImage extends BasePage {
   deleteImage = () =>
     this.deleteAction({
       url: `/api/properties/${this.state.propertyId}/images/${this.state.imageId}`,
-      successRedirect: `/properties/${this.state.propertyId}/images`,
-      failureRedirect: `/properties/${this.state.propertyId}/images`,
+      redirect: `/properties/${this.state.propertyId}/images`,
     });
 
   returnToPropertyPage = () => {

@@ -28,7 +28,6 @@ class ImagesItem extends React.Component {
           <NavLink
             to={{
               pathname: `/properties/${propertyId}/images/${image.imageId}/delete`,
-              aboutProps: { link: image.link },
             }}
             className={styles.nav_link}
           >

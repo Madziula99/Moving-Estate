@@ -16,8 +16,7 @@ class DeleteFloorPlan extends BasePage {
   deleteFloorPlan = () =>
     this.deleteAction({
       url: `/api/properties/${this.state.propertyId}/floor_plans/${this.state.floorPlanId}`,
-      successRedirect: `/properties/${this.state.propertyId}/floor_plans`,
-      failureRedirect: `/properties/${this.state.propertyId}/floor_plans`,
+      redirect: `/properties/${this.state.propertyId}/floor_plans`,
     });
 
   returnToPropertyPage = () => {

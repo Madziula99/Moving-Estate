@@ -46,7 +46,6 @@ class FeaturesItem extends React.Component {
         <NavLink
           to={{
             pathname: `/properties/${propertyId}/features/${feature.feature}/delete`,
-            aboutProps: { feature: feature },
           }}
           className={styles.nav_link}
         >

@@ -45,8 +45,7 @@ class DeleteProperty extends BasePage {
   deleteProperty = () =>
     this.deleteAction({
       url: `/api/properties/${this.state.propertyId}`,
-      successRedirect: "/properties",
-      failureRedirect: "/properties",
+      redirect: "/properties",
     });
 
   componentDidMount() {

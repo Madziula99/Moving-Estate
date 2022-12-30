@@ -1,15 +1,15 @@
 import React from "react";
 
 export default class BasePage extends React.Component {
-  deleteAction({ url, successRedirect, failureRedirect }) {
+  deleteAction({ url, redirect }) {
     this.setState({ isLoading: true });
 
     fetch(url, { method: "DELETE" })
       .then(() => {
-        if (successRedirect) this.setState({ redirect: successRedirect });
+        if (redirect) this.setState({ redirect });
       })
       .catch(() => {
-        if (failureRedirect) this.setState({ redirect: failureRedirect });
+        if (redirect) this.setState({ redirect });
       })
       .finally(() => this.setState({ isLoading: false }));
   }

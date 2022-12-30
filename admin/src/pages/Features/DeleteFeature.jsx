@@ -16,8 +16,7 @@ class DeleteFeature extends BasePage {
   deleteFeature = () =>
     this.deleteAction({
       url: `/api/properties/${this.state.propertyId}/features/${this.state.icon}`,
-      successRedirect: `/properties/${this.state.propertyId}/features`,
-      failureRedirect: `/properties/${this.state.propertyId}/features`,
+      redirect: `/properties/${this.state.propertyId}/features`,
     });
 
   returnToPropertyPage = () => {
