@@ -161,7 +161,6 @@ class PropertyForm extends React.Component {
             <Menu
               onCancelClick={onCancel}
               isDisabled={!(props.dirty && props.isValid)}
-              submitText="Save"
             />
           </form>
         )}

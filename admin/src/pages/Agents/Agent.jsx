@@ -20,13 +20,7 @@ class Agent extends React.Component {
     this.setState({ isLoading: true });
 
     fetch(`/api/agents/${agentId}`)
-      .then((r) => {
-        if (r.status === 404) {
-          throw new Error();
-        } else {
-          return r.json();
-        }
-      })
+      .then((r) => r.json())
       .then((data) => {
         this.setState({
           agentData: data.agent,
@@ -71,6 +65,7 @@ class Agent extends React.Component {
           </Switch>
         </PageWrapper>
       );
+
     return <Redirect to="/" />;
   }
 }
