@@ -72,20 +72,21 @@ class DeleteAgent extends React.Component {
     }).finally(() => this.setState({ redirect: "/agents", isLoading: false }));
   };
 
+  returnToAgentPage = () => {
+    const { agentId } = this.state;
+
+    this.setState({
+      redirect: `/agents/${agentId}`,
+    });
+  };
+
   componentDidMount() {
     this.getAgents();
   }
 
   render() {
-    const {
-      agentId,
-      agent,
-      agents,
-      isLoading,
-      hasProperties,
-      newAgentId,
-      redirect,
-    } = this.state;
+    const { agent, agents, isLoading, hasProperties, newAgentId, redirect } =
+      this.state;
     const isDisabled = newAgentId === 0 && hasProperties === true;
 
     if (isLoading) return <Spinner />;
@@ -116,7 +117,7 @@ class DeleteAgent extends React.Component {
             text="Delete"
             handleClick={this.deleteAgent}
           />
-          <MenuButton href={`/admin/agents/${agentId}`} text="Cancel" />
+          <MenuButton text="Cancel" handleClick={this.returnToAgentPage} />
         </div>
       </Modal>
     );
