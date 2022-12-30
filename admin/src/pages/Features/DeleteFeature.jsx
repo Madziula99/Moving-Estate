@@ -34,7 +34,7 @@ class DeleteFeature extends BasePage {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <Modal title={`Remove this feature?`}>
+      <Modal title={"Are you sure you want to delete this feature?"}>
         <Button
           sx={{ m: 1, p: 1 }}
           variant="contained"

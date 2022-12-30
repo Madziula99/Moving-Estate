@@ -34,7 +34,7 @@ class DeleteFloorPlan extends BasePage {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <Modal title={`Remove this floor plan?`}>
+      <Modal title={"Are you sure you want to delete this floor plan?"}>
         <Button
           sx={{ m: 1, p: 1 }}
           variant="contained"
