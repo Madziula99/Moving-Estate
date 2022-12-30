@@ -1,6 +1,6 @@
-import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
+import { FormControl, FormHelperText, MenuItem, Select } from "@mui/material";
 import { Modal } from "../../components/Modal/Modal.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
@@ -8,12 +8,12 @@ import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 class DeleteAgent extends React.Component {
   state = {
     agentId: this.props.match.params.id,
-    agentName: "",
+    agent: {},
     isLoading: true,
     agents: [],
     newAgentId: 0,
-    // hasProperties: this.props.hasProperties
-    hasProperties: true,
+    hasProperties: false,
+    redirect: null,
   };
 
   getAgents() {
@@ -24,19 +24,32 @@ class DeleteAgent extends React.Component {
     fetch("/api/agents")
       .then((r) => r.json())
       .then((data) => {
-        const currentAgentName = data.agents.find(
+        const currentAgent = data.agents.find(
           (agent) => agent.id === Number(agentId)
-        ).name;
+        );
         const otherAgents = data.agents.filter(
           (agent) => agent.id !== Number(agentId)
         );
 
         this.setState({
-          agentName: currentAgentName,
+          agent: currentAgent,
           agents: otherAgents,
           isLoading: false,
         });
-      });
+
+        this.hasProperties(currentAgent.email);
+      })
+      .catch(() => this.setState({ redirect: "/agents" }))
+      .finally(() => this.setState({ isLoading: false }));
+  }
+
+  hasProperties(email) {
+    fetch(`/api/properties?email=${email}`)
+      .then((r) => r.json())
+      .then((body) => {
+        if (body.properties.length > 0) this.setState({ hasProperties: true });
+      })
+      .catch(() => this.setState({ redirect: "/agents" }));
   }
 
   handleChange = (e) => {
@@ -47,19 +60,40 @@ class DeleteAgent extends React.Component {
     this.setState({ newAgentId: newAgentId });
   };
 
+  deleteAgent = () => {
+    const { agentId, newAgentId } = this.state;
+
+    this.setState({ isLoading: true });
+
+    fetch(`/api/agents/${agentId}`, {
+      method: "DELETE",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ newAgentId: newAgentId }),
+    }).finally(() => this.setState({ redirect: "/agents", isLoading: false }));
+  };
+
   componentDidMount() {
     this.getAgents();
   }
 
   render() {
-    const { agentId, agentName, agents, isLoading, hasProperties, newAgentId } =
-      this.state;
+    const {
+      agentId,
+      agent,
+      agents,
+      isLoading,
+      hasProperties,
+      newAgentId,
+      redirect,
+    } = this.state;
     const isDisabled = newAgentId === 0 && hasProperties === true;
 
     if (isLoading) return <Spinner />;
 
+    if (redirect) return <Redirect to={redirect} />;
+
     return (
-      <Modal title={`Delete ${agentName}`}>
+      <Modal title={`Are you sure you want to delete ${agent.name}?`}>
         {hasProperties && (
           <FormControl sx={{ m: 2, minWidth: 300 }}>
             <Select defaultValue="" onChange={this.handleChange} displayEmpty>
@@ -77,7 +111,11 @@ class DeleteAgent extends React.Component {
           </FormControl>
         )}
         <div>
-          <MenuButton isDisabled={isDisabled} text="Delete agent" />
+          <MenuButton
+            isDisabled={isDisabled}
+            text="Delete"
+            handleClick={this.deleteAgent}
+          />
           <MenuButton href={`/admin/agents/${agentId}`} text="Cancel" />
         </div>
       </Modal>

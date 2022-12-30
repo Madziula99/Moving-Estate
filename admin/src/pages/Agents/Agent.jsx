@@ -47,25 +47,30 @@ class Agent extends React.Component {
 
     if (redirect) return <Redirect to={redirect} />;
 
-    if (this.context.isManager) return <PageWrapper>
-        <MenuButton
-          text="Edit agent"
-          href={`/admin/agents/${agentId}/edit`}
-        />
-        <MenuButton
-          text="Delete agent"
-          href={`/admin/agents/${agentId}/delete`}
-        />      <div>
-        <img src={agentData.photo} alt="Agent" />
-        <p>Name: {agentData.name}</p>
-        <p>Email: {agentData.email}</p>
-        <p>Location: {agentData.location}</p>
-      </div>
+    if (this.context.isManager)
+      return (
+        <PageWrapper>
+          <MenuButton
+            text="Edit agent"
+            href={`/admin/agents/${agentId}/edit`}
+          />
+          <MenuButton
+            text="Delete agent"
+            href={`/admin/agents/${agentId}/delete`}
+          />
+          <MenuButton text="To agents" href="/admin/agents" />
+          <div>
+            <img src={agentData.photo} alt="Agent" />
+            <p>Name: {agentData.name}</p>
+            <p>Email: {agentData.email}</p>
+            <p>Location: {agentData.location}</p>
+          </div>
 
-      <Switch>
-        <Route path="/agents/:id/delete" component={DeleteAgent}></Route>
-      </Switch>
-    </PageWrapper>
+          <Switch>
+            <Route path="/agents/:id/delete" component={DeleteAgent}></Route>
+          </Switch>
+        </PageWrapper>
+      );
     return <Redirect to="/" />;
   }
 }
