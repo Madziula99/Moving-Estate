@@ -25,7 +25,7 @@ async function index(req, res) {
   try {
     const amenities = await PropertyAmenity.findAll({ where: { propertyId: id } });
 
-    if (!amenities) return res.status(404).json({ image: {} });
+    if (!amenities) return res.status(404).json({ amenity: {} });
     return res.json({ amenities });
   } catch (error) {
     res.status(500).json({ error });
