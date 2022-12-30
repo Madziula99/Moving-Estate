@@ -37,8 +37,7 @@ class AgentForm extends React.Component {
             <Menu
               onCancelClick={handleCancel}
               isDisabled={!(props.dirty && props.isValid)}
-              firstBtnText="Save"
-              secondBtnText="Cancel"
+              submitText="Save"
             />
             <StyledInput
               isDisabled={props.isSubmitting}
