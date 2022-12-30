@@ -12,38 +12,48 @@ class FeaturesItem extends React.Component {
   };
 
   icon() {
-    switch(this.props.feature.feature) {
-      case "paw": return <PawIcon className={styles.feature_component} />;
-      case "pool": return <PoolIcon className={styles.feature_component} />;
-      case "fence": return <FenceIcon className={styles.feature_component} />;
-      default: return null;
+    switch (this.props.feature.feature) {
+      case "paw":
+        return <PawIcon className={styles.feature_component} />;
+      case "pool":
+        return <PoolIcon className={styles.feature_component} />;
+      case "fence":
+        return <FenceIcon className={styles.feature_component} />;
+      default:
+        return null;
     }
   }
 
   render() {
-    const { feature, deleteFeature } = this.props;
+    const { feature } = this.props;
     const { propertyId } = this.state;
 
-    return <div className={styles.wrapper}>
-      {this.icon()}
-      <p>{feature.title}</p>
-      <NavLink
-        to={{
-          pathname: `/properties/${propertyId}/features/${feature.feature}/edit`,
-          aboutProps: { feature: feature }
-        }}
-        className={styles.nav_link}
-      >
-        <Button sx={{ m: 1, p: 1 }} variant="contained">...</Button>
-      </NavLink>
-      <Button
-        sx={{ m: 1, p: 1 }}
-        variant="contained"
-        onClick={() => deleteFeature(feature.feature)}
-      >
-        X
-      </Button>
-    </div>
+    return (
+      <div className={styles.wrapper}>
+        {this.icon()}
+        <p>{feature.title}</p>
+        <NavLink
+          to={{
+            pathname: `/properties/${propertyId}/features/${feature.feature}/edit`,
+            aboutProps: { feature: feature },
+          }}
+          className={styles.nav_link}
+        >
+          <Button sx={{ m: 1, p: 1 }} variant="contained">
+            ...
+          </Button>
+        </NavLink>
+        <NavLink
+          to={{
+            pathname: `/properties/${propertyId}/features/${feature.feature}/delete`,
+            aboutProps: { feature: feature },
+          }}
+          className={styles.nav_link}
+        >
+          <Button variant="contained">x</Button>
+        </NavLink>
+      </div>
+    );
   }
 }
 

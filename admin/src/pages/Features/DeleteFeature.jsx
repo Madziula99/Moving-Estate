@@ -5,24 +5,24 @@ import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import BasePage from "../BasePage.jsx";
 import { Button } from "@mui/material";
 
-class DeleteFloorPlan extends BasePage {
+class DeleteFeature extends BasePage {
   state = {
     redirect: null,
     propertyId: this.props.match.params.propertyId,
-    floorPlanId: this.props.match.params.floorPlanId,
+    icon: this.props.match.params.icon,
     isLoading: false,
   };
 
-  deleteFloorPlan = () =>
+  deleteFeature = () =>
     this.deleteAction({
-      url: `/api/properties/${this.state.propertyId}/floor_plans/${this.state.floorPlanId}`,
-      successRedirect: `/properties/${this.state.propertyId}/floor_plans`,
-      failureRedirect: `/properties/${this.state.propertyId}/floor_plans`,
+      url: `/api/properties/${this.state.propertyId}/features/${this.state.icon}`,
+      successRedirect: `/properties/${this.state.propertyId}/features`,
+      failureRedirect: `/properties/${this.state.propertyId}/features`,
     });
 
   returnToPropertyPage = () => {
     this.setState({
-      redirect: `/properties/${this.state.propertyId}/floor_plans`,
+      redirect: `/properties/${this.state.propertyId}/features`,
     });
   };
 
@@ -34,11 +34,11 @@ class DeleteFloorPlan extends BasePage {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <Modal title={`Remove this floor plan?`}>
+      <Modal title={`Remove this feature?`}>
         <Button
           sx={{ m: 1, p: 1 }}
           variant="contained"
-          onClick={this.deleteFloorPlan}
+          onClick={this.deleteFeature}
         >
           Delete
         </Button>
@@ -54,4 +54,4 @@ class DeleteFloorPlan extends BasePage {
   }
 }
 
-export default withRouter(DeleteFloorPlan);
+export default withRouter(DeleteFeature);
