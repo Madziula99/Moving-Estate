@@ -6,20 +6,15 @@ import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.j
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { FloorPlansList } from "../../components/FloorPlansList/FloorPlansList.jsx";
 import BasePage from "../BasePage.jsx";
+import DeleteFloorPlan from "./DeleteFloorPlan.jsx";
 
 class FloorPlans extends BasePage {
   state = {
     propertyId: this.props.match.params.id,
     isLoading: true,
     redirect: null,
-    floorPlans: []
+    floorPlans: [],
   };
-
-  deleteFloorPlan = floorPlanId => this.deleteAction({
-    message: "Are you sure you want to delete this floor plan?",
-    url: `/api/properties/${this.state.propertyId}/floor_plans/${floorPlanId}`,
-    failureRedirect: `/properties/${this.state.propertyId}`
-  })
 
   async getFloorPlans() {
     this.setState({ isLoading: true });
@@ -29,16 +24,21 @@ class FloorPlans extends BasePage {
     this.setState({
       floorPlans: floorPlans,
       isLoading: false,
-    })
+    });
   }
 
   async fetchFloorPlans() {
     const { propertyId } = this.state;
 
     return await fetch(`/api/properties/${propertyId}`)
-      .then(res => res.json())
-      .then(data => data.floor_plans)
-      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+      .then((res) => res.json())
+      .then((data) => data.floor_plans)
+      .catch(() =>
+        this.setState({
+          redirect: `/properties/${propertyId}`,
+          isLoading: false,
+        })
+      );
   }
 
   async componentDidUpdate() {
@@ -60,19 +60,36 @@ class FloorPlans extends BasePage {
   render() {
     const { propertyId, floorPlans, isLoading, redirect } = this.state;
 
-    if (isLoading) return <Spinner />
+    if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
-    return <>
-      <FloorPlansList floorPlans={floorPlans} deleteFloorPlan={this.deleteFloorPlan} />
-      <NavLinkWrapper propertyId={propertyId} type="floor_plans" text="Add floor plan" />
+    return (
+      <>
+        <FloorPlansList floorPlans={floorPlans} />
+        <NavLinkWrapper
+          propertyId={propertyId}
+          type="floor_plans"
+          text="Add floor plan"
+        />
 
-      <Switch>
-        <Route exact path="/properties/:id/floor_plans/new" component={CreateFloorPlan}></Route>
-        <Route path="/properties/:propertyId/floor_plans/:floorPlanId/edit" component={EditFloorPlan}></Route>
-      </Switch>
-    </>
+        <Switch>
+          <Route
+            exact
+            path="/properties/:id/floor_plans/new"
+            component={CreateFloorPlan}
+          ></Route>
+          <Route
+            path="/properties/:propertyId/floor_plans/:floorPlanId/edit"
+            component={EditFloorPlan}
+          ></Route>
+          <Route
+            path="/properties/:propertyId/floor_plans/:floorPlanId/delete"
+            component={DeleteFloorPlan}
+          ></Route>
+        </Switch>
+      </>
+    );
   }
 }
 

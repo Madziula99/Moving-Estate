@@ -9,25 +9,35 @@ class FloorPlansItem extends React.Component {
   };
 
   render() {
-    const { floorPlan, deleteFloorPlan } = this.props;
+    const { floorPlan } = this.props;
     const { propertyId } = this.state;
 
-    return <div className={styles.wrapper}>
-      <img src={floorPlan.url} className={styles.image} alt="" />
-      <p>{floorPlan.name}</p>
-      <NavLink
-        to={{ pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`, aboutProps: { name: floorPlan.name, url: floorPlan.url } }}
-        className={styles.nav_link}
-      >
-        <Button sx={{ m:1 }} variant="contained">...</Button>
-      </NavLink>
-      <Button
-        variant="contained"
-        onClick={() => deleteFloorPlan(floorPlan.floorPlanId)}
-      >
-       X
-      </Button>
-    </div>
+    return (
+      <div className={styles.wrapper}>
+        <img src={floorPlan.url} className={styles.image} alt="" />
+        <p>{floorPlan.name}</p>
+        <NavLink
+          to={{
+            pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`,
+            aboutProps: { name: floorPlan.name, url: floorPlan.url },
+          }}
+          className={styles.nav_link}
+        >
+          <Button sx={{ m: 1 }} variant="contained">
+            ...
+          </Button>
+        </NavLink>
+        <NavLink
+          to={{
+            pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/delete`,
+            aboutProps: { name: floorPlan.name, url: floorPlan.url },
+          }}
+          className={styles.nav_link}
+        >
+          <Button variant="contained">x</Button>
+        </NavLink>
+      </div>
+    );
   }
 }
 
