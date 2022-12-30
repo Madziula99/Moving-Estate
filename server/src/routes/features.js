@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Property, Feature, Amenity } = require("../models");
+const { Property, Feature, Amenity, PropertyFeature } = require("../models");
 
 async function create(req, res) {
   const { id } = req.params;
@@ -18,6 +18,19 @@ async function create(req, res) {
     res.json(await updatedProperty.detailView(Amenity));
   } catch (error) {
     res.status(403).json({ error });
+  }
+}
+
+async function index(req, res) {
+  const { id } = req.params;
+
+  try {
+    const features = await PropertyFeature.findAll({ where: { propertyId: id } });
+
+    if (!features) return res.status(404).json({ image: {} });
+    return res.json({ features });
+  } catch (error) {
+    res.status(500).json({ error });
   }
 }
 
@@ -57,6 +70,7 @@ async function destroy(req, res) {
 }
 
 module.exports = Router({ mergeParams: true })
+  .get("/", index)
   .post("/", create)
   .put("/:icon", update)
   .delete("/:icon", destroy)
