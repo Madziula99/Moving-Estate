@@ -11,7 +11,9 @@ async function create(req, res) {
 
     await property.addAmenity(newAmenity);
 
-    const updatedProperty = await Property.findByPk(id, { include: { all: true } });
+    const updatedProperty = await Property.findByPk(id, {
+      include: { all: true },
+    });
 
     res.json(await updatedProperty.detailView(Amenity));
   } catch (error) {
@@ -24,25 +26,28 @@ async function index(req, res) {
 
   try {
     const propertyAmenities = await PropertyAmenity.findAll({
-      attributes: [ "amenityId" ],
-      where: { propertyId: id }
+      attributes: ["amenityId"],
+      where: { propertyId: id },
     });
 
-    if (!propertyAmenities) return res.status(404).json({ propertyAmenities: {} });
+    if (!propertyAmenities)
+      return res.status(404).json({ propertyAmenities: {} });
 
-    const propertyAmenitiesId = propertyAmenities.map(amenity => amenity.amenityId);
+    const propertyAmenitiesId = propertyAmenities.map(
+      (amenity) => amenity.amenityId
+    );
     const allAmenities = await Amenity.findAll();
 
     if (!allAmenities) return res.status(404).json({ amenities: {} });
 
-    const amenities = allAmenities.map(amenity => {
+    const amenities = allAmenities.map((amenity) => {
       return {
         title: amenity.title,
-        available: propertyAmenitiesId.includes(amenity.id)
-    }
-  })
+        available: propertyAmenitiesId.includes(amenity.id),
+      };
+    });
 
-    return res.json({ amenities });
+    return res.json(amenities);
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -53,11 +58,15 @@ async function destroy(req, res) {
 
   try {
     const property = await Property.findByPk(id, { include: { all: true } });
-    const amenityToRemove = await Amenity.findOne({ where: { title: amenityTitle } });
+    const amenityToRemove = await Amenity.findOne({
+      where: { title: amenityTitle },
+    });
 
     await property.removeAmenity(amenityToRemove);
 
-    const updatedProperty = await Property.findByPk(id, { include: { all: true } });
+    const updatedProperty = await Property.findByPk(id, {
+      include: { all: true },
+    });
 
     res.json(await updatedProperty.detailView(Amenity));
   } catch (error) {
@@ -68,4 +77,4 @@ async function destroy(req, res) {
 module.exports = Router({ mergeParams: true })
   .get("/", index)
   .post("/", create)
-  .delete("/:amenityTitle", destroy)
+  .delete("/:amenityTitle", destroy);

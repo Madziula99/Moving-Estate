@@ -5,10 +5,19 @@ async function index(req, res) {
   const { id } = req.params;
 
   try {
-    const floorPlans = await FloorPlan.findAll({ where: { propertyId: id } });
+    const floorPlansList = await FloorPlan.findAll({
+      where: { propertyId: id },
+    });
 
-    if (!floorPlans) return res.status(404).json({ floor_plan: {} });
-    return res.json({ floorPlans });
+    if (!floorPlansList) return res.status(404).json({ floor_plan: {} });
+    const floorPlans = floorPlansList.map((floorPlan) => {
+      return {
+        floorPlanId: floorPlan.id,
+        name: floorPlan.name,
+        url: floorPlan.url,
+      };
+    });
+    return res.json(floorPlans);
   } catch (error) {
     res.status(500).json({ error });
   }
@@ -64,4 +73,4 @@ module.exports = Router({ mergeParams: true })
   .get("/", index)
   .post("/", create)
   .put("/:floorPlanId", update)
-  .delete("/:floorPlanId", destroy)
+  .delete("/:floorPlanId", destroy);
