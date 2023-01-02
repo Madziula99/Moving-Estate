@@ -1,10 +1,10 @@
 const { Router } = require("express");
-const { Property, Agent, PropertyImage, Amenity } = require("../../models");
+const { Property, PropertyImage, Amenity } = require("../../models");
 
 async function index(req, res) {
   const { page, ...filters } = req.query;
 
-  const properties = await Property.filter(filters, Agent, PropertyImage);
+  const properties = await Property.filter(filters, PropertyImage);
 
   const filteredProperties = properties.map((property) =>
     property.summaryView()

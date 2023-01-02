@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
 
-    static filter(filters, agent, images) {
-      const { minArea, maxArea, minPrice, maxPrice, email, ...other } = filters;
+    static filter(filters, images) {
+      const { minArea, maxArea, minPrice, maxPrice, ...other } = filters;
 
       return this.findAll({
         where: [
@@ -41,6 +41,15 @@ module.exports = (sequelize, DataTypes) => {
           maxPrice && { price: { [Op.lt]: maxPrice } },
           other,
         ],
+        include: {
+          model: images,
+          as: "images",
+        },
+      });
+    }
+
+    static getAgentProperties(email, agent, images) {
+      return this.findAll({
         include: [
           {
             model: agent,

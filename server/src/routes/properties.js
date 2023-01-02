@@ -19,26 +19,29 @@ async function read(req, res) {
   if (!property)
     return res.status(404).json({ error: `Property with id ${id} not found` });
 
-  return res.status(200).json(await property.summaryView(Amenity));
+  return res.status(200).json(await property.detailView(Amenity));
 }
 
 async function index(req, res) {
-  const { ...filters } = req.query;
+  const { email } = req.query;
 
-  const properties = await Property.filter(filters, Agent, PropertyImage);
-
-  if (filters.email) {
-    const agent = await Agent.findOne({ where: { email: filters.email } });
-
-    if (!agent)
-      return res
-        .status(404)
-        .json({ message: `Agent with email: ${filters.email} does not exist` });
+  try {
+    const properties = await Property.getAgentProperties(
+      email,
+      Agent,
+      PropertyImage
+    );
+    const agent = await Agent.findOne({ where: { email: email } });
+    console.log(properties);
 
     return res.json({
       properties: properties.map((property) => property.summaryView()),
       agentName: agent.name,
     });
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ message: `Agent with email: ${email} does not exist` });
   }
 }
 
