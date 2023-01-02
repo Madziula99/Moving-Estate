@@ -31,7 +31,7 @@ async function index(req, res) {
     });
 
     if (!propertyAmenities)
-      return res.status(404).json({ propertyAmenities: {} });
+      return res.status(404).json({ property_amenities: {} });
 
     const propertyAmenitiesId = propertyAmenities.map(
       (amenity) => amenity.amenityId

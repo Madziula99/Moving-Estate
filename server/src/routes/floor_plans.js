@@ -9,7 +9,7 @@ async function index(req, res) {
       where: { propertyId: id },
     });
 
-    if (!floorPlansList) return res.status(404).json({ floor_plan: {} });
+    if (!floorPlansList) return res.status(404).json({ floor_plans: {} });
     const floorPlans = floorPlansList.map((floorPlan) => {
       return {
         floorPlanId: floorPlan.id,
