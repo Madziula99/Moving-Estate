@@ -6,6 +6,7 @@ import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { FeaturesList } from "../../components/FeaturesList/FeaturesList.jsx";
 import { NavLinkWrapper } from "../../components/NavLinkWrapper/NavLinkWrapper.jsx";
 import BasePage from "../BasePage.jsx";
+import DeleteFeature from "./DeleteFeature.jsx";
 
 class Features extends BasePage {
   state = {
@@ -13,7 +14,7 @@ class Features extends BasePage {
     isLoading: true,
     redirect: null,
     features: [],
-    disableAdd: false
+    disableAdd: false,
   };
 
   async getFeatures() {
@@ -24,23 +25,22 @@ class Features extends BasePage {
     this.setState({
       features: features,
       isLoading: false,
-      disableAdd: features.length === 3 ? true : false
-    })
+      disableAdd: features.length === 3 ? true : false,
+    });
   }
-
-  deleteFeature = feature => this.deleteAction({
-    message: "Are you sure you want to delete this feature?",
-    url: `/api/properties/${this.state.propertyId}/features/${feature}`,
-    failureRedirect: `/properties/${this.state.propertyId}`
-  })
 
   async fetchFeatures() {
     const { propertyId } = this.state;
 
     return await fetch(`/api/properties/${propertyId}`)
-      .then(res => res.json())
-      .then(data => data.features)
-      .catch(() => this.setState({ redirect: `/properties/${propertyId}`, isLoading: false }));
+      .then((res) => res.json())
+      .then((data) => data.features)
+      .catch(() =>
+        this.setState({
+          redirect: `/properties/${propertyId}`,
+          isLoading: false,
+        })
+      );
   }
 
   componentDidMount() {
@@ -60,26 +60,39 @@ class Features extends BasePage {
   }
 
   render() {
-    const { propertyId, features, isLoading, redirect, disableAdd } = this.state;
+    const { propertyId, features, isLoading, redirect, disableAdd } =
+      this.state;
 
     if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
-    return <>
-      <FeaturesList features={features} deleteFeature={this.deleteFeature}/>
-      <NavLinkWrapper
-        propertyId={propertyId}
-        disabled={disableAdd}
-        type="features"
-        text="Add Feature"
-      />
+    return (
+      <>
+        <FeaturesList features={features} />
+        <NavLinkWrapper
+          propertyId={propertyId}
+          disabled={disableAdd}
+          type="features"
+          text="Add Feature"
+        />
 
-      <Switch>
-        <Route exact path="/properties/:id/features/new" component={CreateFeature}></Route>
-        <Route path="/properties/:propertyId/features/:icon/edit" component={EditFeature}></Route>
-      </Switch>
-    </>
+        <Switch>
+          <Route
+            path="/properties/:id/features/new"
+            component={CreateFeature}
+          ></Route>
+          <Route
+            path="/properties/:propertyId/features/:icon/edit"
+            component={EditFeature}
+          ></Route>
+          <Route
+            path="/properties/:propertyId/features/:icon/delete"
+            component={DeleteFeature}
+          ></Route>
+        </Switch>
+      </>
+    );
   }
 }
 
