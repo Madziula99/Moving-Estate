@@ -4,11 +4,9 @@ export default class BasePage extends React.Component {
   deleteAction({ url, redirect }) {
     this.setState({ isLoading: true });
 
-    fetch(url, { method: "DELETE" })
-      .then(() => {
-        if (redirect) this.setState({ redirect });
-      })
-      .finally(() => this.setState({ redirect, isLoading: false }));
+    fetch(url, { method: "DELETE" }).finally(() =>
+      this.setState({ redirect, isLoading: false })
+    );
   }
 
   createAction({ url, values, successObject, redirect }) {
