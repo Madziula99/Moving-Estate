@@ -75,7 +75,6 @@ class Images extends BasePage {
 
         <Switch>
           <Route
-            exact
             path="/properties/:id/images/new"
             component={CreateImage}
           ></Route>

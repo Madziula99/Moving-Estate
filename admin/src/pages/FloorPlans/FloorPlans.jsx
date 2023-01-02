@@ -75,7 +75,6 @@ class FloorPlans extends BasePage {
 
         <Switch>
           <Route
-            exact
             path="/properties/:id/floor_plans/new"
             component={CreateFloorPlan}
           ></Route>

@@ -79,7 +79,6 @@ class Features extends BasePage {
 
         <Switch>
           <Route
-            exact
             path="/properties/:id/features/new"
             component={CreateFeature}
           ></Route>
