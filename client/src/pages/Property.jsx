@@ -17,8 +17,9 @@ class Property extends Component {
   };
 
   async fetchProperty(propertyId) {
-    await fetch(`/api/properties/${propertyId}`).then(r => r.json())
-      .then(data => this.setState({ property: data }));
+    await fetch(`/api/client/properties/${propertyId}`)
+      .then((r) => r.json())
+      .then((data) => this.setState({ property: data }));
   }
 
   componentDidMount() {
@@ -30,30 +31,37 @@ class Property extends Component {
   render() {
     const { property } = this.state;
 
-    if (property === undefined) return <div className={styles.property_page}><Spinner /></div>
+    if (property === undefined)
+      return (
+        <div className={styles.property_page}>
+          <Spinner />
+        </div>
+      );
 
-    return <Page title={property.title}>
-      <Title
-        name={property.title}
-        location={property.location}
-        type={property.type}
-        area={property.area}
-        bedrooms={property.bedrooms}
-        bathrooms={property.bathrooms}
-        id={property.id}
-      />
-      <Gallery
-        images={property.images}
-        type={property.type}
-        mode={property.mode}
-        price={property.price}
-      />
-      <Description>{property.description}</Description>
-      {property.floor_plans[0] && <FloorPlans plans={property.floor_plans} />}
-      <Amenities items={property.amenities} />
-      <Features items={property.features} />
-      <AgentInfo {...property.agent} propertyId={property.id} />
-    </Page>
+    return (
+      <Page title={property.title}>
+        <Title
+          name={property.title}
+          location={property.location}
+          type={property.type}
+          area={property.area}
+          bedrooms={property.bedrooms}
+          bathrooms={property.bathrooms}
+          id={property.id}
+        />
+        <Gallery
+          images={property.images}
+          type={property.type}
+          mode={property.mode}
+          price={property.price}
+        />
+        <Description>{property.description}</Description>
+        {property.floor_plans[0] && <FloorPlans plans={property.floor_plans} />}
+        <Amenities items={property.amenities} />
+        <Features items={property.features} />
+        <AgentInfo {...property.agent} propertyId={property.id} />
+      </Page>
+    );
   }
 }
 
