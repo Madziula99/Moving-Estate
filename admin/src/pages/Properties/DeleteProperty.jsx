@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { Modal } from "../../components/Modal/Modal.jsx";
 import BasePage from "../BasePage.jsx";
-import { Button } from "@mui/material";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 
 class DeleteProperty extends BasePage {
   state = {
@@ -64,23 +64,11 @@ class DeleteProperty extends BasePage {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <Modal
-        title={`Are you sure you want to delete this property: ${property.id}?`}
-      >
-        <Button
-          sx={{ m: 1, p: 1 }}
-          variant="contained"
-          onClick={this.deleteProperty}
-        >
-          Delete
-        </Button>
-        <Button
-          sx={{ m: 1, p: 1 }}
-          variant="contained"
-          onClick={this.returnToPropertyPage}
-        >
-          Cancel
-        </Button>
+      <Modal title={`Are you sure you want to delete ${property.id} property?`}>
+        <div>
+          <MenuButton handleClick={this.deleteProperty} text="Delete" />
+          <MenuButton handleClick={this.returnToPropertyPage} text="Cancel" />
+        </div>
       </Modal>
     );
   }

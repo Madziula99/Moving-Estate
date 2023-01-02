@@ -3,7 +3,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { Modal } from "../../components/Modal/Modal.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import BasePage from "../BasePage.jsx";
-import { Button } from "@mui/material";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 
 class DeleteFeature extends BasePage {
   state = {
@@ -34,20 +34,10 @@ class DeleteFeature extends BasePage {
 
     return (
       <Modal title={"Are you sure you want to delete this feature?"}>
-        <Button
-          sx={{ m: 1, p: 1 }}
-          variant="contained"
-          onClick={this.deleteFeature}
-        >
-          Delete
-        </Button>
-        <Button
-          sx={{ m: 1, p: 1 }}
-          variant="contained"
-          onClick={this.returnToPropertyPage}
-        >
-          Cancel
-        </Button>
+        <div>
+          <MenuButton handleClick={this.deleteFeature} text="Delete" />
+          <MenuButton handleClick={this.returnToPropertyPage} text="Cancel" />
+        </div>
       </Modal>
     );
   }

@@ -8,10 +8,7 @@ export default class BasePage extends React.Component {
       .then(() => {
         if (redirect) this.setState({ redirect });
       })
-      .catch(() => {
-        if (redirect) this.setState({ redirect });
-      })
-      .finally(() => this.setState({ isLoading: false }));
+      .finally(() => this.setState({ redirect, isLoading: false }));
   }
 
   createAction({ url, values, successObject, redirect }) {

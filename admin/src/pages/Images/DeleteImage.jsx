@@ -3,7 +3,7 @@ import { Redirect, withRouter } from "react-router-dom";
 import { Modal } from "../../components/Modal/Modal.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import BasePage from "../BasePage.jsx";
-import { Button } from "@mui/material";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 
 class DeleteImage extends BasePage {
   state = {
@@ -32,20 +32,10 @@ class DeleteImage extends BasePage {
 
     return (
       <Modal title={"Are you sure you want to delete this image?"}>
-        <Button
-          sx={{ m: 1, p: 1 }}
-          variant="contained"
-          onClick={this.deleteImage}
-        >
-          Delete
-        </Button>
-        <Button
-          sx={{ m: 1, p: 1 }}
-          variant="contained"
-          onClick={this.returnToPropertyPage}
-        >
-          Cancel
-        </Button>
+        <div>
+          <MenuButton handleClick={this.deleteImage} text="Delete" />
+          <MenuButton handleClick={this.returnToPropertyPage} text="Cancel" />
+        </div>
       </Modal>
     );
   }
