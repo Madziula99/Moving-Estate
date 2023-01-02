@@ -29,9 +29,9 @@ async function index(req, res) {
 
   try {
     const property = await Property.findByPk(id, { include: { all: true } });
-    const features = property.featuresDetail()
+    const features = property.featuresDetail();
 
-    return res.json({features});
+    return res.json({ features });
   } catch (error) {
     res.status(500).json({ error });
   }

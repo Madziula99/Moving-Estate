@@ -8,7 +8,7 @@ async function index(req, res) {
     const property = await Property.findByPk(id, { include: { all: true } });
     const floorPlans = property.floorPlansDetail();
 
-    return res.json({floorPlans});
+    return res.json({ floorPlans });
   } catch (error) {
     res.status(500).json({ error });
   }

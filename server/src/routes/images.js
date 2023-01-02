@@ -21,9 +21,9 @@ async function index(req, res) {
 
   try {
     const property = await Property.findByPk(id, { include: { all: true } });
-    const images = property.imagesDetail()
+    const images = property.imagesDetail();
 
-    return res.json({images});
+    return res.json({ images });
   } catch (error) {
     res.status(500).json({ error });
   }

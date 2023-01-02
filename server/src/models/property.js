@@ -1,135 +1,200 @@
-'use strict';
+"use strict";
 
-const { Model, Op } = require('sequelize');
+const { Model, Op } = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
   class Property extends Model {
     static associate(models) {
       Property.belongsTo(models.Agent, { as: "agent", foreignKey: "agentId" }),
-      Property.hasMany(models.PropertyImage, { as: "images", foreignKey: "propertyId" }),
-      Property.belongsToMany(models.Amenity, { as: "amenities", through: models.PropertyAmenity, foreignKey: "propertyId" }),
-      Property.belongsToMany(models.Feature, { as: "features", through: models.PropertyFeature, foreignKey: "propertyId" }),
-      Property.hasMany(models.FloorPlan, { as: "floor_plans", foreignKey: "propertyId" }),
-      Property.hasMany(models.Message, { as: "messages", foreignKey: "propertyId" })
+        Property.hasMany(models.PropertyImage, {
+          as: "images",
+          foreignKey: "propertyId",
+        }),
+        Property.belongsToMany(models.Amenity, {
+          as: "amenities",
+          through: models.PropertyAmenity,
+          foreignKey: "propertyId",
+        }),
+        Property.belongsToMany(models.Feature, {
+          as: "features",
+          through: models.PropertyFeature,
+          foreignKey: "propertyId",
+        }),
+        Property.hasMany(models.FloorPlan, {
+          as: "floor_plans",
+          foreignKey: "propertyId",
+        }),
+        Property.hasMany(models.Message, {
+          as: "messages",
+          foreignKey: "propertyId",
+        });
     }
 
     static filter(filters, agent, images) {
-      const { minArea, maxArea, minPrice, maxPrice, email, ...other} = filters;
+      const { minArea, maxArea, minPrice, maxPrice, email, ...other } = filters;
 
       return this.findAll({
         where: [
-          minArea && { area: {[Op.gt]: minArea} },
+          minArea && { area: { [Op.gt]: minArea } },
           maxArea && { area: { [Op.lt]: maxArea } },
           minPrice && { price: { [Op.gt]: minPrice } },
           maxPrice && { price: { [Op.lt]: maxPrice } },
-          other
+          other,
         ],
         include: [
           {
             model: agent,
             as: "agent",
-            where: email && { email: email}
+            where: email && { email: email },
           },
           {
             model: images,
             as: "images",
-          }
-        ]
+          },
+        ],
       });
     }
 
     static getOptions() {
-      return this.findAll().then(properties => {
+      return this.findAll().then((properties) => {
         const extract = (key) => [
-          ...new Set(properties.map((property => property[key])))
+          ...new Set(properties.map((property) => property[key])),
         ];
 
         const options = {
           type: extract("type").sort() || [],
           mode: extract("mode").sort() || [],
-          bedrooms: extract("bedrooms").sort((a, b) => { return a - b }) || [],
-          bathrooms: extract("bathrooms").sort((a, b) => { return a - b }) || [],
-          location: extract("location").sort((a, b) => { return a - b }) || []
+          bedrooms:
+            extract("bedrooms").sort((a, b) => {
+              return a - b;
+            }) || [],
+          bathrooms:
+            extract("bathrooms").sort((a, b) => {
+              return a - b;
+            }) || [],
+          location:
+            extract("location").sort((a, b) => {
+              return a - b;
+            }) || [],
         };
 
         return options;
-      })
+      });
     }
 
     static async createProperty(values, Amenity) {
-      const { title, location, description, type, mode, price, area, bedrooms, bathrooms, agentId} = values;
+      const {
+        title,
+        location,
+        description,
+        type,
+        mode,
+        price,
+        area,
+        bedrooms,
+        bathrooms,
+        agentId,
+      } = values;
 
-      const lastId = await Property.findOne({ attributes: ["id"], where: { type: type }, order: [["id", "DESC"]], paranoid: false }).then(property => property.id);
-      const id = lastId.charAt(0) + (Number(lastId.slice(1)) + 1).toString().padStart(3, "0");
+      const lastId = await Property.findOne({
+        attributes: ["id"],
+        where: { type: type },
+        order: [["id", "DESC"]],
+        paranoid: false,
+      }).then((property) => property.id);
+      const id =
+        lastId.charAt(0) +
+        (Number(lastId.slice(1)) + 1).toString().padStart(3, "0");
 
-      await Property.create(
-        {
-          id,
-          title,
-          location,
-          description,
-          type,
-          mode,
-          price,
-          area,
-          bedrooms,
-          bathrooms,
-          agentId
-        }
-      );
+      await Property.create({
+        id,
+        title,
+        location,
+        description,
+        type,
+        mode,
+        price,
+        area,
+        bedrooms,
+        bathrooms,
+        agentId,
+      });
 
-      const property = await this.findByPk(id, { include: { all: true } })
+      const property = await this.findByPk(id, { include: { all: true } });
 
       return await property.detailView(Amenity);
     }
 
     async updateProperty(values, models) {
-      const { title, location, description, type, mode, price, area, bedrooms, bathrooms } = values;
+      const {
+        title,
+        location,
+        description,
+        type,
+        mode,
+        price,
+        area,
+        bedrooms,
+        bathrooms,
+      } = values;
 
-
-      await this.update({ title, location, description, type, mode, price, area, bedrooms, bathrooms });
+      await this.update({
+        title,
+        location,
+        description,
+        type,
+        mode,
+        price,
+        area,
+        bedrooms,
+        bathrooms,
+      });
 
       return await Property.findByPk(this.id, { include: { all: true } });
     }
 
     async amenitiesDetail(Amenity) {
-      const amenities = await Amenity.findAll().then(amenities => amenities.map(amenity => amenity.title));
+      const amenities = await Amenity.findAll().then((amenities) =>
+        amenities.map((amenity) => amenity.title)
+      );
 
-      return amenities.map(amenityTitle => {
-        const available = this.amenities.some(amenity => amenity.title === amenityTitle);
+      return amenities.map((amenityTitle) => {
+        const available = this.amenities.some(
+          (amenity) => amenity.title === amenityTitle
+        );
         return {
           title: amenityTitle,
-          available: available
-        }
-      })
+          available: available,
+        };
+      });
     }
 
     floorPlansDetail() {
-      return this.floor_plans.map(floor_plan => {
+      return this.floor_plans.map((floor_plan) => {
         return {
           floorPlanId: floor_plan.id,
           name: floor_plan.name,
-          url: floor_plan.url
-        }
-      })
+          url: floor_plan.url,
+        };
+      });
     }
 
     featuresDetail() {
-      return this.features.map(feature => {
+      return this.features.map((feature) => {
         return {
           feature: feature.icon,
-          title: feature.PropertyFeature.title
-        }
-      })
+          title: feature.PropertyFeature.title,
+        };
+      });
     }
 
     imagesDetail() {
-      return this.images.map(image => {
+      return this.images.map((image) => {
         return {
           imageId: image.id,
-          link: image.link
-        }
-      })
+          link: image.link,
+        };
+      });
     }
 
     async detailView(Amenity) {
@@ -152,9 +217,9 @@ module.exports = (sequelize, DataTypes) => {
           name: this.agent.name,
           location: this.agent.location,
           email: this.agent.email,
-          photo: this.agent.photo
-        }
-      }
+          photo: this.agent.photo,
+        },
+      };
     }
 
     summaryView() {
@@ -170,44 +235,47 @@ module.exports = (sequelize, DataTypes) => {
         price: this.price,
         area: this.area,
         bedrooms: this.bedrooms,
-        bathrooms: this.bathrooms
-      }
+        bathrooms: this.bathrooms,
+      };
     }
   }
 
-  Property.init({
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
+  Property.init(
+    {
+      title: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      location: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      description: DataTypes.TEXT,
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      mode: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      price: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      area: DataTypes.INTEGER,
+      bedrooms: DataTypes.INTEGER,
+      bathrooms: DataTypes.INTEGER,
+      agentId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
-    location: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    description: DataTypes.TEXT,
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    mode: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    price: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    area: DataTypes.INTEGER,
-    bedrooms: DataTypes.INTEGER,
-    bathrooms: DataTypes.INTEGER,
-    agentId: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-  }, {
-    sequelize,
-    paranoid: true,
-    modelName: 'Property',
-  });
+    {
+      sequelize,
+      paranoid: true,
+      modelName: "Property",
+    }
+  );
   return Property;
 };
