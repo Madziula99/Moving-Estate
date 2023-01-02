@@ -53,11 +53,7 @@ class DeleteAgent extends React.Component {
   }
 
   handleChange = (e) => {
-    const { agents } = this.state;
-
-    const newAgentId = agents.find((agent) => agent.name === e.target.value).id;
-
-    this.setState({ newAgentId: newAgentId });
+    this.setState({ newAgentId: e.target.value });
   };
 
   deleteAgent = () => {
@@ -100,7 +96,7 @@ class DeleteAgent extends React.Component {
             <Select defaultValue="" onChange={this.handleChange} displayEmpty>
               {agents.map((option) => {
                 return (
-                  <MenuItem key={option.name} value={option.name}>
+                  <MenuItem key={option.name} value={option.id}>
                     {option.name.toUpperCase()}
                   </MenuItem>
                 );
