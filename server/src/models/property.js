@@ -92,19 +92,52 @@ module.exports = (sequelize, DataTypes) => {
       return await Property.findByPk(this.id, { include: { all: true } });
     }
 
-    async detailView(Amenity) {
+    async amenitiesDetail(Amenity) {
       const amenities = await Amenity.findAll().then(amenities => amenities.map(amenity => amenity.title));
 
+      return amenities.map(amenityTitle => {
+        const available = this.amenities.some(amenity => amenity.title === amenityTitle);
+        return {
+          title: amenityTitle,
+          available: available
+        }
+      })
+    }
+
+    floorPlansDetail() {
+      return this.floor_plans.map(floor_plan => {
+        return {
+          floorPlanId: floor_plan.id,
+          name: floor_plan.name,
+          url: floor_plan.url
+        }
+      })
+    }
+
+    featuresDetail() {
+      return this.features.map(feature => {
+        return {
+          feature: feature.icon,
+          title: feature.PropertyFeature.title
+        }
+      })
+    }
+
+    imagesDetail() {
+      return this.images.map(image => {
+        return {
+          imageId: image.id,
+          link: image.link
+        }
+      })
+    }
+
+    async detailView(Amenity) {
       return {
         id: this.id,
         title: this.title,
         location: this.location.split(", "),
-        images: [...this.images.map(image => {
-          return {
-            imageId: image.id,
-            link: image.link
-          }
-        })],
+        images: this.imagesDetail(),
         description: this.description,
         type: this.type,
         mode: this.mode,
@@ -112,27 +145,9 @@ module.exports = (sequelize, DataTypes) => {
         area: this.area,
         bedrooms: this.bedrooms,
         bathrooms: this.bathrooms,
-        amenities: amenities.map(amenityTitle => {
-          const available = this.amenities.some(amenity => amenity.title === amenityTitle);
-          return {
-            title: amenityTitle,
-            available: available
-          }
-        }
-        ),
-        features: this.features.map(feature => {
-          return {
-            feature: feature.icon,
-            title: feature.PropertyFeature.title
-          }
-        }),
-        floor_plans: this.floor_plans.map(floor_plan => {
-          return {
-            floorPlanId: floor_plan.id,
-            name: floor_plan.name,
-            url: floor_plan.url
-          }
-        }),
+        amenities: await this.amenitiesDetail(Amenity),
+        features: this.featuresDetail(),
+        floor_plans: this.floorPlansDetail(),
         agent: {
           name: this.agent.name,
           location: this.agent.location,

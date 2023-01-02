@@ -5,19 +5,10 @@ async function index(req, res) {
   const { id } = req.params;
 
   try {
-    const floorPlansList = await FloorPlan.findAll({
-      where: { propertyId: id },
-    });
+    const property = await Property.findByPk(id, { include: { all: true } });
+    const floorPlans = property.floorPlansDetail();
 
-    if (!floorPlansList) return res.status(404).json({ floor_plans: {} });
-    const floorPlans = floorPlansList.map((floorPlan) => {
-      return {
-        floorPlanId: floorPlan.id,
-        name: floorPlan.name,
-        url: floorPlan.url,
-      };
-    });
-    return res.json(floorPlans);
+    return res.json({floorPlans});
   } catch (error) {
     res.status(500).json({ error });
   }

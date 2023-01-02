@@ -28,26 +28,10 @@ async function index(req, res) {
   const { id } = req.params;
 
   try {
-    const propertyFeatures = await PropertyFeature.findAll({
-      where: { propertyId: id },
-    });
+    const property = await Property.findByPk(id, { include: { all: true } });
+    const features = property.featuresDetail()
 
-    if (!propertyFeatures) return res.status(404).json({ feature: {} });
-
-    const propertyFeaturesId = propertyFeatures.map(
-      (feature) => feature.featureId
-    );
-
-    const icons = await Feature.findAll();
-    if (!icons) return res.status(404).json({ icons: {} });
-
-    const features = propertyFeatures.map((feature) => {
-      return {
-        feature: icons[feature.featureId - 1].icon,
-        title: feature.title,
-      };
-    });
-    return res.json(features);
+    return res.json({features});
   } catch (error) {
     res.status(500).json({ error });
   }

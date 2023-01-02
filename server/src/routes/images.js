@@ -20,18 +20,10 @@ async function index(req, res) {
   const { id } = req.params;
 
   try {
-    const imagesList = await PropertyImage.findAll({
-      where: { propertyId: id },
-    });
+    const property = await Property.findByPk(id, { include: { all: true } });
+    const images = property.imagesDetail()
 
-    if (!imagesList) return res.status(404).json({ images: {} });
-    const images = imagesList.map((image) => {
-      return {
-        imageId: image.id,
-        link: image.link,
-      };
-    });
-    return res.json(images);
+    return res.json({images});
   } catch (error) {
     res.status(500).json({ error });
   }
