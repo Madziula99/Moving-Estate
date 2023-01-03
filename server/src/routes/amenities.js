@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { Property, Amenity, PropertyAmenity } = require("../models");
+const { Property, Amenity } = require("../models");
 
 async function create(req, res) {
   const { id } = req.params;
