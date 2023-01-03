@@ -13,18 +13,19 @@ class EditFeature extends BasePage {
     redirect: null,
   };
 
-  updateFeature = (icon, title) => this.updateAction({
-    url: `/api/properties/${this.state.propertyId}/features/${icon}`,
-    values: { title: title },
-    failureRedirect: `/properties/${this.state.propertyId}`
-  })
+  updateFeature = (icon, title) =>
+    this.updateAction({
+      url: `/api/properties/${this.state.propertyId}/features/${icon}`,
+      values: { title: title },
+      failureRedirect: `/properties/${this.state.propertyId}`,
+    });
 
   async getFeatures() {
     const { propertyId } = this.state;
 
-    return await fetch(`/api/properties/${propertyId}`)
-      .then(res => res.json())
-      .then(data => this.setState({ features: data.features }))
+    return await fetch(`/api/properties/${propertyId}/features`)
+      .then((res) => res.json())
+      .then(({ features }) => this.setState({ features: features }))
       .catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
   }
 
@@ -35,22 +36,25 @@ class EditFeature extends BasePage {
   render() {
     const { propertyId, features, redirect } = this.state;
 
-    if (this.props.location.aboutProps === undefined) return <Redirect to={`/properties/${propertyId}/features`} />
+    if (this.props.location.aboutProps === undefined)
+      return <Redirect to={`/properties/${propertyId}/features`} />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
     const { feature, title } = this.props.location.aboutProps.feature;
 
-    return <Modal title="Edit feature:">
-      <FeatureForm
-        editMode
-        features={features}
-        propertyId={propertyId}
-        icon={feature}
-        title={title}
-        handleSubmit={this.updateFeature}
-      />
-    </Modal>
+    return (
+      <Modal title="Edit feature:">
+        <FeatureForm
+          editMode
+          features={features}
+          propertyId={propertyId}
+          icon={feature}
+          title={title}
+          handleSubmit={this.updateFeature}
+        />
+      </Modal>
+    );
   }
 }
 

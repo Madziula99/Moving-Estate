@@ -11,18 +11,19 @@ class CreateFeature extends BasePage {
     redirect: null,
   };
 
-  createFeature = (feature, title) => this.createAction({
-    url: `/api/properties/${this.state.propertyId}/features`,
-    values: { icon: feature, title: title },
-    redirect: `/properties/${this.state.propertyId}`
-  })
+  createFeature = (feature, title) =>
+    this.createAction({
+      url: `/api/properties/${this.state.propertyId}/features`,
+      values: { icon: feature, title: title },
+      redirect: `/properties/${this.state.propertyId}`,
+    });
 
   async getFeatures() {
     const { propertyId } = this.state;
 
-    return await fetch(`/api/properties/${propertyId}`)
-      .then(res => res.json())
-      .then(data => this.setState({ features: data.features }))
+    return await fetch(`/api/properties/${propertyId}/features`)
+      .then((res) => res.json())
+      .then(({ features }) => this.setState({ features: features }))
       .catch(() => this.setState({ redirect: `/properties/${propertyId}` }));
   }
 
@@ -33,17 +34,19 @@ class CreateFeature extends BasePage {
   render() {
     const { propertyId, features, redirect } = this.state;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
-    return <Modal title="Create a new feature:">
-      <FeatureForm
-        features={features}
-        propertyId={propertyId}
-        icon=""
-        title=""
-        handleSubmit={this.createFeature}
-      />
-    </Modal>
+    return (
+      <Modal title="Create a new feature:">
+        <FeatureForm
+          features={features}
+          propertyId={propertyId}
+          icon=""
+          title=""
+          handleSubmit={this.createFeature}
+        />
+      </Modal>
+    );
   }
 }
 
