@@ -14,12 +14,12 @@ class Index extends React.Component {
       selectedOptions: {},
       options: {},
       pages: null,
-      isLoading: false
-    }
+      isLoading: false,
+    };
   }
 
   paramsToObject(params) {
-    const filters = {}
+    const filters = {};
     for (const [key, value] of params) {
       filters[key] = value;
     }
@@ -36,7 +36,11 @@ class Index extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
-    if (JSON.stringify(this.state.selectedOptions) === JSON.stringify(prevState.selectedOptions)) return;
+    if (
+      JSON.stringify(this.state.selectedOptions) ===
+      JSON.stringify(prevState.selectedOptions)
+    )
+      return;
 
     this.getProperties();
   }
@@ -44,17 +48,19 @@ class Index extends React.Component {
   async getProperties() {
     this.setState({ isLoading: true });
 
-    const urlQueryParams = new URLSearchParams(this.state.selectedOptions).toString();
+    const urlQueryParams = new URLSearchParams(
+      this.state.selectedOptions
+    ).toString();
 
-    await fetch("/api/properties?" + urlQueryParams)
-      .then(r => r.json())
+    await fetch("/api/client/properties?" + urlQueryParams)
+      .then((r) => r.json())
       .then(({ properties, options, pages }) => {
         this.setState({
           filteredProperties: properties,
           options: options,
           pages: pages,
-          isLoading: false
-        })
+          isLoading: false,
+        });
       });
   }
 
@@ -71,34 +77,37 @@ class Index extends React.Component {
   }
 
   filterProperties(filters) {
-    this.updateOptions({ ...filters, page: 1 })
+    this.updateOptions({ ...filters, page: 1 });
   }
 
   changePage(page) {
-    this.updateOptions({ ...this.state.selectedOptions, page: page })
+    this.updateOptions({ ...this.state.selectedOptions, page: page });
   }
 
   render() {
-    const { filteredProperties, selectedOptions, options, pages, isLoading } = this.state;
+    const { filteredProperties, selectedOptions, options, pages, isLoading } =
+      this.state;
 
     if (Object.keys(options).length === 0) return;
 
-    return <Page title="PROPERTIES" hasSidebar>
-      <PropertyFilter
-        values={selectedOptions}
-        options={options}
-        onSubmit={(filters) => this.filterProperties(filters)}
-      />
-      <PropertyList
-        pages={pages}
-        page={selectedOptions.page}
-        defaultView="grid"
-        properties={filteredProperties}
-        changePage={(page) => this.changePage(page)}
-      >
-        {isLoading && <Spinner />}
-      </PropertyList>
-    </Page>
+    return (
+      <Page title="PROPERTIES" hasSidebar>
+        <PropertyFilter
+          values={selectedOptions}
+          options={options}
+          onSubmit={(filters) => this.filterProperties(filters)}
+        />
+        <PropertyList
+          pages={pages}
+          page={selectedOptions.page}
+          defaultView="grid"
+          properties={filteredProperties}
+          changePage={(page) => this.changePage(page)}
+        >
+          {isLoading && <Spinner />}
+        </PropertyList>
+      </Page>
+    );
   }
 }
 

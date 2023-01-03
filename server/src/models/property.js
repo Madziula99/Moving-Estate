@@ -30,8 +30,8 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
 
-    static filter(filters, agent, images) {
-      const { minArea, maxArea, minPrice, maxPrice, email, ...other } = filters;
+    static filter(filters) {
+      const { minArea, maxArea, minPrice, maxPrice, ...other } = filters;
 
       return this.findAll({
         where: [
@@ -41,17 +41,14 @@ module.exports = (sequelize, DataTypes) => {
           maxPrice && { price: { [Op.lt]: maxPrice } },
           other,
         ],
-        include: [
-          {
-            model: agent,
-            as: "agent",
-            where: email && { email: email },
-          },
-          {
-            model: images,
-            as: "images",
-          },
-        ],
+        include: { all: true },
+      });
+    }
+
+    static getAgentProperties(agentId) {
+      return this.findAll({
+        where: { agentId: agentId },
+        include: { all: true },
       });
     }
 
@@ -125,7 +122,7 @@ module.exports = (sequelize, DataTypes) => {
       return await property.detailView(Amenity);
     }
 
-    async updateProperty(values, models) {
+    async updateProperty(values) {
       const {
         title,
         location,
@@ -224,11 +221,12 @@ module.exports = (sequelize, DataTypes) => {
 
     summaryView() {
       const image = this.images.length > 0 ? this.images[0].link : "";
+
       return {
         id: this.id,
         title: this.title,
         location: this.location.split(", "),
-        images: image,
+        image: image,
         description: this.description,
         type: this.type,
         mode: this.mode,
