@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
-import { Button } from "@mui/material";
+import { withRouter } from "react-router-dom";
 import styles from "./FloorPlansItem.module.css";
+import { NavLinksComponent } from "../../NavLinksComponent/NavLinksComponent";
 
 class FloorPlansItem extends React.Component {
   state = {
@@ -16,25 +16,11 @@ class FloorPlansItem extends React.Component {
       <div className={styles.wrapper}>
         <img src={floorPlan.url} className={styles.image} alt="" />
         <p>{floorPlan.name}</p>
-        <NavLink
-          to={{
-            pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`,
-            aboutProps: { name: floorPlan.name, url: floorPlan.url },
-          }}
-          className={styles.nav_link}
-        >
-          <Button sx={{ m: 1 }} variant="contained">
-            ...
-          </Button>
-        </NavLink>
-        <NavLink
-          to={{
-            pathname: `/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/delete`,
-          }}
-          className={styles.nav_link}
-        >
-          <Button variant="contained">x</Button>
-        </NavLink>
+        <NavLinksComponent
+          editPath={`/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`}
+          deletePath={`/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/delete`}
+          aboutProps={{ name: floorPlan.name, url: floorPlan.url }}
+        />
       </div>
     );
   }
