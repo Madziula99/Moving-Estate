@@ -32,7 +32,6 @@ async function index(req, res) {
       PropertyImage
     );
     const agent = await Agent.findOne({ where: { email: email } });
-    console.log(properties);
 
     return res.json({
       properties: properties.map((property) => property.summaryView()),
