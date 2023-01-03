@@ -42,14 +42,13 @@ class Properties extends React.Component {
 
     return (
       <>
-        <Header></Header>
+        <Header>Properties</Header>
+        <SignOut headerMessage={`${agentName}, welcome!`} />
+        <PropertyTable adminProperties={filteredProperties} />
+
         <Switch>
           <Route path="/properties/new" component={CreateProperty}></Route>
         </Switch>
-
-        <SignOut headerMessage={`${agentName}, welcome!`} />
-
-        <PropertyTable adminProperties={filteredProperties} />
       </>
     );
   }
