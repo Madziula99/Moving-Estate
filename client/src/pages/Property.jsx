@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { Redirect, withRouter } from "react-router-dom";
 import Title from "../components/Title/Title.jsx";
 import { Gallery } from "../components/Gallery/Gallery.jsx";
 import Description from "../components/Description/Description.jsx";
@@ -8,18 +8,24 @@ import Amenities from "../components/Amenities/Amenities.jsx";
 import Features from "../components/Features/Features.jsx";
 import { AgentInfo } from "../components/Agentinfo/AgentInfo.jsx";
 import { Page } from "../components/Page/Page.jsx";
-import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Property extends Component {
   state = {
     property: undefined,
+    redirect: null,
   };
 
   async fetchProperty(propertyId) {
     await fetch(`/api/client/properties/${propertyId}`)
       .then((r) => r.json())
-      .then((data) => this.setState({ property: data }));
+      .then((data) => {
+        if (data.error) {
+          this.setState({ redirect: true });
+        } else {
+          this.setState({ property: data });
+        }
+      });
   }
 
   componentDidMount() {
@@ -29,13 +35,15 @@ class Property extends Component {
   }
 
   render() {
-    const { property } = this.state;
+    const { property, redirect } = this.state;
+
+    if (redirect) return <Redirect to="/" />;
 
     if (property === undefined)
       return (
-        <PageWrapper>
+        <Page>
           <Spinner />
-        </PageWrapper>
+        </Page>
       );
 
     return (
