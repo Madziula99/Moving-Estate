@@ -26,7 +26,9 @@ class NavLinksComponent extends React.Component {
           }}
           className={styles.nav_link}
         >
-          <Button variant="contained">Delete</Button>
+          <Button sx={{ m: 1, p: 1 }} variant="contained">
+            Delete
+          </Button>
         </NavLink>
       </>
     );
