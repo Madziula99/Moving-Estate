@@ -11,7 +11,7 @@ async function read(req, res) {
   try {
     const property = await Property.findByPk(id, { include: { all: true } });
 
-    return res.status(200).json(await property.detailView(Amenity));
+    return res.status(200).json(await property.summaryView(Amenity));
   } catch (error) {
     return res.status(404).json({ error: `Property with id ${id} not found` });
   }
