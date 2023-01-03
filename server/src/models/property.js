@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
         });
     }
 
-    static filter(filters, images) {
+    static filter(filters) {
       const { minArea, maxArea, minPrice, maxPrice, ...other } = filters;
 
       return this.findAll({
@@ -41,10 +41,7 @@ module.exports = (sequelize, DataTypes) => {
           maxPrice && { price: { [Op.lt]: maxPrice } },
           other,
         ],
-        include: {
-          model: images,
-          as: "images",
-        },
+        include: { all: true },
       });
     }
 
