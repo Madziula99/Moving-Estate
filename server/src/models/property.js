@@ -220,12 +220,13 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     summaryView() {
-      const images = this.images.length > 0 ? this.images[0].link : "";
+      const image = this.images.length > 0 ? this.images[0].link : "";
+
       return {
         id: this.id,
         title: this.title,
         location: this.location.split(", "),
-        images: images,
+        image: image,
         description: this.description,
         type: this.type,
         mode: this.mode,
