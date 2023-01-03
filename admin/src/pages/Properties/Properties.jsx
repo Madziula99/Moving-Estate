@@ -5,6 +5,7 @@ import { PropertyTable } from "../../components/PropertyTable/PropertyTable.jsx"
 import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { CreateProperty } from "./CreateProperty.jsx";
 import { Context } from "../../Context/Context.js";
+import { Header } from "../../components/Header/Header.jsx";
 
 class Properties extends React.Component {
   state = {
@@ -17,7 +18,7 @@ class Properties extends React.Component {
     const email = this.context.email;
 
     fetch(`/api/properties?email=${email}`)
-      .then(r => r.json())
+      .then((r) => r.json())
       .then(({ properties, agentName }) => {
         this.setState({
           filteredProperties: properties,
@@ -35,18 +36,22 @@ class Properties extends React.Component {
   render() {
     const { filteredProperties, isLoading, agentName, redirect } = this.state;
 
-    if (isLoading) return <Spinner />
+    if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
-    return <>
-      <Switch>
-        <Route path="/properties/new" component={CreateProperty}></Route>
-      </Switch>
+    return (
+      <>
+        <Header></Header>
+        <Switch>
+          <Route path="/properties/new" component={CreateProperty}></Route>
+        </Switch>
 
-      <SignOut headerMessage={`${agentName}, welcome!`} />
-      <PropertyTable adminProperties={filteredProperties} />
-    </>
+        <SignOut headerMessage={`${agentName}, welcome!`} />
+
+        <PropertyTable adminProperties={filteredProperties} />
+      </>
+    );
   }
 }
 
