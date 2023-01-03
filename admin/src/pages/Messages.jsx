@@ -46,7 +46,7 @@ class Messages extends React.Component {
 
     if (hasAccess)
       return (
-        <PageWrapper message={`Messages regarding property ${propertyId}`}>
+        <PageWrapper message={`Messages regarding property: ${propertyId}`}>
           <MenuButton text="To properties" href={`/admin/properties`} />
           <PropertyMessages propertyMessages={propertyMessages} />
         </PageWrapper>

@@ -3,8 +3,8 @@ import { withRouter } from "react-router-dom";
 import { ReactComponent as PawIcon } from "./assets/paw.svg";
 import { ReactComponent as PoolIcon } from "./assets/pool.svg";
 import { ReactComponent as FenceIcon } from "./assets/fence.svg";
+import { ListItemLinks } from "../../ListItemLinks/ListItemLinks.jsx";
 import styles from "./FeatureItem.module.css";
-import { ListItemLinks } from "../../ListItemLinks/ListItemLinks";
 
 class FeaturesItem extends React.Component {
   state = {

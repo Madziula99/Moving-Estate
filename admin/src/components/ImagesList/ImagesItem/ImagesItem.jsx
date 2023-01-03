@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { ListItemLinks } from "../../ListItemLinks/ListItemLinks.jsx";
 import styles from "./ImagesItem.module.css";
-import { ListItemLinks } from "../../ListItemLinks/ListItemLinks";
 
 class ImagesItem extends React.Component {
   state = {

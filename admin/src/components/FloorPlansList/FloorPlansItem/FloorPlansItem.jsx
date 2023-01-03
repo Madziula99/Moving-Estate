@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import { ListItemLinks } from "../../ListItemLinks/ListItemLinks.jsx";
 import styles from "./FloorPlansItem.module.css";
-import { ListItemLinks } from "../../ListItemLinks/ListItemLinks";
 
 class FloorPlansItem extends React.Component {
   state = {

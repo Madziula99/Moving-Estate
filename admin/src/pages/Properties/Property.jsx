@@ -78,7 +78,7 @@ class Property extends BasePage {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <PageWrapper message={`Property ${propertyId}`}>
+      <PageWrapper message={`Property: ${propertyId}`}>
         <MenuButton
           text="Edit property"
           href={`/admin/properties/${propertyId}/edit`}
