@@ -45,18 +45,10 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
 
-    static getAgentProperties(email, agent, images) {
+    static getAgentProperties(agentId) {
       return this.findAll({
-        include: [
-          {
-            model: agent,
-            as: "agent",
-          },
-          {
-            model: images,
-            as: "images",
-          },
-        ],
+        where: { agentId: agentId },
+        include: { all: true },
       });
     }
 
@@ -130,7 +122,7 @@ module.exports = (sequelize, DataTypes) => {
       return await property.detailView(Amenity);
     }
 
-    async updateProperty(values, models) {
+    async updateProperty(values) {
       const {
         title,
         location,
@@ -228,12 +220,12 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     summaryView() {
-      const image = this.images.length > 0 ? this.images[0].link : "";
+      const images = this.images.length > 0 ? this.images[0].link : "";
       return {
         id: this.id,
         title: this.title,
         location: this.location.split(", "),
-        images: image,
+        images: images,
         description: this.description,
         type: this.type,
         mode: this.mode,

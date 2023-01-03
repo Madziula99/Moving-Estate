@@ -3,35 +3,26 @@ const amenities = require("./amenities.js");
 const floor_plans = require("./floor_plans.js");
 const images = require("./images.js");
 const features = require("./features.js");
-const {
-  Message,
-  Property,
-  Agent,
-  PropertyImage,
-  Amenity,
-} = require("../models");
+const { Message, Property, Agent, Amenity } = require("../models");
 
 async function read(req, res) {
   const { id } = req.params;
 
-  const property = await Property.findByPk(id, { include: { all: true } });
+  try {
+    const property = await Property.findByPk(id, { include: { all: true } });
 
-  if (!property)
+    return res.status(200).json(await property.detailView(Amenity));
+  } catch (error) {
     return res.status(404).json({ error: `Property with id ${id} not found` });
-
-  return res.status(200).json(await property.detailView(Amenity));
+  }
 }
 
 async function index(req, res) {
   const { email } = req.query;
 
   try {
-    const properties = await Property.getAgentProperties(
-      email,
-      Agent,
-      PropertyImage
-    );
     const agent = await Agent.findOne({ where: { email: email } });
+    const properties = await Property.getAgentProperties(agent.id);
 
     return res.json({
       properties: properties.map((property) => property.summaryView()),
@@ -55,6 +46,7 @@ async function create(req, res) {
       { ...req.body, agentId },
       Amenity
     );
+
     return res.status(200).json({ property });
   } catch (error) {
     return res.status(403).json({ error });
@@ -94,6 +86,7 @@ async function update(req, res) {
       bedrooms,
       bathrooms,
     });
+
     return res.json(await property.detailView(Amenity));
   } catch (error) {
     res.status(403).json({ error });
@@ -105,6 +98,7 @@ async function destroy(req, res) {
 
   try {
     const property = await Property.findByPk(id);
+
     res.json(await property.destroy());
   } catch (error) {
     res.status(403).json({ error });
