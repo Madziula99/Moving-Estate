@@ -9,15 +9,31 @@ async function create(req, res) {
     const property = await Property.findByPk(id, { include: { all: true } });
     const newFeature = await Feature.findOne({ where: { icon: icon } });
 
-    if (await property.hasFeature(newFeature)) return res.status(403).json({ error: "Feature icon already used" });
+    if (await property.hasFeature(newFeature))
+      return res.status(403).json({ error: "Feature icon already used" });
 
     await property.addFeature(newFeature, { through: { title: title } });
 
-    const updatedProperty = await Property.findByPk(id, { include: { all: true } });
+    const updatedProperty = await Property.findByPk(id, {
+      include: { all: true },
+    });
 
     res.json(await updatedProperty.detailView(Amenity));
   } catch (error) {
     res.status(403).json({ error });
+  }
+}
+
+async function index(req, res) {
+  const { id } = req.params;
+
+  try {
+    const property = await Property.findByPk(id, { include: { all: true } });
+    const features = property.featuresDetail();
+
+    return res.json({ features });
+  } catch (error) {
+    res.status(500).json({ error });
   }
 }
 
@@ -31,7 +47,9 @@ async function update(req, res) {
 
     await property.addFeature(featureToUpdate, { through: { title: title } });
 
-    const updatedProperty = await Property.findByPk(id, { include: { all: true } });
+    const updatedProperty = await Property.findByPk(id, {
+      include: { all: true },
+    });
 
     res.json(await updatedProperty.detailView(Amenity));
   } catch (error) {
@@ -48,7 +66,9 @@ async function destroy(req, res) {
 
     await property.removeFeature(featureToRemove);
 
-    const updatedProperty = await Property.findByPk(id, { include: { all: true } });
+    const updatedProperty = await Property.findByPk(id, {
+      include: { all: true },
+    });
 
     res.json(await updatedProperty.detailView(Amenity));
   } catch (error) {
@@ -57,6 +77,7 @@ async function destroy(req, res) {
 }
 
 module.exports = Router({ mergeParams: true })
+  .get("/", index)
   .post("/", create)
   .put("/:icon", update)
-  .delete("/:icon", destroy)
+  .delete("/:icon", destroy);

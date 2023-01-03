@@ -1,6 +1,19 @@
 const { Router } = require("express");
 const { Property, FloorPlan, Amenity } = require("../models");
 
+async function index(req, res) {
+  const { id } = req.params;
+
+  try {
+    const property = await Property.findByPk(id, { include: { all: true } });
+    const floorPlans = property.floorPlansDetail();
+
+    return res.json({ floorPlans });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
+}
+
 async function create(req, res) {
   const { id } = req.params;
   const { name, url } = req.body;
@@ -48,6 +61,7 @@ async function destroy(req, res) {
 }
 
 module.exports = Router({ mergeParams: true })
+  .get("/", index)
   .post("/", create)
   .put("/:floorPlanId", update)
-  .delete("/:floorPlanId", destroy)
+  .delete("/:floorPlanId", destroy);
