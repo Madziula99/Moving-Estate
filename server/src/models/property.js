@@ -51,7 +51,6 @@ module.exports = (sequelize, DataTypes) => {
           {
             model: agent,
             as: "agent",
-            where: email && { email: email },
           },
           {
             model: images,
