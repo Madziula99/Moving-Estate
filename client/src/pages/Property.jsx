@@ -8,8 +8,8 @@ import Amenities from "../components/Amenities/Amenities.jsx";
 import Features from "../components/Features/Features.jsx";
 import { AgentInfo } from "../components/Agentinfo/AgentInfo.jsx";
 import { Page } from "../components/Page/Page.jsx";
+import { PageWrapper } from "../components/PageWrapper/PageWrapper.jsx";
 import { Spinner } from "../components/Spinner/Spinner.jsx";
-import styles from "./Property.module.css";
 
 class Property extends Component {
   state = {
@@ -33,9 +33,9 @@ class Property extends Component {
 
     if (property === undefined)
       return (
-        <div className={styles.property_page}>
+        <PageWrapper>
           <Spinner />
-        </div>
+        </PageWrapper>
       );
 
     return (
