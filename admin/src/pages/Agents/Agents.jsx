@@ -37,8 +37,9 @@ class Agents extends React.Component {
     if (this.context.isManager)
       return (
         <>
-          <Header>Agents</Header>
-          <SignOut headerMessage={"Welcome!"} />
+          <Header>
+            <SignOut headerMessage="Agents" />
+          </Header>
           <AgentsTable agents={agents} />
         </>
       );

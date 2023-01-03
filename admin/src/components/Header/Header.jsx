@@ -8,7 +8,7 @@ class Header extends React.Component {
     return (
       <header className={styles.header}>
         <div className={styles.header_center}>
-          <NavLink to={"/"}>
+          <NavLink to="/">
             <Logo />
           </NavLink>
           {this.props.children}

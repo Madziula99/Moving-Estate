@@ -10,7 +10,6 @@ import { Header } from "../../components/Header/Header.jsx";
 class Properties extends React.Component {
   state = {
     filteredProperties: [],
-    agentName: "",
     isLoading: true,
   };
 
@@ -19,10 +18,9 @@ class Properties extends React.Component {
 
     fetch(`/api/properties?email=${email}`)
       .then((r) => r.json())
-      .then(({ properties, agentName }) => {
+      .then(({ properties }) => {
         this.setState({
           filteredProperties: properties,
-          agentName: agentName,
           isLoading: false,
         });
       })
@@ -34,7 +32,7 @@ class Properties extends React.Component {
   }
 
   render() {
-    const { filteredProperties, isLoading, agentName, redirect } = this.state;
+    const { filteredProperties, isLoading, redirect } = this.state;
 
     if (isLoading) return <Spinner />;
 
@@ -42,8 +40,9 @@ class Properties extends React.Component {
 
     return (
       <>
-        <Header>Properties</Header>
-        <SignOut headerMessage={`${agentName}, welcome!`} />
+        <Header>
+          <SignOut headerMessage="Properties" />
+        </Header>
         <PropertyTable adminProperties={filteredProperties} />
 
         <Switch>

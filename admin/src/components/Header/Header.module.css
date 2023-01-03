@@ -2,12 +2,16 @@
   background-image: url("assets/background.svg");
   height: 150px;
   color: #df434a;
-  font-size: 32px;
   line-height: 39px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
 }
 
 .header_center {
   width: 1000px;
   margin: 0 auto;
-  padding-top: 40px;
+  display: flex;
+  align-items: center;
+  gap: 250px;
 }
