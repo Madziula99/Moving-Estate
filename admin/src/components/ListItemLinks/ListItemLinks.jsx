@@ -1,9 +1,9 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import styles from "./NavLinksComponent.module.css";
+import styles from "./ListItemLinks.module.css";
 
-class NavLinksComponent extends React.Component {
+class ListItemLinks extends React.Component {
   render() {
     const { editPath, deletePath, aboutProps } = this.props;
 
@@ -35,4 +35,4 @@ class NavLinksComponent extends React.Component {
   }
 }
 
-export { NavLinksComponent };
+export { ListItemLinks };

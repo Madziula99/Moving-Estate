@@ -2,10 +2,9 @@ import React from "react";
 import { Redirect, Switch, Route } from "react-router-dom";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { PropertyTable } from "../../components/PropertyTable/PropertyTable.jsx";
-import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { CreateProperty } from "./CreateProperty.jsx";
 import { Context } from "../../Context/Context.js";
-import { Header } from "../../components/Header/Header.jsx";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 
 class Properties extends React.Component {
   state = {
@@ -39,16 +38,13 @@ class Properties extends React.Component {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <>
-        <Header>
-          <SignOut headerMessage="Properties" />
-        </Header>
+      <PageWrapper message="Properties">
         <PropertyTable adminProperties={filteredProperties} />
 
         <Switch>
           <Route path="/properties/new" component={CreateProperty}></Route>
         </Switch>
-      </>
+      </PageWrapper>
     );
   }
 }

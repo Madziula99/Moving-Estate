@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./ImagesItem.module.css";
-import { NavLinksComponent } from "../../NavLinksComponent/NavLinksComponent";
+import { ListItemLinks } from "../../ListItemLinks/ListItemLinks";
 
 class ImagesItem extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class ImagesItem extends React.Component {
       <div className={styles.wrapper}>
         <img src={image.link} className={styles.image} alt="" />
         <div className={styles.buttons_wrapper}>
-          <NavLinksComponent
+          <ListItemLinks
             editPath={`/properties/${propertyId}/images/${image.imageId}/edit`}
             deletePath={`/properties/${propertyId}/images/${image.imageId}/delete`}
             aboutProps={{ link: image.link }}

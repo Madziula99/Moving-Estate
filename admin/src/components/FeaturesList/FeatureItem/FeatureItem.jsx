@@ -4,7 +4,7 @@ import { ReactComponent as PawIcon } from "./assets/paw.svg";
 import { ReactComponent as PoolIcon } from "./assets/pool.svg";
 import { ReactComponent as FenceIcon } from "./assets/fence.svg";
 import styles from "./FeatureItem.module.css";
-import { NavLinksComponent } from "../../NavLinksComponent/NavLinksComponent";
+import { ListItemLinks } from "../../ListItemLinks/ListItemLinks";
 
 class FeaturesItem extends React.Component {
   state = {
@@ -32,7 +32,7 @@ class FeaturesItem extends React.Component {
       <div className={styles.wrapper}>
         {this.icon()}
         <p>{feature.title}</p>
-        <NavLinksComponent
+        <ListItemLinks
           editPath={`/properties/${propertyId}/features/${feature.feature}/edit`}
           deletePath={`/properties/${propertyId}/features/${feature.feature}/delete`}
           aboutProps={{ feature: feature }}

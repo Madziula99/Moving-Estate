@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import styles from "./FloorPlansItem.module.css";
-import { NavLinksComponent } from "../../NavLinksComponent/NavLinksComponent";
+import { ListItemLinks } from "../../ListItemLinks/ListItemLinks";
 
 class FloorPlansItem extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class FloorPlansItem extends React.Component {
       <div className={styles.wrapper}>
         <img src={floorPlan.url} className={styles.image} alt="" />
         <p>{floorPlan.name}</p>
-        <NavLinksComponent
+        <ListItemLinks
           editPath={`/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/edit`}
           deletePath={`/properties/${propertyId}/floor_plans/${floorPlan.floorPlanId}/delete`}
           aboutProps={{ name: floorPlan.name, url: floorPlan.url }}

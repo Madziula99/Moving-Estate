@@ -2,9 +2,8 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { AgentsTable } from "../../components/AgentsTable/AgentsTable.jsx";
-import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { Context } from "../../Context/Context.js";
-import { Header } from "../../components/Header/Header.jsx";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 
 class Agents extends React.Component {
   state = {
@@ -36,12 +35,9 @@ class Agents extends React.Component {
 
     if (this.context.isManager)
       return (
-        <>
-          <Header>
-            <SignOut headerMessage="Agents" />
-          </Header>
+        <PageWrapper message="Agents">
           <AgentsTable agents={agents} />
-        </>
+        </PageWrapper>
       );
 
     return <Redirect to="/" />;

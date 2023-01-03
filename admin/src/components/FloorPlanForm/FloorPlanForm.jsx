@@ -7,7 +7,7 @@ class FloorPlanForm extends React.Component {
   state = {
     isDisabled: true,
     url: this.props.url || "",
-    name: this.props.name || ""
+    name: this.props.name || "",
   };
 
   handleChange(name, value) {
@@ -22,7 +22,8 @@ class FloorPlanForm extends React.Component {
       (url === prevProps.url && name === prevProps.name) ||
       name === "" ||
       url === ""
-    ) return;
+    )
+      return;
 
     this.setState({ isDisabled: false });
   }
@@ -32,38 +33,47 @@ class FloorPlanForm extends React.Component {
     const { url, name } = this.state;
 
     handleSubmit(url, name);
-  }
+  };
 
   render() {
     const { url, name, propertyId } = this.props;
     const { isDisabled } = this.state;
 
-    return <form className={styles.form}>
-      <label>Url:</label>
-      <Input
-        defaultValue={url}
-        onChange={e => this.handleChange("url", e.target.value)}
-        className={styles.input}
-      />
-      <label>Name:</label>
-      <Input
-        defaultValue={name}
-        onChange={e => this.handleChange("name", e.target.value)}
-        className={styles.input}
-      />
-      <NavLink
-        onClick={e => isDisabled && e.preventDefault()}
-        to={`/properties/${propertyId}/floor_plans`}
-        className={styles.nav_link}
-      >
-        <Button variant="contained" onClick={this.onSave} disabled={isDisabled}>
-          Save
-        </Button>
-      </NavLink>
-      <NavLink to={`/properties/${propertyId}/floor_plans`} className={styles.nav_link}>
-        <Button variant="contained">x</Button>
-      </NavLink>
-    </form>
+    return (
+      <form className={styles.form}>
+        <label>Url:</label>
+        <Input
+          defaultValue={url}
+          onChange={(e) => this.handleChange("url", e.target.value)}
+          className={styles.input}
+        />
+        <label>Name:</label>
+        <Input
+          defaultValue={name}
+          onChange={(e) => this.handleChange("name", e.target.value)}
+          className={styles.input}
+        />
+        <NavLink
+          onClick={(e) => isDisabled && e.preventDefault()}
+          to={`/properties/${propertyId}/floor_plans`}
+          className={styles.nav_link}
+        >
+          <Button
+            variant="contained"
+            onClick={this.onSave}
+            disabled={isDisabled}
+          >
+            Save
+          </Button>
+        </NavLink>
+        <NavLink
+          to={`/properties/${propertyId}/floor_plans`}
+          className={styles.nav_link}
+        >
+          <Button variant="contained">Cancel</Button>
+        </NavLink>
+      </form>
+    );
   }
 }
 
