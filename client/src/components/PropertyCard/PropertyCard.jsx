@@ -24,8 +24,8 @@ class PropertyCard extends React.Component {
   }
 
   showErrorImage = ({ target }) => {
-    target.src="image_not_available.png"
-  }
+    target.src = "image_not_available.png";
+  };
 
   render() {
     return (
@@ -35,13 +35,20 @@ class PropertyCard extends React.Component {
           mode={this.props.mode}
           price={this.props.price}
         />
-        <img className={styles.property_card_image} src={this.props.images}
+        <img
+          className={styles.property_card_image}
+          src={this.props.image}
           onError={this.showErrorImage}
-          alt="Accommodation" />
+          alt="Accommodation"
+        />
         <div className={this.addWrapperClassName()}>
           <h3 className={styles.property_card_name}>{this.props.title}</h3>
-          <span className={styles.property_card_location}>{this.props.location.join(", ")}</span>
-          <p className={styles.property_card_description}>{this.props.description}</p>
+          <span className={styles.property_card_location}>
+            {this.props.location.join(", ")}
+          </span>
+          <p className={styles.property_card_description}>
+            {this.props.description}
+          </p>
           <PropertyInfo
             area={this.props.area}
             beds={this.props.bedrooms}
@@ -50,7 +57,7 @@ class PropertyCard extends React.Component {
           />
         </div>
       </div>
-    )
+    );
   }
 }
 
