@@ -43,7 +43,7 @@ class Agent extends React.Component {
 
     if (this.context.isManager)
       return (
-        <PageWrapper>
+        <PageWrapper message={`Agent: ${agentData.name}`}>
           <MenuButton
             text="Edit agent"
             href={`/admin/agents/${agentId}/edit`}

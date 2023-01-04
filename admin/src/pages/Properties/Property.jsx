@@ -2,7 +2,6 @@ import React from "react";
 import { Redirect, withRouter, Switch, Route } from "react-router-dom";
 import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
-import { SignOut } from "../../components/SignOut/SignOut.jsx";
 import { PropertyTabs } from "../../components/PropertyTabs/PropertyTabs.jsx";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 import EditProperty from "./EditProperty.jsx";
@@ -79,8 +78,7 @@ class Property extends BasePage {
     if (redirect) return <Redirect to={redirect} />;
 
     return (
-      <PageWrapper>
-        <SignOut headerMessage={`Property page: ${propertyId}`} />
+      <PageWrapper message={`Property: ${propertyId}`}>
         <MenuButton
           text="Edit property"
           href={`/admin/properties/${propertyId}/edit`}

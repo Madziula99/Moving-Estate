@@ -1,9 +1,9 @@
 import React from "react";
-import { NavLink, withRouter } from "react-router-dom";
-import { Button } from "@mui/material";
+import { withRouter } from "react-router-dom";
 import { ReactComponent as PawIcon } from "./assets/paw.svg";
 import { ReactComponent as PoolIcon } from "./assets/pool.svg";
 import { ReactComponent as FenceIcon } from "./assets/fence.svg";
+import { ListItemLinks } from "../../ListItemLinks/ListItemLinks.jsx";
 import styles from "./FeatureItem.module.css";
 
 class FeaturesItem extends React.Component {
@@ -32,25 +32,11 @@ class FeaturesItem extends React.Component {
       <div className={styles.wrapper}>
         {this.icon()}
         <p>{feature.title}</p>
-        <NavLink
-          to={{
-            pathname: `/properties/${propertyId}/features/${feature.feature}/edit`,
-            aboutProps: { feature: feature },
-          }}
-          className={styles.nav_link}
-        >
-          <Button sx={{ m: 1, p: 1 }} variant="contained">
-            ...
-          </Button>
-        </NavLink>
-        <NavLink
-          to={{
-            pathname: `/properties/${propertyId}/features/${feature.feature}/delete`,
-          }}
-          className={styles.nav_link}
-        >
-          <Button variant="contained">x</Button>
-        </NavLink>
+        <ListItemLinks
+          editPath={`/properties/${propertyId}/features/${feature.feature}/edit`}
+          deletePath={`/properties/${propertyId}/features/${feature.feature}/delete`}
+          aboutProps={{ feature: feature }}
+        />
       </div>
     );
   }
