@@ -7,7 +7,7 @@ import Index from "./pages/Index.jsx";
 import "./index.css";
 
 async function main() {
-  const api = await fetch('/api/config').then(r => r.json());
+  const api = await fetch("/api/config").then((r) => r.json());
   console.log(`API is ${api.status}`);
 
   const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -18,7 +18,7 @@ async function main() {
           <Route path="/component_gallery">
             <ComponentGallery />
           </Route>
-          <Route path="/:property_id">
+          <Route path="/:propertyId">
             <Property />
           </Route>
           <Route path="/">

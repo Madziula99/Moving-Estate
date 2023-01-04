@@ -29,7 +29,7 @@ class Property extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.property_id;
+    const id = this.props.match.params.propertyId;
 
     this.fetchProperty(id);
   }
