@@ -5,7 +5,7 @@ import styles from "./ImagesItem.module.css";
 
 class ImagesItem extends React.Component {
   state = {
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
   };
 
   render() {

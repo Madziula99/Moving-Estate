@@ -9,7 +9,7 @@ import DeleteAgent from "./DeleteAgent.jsx";
 class Agent extends React.Component {
   state = {
     agentData: {},
-    agentId: this.props.match.params.id,
+    agentId: this.props.match.params.agentId,
     isLoading: true,
     redirect: null,
   };
@@ -61,7 +61,10 @@ class Agent extends React.Component {
           </div>
 
           <Switch>
-            <Route path="/agents/:id/delete" component={DeleteAgent}></Route>
+            <Route
+              path="/agents/:agentId/delete"
+              component={DeleteAgent}
+            ></Route>
           </Switch>
         </PageWrapper>
       );

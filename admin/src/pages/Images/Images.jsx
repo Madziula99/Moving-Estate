@@ -10,7 +10,7 @@ import DeleteImage from "./DeleteImage.jsx";
 
 class Images extends BasePage {
   state = {
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
     isLoading: true,
     redirect: null,
     images: [],
@@ -75,7 +75,7 @@ class Images extends BasePage {
 
         <Switch>
           <Route
-            path="/properties/:id/images/new"
+            path="/properties/:propertyId/images/new"
             component={CreateImage}
           ></Route>
           <Route

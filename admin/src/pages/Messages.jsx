@@ -11,27 +11,30 @@ class Messages extends React.Component {
     propertyMessages: [],
     isLoading: true,
     hasAccess: false,
+    propertyId: this.props.match.params.propertyId,
   };
 
   getPropertyMessages() {
-    const id = this.props.match.params.id;
+    const { propertyId } = this.state;
 
     this.setState({ isLoading: true });
 
     const email = this.context.email;
 
-    fetch(`/api/properties/messages/${id}?email=${email}`).then((res) => {
-      if (res.status === 401) {
-        return this.setState({ isLoading: false });
-      } else
-        return res.json().then((messages) => {
-          this.setState({
-            propertyMessages: messages,
-            isLoading: false,
-            hasAccess: true,
+    fetch(`/api/properties/messages/${propertyId}?email=${email}`).then(
+      (res) => {
+        if (res.status === 401) {
+          return this.setState({ isLoading: false });
+        } else
+          return res.json().then((messages) => {
+            this.setState({
+              propertyMessages: messages,
+              isLoading: false,
+              hasAccess: true,
+            });
           });
-        });
-    });
+      }
+    );
   }
 
   componentDidMount() {
@@ -39,8 +42,7 @@ class Messages extends React.Component {
   }
 
   render() {
-    const { propertyMessages, isLoading, hasAccess } = this.state;
-    const propertyId = this.props.match.params.id;
+    const { propertyMessages, isLoading, hasAccess, propertyId } = this.state;
 
     if (isLoading) return <Spinner />;
 

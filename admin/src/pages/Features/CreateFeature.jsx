@@ -7,7 +7,7 @@ import BasePage from "../BasePage.jsx";
 class CreateFeature extends BasePage {
   state = {
     features: [],
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
     redirect: null,
   };
 

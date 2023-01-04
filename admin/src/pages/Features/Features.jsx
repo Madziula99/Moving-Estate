@@ -10,7 +10,7 @@ import DeleteFeature from "./DeleteFeature.jsx";
 
 class Features extends BasePage {
   state = {
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
     isLoading: true,
     redirect: null,
     features: [],
@@ -79,7 +79,7 @@ class Features extends BasePage {
 
         <Switch>
           <Route
-            path="/properties/:id/features/new"
+            path="/properties/:propertyId/features/new"
             component={CreateFeature}
           ></Route>
           <Route

@@ -15,7 +15,7 @@ import BasePage from "../BasePage.jsx";
 class Property extends BasePage {
   state = {
     property: {},
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
     isLoading: true,
     redirect: null,
   };
@@ -87,8 +87,11 @@ class Property extends BasePage {
           text="Delete property"
           href={`/admin/properties/${propertyId}/delete`}
         />
-        <MenuButton text="To messages" href={`/admin/messages/${propertyId}`} />
-        <MenuButton text="To properties" href={`/admin/properties`} />
+        <MenuButton
+          text="To messages"
+          href={`/admin/properties/${propertyId}/messages`}
+        />
+        <MenuButton text="To properties" href="/admin/properties" />
         {Object.keys(property).map((el) => (
           <dl key={el}>
             <dt>{`${el.toUpperCase()}:`}</dt>
@@ -98,21 +101,24 @@ class Property extends BasePage {
         <PropertyTabs propertyId={propertyId} />
 
         <Switch>
-          <Route path="/properties/:id/edit" component={EditProperty}></Route>
           <Route
-            path="/properties/:id/delete"
+            path="/properties/:propertyId/edit"
+            component={EditProperty}
+          ></Route>
+          <Route
+            path="/properties/:propertyId/delete"
             component={DeleteProperty}
           ></Route>
-          <Route path="/properties/:id/amenities">
+          <Route path="/properties/:propertyId/amenities">
             <Amenities />
           </Route>
-          <Route path="/properties/:id/images">
+          <Route path="/properties/:propertyId/images">
             <Images />
           </Route>
-          <Route path="/properties/:id/floor_plans">
+          <Route path="/properties/:propertyId/floor_plans">
             <FloorPlans />
           </Route>
-          <Route path="/properties/:id/features">
+          <Route path="/properties/:propertyId/features">
             <Features />
           </Route>
         </Switch>

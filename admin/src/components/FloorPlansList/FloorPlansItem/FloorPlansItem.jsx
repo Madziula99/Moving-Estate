@@ -5,7 +5,7 @@ import styles from "./FloorPlansItem.module.css";
 
 class FloorPlansItem extends React.Component {
   state = {
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
   };
 
   render() {

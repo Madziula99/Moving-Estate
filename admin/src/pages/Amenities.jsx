@@ -11,7 +11,7 @@ class Amenities extends BasePage {
     this.isChecked = this.isChecked.bind(this);
 
     this.state = {
-      propertyId: this.props.match.params.id,
+      propertyId: this.props.match.params.propertyId,
       amenities: [],
       isLoading: true,
       redirect: null,
