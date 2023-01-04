@@ -14,7 +14,7 @@ class NavLinkWrapper extends React.Component {
           to={`/properties/${propertyId}/${type}/new`}
           className={styles.nav_link}
         >
-          <MenuButton disabled={disabled} text={text} />
+          <MenuButton isDisabled={disabled} text={text} />
         </NavLink>
       </div>
     );
