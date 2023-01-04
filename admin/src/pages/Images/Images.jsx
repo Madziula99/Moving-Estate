@@ -30,9 +30,9 @@ class Images extends BasePage {
   async fetchImages() {
     const { propertyId } = this.state;
 
-    return await fetch(`/api/properties/${propertyId}`)
+    return await fetch(`/api/properties/${propertyId}/images`)
       .then((res) => res.json())
-      .then((data) => data.images)
+      .then(({ images }) => images)
       .catch(() =>
         this.setState({
           redirect: `/properties/${propertyId}`,

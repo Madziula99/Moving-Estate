@@ -32,9 +32,9 @@ class Features extends BasePage {
   async fetchFeatures() {
     const { propertyId } = this.state;
 
-    return await fetch(`/api/properties/${propertyId}`)
+    return await fetch(`/api/properties/${propertyId}/features`)
       .then((res) => res.json())
-      .then((data) => data.features)
+      .then(({ features }) => features)
       .catch(() =>
         this.setState({
           redirect: `/properties/${propertyId}`,

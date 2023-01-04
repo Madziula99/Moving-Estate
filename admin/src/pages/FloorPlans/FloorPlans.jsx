@@ -30,9 +30,9 @@ class FloorPlans extends BasePage {
   async fetchFloorPlans() {
     const { propertyId } = this.state;
 
-    return await fetch(`/api/properties/${propertyId}`)
+    return await fetch(`/api/properties/${propertyId}/floor_plans`)
       .then((res) => res.json())
-      .then((data) => data.floor_plans)
+      .then(({ floorPlans }) => floorPlans)
       .catch(() =>
         this.setState({
           redirect: `/properties/${propertyId}`,

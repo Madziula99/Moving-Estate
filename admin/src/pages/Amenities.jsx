@@ -14,30 +14,36 @@ class Amenities extends BasePage {
       propertyId: this.props.match.params.id,
       amenities: [],
       isLoading: true,
-      redirect: null
+      redirect: null,
     };
   }
 
-  createAmenity = title => this.createAction({
-    url: `/api/properties/${this.state.propertyId}/amenities`,
-    values: { title: title },
-    redirect: `/properties/${this.state.propertyId}`
-  })
+  createAmenity = (title) =>
+    this.createAction({
+      url: `/api/properties/${this.state.propertyId}/amenities`,
+      values: { title: title },
+      redirect: `/properties/${this.state.propertyId}`,
+    });
 
-  deleteAmenity = amenityTitle => this.deleteAction({
-    url: `/api/properties/${this.state.propertyId}/amenities/${amenityTitle}`,
-    failureRedirect: `/properties/${this.state.propertyId}`
-  })
+  deleteAmenity = (amenityTitle) =>
+    this.deleteAction({
+      url: `/api/properties/${this.state.propertyId}/amenities/${amenityTitle}`,
+      failureRedirect: `/properties/${this.state.propertyId}`,
+    });
 
   isChecked(item) {
     const { amenities } = this.state;
-    const isChecked = amenities.find(amenity => amenity.title === item.title).available;
+    const isChecked = amenities.find(
+      (amenity) => amenity.title === item.title
+    ).available;
 
     if (isChecked) {
       let amenityTitle = item.title;
 
-      if (amenityTitle.includes("/")) amenityTitle = amenityTitle.replace(/\//g, "%2F");
-      if (amenityTitle.includes("&")) amenityTitle = amenityTitle.replace(/&/g, "%26");
+      if (amenityTitle.includes("/"))
+        amenityTitle = amenityTitle.replace(/\//g, "%2F");
+      if (amenityTitle.includes("&"))
+        amenityTitle = amenityTitle.replace(/&/g, "%26");
       amenityTitle = amenityTitle.replace(/ /g, "%20");
 
       this.deleteAmenity(amenityTitle);
@@ -60,10 +66,12 @@ class Amenities extends BasePage {
   async fetchAmenities() {
     const { propertyId } = this.state;
 
-    return await fetch(`/api/properties/${propertyId}`)
-      .then(res => res.json())
-      .then(data => data.amenities)
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+    return await fetch(`/api/properties/${propertyId}/amenities`)
+      .then((res) => res.json())
+      .then(({ amenities }) => amenities)
+      .catch(() =>
+        this.setState({ redirect: "/properties", isLoading: false })
+      );
   }
 
   async componentDidUpdate() {
@@ -82,11 +90,13 @@ class Amenities extends BasePage {
   render() {
     const { isLoading, amenities, redirect } = this.state;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
-    if (isLoading) return <Spinner />
+    if (isLoading) return <Spinner />;
 
-    return <AmenitiesPageContent amenities={amenities} isChecked={this.isChecked} />
+    return (
+      <AmenitiesPageContent amenities={amenities} isChecked={this.isChecked} />
+    );
   }
 }
 
