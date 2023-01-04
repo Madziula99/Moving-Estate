@@ -39,9 +39,6 @@ class Routing extends React.Component {
         <Route path="/properties">
           <Properties />
         </Route>
-        <Route path="/agents/:agentId/edit">
-          <EditAgent />
-        </Route>
         <Route path="/agents/new">
           <Agents />
         </Route>
