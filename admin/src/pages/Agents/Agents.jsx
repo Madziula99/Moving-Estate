@@ -4,6 +4,7 @@ import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { AgentsTable } from "../../components/AgentsTable/AgentsTable.jsx";
 import { Context } from "../../Context/Context.js";
 import { CreateAgent } from "./CreateAgent.jsx";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 
 class Agents extends React.Component {
   state = {
@@ -35,14 +36,13 @@ class Agents extends React.Component {
 
     if (this.context.isManager)
       return (
-        <>
-          <SignOut headerMessage={"Manager Panel"} />
+        <PageWrapper message="Agents">
           <AgentsTable agents={agents} />
 
           <Switch>
             <Route path="/agents/new" component={CreateAgent}></Route>
           </Switch>
-        </>
+        </PageWrapper>
       );
 
     return <Redirect to="/" />;
