@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Button, Input } from "@mui/material";
+import { Input } from "@mui/material";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import styles from "./ImageForm.module.css";
 
 class ImageForm extends React.Component {
@@ -46,19 +47,17 @@ class ImageForm extends React.Component {
           to={`/properties/${propertyId}/images`}
           className={styles.nav_link}
         >
-          <Button
-            variant="contained"
-            onClick={this.onSave}
-            disabled={isDisabled}
-          >
-            Save
-          </Button>
+          <MenuButton
+            handleClick={this.onSave}
+            isDisabled={isDisabled}
+            text="Save"
+          />
         </NavLink>
         <NavLink
           to={`/properties/${propertyId}/images`}
           className={styles.nav_link}
         >
-          <Button variant="contained">Cancel</Button>
+          <MenuButton text="Cancel" />
         </NavLink>
       </form>
     );
