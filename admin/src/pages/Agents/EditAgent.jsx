@@ -32,11 +32,11 @@ class EditAgent extends BasePage {
       failureRedirect: `/agents/${this.state.agentId}`,
     });
 
-  returnToAgentPage() {
+  returnToAgentPage = () => {
     const { agentId } = this.state;
 
     this.setState({ redirect: `/agents/${agentId}` });
-  }
+  };
 
   componentDidMount() {
     this.getAgent();
@@ -55,7 +55,7 @@ class EditAgent extends BasePage {
           <AgentForm
             values={agentData}
             handleSubmit={(newValues) => this.updateAgent(newValues)}
-            handleCancel={() => this.returnToAgentPage()}
+            handleCancel={this.returnToAgentPage}
           />
         </Modal>
       );
