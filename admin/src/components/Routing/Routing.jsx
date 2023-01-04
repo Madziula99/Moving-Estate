@@ -5,8 +5,6 @@ import { Index } from "../../pages/Index.jsx";
 import { Properties } from "../../pages/Properties/Properties.jsx";
 import { Agents } from "../../pages/Agents/Agents.jsx";
 import Agent from "../../pages/Agents/Agent.jsx";
-import { CreateAgent } from "../../pages/Agents/CreateAgent.jsx";
-import EditAgent from "../../pages/Agents/EditAgent.jsx";
 import Property from "../../pages/Properties/Property.jsx";
 import { Manager } from "../../pages/Manager.jsx";
 import { SignIn } from "../../pages/SignIn.jsx";
@@ -45,7 +43,7 @@ class Routing extends React.Component {
           <EditAgent />
         </Route>
         <Route path="/agents/new">
-          <CreateAgent />
+          <Agents />
         </Route>
         <Route path="/agents/:agentId">
           <Agent />

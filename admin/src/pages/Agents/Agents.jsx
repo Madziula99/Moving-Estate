@@ -1,9 +1,9 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Switch, Route } from "react-router-dom";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { AgentsTable } from "../../components/AgentsTable/AgentsTable.jsx";
 import { Context } from "../../Context/Context.js";
-import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
+import { CreateAgent } from "./CreateAgent.jsx";
 
 class Agents extends React.Component {
   state = {
@@ -35,9 +35,14 @@ class Agents extends React.Component {
 
     if (this.context.isManager)
       return (
-        <PageWrapper message="Agents">
+        <>
+          <SignOut headerMessage={"Manager Panel"} />
           <AgentsTable agents={agents} />
-        </PageWrapper>
+
+          <Switch>
+            <Route path="/agents/new" component={CreateAgent}></Route>
+          </Switch>
+        </>
       );
 
     return <Redirect to="/" />;
