@@ -8,27 +8,28 @@ import { Context } from "../../Context/Context.js";
 class EditAgent extends BasePage {
   state = {
     redirect: null,
-    agentId: this.props.match.params.id,
+    agentId: this.props.match.params.agentId,
     agentData: {},
-    isLoading: true
+    isLoading: true,
   };
 
   getAgent() {
     const { agentId } = this.state;
 
     fetch(`/api/agents/${agentId}`)
-      .then(r => r.json())
-      .then(data => this.setState({ agentData: data.agent }))
+      .then((r) => r.json())
+      .then((data) => this.setState({ agentData: data.agent }))
       .catch(() => this.setState({ redirect: "/agents" }))
       .finally(() => this.setState({ isLoading: false }));
   }
 
-  updateAgent = agent => this.updateAction({
-    url: `/api/agents/${this.state.agentId}`,
-    values: agent,
-    successRedirect: `/agents/${this.state.agentId}`,
-    failureRedirect: `/agents/${this.state.agentId}`
-  })
+  updateAgent = (agent) =>
+    this.updateAction({
+      url: `/api/agents/${this.state.agentId}`,
+      values: agent,
+      successRedirect: `/agents/${this.state.agentId}`,
+      failureRedirect: `/agents/${this.state.agentId}`,
+    });
 
   returnToAgentPage() {
     const { agentId } = this.state;
@@ -45,14 +46,16 @@ class EditAgent extends BasePage {
 
     if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
     if (agentData.name && this.context.isManager) {
-      return <AgentForm
-        values={agentData}
-        handleSubmit={newValues => this.updateAgent(newValues)}
-        handleCancel={() => this.returnToAgentPage()}
-      />
+      return (
+        <AgentForm
+          values={agentData}
+          handleSubmit={(newValues) => this.updateAgent(newValues)}
+          handleCancel={() => this.returnToAgentPage()}
+        />
+      );
     }
 
     return <Redirect to="/agents" />;

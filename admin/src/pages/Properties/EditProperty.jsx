@@ -9,16 +9,16 @@ class EditProperty extends BasePage {
   state = {
     redirect: null,
     isLoading: true,
-    propertyId: this.props.match.params.id,
-    property: {}
+    propertyId: this.props.match.params.propertyId,
+    property: {},
   };
 
   async getProperty() {
     const { propertyId } = this.state;
 
     await fetch(`/api/properties/${propertyId}`)
-      .then(res =>  res.json())
-      .then(body => {
+      .then((res) => res.json())
+      .then((body) => {
         const property = {
           id: body.id,
           title: body.title,
@@ -30,23 +30,26 @@ class EditProperty extends BasePage {
           price: body.price,
           area: body.area,
           bedrooms: body.bedrooms,
-          bathrooms: body.bathrooms
+          bathrooms: body.bathrooms,
         };
 
         this.setState({
           property: property,
-          isLoading: false
+          isLoading: false,
         });
       })
-      .catch(() => this.setState({ redirect: "/properties", isLoading: false }));
+      .catch(() =>
+        this.setState({ redirect: "/properties", isLoading: false })
+      );
   }
 
-  updateProperty = property => this.updateAction({
-    url: `/api/properties/${this.state.propertyId}`,
-    values: property,
-    successRedirect: `/properties/${this.state.propertyId}`,
-    failureRedirect: `/properties/${this.state.propertyId}`
-  })
+  updateProperty = (property) =>
+    this.updateAction({
+      url: `/api/properties/${this.state.propertyId}`,
+      values: property,
+      successRedirect: `/properties/${this.state.propertyId}`,
+      failureRedirect: `/properties/${this.state.propertyId}`,
+    });
 
   componentDidMount() {
     this.getProperty();
@@ -54,22 +57,24 @@ class EditProperty extends BasePage {
 
   returnToPropertyPage = () => {
     this.setState({ redirect: `/properties/${this.state.propertyId}` });
-  }
+  };
 
   render() {
     const { redirect, property, isLoading } = this.state;
 
-    if (isLoading) return <Spinner />
+    if (isLoading) return <Spinner />;
 
-    if (redirect) return <Redirect to={redirect} />
+    if (redirect) return <Redirect to={redirect} />;
 
-    return <Modal title={`Edit property: ${property.id}`}>
-      <PropertyForm
-        values={property}
-        onSubmit={this.updateProperty}
-        onCancel={this.returnToPropertyPage}
-      />
-    </Modal>
+    return (
+      <Modal title={`Edit property: ${property.id}`}>
+        <PropertyForm
+          values={property}
+          onSubmit={this.updateProperty}
+          onCancel={this.returnToPropertyPage}
+        />
+      </Modal>
+    );
   }
 }
 

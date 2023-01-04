@@ -15,47 +15,52 @@ class Routing extends React.Component {
   render() {
     const { currentUser } = this.props;
 
-    if (!currentUser) return <Switch>
-      <Route exact path="/">
-        <SignIn />
-      </Route>
-      <Route>
-        <Redirect to="/" />
-      </Route>
-    </Switch>;
+    if (!currentUser)
+      return (
+        <Switch>
+          <Route exact path="/">
+            <SignIn />
+          </Route>
+          <Route>
+            <Redirect to="/" />
+          </Route>
+        </Switch>
+      );
 
-    return <Switch>
-      <Route path="/properties/new">
-        <Properties />
-      </Route>
-      <Route path="/properties/:id">
-        <Property />
-      </Route>
-      <Route path="/properties">
-        <Properties />
-      </Route>
-      <Route path="/messages/:id">
-        <Messages />
-      </Route>
-      <Route path="/agents/:id/edit">
-        <EditAgent />
-      </Route>
-      <Route path="/agents/new">
-        <CreateAgent />
-      </Route>
-      <Route path="/agents/:id">
-        <Agent />
-      </Route>
-      <Route path="/agents">
-        <Agents />
-      </Route>
-      <Route path="/manager">
-        <Manager />
-      </Route>
-      <Route>
-        <Index path="/index" />
-      </Route>
-    </Switch>;
+    return (
+      <Switch>
+        <Route path="/properties/new">
+          <Properties />
+        </Route>
+        <Route path="/properties/:propertyId/messages">
+          <Messages />
+        </Route>
+        <Route path="/properties/:propertyId">
+          <Property />
+        </Route>
+        <Route path="/properties">
+          <Properties />
+        </Route>
+        <Route path="/agents/:agentId/edit">
+          <EditAgent />
+        </Route>
+        <Route path="/agents/new">
+          <CreateAgent />
+        </Route>
+        <Route path="/agents/:agentId">
+          <Agent />
+        </Route>
+        <Route path="/agents">
+          <Agents />
+        </Route>
+        <Route path="/manager">
+          <Manager />
+        </Route>
+        <Route>
+          <Index path="/index" />
+        </Route>
+      </Switch>
+    );
   }
 }
 

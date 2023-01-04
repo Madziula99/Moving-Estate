@@ -10,7 +10,7 @@ import DeleteFloorPlan from "./DeleteFloorPlan.jsx";
 
 class FloorPlans extends BasePage {
   state = {
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
     isLoading: true,
     redirect: null,
     floorPlans: [],
@@ -75,7 +75,7 @@ class FloorPlans extends BasePage {
 
         <Switch>
           <Route
-            path="/properties/:id/floor_plans/new"
+            path="/properties/:propertyId/floor_plans/new"
             component={CreateFloorPlan}
           ></Route>
           <Route

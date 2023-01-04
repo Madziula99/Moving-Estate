@@ -8,7 +8,7 @@ import styles from "./FeatureItem.module.css";
 
 class FeaturesItem extends React.Component {
   state = {
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
   };
 
   icon() {

@@ -7,7 +7,7 @@ import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 
 class DeleteAgent extends React.Component {
   state = {
-    agentId: this.props.match.params.id,
+    agentId: this.props.match.params.agentId,
     agent: {},
     isLoading: true,
     agents: [],

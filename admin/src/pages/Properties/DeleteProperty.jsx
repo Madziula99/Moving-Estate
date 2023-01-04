@@ -9,7 +9,7 @@ class DeleteProperty extends BasePage {
   state = {
     redirect: null,
     isLoading: true,
-    propertyId: this.props.match.params.id,
+    propertyId: this.props.match.params.propertyId,
   };
 
   async getProperty() {
