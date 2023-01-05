@@ -54,7 +54,7 @@ class EditAgent extends BasePage {
         <Modal title={`Edit agent: ${agentData.name}`}>
           <AgentForm
             values={agentData}
-            handleSubmit={(newValues) => this.updateAgent(newValues)}
+            handleSubmit={this.updateAgent}
             handleCancel={this.returnToAgentPage}
           />
         </Modal>
