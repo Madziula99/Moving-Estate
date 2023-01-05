@@ -21,20 +21,15 @@ class Messages extends React.Component {
 
     const email = this.context.email;
 
-    fetch(`/api/properties/messages/${propertyId}?email=${email}`).then(
-      (res) => {
-        if (res.status === 401) {
-          return this.setState({ isLoading: false });
-        } else
-          return res.json().then((messages) => {
-            this.setState({
-              propertyMessages: messages,
-              isLoading: false,
-              hasAccess: true,
-            });
-          });
-      }
-    );
+    fetch(`/api/properties/messages/${propertyId}?email=${email}`)
+      .then((res) => res.json())
+      .then((messages) => {
+        this.setState({
+          propertyMessages: messages,
+          hasAccess: true,
+        });
+      })
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   componentDidMount() {
