@@ -26,13 +26,35 @@ class Index extends React.Component {
     return filters;
   }
 
+  clearOptions(options) {
+    const filterFields = [
+      "title",
+      "type",
+      "mode",
+      "minArea",
+      "maxArea",
+      "bedrooms",
+      "bathrooms",
+      "minPrice",
+      "maxPrice",
+      "location",
+      "minYear",
+      "page",
+    ];
+    Object.keys(options).forEach((key) => {
+      if (!filterFields.includes(key)) delete options[key];
+    });
+    return options;
+  }
+
   componentDidMount() {
     const params = new URLSearchParams(this.props.location.search);
-    const selectedOptions = this.paramsToObject(params);
+    const urlOptions = this.paramsToObject(params);
+    const clearedOptions = this.clearOptions(urlOptions);
 
-    if (selectedOptions.page === undefined) selectedOptions.page = 1;
+    if (clearedOptions.page === undefined) clearedOptions.page = 1;
 
-    this.updateOptions(selectedOptions);
+    this.updateOptions(clearedOptions);
   }
 
   componentDidUpdate(_, prevState) {
