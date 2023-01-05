@@ -15,23 +15,39 @@ class Agent extends React.Component {
     redirect: null,
   };
 
-  getAgent() {
+  async fetchAgent() {
     const { agentId } = this.state;
 
-    this.setState({ isLoading: true });
-
-    fetch(`/api/agents/${agentId}`)
+    return await fetch(`/api/agents/${agentId}`)
       .then((r) => r.json())
-      .then((data) => {
-        this.setState({
-          agentData: data.agent,
-          isLoading: false,
-        });
-      })
+      .then(({ agent }) => agent)
       .catch(() => this.setState({ redirect: "/agents", isLoading: false }));
   }
 
+  async getAgent() {
+    this.setState({ isLoading: true });
+
+    const agent = await this.fetchAgent();
+
+    this.setState({
+      agentData: agent,
+      isLoading: false,
+    });
+  }
+
   componentDidMount() {
+    this.getAgent();
+  }
+
+  async componentDidUpdate() {
+    const { agentData, isLoading } = this.state;
+
+    if (isLoading) return;
+
+    const updated = await this.fetchAgent();
+
+    if (JSON.stringify(agentData) === JSON.stringify(updated)) return;
+
     this.getAgent();
   }
 
