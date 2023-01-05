@@ -2,7 +2,6 @@ import React from "react";
 import { Formik } from "formik";
 import { StyledInput } from "../../controls/StyledInput/StyledInput.jsx";
 import { Menu } from "../Menu/Menu.jsx";
-import styles from "./AgentForm.module.css";
 
 class AgentForm extends React.Component {
   render() {
@@ -33,11 +32,7 @@ class AgentForm extends React.Component {
         }}
       >
         {(props) => (
-          <form onSubmit={props.handleSubmit} className={styles.form}>
-            <Menu
-              onCancelClick={handleCancel}
-              isDisabled={!(props.dirty && props.isValid)}
-            />
+          <form onSubmit={props.handleSubmit}>
             <StyledInput
               isDisabled={props.isSubmitting}
               label="Name: "
@@ -65,6 +60,10 @@ class AgentForm extends React.Component {
               type="text"
               name="photo"
               data={props}
+            />
+            <Menu
+              onCancelClick={handleCancel}
+              isDisabled={!(props.dirty && props.isValid)}
             />
           </form>
         )}

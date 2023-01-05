@@ -1,8 +1,9 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Switch, Route } from "react-router-dom";
 import { Spinner } from "../../components/Spinner/Spinner.jsx";
 import { AgentsTable } from "../../components/AgentsTable/AgentsTable.jsx";
 import { Context } from "../../Context/Context.js";
+import { CreateAgent } from "./CreateAgent.jsx";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 
 class Agents extends React.Component {
@@ -37,6 +38,10 @@ class Agents extends React.Component {
       return (
         <PageWrapper message="Agents">
           <AgentsTable agents={agents} />
+
+          <Switch>
+            <Route path="/agents/new" component={CreateAgent}></Route>
+          </Switch>
         </PageWrapper>
       );
 

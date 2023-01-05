@@ -5,6 +5,7 @@ import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import { Context } from "../../Context/Context.js";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper.jsx";
 import DeleteAgent from "./DeleteAgent.jsx";
+import EditAgent from "./EditAgent.jsx";
 
 class Agent extends React.Component {
   state = {
@@ -61,6 +62,7 @@ class Agent extends React.Component {
           </div>
 
           <Switch>
+            <Route path="/agents/:agentId/edit" component={EditAgent}></Route>
             <Route
               path="/agents/:agentId/delete"
               component={DeleteAgent}
