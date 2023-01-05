@@ -1,7 +1,7 @@
 import React from "react";
 import { Input } from "../../controls/Input/Input.jsx";
 import { Button } from "../../controls/Button/Button.jsx";
-import { Textarea } from "../Textarea/Textarea.jsx";
+import { Textarea } from "../../controls/Textarea/Textarea.jsx";
 import styles from "./ContactForm.module.css";
 
 class ContactForm extends React.Component {

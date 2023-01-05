@@ -3,12 +3,12 @@ import styles from "./Textarea.module.css";
 
 class Textarea extends React.Component {
   state = {
-    textAreaValue: ""
-  }
+    textAreaValue: "",
+  };
 
   handleTextareaChange = (inputTextarea) => {
     this.props.onChange(inputTextarea.target.value);
-  }
+  };
 
   componentDidUpdate(prevProps, _) {
     if (prevProps.textAreaValue === this.props.textAreaValue) return;
@@ -27,13 +27,16 @@ class Textarea extends React.Component {
   render() {
     const { placeholder } = this.props;
     return (
-      <textarea className={this.className()} rows={8} type="text"
+      <textarea
+        className={this.className()}
+        rows={8}
+        type="text"
         placeholder={placeholder}
         defaultValue={this.state.textAreaValue}
         onChange={this.handleTextareaChange}
         maxLength={this.props.maxlength}
       />
-    )
+    );
   }
 }
 
