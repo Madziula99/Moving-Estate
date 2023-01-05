@@ -58,8 +58,9 @@ class Index extends React.Component {
   }
 
   componentDidUpdate(_, prevState) {
+    const { selectedOptions } = this.state;
     if (
-      JSON.stringify(this.state.selectedOptions) ===
+      JSON.stringify(selectedOptions) ===
       JSON.stringify(prevState.selectedOptions)
     )
       return;
@@ -67,14 +68,14 @@ class Index extends React.Component {
     this.getProperties();
   }
 
-  async getProperties() {
+  getProperties() {
     this.setState({ isLoading: true });
 
     const urlQueryParams = new URLSearchParams(
       this.state.selectedOptions
     ).toString();
 
-    await fetch("/api/client/properties?" + urlQueryParams)
+    fetch("/api/client/properties?" + urlQueryParams)
       .then((r) => r.json())
       .then(({ properties, options, pages }) => {
         this.setState({

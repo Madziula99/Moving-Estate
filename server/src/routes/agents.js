@@ -17,13 +17,11 @@ async function read(req, res) {
 
   let agent;
 
-  try {
-    agent = await Agent.findByPk(id);
-    if (!agent) return res.status(404).json({ agent: {} });
-    return res.json({ agent });
-  } catch (error) {
-    res.status(500).json({ error });
-  }
+  agent = await Agent.findByPk(id);
+
+  if (!agent) return res.status(404).json();
+
+  return res.json({ agent });
 }
 
 async function create(req, res) {

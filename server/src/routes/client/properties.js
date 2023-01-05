@@ -19,7 +19,7 @@ async function index(req, res) {
     }
 
     return res.status(200).json({
-      properties: propertiesPages[Number(page) - 1] || propertiesPages[0] || [],
+      properties: propertiesPages[Number(page) - 1] || [],
       options: options,
       pages: propertiesPages.length,
     });
@@ -36,7 +36,7 @@ async function read(req, res) {
 
     return res.status(200).json(await property.detailView(Amenity));
   } catch (error) {
-    return res.status(404).json({ error: `Property with id ${id} not found` });
+    return res.status(404).json();
   }
 }
 
