@@ -4,10 +4,14 @@ import styles from "./Button.module.css";
 class Button extends React.Component {
   render() {
     return (
-      <button className={this.className()} onClick={this.props.onClick} disabled={this.props.disabled}>
+      <button
+        className={this.className()}
+        onClick={this.props.onClick}
+        disabled={this.props.disabled}
+      >
         {this.props.children}
       </button>
-    )
+    );
   }
 
   className() {

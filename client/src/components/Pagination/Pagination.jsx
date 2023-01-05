@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "../Button/Button.jsx";
+import { Button } from "../../controls/Button/Button.jsx";
 import styles from "./Pagination.module.css";
 
 class Pagination extends React.Component {
@@ -33,38 +33,42 @@ class Pagination extends React.Component {
 
     return (
       <div className={styles.wrapper}>
-        {((page > 1) && (page <= pages)) &&
-          <Button size="m"
+        {page > 1 && page <= pages && (
+          <Button
+            size="m"
             roundedLeft
             roundedRight
             onClick={() => onChange(page - 1)}
           >
             &lt;
           </Button>
-        }
+        )}
         <div className={styles.pages}>
-          {pageButtons.map(button => {
+          {pageButtons.map((button) => {
             const { pageNumber, ...properties } = button;
-            return <Button
-              key={pageNumber}
-              {...properties}
-              onClick={() => onChange(pageNumber)}
-            >
-              {pageNumber}
-            </Button>
+            return (
+              <Button
+                key={pageNumber}
+                {...properties}
+                onClick={() => onChange(pageNumber)}
+              >
+                {pageNumber}
+              </Button>
+            );
           })}
         </div>
-        {((page < pages) && (page >= 1)) &&
-          <Button size="m"
+        {page < pages && page >= 1 && (
+          <Button
+            size="m"
             roundedLeft
             roundedRight
             onClick={() => onChange(page + 1)}
           >
             &gt;
           </Button>
-        }
+        )}
       </div>
-    )
+    );
   }
 }
 

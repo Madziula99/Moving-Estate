@@ -1,5 +1,5 @@
 import React from "react";
-import Select from 'react-select';
+import Select from "react-select";
 import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
@@ -7,20 +7,20 @@ class Dropdown extends React.Component {
     super(props);
 
     this.state = {
-      selectedOption: this.props.value || null
-    }
+      selectedOption: this.props.value || null,
+    };
   }
 
   handleChange = (selectedOption) => {
     let value = null;
-    if (selectedOption) value = selectedOption.value
+    if (selectedOption) value = selectedOption.value;
     this.setState({ selectedOption: value });
     this.props.onChange(value);
-  }
+  };
 
   componentDidUpdate(prevprops, _) {
     if (prevprops.value === this.props.value) return;
-    this.setState({ selectedOption: this.props.value })
+    this.setState({ selectedOption: this.props.value });
   }
 
   className() {
@@ -33,22 +33,22 @@ class Dropdown extends React.Component {
     const customStyles = {
       option: (provided, state) => ({
         ...provided,
-        borderBottom: '2px solid #df434a',
-        color: state.isSelected ? '#484848' : 'black',
-        backgroundColor: state.isSelected ? '#df434a' : '#F0F0F0',
+        borderBottom: "2px solid #df434a",
+        color: state.isSelected ? "#484848" : "black",
+        backgroundColor: state.isSelected ? "#df434a" : "#F0F0F0",
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: "#D8D8D8"
-        }
+          backgroundColor: "#D8D8D8",
+        },
       }),
       control: (provided) => ({
         ...provided,
         backgroundColor: "#F5F5F5",
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: "#D8D8D8"
-        }
-      })
+          backgroundColor: "#D8D8D8",
+        },
+      }),
     };
 
     const { options, placeholder } = this.props;
@@ -61,7 +61,14 @@ class Dropdown extends React.Component {
         className={this.className()}
         placeholder={placeholder}
         isClearable
-        value={this.state.selectedOption ? { "value": this.state.selectedOption, "label": this.state.selectedOption } : null}
+        value={
+          this.state.selectedOption
+            ? {
+                value: this.state.selectedOption,
+                label: this.state.selectedOption,
+              }
+            : null
+        }
       />
     );
   }

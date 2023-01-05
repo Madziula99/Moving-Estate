@@ -6,13 +6,13 @@ class Input extends React.Component {
     super(props);
 
     this.state = {
-      value: this.props.value || ""
-    }
+      value: this.props.value || "",
+    };
   }
 
   handleInputBlur = (inputText) => {
     this.props.onChange(inputText.target.value);
-  }
+  };
 
   componentDidUpdate(prevprops, _) {
     if (prevprops.value === this.props.value) return;
@@ -33,19 +33,21 @@ class Input extends React.Component {
     const { type, placeholder } = this.props;
     return (
       (type === undefined ||
-      type === "text" ||
-      type === "email" ||
-      type === "number" ) && <input
-        className = { this.className() }
-        type = { type || "text" }
-        placeholder = { placeholder }
-        defaultValue = { this.state.value }
-        onBlur = { this.handleInputBlur }
-        minLength = { this.props.minlength }
-        maxLength = { this.props.maxlength }
-        pattern = { this.props.pattern }
-      />
-    )
+        type === "text" ||
+        type === "email" ||
+        type === "number") && (
+        <input
+          className={this.className()}
+          type={type || "text"}
+          placeholder={placeholder}
+          defaultValue={this.state.value}
+          onBlur={this.handleInputBlur}
+          minLength={this.props.minlength}
+          maxLength={this.props.maxlength}
+          pattern={this.props.pattern}
+        />
+      )
+    );
   }
 }
 

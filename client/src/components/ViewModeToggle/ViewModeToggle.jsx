@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "../Button/Button.jsx";
-import {ReactComponent as ListModeIcon} from './assets/listMode.svg';
-import {ReactComponent as GridModeIcon} from './assets/gridMode.svg';
+import { Button } from "../../controls/Button/Button.jsx";
+import { ReactComponent as ListModeIcon } from "./assets/listMode.svg";
+import { ReactComponent as GridModeIcon } from "./assets/gridMode.svg";
 import styles from "./ViewModeToggle.module.css";
 
 class ViewModeToggle extends React.Component {
@@ -12,31 +12,36 @@ class ViewModeToggle extends React.Component {
         {this.viewModeButtons("grid")}
         {this.viewModeButtons("list")}
       </div>
-    )
+    );
   }
 
   viewModeButtons(mode) {
     const currentMode = this.props.mode;
     const props = {
-      size: "m"
+      size: "m",
     };
     mode === currentMode && (props.isFocused = true);
-    mode === "grid" ? props.roundedLeft = true : props.roundedRight = true;
+    mode === "grid" ? (props.roundedLeft = true) : (props.roundedRight = true);
     return (
       <Button
         {...props}
-        onClick={() => {this.props.onChange(`${mode}`)}}
+        onClick={() => {
+          this.props.onChange(`${mode}`);
+        }}
       >
         {this.icon(mode)}
       </Button>
-    )
+    );
   }
 
   icon(mode) {
-    switch(mode) {
-      case "grid": return <GridModeIcon />;
-      case "list": return <ListModeIcon />;
-      default: return null;
+    switch (mode) {
+      case "grid":
+        return <GridModeIcon />;
+      case "list":
+        return <ListModeIcon />;
+      default:
+        return null;
     }
   }
 }
