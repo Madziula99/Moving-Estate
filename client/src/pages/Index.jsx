@@ -6,17 +6,13 @@ import { PropertyFilter } from "../components/PropertyFilter/PropertyFilter.jsx"
 import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Index extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      filteredProperties: [],
-      selectedOptions: {},
-      options: {},
-      pages: null,
-      isLoading: false,
-    };
-  }
+  state = {
+    filteredProperties: [],
+    selectedOptions: {},
+    options: {},
+    pages: null,
+    isLoading: false,
+  };
 
   paramsToObject(params) {
     const filters = {};
