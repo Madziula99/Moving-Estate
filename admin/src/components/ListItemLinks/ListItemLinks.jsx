@@ -1,6 +1,6 @@
 import React from "react";
-import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import styles from "./ListItemLinks.module.css";
 
 class ListItemLinks extends React.Component {
@@ -16,9 +16,7 @@ class ListItemLinks extends React.Component {
           }}
           className={styles.nav_link}
         >
-          <Button sx={{ m: 1, p: 1 }} variant="contained">
-            Edit
-          </Button>
+          <MenuButton text="Edit" />
         </NavLink>
         <NavLink
           to={{
@@ -26,9 +24,7 @@ class ListItemLinks extends React.Component {
           }}
           className={styles.nav_link}
         >
-          <Button sx={{ m: 1, p: 1 }} variant="contained">
-            Delete
-          </Button>
+          <MenuButton text="Delete" />
         </NavLink>
       </>
     );

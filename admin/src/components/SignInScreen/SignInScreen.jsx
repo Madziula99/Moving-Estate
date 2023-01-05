@@ -1,12 +1,14 @@
 import React from "react";
-import { Button } from "@mui/material";
+import { MenuButton } from "../../controls/MenuButton/MenuButton";
 import styles from "./SignInScreen.module.css";
 
 class SignInScreen extends React.Component {
   render() {
-    return <div id={styles.sign_in_screen}>
-      <Button variant="contained" href="/api/auth/login/google" className={styles.sign_in_button}>Sign In</Button>
-    </div>
+    return (
+      <div id={styles.sign_in_screen}>
+        <MenuButton href="/api/auth/login/google" text="Sign In" />
+      </div>
+    );
   }
 }
 

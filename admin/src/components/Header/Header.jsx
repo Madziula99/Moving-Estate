@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { Logo } from "../Logo/Logo.jsx";
-import { Button } from "@mui/material";
+import { MenuButton } from "../../controls/MenuButton/MenuButton.jsx";
 import styles from "./Header.module.css";
 
 class Header extends React.Component {
@@ -13,9 +13,7 @@ class Header extends React.Component {
             <Logo />
           </NavLink>
           <h2>{this.props.message}</h2>
-          <Button variant="contained" href="/api/auth/logout">
-            Sign Out
-          </Button>
+          <MenuButton href="/api/auth/logout" text="Sign Out" />
         </div>
       </header>
     );
