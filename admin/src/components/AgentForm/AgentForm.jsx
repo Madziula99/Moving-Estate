@@ -33,10 +33,6 @@ class AgentForm extends React.Component {
       >
         {(props) => (
           <form onSubmit={props.handleSubmit}>
-            <Menu
-              onCancelClick={handleCancel}
-              isDisabled={!(props.dirty && props.isValid)}
-            />
             <StyledInput
               isDisabled={props.isSubmitting}
               label="Name: "
@@ -64,6 +60,10 @@ class AgentForm extends React.Component {
               type="text"
               name="photo"
               data={props}
+            />
+            <Menu
+              onCancelClick={handleCancel}
+              isDisabled={!(props.dirty && props.isValid)}
             />
           </form>
         )}
