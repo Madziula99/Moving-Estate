@@ -12,39 +12,32 @@ import { Spinner } from "../components/Spinner/Spinner.jsx";
 
 class Property extends Component {
   state = {
-    property: undefined,
+    propertyId: this.props.match.params.propertyId,
+    property: {},
     redirect: null,
+    isLoading: true,
   };
 
-  async fetchProperty(propertyId) {
-    await fetch(`/api/client/properties/${propertyId}`)
+  getProperty() {
+    const { propertyId } = this.state;
+
+    fetch(`/api/client/properties/${propertyId}`)
       .then((r) => r.json())
-      .then((data) => {
-        if (data.error) {
-          this.setState({ redirect: true });
-        } else {
-          this.setState({ property: data });
-        }
-      });
+      .then((body) => this.setState({ property: body }))
+      .catch(() => this.setState({ redirect: "/" }))
+      .finally(() => this.setState({ isLoading: false }));
   }
 
   componentDidMount() {
-    const id = this.props.match.params.propertyId;
-
-    this.fetchProperty(id);
+    this.getProperty();
   }
 
   render() {
-    const { property, redirect } = this.state;
+    const { isLoading, redirect, property } = this.state;
 
-    if (redirect) return <Redirect to="/" />;
+    if (isLoading) return <Spinner />;
 
-    if (property === undefined)
-      return (
-        <Page>
-          <Spinner />
-        </Page>
-      );
+    if (redirect) return <Redirect to={redirect} />;
 
     return (
       <Page title={property.title}>

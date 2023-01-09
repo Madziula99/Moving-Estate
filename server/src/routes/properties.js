@@ -114,7 +114,7 @@ async function retrieve(req, res) {
     include: { model: Property, where: { id: id } },
   });
 
-  if (!agent) return res.status(401).json({ message: "No access" });
+  if (!agent) return res.status(401).json();
 
   const messages = await Message.findAll({ where: { propertyId: id } });
 
