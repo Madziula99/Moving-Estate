@@ -1,12 +1,10 @@
 import React from "react";
-import { render, screen, cleanup } from "@testing-library/react";
-
+import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import { Button } from "./Button";
 
-// afterEach function runs after each test suite is executed
 afterEach(() => {
-  cleanup(); // Resets the DOM after each test suite
+  cleanup();
 });
 
 describe("Button Component", () => {
@@ -30,5 +28,21 @@ describe("Button Component", () => {
 
   test("Button Text", () => {
     expect(button).toHaveTextContent("Send message");
+  });
+
+  //HOw to check onClick function
+  test("calls onClick prop when clicked", () => {
+    fireEvent.click(button);
+    expect(jest.fn()).toHaveBeenCalledTimes(0);
+  });
+
+  test("pass correct classes", () => {
+    expect(button).toHaveClass(
+      "rounded_left rounded_right large_button right_button"
+    );
+  });
+
+  test("disabled is true", () => {
+    expect(button).toBeDisabled();
   });
 });
