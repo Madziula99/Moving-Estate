@@ -1,7 +1,7 @@
 import React from "react";
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
 import "@testing-library/jest-dom";
-import { Button } from "./Button";
+import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { Button } from "./Button.jsx";
 
 afterEach(() => {
   cleanup();
@@ -15,28 +15,33 @@ describe("Button Component", () => {
       position="right"
       roundedLeft
       roundedRight
-      disabled={true}
+      disabled
     >
       Send message
     </Button>
   );
+
   const button = screen.getByText(/Send message/i);
 
-  test("Button Rendering", () => {
+  test("renders button", () => {
     expect(button).toBeInTheDocument();
   });
 
-  test("Button Text", () => {
+  test("has correct text", () => {
     expect(button).toHaveTextContent("Send message");
   });
 
-  //HOw to check onClick function
   test("calls onClick prop when clicked", () => {
-    fireEvent.click(button);
-    expect(jest.fn()).toHaveBeenCalledTimes(0);
+    const handleClick = jest.fn();
+
+    render(<Button onClick={handleClick}>Send message</Button>);
+
+    fireEvent.click(screen.getByText(/send message/i));
+
+    expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
-  test("pass correct classes", () => {
+  test("has correct classes", () => {
     expect(button).toHaveClass(
       "rounded_left rounded_right large_button right_button"
     );

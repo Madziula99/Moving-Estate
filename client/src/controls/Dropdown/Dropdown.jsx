@@ -3,29 +3,35 @@ import Select from "react-select";
 import styles from "./Dropdown.module.css";
 
 class Dropdown extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectedOption: this.props.value || null,
-    };
-  }
-
-  handleChange = (selectedOption) => {
-    let value = null;
-    if (selectedOption) value = selectedOption.value;
-    this.setState({ selectedOption: value });
-    this.props.onChange(value);
+  state = {
+    selectedOption: this.props.value || null,
   };
 
-  componentDidUpdate(prevprops, _) {
-    if (prevprops.value === this.props.value) return;
-    this.setState({ selectedOption: this.props.value });
+  handleChange = (selectedOption) => {
+    const { onChange } = this.props;
+    let value = null;
+
+    if (selectedOption) value = selectedOption.value;
+
+    this.setState({ selectedOption: value });
+
+    onChange(value);
+  };
+
+  componentDidUpdate(prevProps) {
+    const { value } = this.props;
+
+    if (prevProps.value === value) return;
+
+    this.setState({ selectedOption: value });
   }
 
   className() {
+    const { width } = this.props;
     const classes = [styles.select];
-    this.props.width === "half" && classes.push(styles.select_half);
+
+    width === "half" && classes.push(styles.select_half);
+
     return classes.join(" ");
   }
 
@@ -52,6 +58,7 @@ class Dropdown extends React.Component {
     };
 
     const { options, placeholder } = this.props;
+    const { selectedOption } = this.state;
 
     return (
       <Select
@@ -62,10 +69,10 @@ class Dropdown extends React.Component {
         placeholder={placeholder}
         isClearable
         value={
-          this.state.selectedOption
+          selectedOption
             ? {
-                value: this.state.selectedOption,
-                label: this.state.selectedOption,
+                value: selectedOption,
+                label: selectedOption,
               }
             : null
         }

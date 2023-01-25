@@ -3,11 +3,13 @@ import styles from "./Button.module.css";
 
 class Button extends React.Component {
   render() {
+    const { onClick, disabled } = this.props;
+
     return (
       <button
         className={this.className()}
-        onClick={this.props.onClick}
-        disabled={this.props.disabled}
+        onClick={onClick}
+        disabled={disabled}
       >
         {this.props.children}
       </button>
@@ -15,13 +17,16 @@ class Button extends React.Component {
   }
 
   className() {
+    const { roundedLeft, roundedRight, isFocused, size, position } = this.props;
     const names = [styles.button];
-    this.props.roundedLeft && names.push(styles.rounded_left);
-    this.props.roundedRight && names.push(styles.rounded_right);
-    this.props.isFocused && names.push(styles.focused);
-    this.props.size === "m" && names.push(styles.medium_button);
-    this.props.size === "l" && names.push(styles.large_button);
-    this.props.position === "right" && names.push(styles.right_button);
+
+    roundedLeft && names.push(styles.rounded_left);
+    roundedRight && names.push(styles.rounded_right);
+    isFocused && names.push(styles.focused);
+    size === "m" && names.push(styles.medium_button);
+    size === "l" && names.push(styles.large_button);
+    position === "right" && names.push(styles.right_button);
+
     return names.join(" ");
   }
 }
