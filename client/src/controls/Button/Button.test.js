@@ -1,11 +1,7 @@
 import React from "react";
 import "@testing-library/jest-dom";
-import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import { render, screen, fireEvent } from "@testing-library/react";
 import { Button } from "./Button.jsx";
-
-afterEach(() => {
-  cleanup();
-});
 
 describe("Button Component", () => {
   render(

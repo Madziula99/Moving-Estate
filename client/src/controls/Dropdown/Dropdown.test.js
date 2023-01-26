@@ -7,6 +7,19 @@ import { Dropdown } from "./Dropdown.jsx";
 const options = ["cat", "dog", "parrot"];
 
 describe("Dropdown component", () => {
+  let dropdownOptions;
+
+  beforeEach(() => {
+    dropdownOptions = {
+      options: options.map((item) => {
+        return {
+          value: item,
+          label: item,
+        };
+      }),
+    };
+  });
+
   test("renders dropdown", () => {
     render(<Dropdown />);
 
@@ -16,16 +29,7 @@ describe("Dropdown component", () => {
   });
 
   test("shows options", () => {
-    render(
-      <Dropdown
-        options={options.map((item) => {
-          return {
-            value: item,
-            label: item,
-          };
-        })}
-      />
-    );
+    render(<Dropdown {...dropdownOptions} />);
 
     const dropdown = screen.getByRole("combobox");
 
@@ -39,17 +43,9 @@ describe("Dropdown component", () => {
   test("calls onChange prop when clicked", async () => {
     const handleChange = jest.fn();
 
-    render(
-      <Dropdown
-        options={options.map((item) => {
-          return {
-            value: item,
-            label: item,
-          };
-        })}
-        onChange={handleChange}
-      />
-    );
+    dropdownOptions.onChange = handleChange;
+
+    render(<Dropdown {...dropdownOptions} />);
 
     const dropdown = screen.getByRole("combobox");
 
@@ -65,17 +61,9 @@ describe("Dropdown component", () => {
   test("selects a specific option", () => {
     const handleChange = jest.fn();
 
-    render(
-      <Dropdown
-        options={options.map((item) => {
-          return {
-            value: item,
-            label: item,
-          };
-        })}
-        onChange={handleChange}
-      />
-    );
+    dropdownOptions.onChange = handleChange;
+
+    render(<Dropdown {...dropdownOptions} />);
 
     const dropdown = screen.getByRole("combobox");
 
@@ -91,17 +79,9 @@ describe("Dropdown component", () => {
   });
 
   test("has placeholder text", () => {
-    render(
-      <Dropdown
-        options={options.map((item) => {
-          return {
-            value: item,
-            label: item,
-          };
-        })}
-        placeholder="Type"
-      />
-    );
+    dropdownOptions.placeholder = "Type";
+
+    render(<Dropdown {...dropdownOptions} />);
 
     expect(screen.getByText(/type/i)).toBeInTheDocument();
     expect(screen.queryByText("cat")).not.toBeInTheDocument();
@@ -110,18 +90,10 @@ describe("Dropdown component", () => {
   });
 
   test("has default value over placeholder text", () => {
-    render(
-      <Dropdown
-        options={options.map((item) => {
-          return {
-            value: item,
-            label: item,
-          };
-        })}
-        placeholder="Type"
-        value="cat"
-      />
-    );
+    dropdownOptions.placeholder = "Type";
+    dropdownOptions.value = "cat";
+
+    render(<Dropdown {...dropdownOptions} />);
 
     expect(screen.getByText("cat")).toBeInTheDocument();
     expect(screen.queryByText("dog")).not.toBeInTheDocument();
@@ -130,20 +102,15 @@ describe("Dropdown component", () => {
   });
 
   // test("has correct classes", () => {
+  //   dropdownOptions.width = "half";
+
   //   render(
-  //     <Dropdown
-  //       width="half"
-  //       options={options.map((item) => {
-  //         return {
-  //           value: item,
-  //           label: item,
-  //         };
-  //       })}
-  //     />
+  //     <Dropdown {...dropdownOptions} />
   //   );
 
   //   const dropdown = screen.getByRole("combobox");
 
+  //   // expect(dropdown.classList.contains("select_half"));
   //   expect(dropdown).toHaveClass("select_half");
   // });
 });
