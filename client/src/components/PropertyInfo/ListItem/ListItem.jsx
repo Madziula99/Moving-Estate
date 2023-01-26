@@ -9,32 +9,45 @@ import styles from "./ListItem.module.css";
 class ListItem extends React.Component {
   showIcon(icon) {
     switch (icon) {
-      case "area": return <AreaIcon />;
-      case "beds": return <BedsIcon />;
-      case "baths": return <BathsIcon />;
-      case "apartment": return <ApartmentIcon />;
-      case "townhouse": return <TownhouseIcon />;
-      default: return null;
+      case "area":
+        return <AreaIcon />;
+      case "beds":
+        return <BedsIcon />;
+      case "baths":
+        return <BathsIcon />;
+      case "apartment":
+        return <ApartmentIcon />;
+      case "townhouse":
+        return <TownhouseIcon />;
+      default:
+        return null;
     }
   }
 
-  addListItemClassName() {
+  className() {
+    const { info, isCentered } = this.props;
     const classes = [styles.list_item];
 
-    if (this.props.info.toString().includes("ID")) classes.push(styles.id_provided);
-    if (this.props.isCentered && this.props.info.toString().includes("ID")) classes.push(styles.centered);
+    if (info.toString().includes("ID")) classes.push(styles.id_provided);
+    if (isCentered && info.toString().includes("ID"))
+      classes.push(styles.centered);
 
     return classes.join(" ");
   }
 
   render() {
-    /* The second check is for cases of getting id-prop and area-prop, because we passed there not just a prop value, but a string including this prop value */
-    if (typeof this.props.info === "undefined" || this.props.info.toString().includes("undefined")) return null;
+    const { info, icon } = this.props;
 
-    return <li className={this.addListItemClassName()}>
-      {this.showIcon(this.props.icon)}
-      <span>{this.props.info}</span>
-    </li>
+    /* The second check is for cases of getting id-prop and area-prop, because we passed there not just a prop value, but a string including this prop value */
+    if (typeof info === "undefined" || info.toString().includes("undefined"))
+      return null;
+
+    return (
+      <li className={this.className()}>
+        {this.showIcon(icon)}
+        <span>{info}</span>
+      </li>
+    );
   }
 }
 
