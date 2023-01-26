@@ -57,4 +57,15 @@ describe("ListItem component", () => {
 
     expect(icon).toBeInTheDocument();
   });
+
+  test("should not show icon if icon-prop doesn't match cases", () => {
+    listItemOptions.info = "ID: A003N";
+    listItemOptions.icon = "test";
+
+    render(<ListItem {...listItemOptions} />);
+
+    const icon = screen.queryByText("test.svg");
+
+    expect(icon).not.toBeInTheDocument();
+  });
 });
